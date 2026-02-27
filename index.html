@@ -49,7 +49,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     
     <style>
-        /* ALL ORIGINAL STYLES - ONLY CHANGED COLORS TO PROFESSIONAL BLUE AND FIXED IMAGE SIZES */
+        /* ALL ORIGINAL STYLES - ONLY CHANGED IMAGE OBJECT-FIT TO COVER FOR FULL IMAGE DISPLAY */
         * {
             margin: 0;
             padding: 0;
@@ -58,9 +58,9 @@
         }
 
         :root {
-            --primary: #1e3c72;  /* Changed from green to professional blue */
-            --secondary: #2a5298; /* Changed from green to professional blue */
-            --accent: #f59e0b;    /* Amber/Gold accent for contrast */
+            --primary: #1e3c72;
+            --secondary: #2a5298;
+            --accent: #f59e0b;
             --dark: #1e293b;
             --light: #f8fafc;
             --white: #ffffff;
@@ -224,7 +224,7 @@
         .preview-img {
             width: 100%;
             height: 200px;
-            object-fit: contain;
+            object-fit: cover;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 10px;
             margin: 10px 0;
@@ -579,7 +579,7 @@
         .about-image img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;  /* Changed from contain to cover for full image */
             transition: transform 0.5s ease;
         }
 
@@ -622,7 +622,7 @@
         .principal-card img {
             width: 100%;
             height: 280px;
-            object-fit: contain;
+            object-fit: cover;  /* Changed from contain to cover for full image */
             border-radius: 15px;
             border: 5px solid var(--accent);
             transition: all 0.3s;
@@ -746,7 +746,7 @@
         .gallery-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover;  /* Already cover - good */
             transition: transform 0.5s ease;
         }
 
@@ -794,7 +794,7 @@
         .facility-card img {
             width: 100%;
             height: 220px;
-            object-fit: cover;
+            object-fit: cover;  /* Already cover - good */
             transition: transform 0.5s;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
@@ -863,7 +863,7 @@
         .academic-img img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover;  /* Already cover - good */
             transition: transform 0.5s;
         }
 
@@ -914,7 +914,7 @@
         .achievement-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover;  /* Already cover - good */
             transition: transform 0.5s;
         }
 
