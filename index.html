@@ -49,7 +49,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     
     <style>
-        /* ALL ORIGINAL STYLES - ONLY CHANGED IMAGE OBJECT-FIT TO COVER FOR FULL IMAGE DISPLAY */
+        /* ALL ORIGINAL STYLES - WITH ADDED MOBILE OPTIMIZATIONS */
         * {
             margin: 0;
             padding: 0;
@@ -78,6 +78,50 @@
             line-height: 1.6;
             overflow-x: hidden;
             background: var(--light);
+        }
+
+        /* Image placeholder styles */
+        .image-placeholder {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .image-placeholder::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: loadingShimmer 1.5s infinite;
+        }
+
+        @keyframes loadingShimmer {
+            100% { left: 100%; }
+        }
+
+        .retry-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 8px 15px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 14px;
+            box-shadow: var(--shadow);
         }
 
         /* Admin Button */
@@ -579,7 +623,7 @@
         .about-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;  /* Changed from contain to cover for full image */
+            object-fit: cover;
             transition: transform 0.5s ease;
         }
 
@@ -622,7 +666,7 @@
         .principal-card img {
             width: 100%;
             height: 280px;
-            object-fit: cover;  /* Changed from contain to cover for full image */
+            object-fit: cover;
             border-radius: 15px;
             border: 5px solid var(--accent);
             transition: all 0.3s;
@@ -746,7 +790,7 @@
         .gallery-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover;  /* Already cover - good */
+            object-fit: cover;
             transition: transform 0.5s ease;
         }
 
@@ -794,7 +838,7 @@
         .facility-card img {
             width: 100%;
             height: 220px;
-            object-fit: cover;  /* Already cover - good */
+            object-fit: cover;
             transition: transform 0.5s;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
@@ -863,7 +907,7 @@
         .academic-img img {
             width: 100%;
             height: 100%;
-            object-fit: cover;  /* Already cover - good */
+            object-fit: cover;
             transition: transform 0.5s;
         }
 
@@ -914,7 +958,7 @@
         .achievement-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover;  /* Already cover - good */
+            object-fit: cover;
             transition: transform 0.5s;
         }
 
@@ -1374,69 +1418,42 @@
             display: block;
         }
 
-        /* Entry Popup Mobile Responsive */
-        @media screen and (max-width: 992px) {
-            .entry-popup-grid {
-                gap: 15px;
-            }
-            
-            .entry-popup-item img {
-                height: 170px;
-            }
-        }
-
+        /* Mobile Optimizations */
         @media screen and (max-width: 768px) {
-            .entry-popup-content {
-                margin: 5% auto;
-                padding: 20px;
-                width: 95%;
-            }
-            
-            .entry-popup-header h2 {
-                font-size: 1.8rem;
-            }
-            
-            .entry-popup-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .entry-popup-item {
-                padding: 15px;
-            }
-            
+            /* Hardware acceleration for smoother rendering */
+            .gallery-item img,
+            .achievement-item img,
+            .facility-card img,
+            .academic-img img,
             .entry-popup-item img {
-                height: 180px;
-                max-width: 100%;
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                -webkit-perspective: 1000;
+                perspective: 1000;
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
             }
-            
-            .entry-popup-close {
-                font-size: 35px;
-                right: 15px;
-                top: 10px;
-            }
-        }
 
-        @media screen and (max-width: 480px) {
-            .entry-popup-header h2 {
-                font-size: 1.5rem;
+            /* Reduce motion if user prefers */
+            @media (prefers-reduced-motion: reduce) {
+                * {
+                    animation-duration: 0.01ms !important;
+                    animation-iteration-count: 1 !important;
+                    transition-duration: 0.01ms !important;
+                }
             }
-            
-            .entry-popup-header p {
-                font-size: 0.95rem;
+
+            /* Optimize image loading */
+            .gallery-item, .achievement-item, .facility-card {
+                will-change: transform;
+                contain: content;
             }
-            
-            .entry-popup-item h3 {
-                font-size: 1.2rem;
-            }
-            
-            .entry-popup-item p {
-                font-size: 0.85rem;
-            }
-            
-            .entry-popup-btn {
-                padding: 8px 20px;
-                font-size: 0.9rem;
+
+            /* Better placeholder for loading */
+            .image-placeholder {
+                min-height: 150px;
             }
         }
 
@@ -1630,6 +1647,20 @@
             .footer-section h3::after {
                 left: 50%;
                 transform: translateX(-50%);
+            }
+
+            /* Entry popup mobile */
+            .entry-popup-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .entry-popup-item {
+                padding: 15px;
+            }
+            
+            .entry-popup-item img {
+                height: 180px;
             }
         }
         
@@ -2338,6 +2369,120 @@
             }
         });
 
+        // ==================== CONNECTION MONITORING ====================
+        let isOnline = navigator.onLine;
+
+        window.addEventListener('online', () => {
+            isOnline = true;
+            showToast('Connection restored. Refreshing images...');
+            refreshImages();
+        });
+
+        window.addEventListener('offline', () => {
+            isOnline = false;
+            showToast('No internet connection', 'error');
+        });
+
+        function refreshImages() {
+            if (isOnline) {
+                const images = document.querySelectorAll('img[data-src]');
+                images.forEach(img => {
+                    if (img.classList.contains('failed-load')) {
+                        img.src = img.dataset.src;
+                        img.classList.remove('failed-load');
+                    }
+                });
+            }
+        }
+
+        // ==================== IMAGE ERROR HANDLER ====================
+        function handleImageError(imgElement, retryCount = 0, originalSrc = null) {
+            const maxRetries = 3;
+            const src = originalSrc || imgElement.src;
+            
+            // Don't retry if src is empty or invalid
+            if (!src || src === 'undefined' || src === 'null' || src.includes('[object Object]')) {
+                console.error('Invalid image src:', src);
+                showFallback(imgElement);
+                return;
+            }
+            
+            if (retryCount < maxRetries) {
+                // Add retry button
+                const parent = imgElement.parentNode;
+                parent.style.position = 'relative';
+                
+                // Remove any existing retry buttons
+                const existingBtn = parent.querySelector('.retry-btn');
+                if (existingBtn) existingBtn.remove();
+                
+                const retryBtn = document.createElement('button');
+                retryBtn.className = 'retry-btn';
+                retryBtn.innerHTML = `↻ Retry (${retryCount + 1}/${maxRetries})`;
+                retryBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    retryBtn.remove();
+                    imgElement.style.display = 'block';
+                    // Add cache busting parameter
+                    const baseSrc = src.split('?')[0];
+                    imgElement.src = baseSrc + '?retry=' + Date.now() + '&attempt=' + (retryCount + 1);
+                    
+                    // Set up next retry if needed
+                    imgElement.onerror = () => handleImageError(imgElement, retryCount + 1, baseSrc);
+                };
+                
+                parent.appendChild(retryBtn);
+                imgElement.style.display = 'none';
+                
+                console.log(`Image failed to load (attempt ${retryCount + 1}):`, src.substring(0, 100));
+                
+            } else {
+                showFallback(imgElement);
+            }
+        }
+        
+        function showFallback(imgElement) {
+            console.log('Max retries reached for image, showing fallback');
+            imgElement.style.display = 'none';
+            const parent = imgElement.parentNode;
+            if (parent) {
+                parent.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+                parent.classList.add('image-placeholder');
+                
+                // Add reload all button
+                const reloadAllBtn = document.createElement('button');
+                reloadAllBtn.className = 'retry-btn';
+                reloadAllBtn.innerHTML = '↻ Reload All Images';
+                reloadAllBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    location.reload();
+                };
+                parent.appendChild(reloadAllBtn);
+            }
+        }
+
+        // ==================== DEBUG FUNCTION ====================
+        function debugImages() {
+            console.log('=== Image Debug Info ===');
+            const images = document.querySelectorAll('img');
+            images.forEach((img, index) => {
+                console.log(`Image ${index}:`, {
+                    src: img.src ? (img.src.length > 50 ? img.src.substring(0, 50) + '...' : img.src) : 'no src',
+                    complete: img.complete,
+                    naturalWidth: img.naturalWidth,
+                    naturalHeight: img.naturalHeight,
+                    loaded: img.complete && img.naturalHeight > 0,
+                    hasError: !!img.onerror,
+                    classes: img.className,
+                    validSrc: img.src && !img.src.includes('[object Object]') && img.src !== 'undefined' && img.src !== 'null'
+                });
+            });
+            console.log('=======================');
+        }
+
+        // Call debug after page load
+        setTimeout(debugImages, 3000);
+
         // ==================== IMAGE PROCESSING FUNCTIONS ====================
         
         // File to Base64 converter
@@ -2350,8 +2495,8 @@
             });
         }
 
-        // Image Compression Function
-        function compressImage(base64String, maxWidth = 800, quality = 0.7) {
+        // Optimized Image Compression Function for mobile
+        async function compressImage(base64String) {
             return new Promise((resolve) => {
                 const img = new Image();
                 img.src = base64String;
@@ -2359,36 +2504,75 @@
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
                     
+                    // Detect mobile device
+                    const isMobile = window.innerWidth <= 768;
+                    
+                    // Set different max dimensions for mobile vs desktop
+                    const maxWidth = isMobile ? 400 : 800;
+                    const quality = isMobile ? 0.5 : 0.7;
+                    
                     let width = img.width;
                     let height = img.height;
                     
+                    // Calculate new dimensions while maintaining aspect ratio
                     if (width > maxWidth) {
                         height = (maxWidth / width) * height;
                         width = maxWidth;
                     }
                     
-                    canvas.width = width;
-                    canvas.height = height;
+                    // Further reduce height for mobile if still too large
+                    if (isMobile && height > 300) {
+                        width = (300 / height) * width;
+                        height = 300;
+                    }
                     
-                    ctx.drawImage(img, 0, 0, width, height);
+                    canvas.width = Math.round(width);
+                    canvas.height = Math.round(height);
                     
+                    // Use better image rendering
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = isMobile ? 'medium' : 'high';
+                    
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    
+                    // Compress based on device
                     const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+                    
+                    console.log(`Image compressed: ${img.width}x${img.height} -> ${canvas.width}x${canvas.height}, Quality: ${quality}`);
+                    
                     resolve(compressedBase64);
+                };
+                
+                img.onerror = () => {
+                    // If image fails to load, return original
+                    resolve(base64String);
                 };
             });
         }
 
-        // Complete image upload pipeline
+        // Complete image upload pipeline with size validation
         async function processAndUploadImage(file, path, isGallery = false) {
             try {
+                // Check file size (limit to 5MB for mobile)
+                if (file.size > 5 * 1024 * 1024) {
+                    showToast('Image too large. Please select image under 5MB', 'error');
+                    return false;
+                }
+                
                 showToast('Processing image...');
                 
                 const base64 = await fileToBase64(file);
                 const compressed = await compressImage(base64);
                 
+                // Ensure we're storing a string, not an object
+                if (typeof compressed !== 'string') {
+                    throw new Error('Compressed image is not a string');
+                }
+                
                 const data = {
-                    imageUrl: compressed,
-                    timestamp: firebase.database.ServerValue.TIMESTAMP
+                    imageUrl: compressed, // This must be a string
+                    timestamp: firebase.database.ServerValue.TIMESTAMP,
+                    fileName: file.name
                 };
                 
                 if (isGallery) {
@@ -2398,10 +2582,12 @@
                     await db.ref(path).set(data);
                 }
                 
-                return true;
+                showToast('Image uploaded successfully!');
+                return compressed; // Return the compressed image string
             } catch (error) {
                 console.error('Image processing error:', error);
-                throw error;
+                showToast('Upload failed: ' + error.message, 'error');
+                return false;
             }
         }
 
@@ -2414,7 +2600,7 @@
                 toast.textContent = msg;
                 setTimeout(() => {
                     toast.style.display = 'none';
-                }, 2000);
+                }, 3000);
             }
         }
 
@@ -2444,7 +2630,7 @@
                 // Load Banner
                 const bannerSnapshot = await db.ref('banner').once('value');
                 const banner = bannerSnapshot.val();
-                if (banner && banner.imageUrl) {
+                if (banner && banner.imageUrl && typeof banner.imageUrl === 'string') {
                     document.getElementById('home').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${banner.imageUrl}')`;
                 }
 
@@ -2452,21 +2638,21 @@
                 const imagesSnapshot = await db.ref('school_images').once('value');
                 const images = imagesSnapshot.val();
                 if (images) {
-                    if (images.schoolImage) {
+                    if (images.schoolImage && typeof images.schoolImage === 'string') {
                         document.getElementById('schoolImage').src = images.schoolImage;
                         document.getElementById('schoolPreview').src = images.schoolImage;
                     }
-                    if (images.principalImage) {
+                    if (images.principalImage && typeof images.principalImage === 'string') {
                         document.getElementById('principalImage').src = images.principalImage;
                         document.getElementById('principalPreview').src = images.principalImage;
                     }
-                    if (images.contactImage) {
+                    if (images.contactImage && typeof images.contactImage === 'string') {
                         document.getElementById('contactImage').src = images.contactImage;
                         document.getElementById('contactPreview').src = images.contactImage;
                     }
                 }
 
-                // Load Gallery
+                // Load Gallery with error handling
                 const gallerySnapshot = await db.ref('gallery').once('value');
                 const gallery = gallerySnapshot.val();
                 let galleryGrid = document.getElementById('galleryGrid');
@@ -2479,16 +2665,30 @@
                         })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                         
                         galleryArray.forEach(item => {
-                            galleryGrid.innerHTML += `
-                                <div class="gallery-item" data-aos="zoom-in">
-                                    <img src="${item.imageUrl}" alt="Gallery Image" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
-                                </div>
-                            `;
+                            // Validate image URL
+                            if (!item.imageUrl || typeof item.imageUrl !== 'string' || item.imageUrl.includes('[object Object]')) {
+                                console.error('Invalid gallery image URL:', item);
+                                return;
+                            }
+                            
+                            const imgDiv = document.createElement('div');
+                            imgDiv.className = 'gallery-item';
+                            imgDiv.setAttribute('data-aos', 'zoom-in');
+                            
+                            const img = document.createElement('img');
+                            img.src = item.imageUrl;
+                            img.alt = 'Gallery Image';
+                            img.setAttribute('data-src', item.imageUrl);
+                            img.onerror = function() { handleImageError(this, 0, item.imageUrl); };
+                            img.loading = 'lazy';
+                            
+                            imgDiv.appendChild(img);
+                            galleryGrid.appendChild(imgDiv);
                         });
                     }
                 }
 
-                // Load Facilities
+                // Load Facilities with error handling
                 const facilitiesSnapshot = await db.ref('facilities').once('value');
                 const facilities = facilitiesSnapshot.val();
                 let facilitiesGrid = document.getElementById('facilitiesGrid');
@@ -2501,18 +2701,40 @@
                         })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                         
                         facilitiesArray.forEach((item, index) => {
-                            facilitiesGrid.innerHTML += `
-                                <div class="facility-card" data-aos="flip-up" data-aos-delay="${index * 100}">
-                                    <img src="${item.imageUrl}" alt="${item.title}" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
-                                    <h3>${item.title}</h3>
-                                    <p>${item.description}</p>
-                                </div>
-                            `;
+                            // Validate image URL
+                            if (!item.imageUrl || typeof item.imageUrl !== 'string' || item.imageUrl.includes('[object Object]')) {
+                                console.error('Invalid facility image URL:', item);
+                                return;
+                            }
+                            
+                            const card = document.createElement('div');
+                            card.className = 'facility-card';
+                            card.setAttribute('data-aos', 'flip-up');
+                            card.setAttribute('data-aos-delay', index * 100);
+                            
+                            const img = document.createElement('img');
+                            img.src = item.imageUrl;
+                            img.alt = item.title;
+                            img.setAttribute('data-src', item.imageUrl);
+                            img.onerror = function() { handleImageError(this, 0, item.imageUrl); };
+                            img.loading = 'lazy';
+                            
+                            card.appendChild(img);
+                            
+                            const h3 = document.createElement('h3');
+                            h3.textContent = item.title;
+                            card.appendChild(h3);
+                            
+                            const p = document.createElement('p');
+                            p.textContent = item.description;
+                            card.appendChild(p);
+                            
+                            facilitiesGrid.appendChild(card);
                         });
                     }
                 }
 
-                // Load Achievements
+                // Load Achievements with error handling
                 const achievementsSnapshot = await db.ref('achievements').once('value');
                 const achievements = achievementsSnapshot.val();
                 let achievementsGrid = document.getElementById('achievementsGrid');
@@ -2525,15 +2747,38 @@
                         })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                         
                         achievementsArray.forEach(item => {
-                            achievementsGrid.innerHTML += `
-                                <div class="achievement-item" data-aos="zoom-in">
-                                    <img src="${item.imageUrl}" alt="${item.title}" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
-                                    <div class="achievement-content">
-                                        <h4>${item.title}</h4>
-                                        <p>${item.description}</p>
-                                    </div>
-                                </div>
-                            `;
+                            // Validate image URL
+                            if (!item.imageUrl || typeof item.imageUrl !== 'string' || item.imageUrl.includes('[object Object]')) {
+                                console.error('Invalid achievement image URL:', item);
+                                return;
+                            }
+                            
+                            const achievementDiv = document.createElement('div');
+                            achievementDiv.className = 'achievement-item';
+                            achievementDiv.setAttribute('data-aos', 'zoom-in');
+                            
+                            const img = document.createElement('img');
+                            img.src = item.imageUrl;
+                            img.alt = item.title;
+                            img.setAttribute('data-src', item.imageUrl);
+                            img.onerror = function() { handleImageError(this, 0, item.imageUrl); };
+                            img.loading = 'lazy';
+                            
+                            achievementDiv.appendChild(img);
+                            
+                            const contentDiv = document.createElement('div');
+                            contentDiv.className = 'achievement-content';
+                            
+                            const h4 = document.createElement('h4');
+                            h4.textContent = item.title;
+                            contentDiv.appendChild(h4);
+                            
+                            const p = document.createElement('p');
+                            p.textContent = item.description;
+                            contentDiv.appendChild(p);
+                            
+                            achievementDiv.appendChild(contentDiv);
+                            achievementsGrid.appendChild(achievementDiv);
                         });
                     }
                 }
@@ -2545,7 +2790,7 @@
                 AOS.refresh();
             } catch (error) {
                 console.error('Error loading data:', error);
-                showToast('Error loading data', 'error');
+                showToast('Error loading data: ' + error.message, 'error');
             }
         }
 
@@ -2567,32 +2812,56 @@
                     popupGrid.innerHTML = '';
                     
                     popupData.cards.forEach((card, index) => {
-                        popupGrid.innerHTML += `
-                            <div class="entry-popup-item" onclick="location.href='${card.link || '#'}'">
-                                <img src="${card.imageUrl || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}" alt="Popup Image" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
-                                <h3>${card.title || 'New Update'}</h3>
-                                <p>${card.description || 'Check out our latest updates and announcements.'}</p>
-                                <button class="entry-popup-btn">${card.buttonText || 'Learn More'}</button>
-                            </div>
-                        `;
+                        // Validate card data
+                        if (!card || !card.imageUrl || typeof card.imageUrl !== 'string' || card.imageUrl.includes('[object Object]')) {
+                            console.error('Invalid popup card data:', card);
+                            return;
+                        }
+                        
+                        const cardDiv = document.createElement('div');
+                        cardDiv.className = 'entry-popup-item';
+                        cardDiv.onclick = function() { location.href = card.link || '#'; };
+                        
+                        const img = document.createElement('img');
+                        img.src = card.imageUrl;
+                        img.alt = 'Popup Image';
+                        img.setAttribute('data-src', card.imageUrl);
+                        img.onerror = function() { handleImageError(this, 0, card.imageUrl); };
+                        img.loading = 'lazy';
+                        cardDiv.appendChild(img);
+                        
+                        const h3 = document.createElement('h3');
+                        h3.textContent = card.title || 'New Update';
+                        cardDiv.appendChild(h3);
+                        
+                        const p = document.createElement('p');
+                        p.textContent = card.description || 'Check out our latest updates and announcements.';
+                        cardDiv.appendChild(p);
+                        
+                        const btn = document.createElement('button');
+                        btn.className = 'entry-popup-btn';
+                        btn.textContent = card.buttonText || 'Learn More';
+                        cardDiv.appendChild(btn);
+                        
+                        popupGrid.appendChild(cardDiv);
                     });
                 } else {
-                    // Default popup
+                    // Default popup with error handling
                     popupGrid.innerHTML = `
                         <div class="entry-popup-item" onclick="location.href='#admissions'">
-                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Admissions Open" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Admissions Open" onerror="handleImageError(this, 0, 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')" loading="lazy">
                             <h3>📚 Admissions 2024-25</h3>
                             <p>Applications open for Pre-Primary to Class X. Limited seats available. Apply now for the upcoming academic year.</p>
                             <button class="entry-popup-btn">Apply Now</button>
                         </div>
                         <div class="entry-popup-item" onclick="location.href='#achievements'">
-                            <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Our Achievements" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                            <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Our Achievements" onerror="handleImageError(this, 0, 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')" loading="lazy">
                             <h3>🏆 Our Achievements</h3>
                             <p>State-level Science Fair winners, Inter-School Sports Champions, and 100% Board Exam results. Celebrating excellence!</p>
                             <button class="entry-popup-btn">View Achievements</button>
                         </div>
                         <div class="entry-popup-item" onclick="location.href='#results'">
-                            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Results" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Results" onerror="handleImageError(this, 0, 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')" loading="lazy">
                             <h3>📊 Results 2024</h3>
                             <p>100% pass percentage with 95% distinction. Our students have excelled in academics and competitive exams.</p>
                             <button class="entry-popup-btn">Check Results</button>
@@ -2616,7 +2885,7 @@
             // Card 1
             popupGrid.innerHTML += `
                 <div class="entry-popup-item" onclick="location.href='${document.getElementById('card1Link').value}'">
-                    <img src="${document.getElementById('card1Preview').src}" alt="Popup Image">
+                    <img src="${document.getElementById('card1Preview').src}" alt="Popup Image" onerror="handleImageError(this, 0, '${document.getElementById('card1Preview').src}')" loading="lazy">
                     <h3>${document.getElementById('card1Title').value}</h3>
                     <p>${document.getElementById('card1Desc').value}</p>
                     <button class="entry-popup-btn">${document.getElementById('card1Btn').value}</button>
@@ -2626,7 +2895,7 @@
             // Card 2
             popupGrid.innerHTML += `
                 <div class="entry-popup-item" onclick="location.href='${document.getElementById('card2Link').value}'">
-                    <img src="${document.getElementById('card2Preview').src}" alt="Popup Image">
+                    <img src="${document.getElementById('card2Preview').src}" alt="Popup Image" onerror="handleImageError(this, 0, '${document.getElementById('card2Preview').src}')" loading="lazy">
                     <h3>${document.getElementById('card2Title').value}</h3>
                     <p>${document.getElementById('card2Desc').value}</p>
                     <button class="entry-popup-btn">${document.getElementById('card2Btn').value}</button>
@@ -2636,7 +2905,7 @@
             // Card 3
             popupGrid.innerHTML += `
                 <div class="entry-popup-item" onclick="location.href='${document.getElementById('card3Link').value}'">
-                    <img src="${document.getElementById('card3Preview').src}" alt="Popup Image">
+                    <img src="${document.getElementById('card3Preview').src}" alt="Popup Image" onerror="handleImageError(this, 0, '${document.getElementById('card3Preview').src}')" loading="lazy">
                     <h3>${document.getElementById('card3Title').value}</h3>
                     <p>${document.getElementById('card3Desc').value}</p>
                     <button class="entry-popup-btn">${document.getElementById('card3Btn').value}</button>
@@ -2686,7 +2955,7 @@
                 showToast('Popup saved to database!');
             } catch (error) {
                 console.error('Error saving popup:', error);
-                showToast('Error saving popup', 'error');
+                showToast('Error saving popup: ' + error.message, 'error');
             }
         }
 
@@ -2718,13 +2987,15 @@
             showToast('Reset to default values');
         }
 
-        // Handle card image uploads
+        // Handle card image uploads with optimization
         document.getElementById('card1Image').onchange = async function() {
             if (!this.files[0]) return;
             try {
-                const base64 = await fileToBase64(this.files[0]);
-                document.getElementById('card1Preview').src = base64;
-                showToast('Card 1 image updated');
+                const compressed = await processAndUploadImage(this.files[0], 'popup/card1', false);
+                if (compressed && typeof compressed === 'string') {
+                    document.getElementById('card1Preview').src = compressed;
+                }
+                this.value = '';
             } catch (error) {
                 showToast('Upload failed', 'error');
             }
@@ -2733,9 +3004,11 @@
         document.getElementById('card2Image').onchange = async function() {
             if (!this.files[0]) return;
             try {
-                const base64 = await fileToBase64(this.files[0]);
-                document.getElementById('card2Preview').src = base64;
-                showToast('Card 2 image updated');
+                const compressed = await processAndUploadImage(this.files[0], 'popup/card2', false);
+                if (compressed && typeof compressed === 'string') {
+                    document.getElementById('card2Preview').src = compressed;
+                }
+                this.value = '';
             } catch (error) {
                 showToast('Upload failed', 'error');
             }
@@ -2744,9 +3017,11 @@
         document.getElementById('card3Image').onchange = async function() {
             if (!this.files[0]) return;
             try {
-                const base64 = await fileToBase64(this.files[0]);
-                document.getElementById('card3Preview').src = base64;
-                showToast('Card 3 image updated');
+                const compressed = await processAndUploadImage(this.files[0], 'popup/card3', false);
+                if (compressed && typeof compressed === 'string') {
+                    document.getElementById('card3Preview').src = compressed;
+                }
+                this.value = '';
             } catch (error) {
                 showToast('Upload failed', 'error');
             }
@@ -2838,9 +3113,11 @@
                         })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                         
                         galleryArray.forEach(item => {
+                            if (!item.imageUrl || typeof item.imageUrl !== 'string') return;
+                            
                             adminGallery.innerHTML += `
                                 <div class="admin-item">
-                                    <img src="${item.imageUrl}" class="thumb-img" alt="Gallery Thumb" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                                    <img src="${item.imageUrl}" class="thumb-img" alt="Gallery Thumb" onerror="handleImageError(this, 0, '${item.imageUrl}')">
                                     <div class="admin-actions">
                                         <button class="delete-btn" onclick="deleteGallery('${item.id}')"><i class="fas fa-trash"></i></button>
                                     </div>
@@ -2863,9 +3140,11 @@
                         })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                         
                         facilitiesArray.forEach(item => {
+                            if (!item.imageUrl || typeof item.imageUrl !== 'string') return;
+                            
                             adminFacilities.innerHTML += `
                                 <div class="admin-item">
-                                    <img src="${item.imageUrl}" class="thumb-img" alt="Facility Thumb" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                                    <img src="${item.imageUrl}" class="thumb-img" alt="Facility Thumb" onerror="handleImageError(this, 0, '${item.imageUrl}')">
                                     <span>${item.title}</span>
                                     <div class="admin-actions">
                                         <button class="delete-btn" onclick="deleteFacility('${item.id}')"><i class="fas fa-trash"></i></button>
@@ -2889,9 +3168,11 @@
                         })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                         
                         achievementsArray.forEach(item => {
+                            if (!item.imageUrl || typeof item.imageUrl !== 'string') return;
+                            
                             adminAchievements.innerHTML += `
                                 <div class="admin-item">
-                                    <img src="${item.imageUrl}" class="thumb-img" alt="Achievement Thumb" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                                    <img src="${item.imageUrl}" class="thumb-img" alt="Achievement Thumb" onerror="handleImageError(this, 0, '${item.imageUrl}')">
                                     <span>${item.title}</span>
                                     <div class="admin-actions">
                                         <button class="delete-btn" onclick="deleteAchievement('${item.id}')"><i class="fas fa-trash"></i></button>
@@ -2905,20 +3186,20 @@
                 // Load banner preview
                 const bannerSnapshot = await db.ref('banner').once('value');
                 const banner = bannerSnapshot.val();
-                if (banner) {
+                if (banner && banner.imageUrl && typeof banner.imageUrl === 'string') {
                     document.getElementById('bannerPreview').src = banner.imageUrl;
                 }
 
                 // Load school images preview
                 const imagesSnapshot = await db.ref('school_images').once('value');
                 const images = imagesSnapshot.val() || {};
-                if (images.schoolImage) {
+                if (images.schoolImage && typeof images.schoolImage === 'string') {
                     document.getElementById('schoolPreview').src = images.schoolImage;
                 }
-                if (images.principalImage) {
+                if (images.principalImage && typeof images.principalImage === 'string') {
                     document.getElementById('principalPreview').src = images.principalImage;
                 }
-                if (images.contactImage) {
+                if (images.contactImage && typeof images.contactImage === 'string') {
                     document.getElementById('contactPreview').src = images.contactImage;
                 }
 
@@ -2936,7 +3217,7 @@
                             document.getElementById('card1Desc').value = popupData.cards[0].description || 'Applications open for Pre-Primary to Class X. Limited seats available.';
                             document.getElementById('card1Link').value = popupData.cards[0].link || '#admissions';
                             document.getElementById('card1Btn').value = popupData.cards[0].buttonText || 'Apply Now';
-                            if (popupData.cards[0].imageUrl) {
+                            if (popupData.cards[0].imageUrl && typeof popupData.cards[0].imageUrl === 'string') {
                                 document.getElementById('card1Preview').src = popupData.cards[0].imageUrl;
                             }
                         }
@@ -2945,7 +3226,7 @@
                             document.getElementById('card2Desc').value = popupData.cards[1].description || 'State-level Science Fair winners, Inter-School Sports Champions';
                             document.getElementById('card2Link').value = popupData.cards[1].link || '#achievements';
                             document.getElementById('card2Btn').value = popupData.cards[1].buttonText || 'View Achievements';
-                            if (popupData.cards[1].imageUrl) {
+                            if (popupData.cards[1].imageUrl && typeof popupData.cards[1].imageUrl === 'string') {
                                 document.getElementById('card2Preview').src = popupData.cards[1].imageUrl;
                             }
                         }
@@ -2954,7 +3235,7 @@
                             document.getElementById('card3Desc').value = popupData.cards[2].description || '100% pass percentage with 95% distinction';
                             document.getElementById('card3Link').value = popupData.cards[2].link || '#results';
                             document.getElementById('card3Btn').value = popupData.cards[2].buttonText || 'Check Results';
-                            if (popupData.cards[2].imageUrl) {
+                            if (popupData.cards[2].imageUrl && typeof popupData.cards[2].imageUrl === 'string') {
                                 document.getElementById('card3Preview').src = popupData.cards[2].imageUrl;
                             }
                         }
@@ -2963,7 +3244,7 @@
 
             } catch (error) {
                 console.error('Error loading admin panel:', error);
-                showToast('Error loading admin panel', 'error');
+                showToast('Error loading admin panel: ' + error.message, 'error');
             }
         }
 
@@ -3006,82 +3287,57 @@
             }
         }
 
-        // Banner upload
+        // Banner upload - FIXED
         document.getElementById('bannerInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            try {
-                const base64 = await fileToBase64(this.files[0]);
-                const compressed = await compressImage(base64);
-                await db.ref('banner').set({ imageUrl: compressed });
+            const compressed = await processAndUploadImage(this.files[0], 'banner', false);
+            if (compressed && typeof compressed === 'string') {
                 document.getElementById('bannerPreview').src = compressed;
                 document.getElementById('home').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${compressed}')`;
-                showToast('Banner updated successfully!');
-                this.value = '';
-            } catch (error) {
-                showToast('Upload failed', 'error');
             }
+            this.value = '';
         };
 
-        // School images uploads
+        // School images uploads - FIXED
         document.getElementById('schoolInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            try {
-                const base64 = await fileToBase64(this.files[0]);
-                const compressed = await compressImage(base64);
-                await db.ref('school_images/schoolImage').set(compressed);
+            const compressed = await processAndUploadImage(this.files[0], 'school_images/schoolImage', false);
+            if (compressed && typeof compressed === 'string') {
                 document.getElementById('schoolPreview').src = compressed;
                 document.getElementById('schoolImage').src = compressed;
-                showToast('School image updated!');
-                this.value = '';
-            } catch (error) {
-                showToast('Upload failed', 'error');
             }
+            this.value = '';
         };
 
         document.getElementById('principalInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            try {
-                const base64 = await fileToBase64(this.files[0]);
-                const compressed = await compressImage(base64);
-                await db.ref('school_images/principalImage').set(compressed);
+            const compressed = await processAndUploadImage(this.files[0], 'school_images/principalImage', false);
+            if (compressed && typeof compressed === 'string') {
                 document.getElementById('principalPreview').src = compressed;
                 document.getElementById('principalImage').src = compressed;
-                showToast('Principal image updated!');
-                this.value = '';
-            } catch (error) {
-                showToast('Upload failed', 'error');
             }
+            this.value = '';
         };
 
         document.getElementById('contactInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            try {
-                const base64 = await fileToBase64(this.files[0]);
-                const compressed = await compressImage(base64);
-                await db.ref('school_images/contactImage').set(compressed);
+            const compressed = await processAndUploadImage(this.files[0], 'school_images/contactImage', false);
+            if (compressed && typeof compressed === 'string') {
                 document.getElementById('contactPreview').src = compressed;
                 document.getElementById('contactImage').src = compressed;
-                showToast('Contact image updated!');
-                this.value = '';
-            } catch (error) {
-                showToast('Upload failed', 'error');
             }
+            this.value = '';
         };
 
-        // Gallery
+        // Gallery - FIXED
         document.getElementById('galleryInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            try {
-                const base64 = await fileToBase64(this.files[0]);
-                const compressed = await compressImage(base64);
-                await db.ref('gallery').push({ imageUrl: compressed });
+            const compressed = await processAndUploadImage(this.files[0], 'gallery', true);
+            if (compressed) {
                 await loadAll();
                 await loadAdminPanel();
-                showToast('Gallery image added!');
-                this.value = '';
-            } catch (error) {
-                showToast('Upload failed', 'error');
             }
+            this.value = '';
         };
 
         async function deleteGallery(id) {
@@ -3094,7 +3350,7 @@
             }
         }
 
-        // Facilities
+        // Facilities - FIXED
         document.getElementById('facilityInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
             let title = prompt('Enter facility name:');
@@ -3103,6 +3359,10 @@
                 try {
                     const base64 = await fileToBase64(this.files[0]);
                     const compressed = await compressImage(base64);
+                    
+                    if (typeof compressed !== 'string') {
+                        throw new Error('Invalid compressed image');
+                    }
                     
                     await db.ref('facilities').push().set({ 
                         imageUrl: compressed, 
@@ -3115,7 +3375,7 @@
                     await loadAdminPanel();
                     showToast('Facility added!');
                 } catch (error) {
-                    showToast('Upload failed', 'error');
+                    showToast('Upload failed: ' + error.message, 'error');
                 }
             }
             this.value = '';
@@ -3131,7 +3391,7 @@
             }
         }
 
-        // Achievements
+        // Achievements - FIXED
         document.getElementById('achievementInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
             let title = prompt('Enter achievement title:');
@@ -3140,6 +3400,10 @@
                 try {
                     const base64 = await fileToBase64(this.files[0]);
                     const compressed = await compressImage(base64);
+                    
+                    if (typeof compressed !== 'string') {
+                        throw new Error('Invalid compressed image');
+                    }
                     
                     await db.ref('achievements').push().set({ 
                         imageUrl: compressed, 
@@ -3152,7 +3416,7 @@
                     await loadAdminPanel();
                     showToast('Achievement added!');
                 } catch (error) {
-                    showToast('Upload failed', 'error');
+                    showToast('Upload failed: ' + error.message, 'error');
                 }
             }
             this.value = '';
@@ -3181,7 +3445,7 @@
                 showToast('Admission form uploaded!');
                 this.value = '';
             } catch (error) {
-                showToast('Upload failed', 'error');
+                showToast('Upload failed: ' + error.message, 'error');
             }
         };
 
@@ -3197,7 +3461,7 @@
                 showToast('Prospectus uploaded!');
                 this.value = '';
             } catch (error) {
-                showToast('Upload failed', 'error');
+                showToast('Upload failed: ' + error.message, 'error');
             }
         };
 
@@ -3220,7 +3484,7 @@
                     alert('Form not available');
                 }
             } catch (error) {
-                alert('Download failed');
+                alert('Download failed: ' + error.message);
             }
         }
 
@@ -3229,11 +3493,14 @@
             const popup = document.getElementById('entryPopup');
             const closeBtn = document.querySelector('.entry-popup-close');
             
+            // Check if popup has been shown in this session
             if (!sessionStorage.getItem('popupShown')) {
+                // Show popup after 2 seconds
                 setTimeout(() => {
                     popup.style.display = 'block';
                     document.body.style.overflow = 'hidden';
                     
+                    // Close when clicking outside
                     popup.addEventListener('click', function(e) {
                         if (e.target === popup) {
                             popup.style.display = 'none';
@@ -3254,6 +3521,12 @@
         // Initialize
         loadAll();
         initEntryPopup();
+
+        // Add resize listener to handle orientation changes
+        window.addEventListener('resize', function() {
+            // Refresh AOS on orientation change
+            AOS.refresh();
+        });
     </script>
 </body>
 </html>
