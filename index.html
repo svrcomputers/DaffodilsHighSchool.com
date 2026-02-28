@@ -1457,7 +1457,7 @@
             }
         }
 
-        /* Mobile Responsive - All Devices */
+        /* Mobile Responsive - All Devices - FIXED */
         @media screen and (max-width: 1200px) {
             .hero h1 {
                 font-size: 3.5rem;
@@ -1649,7 +1649,7 @@
                 transform: translateX(-50%);
             }
 
-            /* Entry popup mobile */
+            /* Entry popup mobile - FIXED */
             .entry-popup-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -1952,7 +1952,7 @@
                 <button class="add-btn" onclick="document.getElementById('contactInput').click()">Change Image</button>
             </div>
 
-            <!-- Downloads -->
+            <!-- Downloads - FIXED: Added delete functionality and better management -->
             <div class="admin-card">
                 <h3><i class="fas fa-download"></i> Download Forms (PDF)</h3>
                 <div id="adminDownloads"></div>
@@ -1967,7 +1967,7 @@
                 </div>
             </div>
 
-            <!-- Entry Popup Management -->
+            <!-- Entry Popup Management - FIXED: Dynamic card management -->
             <div class="admin-card">
                 <h3><i class="fas fa-window-maximize"></i> Entry Popup Manager</h3>
                 
@@ -1982,74 +1982,15 @@
                     <input type="text" id="popupFooterInput" class="popup-input" value="✨ Don't miss this opportunity to be part of excellence ✨">
                 </div>
                 
-                <!-- Card 1 -->
-                <div class="popup-preview-item">
-                    <h4 style="color: var(--accent); margin-bottom: 10px;">Card 1</h4>
-                    
-                    <label class="popup-label">Card Image</label>
-                    <img id="card1Preview" class="thumb-img" src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width:100%; height:150px; object-fit:cover; margin-bottom:10px;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
-                    <input type="file" id="card1Image" accept="image/*" style="margin:10px 0; width:100%;">
-                    
-                    <label class="popup-label">Card Title</label>
-                    <input type="text" id="card1Title" class="popup-input" value="📚 Admissions 2024-25">
-                    
-                    <label class="popup-label">Card Description</label>
-                    <textarea id="card1Desc" class="popup-textarea" rows="3">Applications open for Pre-Primary to Class X. Limited seats available. Apply now for the upcoming academic year.</textarea>
-                    
-                    <label class="popup-label">Link (e.g., #admissions)</label>
-                    <input type="text" id="card1Link" class="popup-input" value="#admissions">
-                    
-                    <label class="popup-label">Button Text</label>
-                    <input type="text" id="card1Btn" class="popup-input" value="Apply Now">
-                </div>
-                
-                <!-- Card 2 -->
-                <div class="popup-preview-item">
-                    <h4 style="color: var(--accent); margin-bottom: 10px;">Card 2</h4>
-                    
-                    <label class="popup-label">Card Image</label>
-                    <img id="card2Preview" class="thumb-img" src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width:100%; height:150px; object-fit:cover; margin-bottom:10px;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
-                    <input type="file" id="card2Image" accept="image/*" style="margin:10px 0; width:100%;">
-                    
-                    <label class="popup-label">Card Title</label>
-                    <input type="text" id="card2Title" class="popup-input" value="🏆 Our Achievements">
-                    
-                    <label class="popup-label">Card Description</label>
-                    <textarea id="card2Desc" class="popup-textarea" rows="3">State-level Science Fair winners, Inter-School Sports Champions, and 100% Board Exam results. Celebrating excellence!</textarea>
-                    
-                    <label class="popup-label">Link (e.g., #achievements)</label>
-                    <input type="text" id="card2Link" class="popup-input" value="#achievements">
-                    
-                    <label class="popup-label">Button Text</label>
-                    <input type="text" id="card2Btn" class="popup-input" value="View Achievements">
-                </div>
-                
-                <!-- Card 3 -->
-                <div class="popup-preview-item">
-                    <h4 style="color: var(--accent); margin-bottom: 10px;">Card 3</h4>
-                    
-                    <label class="popup-label">Card Image</label>
-                    <img id="card3Preview" class="thumb-img" src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width:100%; height:150px; object-fit:cover; margin-bottom:10px;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
-                    <input type="file" id="card3Image" accept="image/*" style="margin:10px 0; width:100%;">
-                    
-                    <label class="popup-label">Card Title</label>
-                    <input type="text" id="card3Title" class="popup-input" value="📊 Results 2024">
-                    
-                    <label class="popup-label">Card Description</label>
-                    <textarea id="card3Desc" class="popup-textarea" rows="3">100% pass percentage with 95% distinction. Our students have excelled in academics and competitive exams.</textarea>
-                    
-                    <label class="popup-label">Link (e.g., #results)</label>
-                    <input type="text" id="card3Link" class="popup-input" value="#results">
-                    
-                    <label class="popup-label">Button Text</label>
-                    <input type="text" id="card3Btn" class="popup-input" value="Check Results">
-                </div>
+                <!-- Dynamic Cards Container -->
+                <div id="popupCardsAdminContainer"></div>
                 
                 <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button class="add-btn" onclick="previewPopup()" style="background: #10b981;">Preview Changes</button>
-                    <button class="add-btn" onclick="savePopupToFirebase()">Save to Database</button>
+                    <button class="add-btn" onclick="addPopupCard()" style="background: #10b981;">➕ Add New Card</button>
+                    <button class="add-btn" onclick="previewPopup()">👁️ Preview Changes</button>
+                    <button class="add-btn" onclick="savePopupToFirebase()">💾 Save to Database</button>
                 </div>
-                <button class="add-btn" onclick="resetPopupToDefault()" style="background: #ef4444; margin-top: 10px;">Reset to Default</button>
+                <button class="add-btn" onclick="resetPopupToDefault()" style="background: #ef4444; margin-top: 10px;">↺ Reset to Default</button>
             </div>
         </div>
     </div>
@@ -2634,21 +2575,35 @@
                     document.getElementById('home').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${banner.imageUrl}')`;
                 }
 
-                // Load School Images
+                // Load School Images - FIXED: Properly handle principal image loading
                 const imagesSnapshot = await db.ref('school_images').once('value');
                 const images = imagesSnapshot.val();
                 if (images) {
+                    // School Image
                     if (images.schoolImage && typeof images.schoolImage === 'string') {
-                        document.getElementById('schoolImage').src = images.schoolImage;
-                        document.getElementById('schoolPreview').src = images.schoolImage;
+                        const schoolImg = document.getElementById('schoolImage');
+                        schoolImg.src = images.schoolImage;
+                        schoolImg.onerror = null; // Remove any error handlers
+                        const schoolPreview = document.getElementById('schoolPreview');
+                        if (schoolPreview) schoolPreview.src = images.schoolImage;
                     }
+                    
+                    // Principal Image - FIXED: Ensure it loads properly
                     if (images.principalImage && typeof images.principalImage === 'string') {
-                        document.getElementById('principalImage').src = images.principalImage;
-                        document.getElementById('principalPreview').src = images.principalImage;
+                        const principalImg = document.getElementById('principalImage');
+                        principalImg.src = images.principalImage;
+                        principalImg.onerror = null; // Remove any error handlers that might cause fallback
+                        const principalPreview = document.getElementById('principalPreview');
+                        if (principalPreview) principalPreview.src = images.principalImage;
                     }
+                    
+                    // Contact Image
                     if (images.contactImage && typeof images.contactImage === 'string') {
-                        document.getElementById('contactImage').src = images.contactImage;
-                        document.getElementById('contactPreview').src = images.contactImage;
+                        const contactImg = document.getElementById('contactImage');
+                        contactImg.src = images.contactImage;
+                        contactImg.onerror = null;
+                        const contactPreview = document.getElementById('contactPreview');
+                        if (contactPreview) contactPreview.src = images.contactImage;
                     }
                 }
 
@@ -2794,8 +2749,11 @@
             }
         }
 
-        // ==================== POPUP FUNCTIONS ====================
+        // ==================== POPUP FUNCTIONS - FIXED: Dynamic card management ====================
         
+        // Global array to store popup cards
+        let popupCards = [];
+
         // Load popup data from Firebase
         async function loadPopupFromFirebase() {
             try {
@@ -2804,12 +2762,13 @@
                 
                 const popupGrid = document.getElementById('popupGrid');
                 
-                if (popupData && popupData.cards) {
+                if (popupData && popupData.cards && Array.isArray(popupData.cards) && popupData.cards.length > 0) {
                     document.getElementById('popupTitle').textContent = popupData.title || '🎓 Welcome to Daffodils High School';
                     document.getElementById('popupSubtitle').textContent = popupData.subtitle || 'Discover what\'s new and happening at our school';
                     document.getElementById('popupFooter').textContent = popupData.footer || '✨ Don\'t miss this opportunity to be part of excellence ✨';
                     
                     popupGrid.innerHTML = '';
+                    popupCards = popupData.cards;
                     
                     popupData.cards.forEach((card, index) => {
                         // Validate card data
@@ -2820,7 +2779,11 @@
                         
                         const cardDiv = document.createElement('div');
                         cardDiv.className = 'entry-popup-item';
-                        cardDiv.onclick = function() { location.href = card.link || '#'; };
+                        cardDiv.onclick = function() { 
+                            if (card.link && card.link !== '#') {
+                                window.location.href = card.link; 
+                            }
+                        };
                         
                         const img = document.createElement('img');
                         img.src = card.imageUrl;
@@ -2846,30 +2809,222 @@
                         popupGrid.appendChild(cardDiv);
                     });
                 } else {
-                    // Default popup with error handling
-                    popupGrid.innerHTML = `
-                        <div class="entry-popup-item" onclick="location.href='#admissions'">
-                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Admissions Open" onerror="handleImageError(this, 0, 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')" loading="lazy">
-                            <h3>📚 Admissions 2024-25</h3>
-                            <p>Applications open for Pre-Primary to Class X. Limited seats available. Apply now for the upcoming academic year.</p>
-                            <button class="entry-popup-btn">Apply Now</button>
-                        </div>
-                        <div class="entry-popup-item" onclick="location.href='#achievements'">
-                            <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Our Achievements" onerror="handleImageError(this, 0, 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')" loading="lazy">
-                            <h3>🏆 Our Achievements</h3>
-                            <p>State-level Science Fair winners, Inter-School Sports Champions, and 100% Board Exam results. Celebrating excellence!</p>
-                            <button class="entry-popup-btn">View Achievements</button>
-                        </div>
-                        <div class="entry-popup-item" onclick="location.href='#results'">
-                            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Results" onerror="handleImageError(this, 0, 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')" loading="lazy">
-                            <h3>📊 Results 2024</h3>
-                            <p>100% pass percentage with 95% distinction. Our students have excelled in academics and competitive exams.</p>
-                            <button class="entry-popup-btn">Check Results</button>
-                        </div>
-                    `;
+                    // Default popup
+                    popupCards = [
+                        {
+                            imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            title: '📚 Admissions 2024-25',
+                            description: 'Applications open for Pre-Primary to Class X. Limited seats available. Apply now for the upcoming academic year.',
+                            link: '#admissions',
+                            buttonText: 'Apply Now'
+                        },
+                        {
+                            imageUrl: 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            title: '🏆 Our Achievements',
+                            description: 'State-level Science Fair winners, Inter-School Sports Champions, and 100% Board Exam results. Celebrating excellence!',
+                            link: '#achievements',
+                            buttonText: 'View Achievements'
+                        },
+                        {
+                            imageUrl: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            title: '📊 Results 2024',
+                            description: '100% pass percentage with 95% distinction. Our students have excelled in academics and competitive exams.',
+                            link: '#results',
+                            buttonText: 'Check Results'
+                        }
+                    ];
+                    
+                    document.getElementById('popupTitle').textContent = '🎓 Welcome to Daffodils High School';
+                    document.getElementById('popupSubtitle').textContent = 'Discover what\'s new and happening at our school';
+                    document.getElementById('popupFooter').textContent = '✨ Don\'t miss this opportunity to be part of excellence ✨';
+                    
+                    popupGrid.innerHTML = '';
+                    popupCards.forEach((card, index) => {
+                        const cardDiv = document.createElement('div');
+                        cardDiv.className = 'entry-popup-item';
+                        cardDiv.onclick = function() { 
+                            if (card.link && card.link !== '#') {
+                                window.location.href = card.link; 
+                            }
+                        };
+                        
+                        const img = document.createElement('img');
+                        img.src = card.imageUrl;
+                        img.alt = 'Popup Image';
+                        img.setAttribute('data-src', card.imageUrl);
+                        img.onerror = function() { handleImageError(this, 0, card.imageUrl); };
+                        img.loading = 'lazy';
+                        cardDiv.appendChild(img);
+                        
+                        const h3 = document.createElement('h3');
+                        h3.textContent = card.title;
+                        cardDiv.appendChild(h3);
+                        
+                        const p = document.createElement('p');
+                        p.textContent = card.description;
+                        cardDiv.appendChild(p);
+                        
+                        const btn = document.createElement('button');
+                        btn.className = 'entry-popup-btn';
+                        btn.textContent = card.buttonText;
+                        cardDiv.appendChild(btn);
+                        
+                        popupGrid.appendChild(cardDiv);
+                    });
                 }
             } catch (error) {
                 console.error('Error loading popup:', error);
+            }
+        }
+
+        // Render admin popup cards dynamically
+        function renderAdminPopupCards() {
+            const container = document.getElementById('popupCardsAdminContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            popupCards.forEach((card, index) => {
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'popup-preview-item';
+                cardDiv.id = `popupCard_${index}`;
+                cardDiv.style.position = 'relative';
+                
+                // Delete button
+                const deleteBtn = document.createElement('button');
+                deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteBtn.style.position = 'absolute';
+                deleteBtn.style.top = '5px';
+                deleteBtn.style.right = '5px';
+                deleteBtn.style.background = '#ef4444';
+                deleteBtn.style.color = 'white';
+                deleteBtn.style.border = 'none';
+                deleteBtn.style.borderRadius = '5px';
+                deleteBtn.style.padding = '5px 10px';
+                deleteBtn.style.cursor = 'pointer';
+                deleteBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    deletePopupCard(index);
+                };
+                cardDiv.appendChild(deleteBtn);
+                
+                // Card content
+                const titleLabel = document.createElement('label');
+                titleLabel.className = 'popup-label';
+                titleLabel.textContent = `Card ${index + 1} Image`;
+                cardDiv.appendChild(titleLabel);
+                
+                const img = document.createElement('img');
+                img.id = `card${index}Preview`;
+                img.className = 'thumb-img';
+                img.src = card.imageUrl;
+                img.style.width = '100%';
+                img.style.height = '150px';
+                img.style.objectFit = 'cover';
+                img.style.marginBottom = '10px';
+                img.onerror = function() { handleImageError(this, 0, card.imageUrl); };
+                cardDiv.appendChild(img);
+                
+                const imgInput = document.createElement('input');
+                imgInput.type = 'file';
+                imgInput.id = `card${index}Image`;
+                imgInput.accept = 'image/*';
+                imgInput.style.margin = '10px 0';
+                imgInput.style.width = '100%';
+                imgInput.onchange = async function() {
+                    if (!this.files[0]) return;
+                    try {
+                        const compressed = await processAndUploadImage(this.files[0], `popup/card${index}`, false);
+                        if (compressed && typeof compressed === 'string') {
+                            document.getElementById(`card${index}Preview`).src = compressed;
+                            popupCards[index].imageUrl = compressed;
+                        }
+                        this.value = '';
+                    } catch (error) {
+                        showToast('Upload failed', 'error');
+                    }
+                };
+                cardDiv.appendChild(imgInput);
+                
+                const titleInput = createInput('Card Title', card.title, (value) => {
+                    popupCards[index].title = value;
+                });
+                cardDiv.appendChild(titleInput);
+                
+                const descInput = createTextarea('Card Description', card.description, (value) => {
+                    popupCards[index].description = value;
+                });
+                cardDiv.appendChild(descInput);
+                
+                const linkInput = createInput('Link (e.g., #admissions)', card.link || '#', (value) => {
+                    popupCards[index].link = value;
+                });
+                cardDiv.appendChild(linkInput);
+                
+                const btnInput = createInput('Button Text', card.buttonText, (value) => {
+                    popupCards[index].buttonText = value;
+                });
+                cardDiv.appendChild(btnInput);
+                
+                container.appendChild(cardDiv);
+            });
+        }
+
+        function createInput(labelText, value, onChange) {
+            const div = document.createElement('div');
+            
+            const label = document.createElement('label');
+            label.className = 'popup-label';
+            label.textContent = labelText;
+            div.appendChild(label);
+            
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'popup-input';
+            input.value = value || '';
+            input.oninput = (e) => onChange(e.target.value);
+            div.appendChild(input);
+            
+            return div;
+        }
+
+        function createTextarea(labelText, value, onChange) {
+            const div = document.createElement('div');
+            
+            const label = document.createElement('label');
+            label.className = 'popup-label';
+            label.textContent = labelText;
+            div.appendChild(label);
+            
+            const textarea = document.createElement('textarea');
+            textarea.className = 'popup-textarea';
+            textarea.rows = 3;
+            textarea.value = value || '';
+            textarea.oninput = (e) => onChange(e.target.value);
+            div.appendChild(textarea);
+            
+            return div;
+        }
+
+        function addPopupCard() {
+            const newCard = {
+                imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                title: 'New Card Title',
+                description: 'Enter your description here',
+                link: '#',
+                buttonText: 'Learn More'
+            };
+            
+            popupCards.push(newCard);
+            renderAdminPopupCards();
+            showToast('New card added');
+        }
+
+        function deletePopupCard(index) {
+            if (confirm('Delete this card?')) {
+                popupCards.splice(index, 1);
+                renderAdminPopupCards();
+                showToast('Card deleted');
             }
         }
 
@@ -2882,35 +3037,37 @@
             const popupGrid = document.getElementById('popupGrid');
             popupGrid.innerHTML = '';
             
-            // Card 1
-            popupGrid.innerHTML += `
-                <div class="entry-popup-item" onclick="location.href='${document.getElementById('card1Link').value}'">
-                    <img src="${document.getElementById('card1Preview').src}" alt="Popup Image" onerror="handleImageError(this, 0, '${document.getElementById('card1Preview').src}')" loading="lazy">
-                    <h3>${document.getElementById('card1Title').value}</h3>
-                    <p>${document.getElementById('card1Desc').value}</p>
-                    <button class="entry-popup-btn">${document.getElementById('card1Btn').value}</button>
-                </div>
-            `;
-            
-            // Card 2
-            popupGrid.innerHTML += `
-                <div class="entry-popup-item" onclick="location.href='${document.getElementById('card2Link').value}'">
-                    <img src="${document.getElementById('card2Preview').src}" alt="Popup Image" onerror="handleImageError(this, 0, '${document.getElementById('card2Preview').src}')" loading="lazy">
-                    <h3>${document.getElementById('card2Title').value}</h3>
-                    <p>${document.getElementById('card2Desc').value}</p>
-                    <button class="entry-popup-btn">${document.getElementById('card2Btn').value}</button>
-                </div>
-            `;
-            
-            // Card 3
-            popupGrid.innerHTML += `
-                <div class="entry-popup-item" onclick="location.href='${document.getElementById('card3Link').value}'">
-                    <img src="${document.getElementById('card3Preview').src}" alt="Popup Image" onerror="handleImageError(this, 0, '${document.getElementById('card3Preview').src}')" loading="lazy">
-                    <h3>${document.getElementById('card3Title').value}</h3>
-                    <p>${document.getElementById('card3Desc').value}</p>
-                    <button class="entry-popup-btn">${document.getElementById('card3Btn').value}</button>
-                </div>
-            `;
+            popupCards.forEach((card, index) => {
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'entry-popup-item';
+                cardDiv.onclick = function() { 
+                    if (card.link && card.link !== '#') {
+                        window.location.href = card.link; 
+                    }
+                };
+                
+                const img = document.createElement('img');
+                img.src = card.imageUrl;
+                img.alt = 'Popup Image';
+                img.onerror = function() { handleImageError(this, 0, card.imageUrl); };
+                img.loading = 'lazy';
+                cardDiv.appendChild(img);
+                
+                const h3 = document.createElement('h3');
+                h3.textContent = card.title;
+                cardDiv.appendChild(h3);
+                
+                const p = document.createElement('p');
+                p.textContent = card.description;
+                cardDiv.appendChild(p);
+                
+                const btn = document.createElement('button');
+                btn.className = 'entry-popup-btn';
+                btn.textContent = card.buttonText;
+                cardDiv.appendChild(btn);
+                
+                popupGrid.appendChild(cardDiv);
+            });
             
             showToast('Preview updated!');
         }
@@ -2924,29 +3081,7 @@
                     title: document.getElementById('popupTitleInput').value,
                     subtitle: document.getElementById('popupSubtitleInput').value,
                     footer: document.getElementById('popupFooterInput').value,
-                    cards: [
-                        {
-                            title: document.getElementById('card1Title').value,
-                            description: document.getElementById('card1Desc').value,
-                            link: document.getElementById('card1Link').value,
-                            buttonText: document.getElementById('card1Btn').value,
-                            imageUrl: document.getElementById('card1Preview').src
-                        },
-                        {
-                            title: document.getElementById('card2Title').value,
-                            description: document.getElementById('card2Desc').value,
-                            link: document.getElementById('card2Link').value,
-                            buttonText: document.getElementById('card2Btn').value,
-                            imageUrl: document.getElementById('card2Preview').src
-                        },
-                        {
-                            title: document.getElementById('card3Title').value,
-                            description: document.getElementById('card3Desc').value,
-                            link: document.getElementById('card3Link').value,
-                            buttonText: document.getElementById('card3Btn').value,
-                            imageUrl: document.getElementById('card3Preview').src
-                        }
-                    ],
+                    cards: popupCards,
                     timestamp: firebase.database.ServerValue.TIMESTAMP
                 };
                 
@@ -2965,67 +3100,34 @@
             document.getElementById('popupSubtitleInput').value = 'Discover what\'s new and happening at our school';
             document.getElementById('popupFooterInput').value = '✨ Don\'t miss this opportunity to be part of excellence ✨';
             
-            document.getElementById('card1Title').value = '📚 Admissions 2024-25';
-            document.getElementById('card1Desc').value = 'Applications open for Pre-Primary to Class X. Limited seats available. Apply now for the upcoming academic year.';
-            document.getElementById('card1Link').value = '#admissions';
-            document.getElementById('card1Btn').value = 'Apply Now';
-            document.getElementById('card1Preview').src = 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+            popupCards = [
+                {
+                    imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    title: '📚 Admissions 2024-25',
+                    description: 'Applications open for Pre-Primary to Class X. Limited seats available. Apply now for the upcoming academic year.',
+                    link: '#admissions',
+                    buttonText: 'Apply Now'
+                },
+                {
+                    imageUrl: 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    title: '🏆 Our Achievements',
+                    description: 'State-level Science Fair winners, Inter-School Sports Champions, and 100% Board Exam results. Celebrating excellence!',
+                    link: '#achievements',
+                    buttonText: 'View Achievements'
+                },
+                {
+                    imageUrl: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    title: '📊 Results 2024',
+                    description: '100% pass percentage with 95% distinction. Our students have excelled in academics and competitive exams.',
+                    link: '#results',
+                    buttonText: 'Check Results'
+                }
+            ];
             
-            document.getElementById('card2Title').value = '🏆 Our Achievements';
-            document.getElementById('card2Desc').value = 'State-level Science Fair winners, Inter-School Sports Champions, and 100% Board Exam results. Celebrating excellence!';
-            document.getElementById('card2Link').value = '#achievements';
-            document.getElementById('card2Btn').value = 'View Achievements';
-            document.getElementById('card2Preview').src = 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
-            
-            document.getElementById('card3Title').value = '📊 Results 2024';
-            document.getElementById('card3Desc').value = '100% pass percentage with 95% distinction. Our students have excelled in academics and competitive exams.';
-            document.getElementById('card3Link').value = '#results';
-            document.getElementById('card3Btn').value = 'Check Results';
-            document.getElementById('card3Preview').src = 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
-            
+            renderAdminPopupCards();
             previewPopup();
             showToast('Reset to default values');
         }
-
-        // Handle card image uploads with optimization
-        document.getElementById('card1Image').onchange = async function() {
-            if (!this.files[0]) return;
-            try {
-                const compressed = await processAndUploadImage(this.files[0], 'popup/card1', false);
-                if (compressed && typeof compressed === 'string') {
-                    document.getElementById('card1Preview').src = compressed;
-                }
-                this.value = '';
-            } catch (error) {
-                showToast('Upload failed', 'error');
-            }
-        };
-
-        document.getElementById('card2Image').onchange = async function() {
-            if (!this.files[0]) return;
-            try {
-                const compressed = await processAndUploadImage(this.files[0], 'popup/card2', false);
-                if (compressed && typeof compressed === 'string') {
-                    document.getElementById('card2Preview').src = compressed;
-                }
-                this.value = '';
-            } catch (error) {
-                showToast('Upload failed', 'error');
-            }
-        };
-
-        document.getElementById('card3Image').onchange = async function() {
-            if (!this.files[0]) return;
-            try {
-                const compressed = await processAndUploadImage(this.files[0], 'popup/card3', false);
-                if (compressed && typeof compressed === 'string') {
-                    document.getElementById('card3Preview').src = compressed;
-                }
-                this.value = '';
-            } catch (error) {
-                showToast('Upload failed', 'error');
-            }
-        };
 
         // ==================== AUTHENTICATION FUNCTIONS ====================
         function openModal() {
@@ -3203,6 +3305,50 @@
                     document.getElementById('contactPreview').src = images.contactImage;
                 }
 
+                // Load Downloads for admin - FIXED: Show current PDFs with delete option
+                const downloadsSnapshot = await db.ref('downloads').once('value');
+                const downloads = downloadsSnapshot.val() || {};
+                let adminDownloads = document.getElementById('adminDownloads');
+                if (adminDownloads) {
+                    adminDownloads.innerHTML = '';
+                    
+                    if (downloads.admission) {
+                        adminDownloads.innerHTML += `
+                            <div class="admin-item">
+                                <i class="fas fa-file-pdf" style="color: #f44336; font-size: 24px;"></i>
+                                <span>Admission Form: ${downloads.admission.name || 'Available'}</span>
+                                <div class="admin-actions">
+                                    <button class="delete-btn" onclick="deletePDF('admission')"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        adminDownloads.innerHTML += `
+                            <div class="admin-item">
+                                <span>No Admission Form uploaded</span>
+                            </div>
+                        `;
+                    }
+                    
+                    if (downloads.prospectus) {
+                        adminDownloads.innerHTML += `
+                            <div class="admin-item">
+                                <i class="fas fa-file-pdf" style="color: #f44336; font-size: 24px;"></i>
+                                <span>Prospectus: ${downloads.prospectus.name || 'Available'}</span>
+                                <div class="admin-actions">
+                                    <button class="delete-btn" onclick="deletePDF('prospectus')"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        adminDownloads.innerHTML += `
+                            <div class="admin-item">
+                                <span>No Prospectus uploaded</span>
+                            </div>
+                        `;
+                    }
+                }
+
                 // Load popup data into admin form
                 const popupSnapshot = await db.ref('popup').once('value');
                 const popupData = popupSnapshot.val();
@@ -3211,35 +3357,35 @@
                     document.getElementById('popupSubtitleInput').value = popupData.subtitle || 'Discover what\'s new and happening at our school';
                     document.getElementById('popupFooterInput').value = popupData.footer || '✨ Don\'t miss this opportunity to be part of excellence ✨';
                     
-                    if (popupData.cards && popupData.cards.length > 0) {
-                        if (popupData.cards[0]) {
-                            document.getElementById('card1Title').value = popupData.cards[0].title || '📚 Admissions 2024-25';
-                            document.getElementById('card1Desc').value = popupData.cards[0].description || 'Applications open for Pre-Primary to Class X. Limited seats available.';
-                            document.getElementById('card1Link').value = popupData.cards[0].link || '#admissions';
-                            document.getElementById('card1Btn').value = popupData.cards[0].buttonText || 'Apply Now';
-                            if (popupData.cards[0].imageUrl && typeof popupData.cards[0].imageUrl === 'string') {
-                                document.getElementById('card1Preview').src = popupData.cards[0].imageUrl;
+                    if (popupData.cards && Array.isArray(popupData.cards) && popupData.cards.length > 0) {
+                        popupCards = popupData.cards;
+                    } else {
+                        popupCards = [
+                            {
+                                imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                                title: '📚 Admissions 2024-25',
+                                description: 'Applications open for Pre-Primary to Class X. Limited seats available. Apply now for the upcoming academic year.',
+                                link: '#admissions',
+                                buttonText: 'Apply Now'
+                            },
+                            {
+                                imageUrl: 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                                title: '🏆 Our Achievements',
+                                description: 'State-level Science Fair winners, Inter-School Sports Champions, and 100% Board Exam results. Celebrating excellence!',
+                                link: '#achievements',
+                                buttonText: 'View Achievements'
+                            },
+                            {
+                                imageUrl: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                                title: '📊 Results 2024',
+                                description: '100% pass percentage with 95% distinction. Our students have excelled in academics and competitive exams.',
+                                link: '#results',
+                                buttonText: 'Check Results'
                             }
-                        }
-                        if (popupData.cards[1]) {
-                            document.getElementById('card2Title').value = popupData.cards[1].title || '🏆 Our Achievements';
-                            document.getElementById('card2Desc').value = popupData.cards[1].description || 'State-level Science Fair winners, Inter-School Sports Champions';
-                            document.getElementById('card2Link').value = popupData.cards[1].link || '#achievements';
-                            document.getElementById('card2Btn').value = popupData.cards[1].buttonText || 'View Achievements';
-                            if (popupData.cards[1].imageUrl && typeof popupData.cards[1].imageUrl === 'string') {
-                                document.getElementById('card2Preview').src = popupData.cards[1].imageUrl;
-                            }
-                        }
-                        if (popupData.cards[2]) {
-                            document.getElementById('card3Title').value = popupData.cards[2].title || '📊 Results 2024';
-                            document.getElementById('card3Desc').value = popupData.cards[2].description || '100% pass percentage with 95% distinction';
-                            document.getElementById('card3Link').value = popupData.cards[2].link || '#results';
-                            document.getElementById('card3Btn').value = popupData.cards[2].buttonText || 'Check Results';
-                            if (popupData.cards[2].imageUrl && typeof popupData.cards[2].imageUrl === 'string') {
-                                document.getElementById('card3Preview').src = popupData.cards[2].imageUrl;
-                            }
-                        }
+                        ];
                     }
+                    
+                    renderAdminPopupCards();
                 }
 
             } catch (error) {
@@ -3287,7 +3433,7 @@
             }
         }
 
-        // Banner upload - FIXED
+        // Banner upload
         document.getElementById('bannerInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
             const compressed = await processAndUploadImage(this.files[0], 'banner', false);
@@ -3298,7 +3444,7 @@
             this.value = '';
         };
 
-        // School images uploads - FIXED
+        // School images uploads
         document.getElementById('schoolInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
             const compressed = await processAndUploadImage(this.files[0], 'school_images/schoolImage', false);
@@ -3329,7 +3475,7 @@
             this.value = '';
         };
 
-        // Gallery - FIXED
+        // Gallery
         document.getElementById('galleryInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
             const compressed = await processAndUploadImage(this.files[0], 'gallery', true);
@@ -3350,7 +3496,7 @@
             }
         }
 
-        // Facilities - FIXED
+        // Facilities
         document.getElementById('facilityInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
             let title = prompt('Enter facility name:');
@@ -3391,7 +3537,7 @@
             }
         }
 
-        // Achievements - FIXED
+        // Achievements
         document.getElementById('achievementInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
             let title = prompt('Enter achievement title:');
@@ -3432,7 +3578,7 @@
             }
         }
 
-        // PDF Downloads
+        // PDF Downloads - FIXED: Delete functionality
         document.getElementById('admissionPdfInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
             try {
@@ -3442,6 +3588,7 @@
                     name: this.files[0].name,
                     timestamp: firebase.database.ServerValue.TIMESTAMP
                 });
+                await loadAdminPanel();
                 showToast('Admission form uploaded!');
                 this.value = '';
             } catch (error) {
@@ -3458,12 +3605,22 @@
                     name: this.files[0].name,
                     timestamp: firebase.database.ServerValue.TIMESTAMP
                 });
+                await loadAdminPanel();
                 showToast('Prospectus uploaded!');
                 this.value = '';
             } catch (error) {
                 showToast('Upload failed: ' + error.message, 'error');
             }
         };
+
+        async function deletePDF(type) {
+            if (!isLoggedIn) return;
+            if (confirm(`Delete this ${type} form?`)) {
+                await db.ref(`downloads/${type}`).remove();
+                await loadAdminPanel();
+                showToast(`${type} form deleted!`);
+            }
+        }
 
         async function downloadForm(type) {
             try {
