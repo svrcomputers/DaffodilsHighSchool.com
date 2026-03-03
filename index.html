@@ -2336,10 +2336,17 @@
             }
         }
 
-        // ==================== IMAGE ERROR HANDLER ====================
+        // ==================== IMAGE ERROR HANDLER - FIXED ====================
         function handleImageError(imgElement, retryCount = 0, originalSrc = null) {
             const maxRetries = 3;
             const src = originalSrc || imgElement.src;
+            
+            // CRITICAL FIX: Check if image actually loaded successfully
+            if (imgElement.complete && imgElement.naturalHeight > 0) {
+                // Image loaded successfully, remove any error handlers and return
+                console.log('Image loaded successfully, ignoring error handler');
+                return;
+            }
             
             // Don't retry if src is empty or invalid
             if (!src || src === 'undefined' || src === 'null' || src.includes('[object Object]')) {
@@ -2348,9 +2355,20 @@
                 return;
             }
             
+            // Check if we're offline
+            if (!navigator.onLine) {
+                console.log('Offline, showing fallback');
+                showFallback(imgElement);
+                return;
+            }
+            
             if (retryCount < maxRetries) {
+                console.log(`Retrying image (attempt ${retryCount + 1}/${maxRetries})`);
+                
                 // Add retry button
                 const parent = imgElement.parentNode;
+                if (!parent) return;
+                
                 parent.style.position = 'relative';
                 
                 // Remove any existing retry buttons
@@ -2362,20 +2380,23 @@
                 retryBtn.innerHTML = `↻ Retry (${retryCount + 1}/${maxRetries})`;
                 retryBtn.onclick = (e) => {
                     e.stopPropagation();
+                    e.preventDefault();
                     retryBtn.remove();
                     imgElement.style.display = 'block';
                     // Add cache busting parameter
                     const baseSrc = src.split('?')[0];
-                    imgElement.src = baseSrc + '?retry=' + Date.now() + '&attempt=' + (retryCount + 1);
+                    const newSrc = baseSrc + '?retry=' + Date.now() + '&attempt=' + (retryCount + 1);
+                    imgElement.src = newSrc;
                     
-                    // Set up next retry if needed
-                    imgElement.onerror = () => handleImageError(imgElement, retryCount + 1, baseSrc);
+                    // Clear the old error handler and set a new one
+                    imgElement.onerror = null;
+                    imgElement.onerror = function() { 
+                        handleImageError(imgElement, retryCount + 1, baseSrc); 
+                    };
                 };
                 
                 parent.appendChild(retryBtn);
                 imgElement.style.display = 'none';
-                
-                console.log(`Image failed to load (attempt ${retryCount + 1}):`, src.substring(0, 100));
                 
             } else {
                 showFallback(imgElement);
