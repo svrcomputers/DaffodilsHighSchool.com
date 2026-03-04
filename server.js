@@ -130,7 +130,7 @@ app.get('/', (req, res) => {
   res.json({ status: 'API is running', message: 'Daffodils School API' });
 });
 
-// Generic query endpoint (used by frontend)
+// FIXED: Generic query endpoint that handles all Neon syntax correctly
 app.post('/api/query', async (req, res) => {
   try {
     const { sql: queryText, params } = req.body;
@@ -139,23 +139,62 @@ app.post('/api/query', async (req, res) => {
       return res.status(400).json({ error: 'SQL query is required' });
     }
     
-    // FIXED: Use the correct syntax for parameterized queries
-    // For Neon serverless driver, we need to use tagged templates or .query()
+    console.log('Query received:', queryText);
+    console.log('Params:', params);
     
     let result;
     
+    // Check if this is a SELECT query
+    const trimmedQuery = queryText.trim();
+    const isSelect = trimmedQuery.toUpperCase().startsWith('SELECT');
+    
+    // Handle different query types
     if (params && params.length > 0) {
-      // Method 1: Use .query() for traditional parameterized queries
+      // For queries with parameters, ALWAYS use .query() method
+      // This is the correct way to do parameterized queries with Neon
       result = await sql.query(queryText, params);
     } else {
-      // Method 2: Use tagged template literal for simple queries
-      result = await sql(queryText);
+      // For queries without parameters, we can use tagged template
+      // But need to be careful with queries that have literals
+      if (queryText.includes('$') || queryText.includes("'")) {
+        // If the query has dollar signs or quotes, use .query() to be safe
+        result = await sql.query(queryText, []);
+      } else {
+        // Simple query without parameters - use tagged template
+        try {
+          result = await sql(queryText);
+        } catch (taggedError) {
+          // If tagged template fails, fall back to .query()
+          console.log('Tagged template failed, falling back to .query()');
+          result = await sql.query(queryText, []);
+        }
+      }
     }
     
-    res.json({ rows: result });
+    // Format the response consistently
+    let responseData;
+    
+    if (result === null || result === undefined) {
+      responseData = { rows: [] };
+    } else if (Array.isArray(result)) {
+      responseData = { rows: result };
+    } else if (result.rows && Array.isArray(result.rows)) {
+      responseData = result;
+    } else {
+      responseData = { rows: [result] };
+    }
+    
+    res.json(responseData);
   } catch (error) {
     console.error('Query error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('Query that caused error:', req.body.sql);
+    console.error('Params:', req.body.params);
+    
+    // Send a more helpful error message
+    res.status(500).json({ 
+      error: error.message,
+      hint: 'For parameterized queries, use sql.query("SELECT $1", [value]) not sql("SELECT $1", [value])'
+    });
   }
 });
 
