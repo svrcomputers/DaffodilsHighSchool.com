@@ -29,7 +29,7 @@
     <meta name="twitter:image" content="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://daffodilshhighschool.edu">
+    <link rel="canonical" href="https://daffodilshighschool.edu">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏫</text></svg>">
@@ -85,6 +85,18 @@
             flex-direction: column;
             width: 100%;
             position: relative;
+        }
+
+        /* Image styles - CRITICAL FIX */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
 
         /* Image placeholder styles */
@@ -813,12 +825,6 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
-            display: block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
         }
 
         .gallery-item:hover img {
@@ -873,11 +879,6 @@
             object-fit: cover;
             transition: transform 0.5s;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: block;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
         }
 
         .facility-card:hover img {
@@ -951,12 +952,6 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
-            display: block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
         }
 
         .academic-card:hover .academic-img img {
@@ -1013,12 +1008,6 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
-            display: block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
         }
 
         .achievement-item:hover img {
@@ -1102,8 +1091,6 @@
             height: 100%;
             object-fit: cover;
             transition: all 0.3s;
-            display: block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
 
         .contact-image:hover img {
@@ -1395,11 +1382,6 @@
             margin-bottom: 15px;
             transition: transform 0.5s;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: block;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
         }
 
         .entry-popup-item:hover img {
@@ -1518,61 +1500,14 @@
             display: inline-block;
         }
 
-        /* Mobile Optimizations - FIXED */
+        /* Mobile Responsive Fixes - CRITICAL */
         @media screen and (max-width: 768px) {
-            /* Hardware acceleration for smoother rendering */
-            .gallery-item img,
-            .achievement-item img,
-            .facility-card img,
-            .academic-img img,
-            .entry-popup-item img,
-            .principal-card img,
-            .about-image img,
-            .contact-image img {
-                -webkit-transform: translateZ(0);
-                transform: translateZ(0);
-                -webkit-backface-visibility: hidden;
-                backface-visibility: hidden;
-                -webkit-perspective: 1000;
-                perspective: 1000;
-                image-rendering: -webkit-optimize-contrast;
-                image-rendering: crisp-edges;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            @media (prefers-reduced-motion: reduce) {
-                * {
-                    animation-duration: 0.01ms !important;
-                    animation-iteration-count: 1 !important;
-                    transition-duration: 0.01ms !important;
-                }
-            }
-
-            .gallery-item, 
-            .achievement-item, 
-            .facility-card,
-            .academic-card,
-            .principal-card,
-            .about-image,
-            .contact-image {
-                will-change: transform;
-                contain: content;
-                width: 100%;
-                max-width: 100%;
-            }
-
-            .image-placeholder {
-                min-height: 150px;
-            }
-            
-            /* Fix grid layouts for mobile */
+            /* Fix all grid layouts for mobile */
             .gallery-grid,
             .facilities-grid,
             .achievements-grid,
             .academics-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
                 gap: 20px;
                 width: 100%;
             }
@@ -1589,23 +1524,86 @@
             .facility-card img,
             .achievement-item img,
             .academic-img img {
+                width: 100%;
                 height: 220px;
-                width: 100%;
+                object-fit: cover;
             }
             
-            /* Fix container widths */
-            section {
-                padding: 50px 15px;
-                width: 100%;
-            }
-            
-            .container,
+            /* Fix about section */
             .about-grid,
-            .contact-grid,
+            .principal-card,
             .vision-mission,
-            .why-grid {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .about-image,
+            .principal-card img {
                 width: 100%;
-                max-width: 100%;
+                height: 300px;
+            }
+            
+            .principal-card {
+                padding: 20px;
+            }
+            
+            .principal-card img {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto;
+            }
+            
+            /* Fix contact section */
+            .contact-info,
+            .map {
+                width: 100%;
+            }
+            
+            .map {
+                min-height: 300px;
+            }
+            
+            /* Fix entry popup */
+            .entry-popup-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .entry-popup-item img {
+                height: 180px;
+            }
+            
+            /* Fix hero section */
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            /* Fix section padding */
+            section {
+                padding: 40px 15px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            /* Fix footer */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
             }
         }
         
@@ -1618,14 +1616,13 @@
                 height: 200px;
             }
             
-            .principal-card img {
-                height: 200px;
-                width: 200px;
-                margin: 0 auto;
-            }
-            
             .about-image {
                 height: 250px;
+            }
+            
+            .principal-card img {
+                width: 150px;
+                height: 150px;
             }
             
             .contact-image {
@@ -1673,13 +1670,6 @@
                 text-decoration: none;
                 color: black;
             }
-        }
-
-        img {
-            display: block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            max-width: 100%;
-            height: auto;
         }
         
         body {
@@ -2274,6 +2264,8 @@
                     parent.style.background = 'none';
                     parent.classList.remove('image-placeholder');
                 }
+                // Force reflow for mobile
+                imgElement.offsetHeight;
             };
             
             imgElement.onerror = function() {
