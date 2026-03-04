@@ -2196,7 +2196,15 @@
                 }
                 
                 if (!response.ok) {
-                    throw new Error(data.error || `HTTP error! status: ${response.status}`);
+                    // Log the full error for debugging
+                    console.error('Server error response:', data);
+                    
+                    // Create a more helpful error message
+                    let errorMessage = data.error || `HTTP error! status: ${response.status}`;
+                    if (data.hint) {
+                        errorMessage += ` - ${data.hint}`;
+                    }
+                    throw new Error(errorMessage);
                 }
                 
                 // IMPORTANT FIX: Our API returns { rows: [...] }
@@ -2220,118 +2228,154 @@
             }
         }
 
-        // Initialize database tables if they don't exist
+        // Initialize database tables if they don't exist - FIXED to run one query at a time
         async function initDatabase() {
-            // Create tables if they don't exist
-            const createTablesSQL = `
-                CREATE TABLE IF NOT EXISTS notices (
-                    id SERIAL PRIMARY KEY,
-                    text TEXT NOT NULL,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
+            try {
+                console.log('Initializing database tables...');
                 
-                CREATE TABLE IF NOT EXISTS banner (
-                    id INTEGER PRIMARY KEY DEFAULT 1,
-                    image_url TEXT,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
+                // Create tables one by one - not in a single multi-statement query
+                const queries = [
+                    `CREATE TABLE IF NOT EXISTS notices (
+                        id SERIAL PRIMARY KEY,
+                        text TEXT NOT NULL,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    );`,
+                    
+                    `CREATE TABLE IF NOT EXISTS banner (
+                        id INTEGER PRIMARY KEY DEFAULT 1,
+                        image_url TEXT,
+                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    );`,
+                    
+                    `CREATE TABLE IF NOT EXISTS school_images (
+                        id INTEGER PRIMARY KEY DEFAULT 1,
+                        school_image TEXT,
+                        principal_image TEXT,
+                        contact_image TEXT,
+                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    );`,
+                    
+                    `CREATE TABLE IF NOT EXISTS gallery (
+                        id SERIAL PRIMARY KEY,
+                        image_url TEXT NOT NULL,
+                        file_name TEXT,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    );`,
+                    
+                    `CREATE TABLE IF NOT EXISTS facilities (
+                        id SERIAL PRIMARY KEY,
+                        image_url TEXT NOT NULL,
+                        title TEXT,
+                        description TEXT,
+                        file_name TEXT,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    );`,
+                    
+                    `CREATE TABLE IF NOT EXISTS achievements (
+                        id SERIAL PRIMARY KEY,
+                        image_url TEXT NOT NULL,
+                        title TEXT,
+                        description TEXT,
+                        file_name TEXT,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    );`,
+                    
+                    `CREATE TABLE IF NOT EXISTS downloads (
+                        id INTEGER PRIMARY KEY DEFAULT 1,
+                        admission_url TEXT,
+                        admission_name TEXT,
+                        prospectus_url TEXT,
+                        prospectus_name TEXT,
+                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    );`,
+                    
+                    `CREATE TABLE IF NOT EXISTS popup (
+                        id INTEGER PRIMARY KEY DEFAULT 1,
+                        title TEXT,
+                        subtitle TEXT,
+                        footer TEXT,
+                        cards JSONB,
+                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    );`
+                ];
                 
-                CREATE TABLE IF NOT EXISTS school_images (
-                    id INTEGER PRIMARY KEY DEFAULT 1,
-                    school_image TEXT,
-                    principal_image TEXT,
-                    contact_image TEXT,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
+                // Execute each query separately
+                for (const query of queries) {
+                    await queryNeon(query);
+                }
                 
-                CREATE TABLE IF NOT EXISTS gallery (
-                    id SERIAL PRIMARY KEY,
-                    image_url TEXT NOT NULL,
-                    file_name TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
+                console.log('Tables created successfully');
                 
-                CREATE TABLE IF NOT EXISTS facilities (
-                    id SERIAL PRIMARY KEY,
-                    image_url TEXT NOT NULL,
-                    title TEXT,
-                    description TEXT,
-                    file_name TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
+                // Insert default records if they don't exist
+                const defaultInserts = [
+                    {
+                        sql: `INSERT INTO banner (id, image_url) 
+                              VALUES ($1, $2) 
+                              ON CONFLICT (id) DO NOTHING`,
+                        params: [1, 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80']
+                    },
+                    {
+                        sql: `INSERT INTO school_images (id, school_image, principal_image, contact_image) 
+                              VALUES ($1, $2, $3, $4) 
+                              ON CONFLICT (id) DO NOTHING`,
+                        params: [
+                            1,
+                            'https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80',
+                            'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                        ]
+                    },
+                    {
+                        sql: `INSERT INTO downloads (id) VALUES ($1) ON CONFLICT (id) DO NOTHING`,
+                        params: [1]
+                    },
+                    {
+                        sql: `INSERT INTO popup (id, title, subtitle, footer, cards) 
+                              VALUES ($1, $2, $3, $4, $5::jsonb) 
+                              ON CONFLICT (id) DO NOTHING`,
+                        params: [
+                            1,
+                            '🎓 Welcome to Daffodils High School',
+                            'Discover what\'s new and happening at our school',
+                            '✨ Don\'t miss this opportunity to be part of excellence ✨',
+                            JSON.stringify([
+                                {
+                                    imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                                    title: '📚 Admissions 2024-25',
+                                    description: 'Applications open for Pre-Primary to Class X. Limited seats available. Apply now for the upcoming academic year.',
+                                    link: '#admissions',
+                                    buttonText: 'Apply Now'
+                                },
+                                {
+                                    imageUrl: 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                                    title: '🏆 Our Achievements',
+                                    description: 'State-level Science Fair winners, Inter-School Sports Champions, and 100% Board Exam results. Celebrating excellence!',
+                                    link: '#achievements',
+                                    buttonText: 'View Achievements'
+                                },
+                                {
+                                    imageUrl: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                                    title: '📊 Results 2024',
+                                    description: '100% pass percentage with 95% distinction. Our students have excelled in academics and competitive exams.',
+                                    link: '#results',
+                                    buttonText: 'Check Results'
+                                }
+                            ])
+                        ]
+                    }
+                ];
                 
-                CREATE TABLE IF NOT EXISTS achievements (
-                    id SERIAL PRIMARY KEY,
-                    image_url TEXT NOT NULL,
-                    title TEXT,
-                    description TEXT,
-                    file_name TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
+                // Execute each insert separately
+                for (const insert of defaultInserts) {
+                    await queryNeon(insert.sql, insert.params);
+                }
                 
-                CREATE TABLE IF NOT EXISTS downloads (
-                    id INTEGER PRIMARY KEY DEFAULT 1,
-                    admission_url TEXT,
-                    admission_name TEXT,
-                    prospectus_url TEXT,
-                    prospectus_name TEXT,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
+                console.log('Default records inserted successfully');
                 
-                CREATE TABLE IF NOT EXISTS popup (
-                    id INTEGER PRIMARY KEY DEFAULT 1,
-                    title TEXT,
-                    subtitle TEXT,
-                    footer TEXT,
-                    cards JSONB,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
-                
-                -- Insert default records if they don't exist
-                INSERT INTO banner (id, image_url) VALUES (1, 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80') 
-                ON CONFLICT (id) DO NOTHING;
-                
-                INSERT INTO school_images (id, school_image, principal_image, contact_image) 
-                VALUES (1, 
-                    'https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80',
-                    'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-                ) ON CONFLICT (id) DO NOTHING;
-                
-                INSERT INTO downloads (id) VALUES (1) ON CONFLICT (id) DO NOTHING;
-                
-                INSERT INTO popup (id, title, subtitle, footer, cards) 
-                VALUES (1, 
-                    '🎓 Welcome to Daffodils High School',
-                    'Discover what''s new and happening at our school',
-                    '✨ Don''t miss this opportunity to be part of excellence ✨',
-                    '[
-                        {
-                            "imageUrl": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                            "title": "📚 Admissions 2024-25",
-                            "description": "Applications open for Pre-Primary to Class X. Limited seats available. Apply now for the upcoming academic year.",
-                            "link": "#admissions",
-                            "buttonText": "Apply Now"
-                        },
-                        {
-                            "imageUrl": "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                            "title": "🏆 Our Achievements",
-                            "description": "State-level Science Fair winners, Inter-School Sports Champions, and 100% Board Exam results. Celebrating excellence!",
-                            "link": "#achievements",
-                            "buttonText": "View Achievements"
-                        },
-                        {
-                            "imageUrl": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                            "title": "📊 Results 2024",
-                            "description": "100% pass percentage with 95% distinction. Our students have excelled in academics and competitive exams.",
-                            "link": "#results",
-                            "buttonText": "Check Results"
-                        }
-                    ]'::jsonb
-                ) ON CONFLICT (id) DO NOTHING;
-            `;
-            
-            await queryNeon(createTablesSQL);
+            } catch (error) {
+                console.error('Database initialization error:', error);
+                // Don't show toast for initialization errors as they might be expected if tables already exist
+            }
         }
 
         // ==================== SAFE IMAGE LOADING FUNCTION ====================
