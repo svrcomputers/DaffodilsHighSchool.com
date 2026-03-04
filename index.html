@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <!-- FIX 1: Fixed viewport for mobile - prevents zoom out -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, shrink-to-fit=no">
     
     <!-- SEO Meta Tags -->
     <title>Daffodils High School | Best School in Hanamkonda | Excellence in Education</title>
@@ -43,10 +44,11 @@
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    <!-- Firebase SDKs -->
+    <!-- Firebase SDKs with Storage -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
     
     <style>
         /* ALL ORIGINAL STYLES - KEEP EVERYTHING EXACTLY AS BEFORE */
@@ -71,6 +73,8 @@
         html {
             scroll-behavior: smooth;
             scroll-padding-top: 80px;
+            width: 100%;
+            overflow-x: hidden;
         }
 
         body {
@@ -81,6 +85,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            width: 100%;
         }
 
         /* Image placeholder styles */
@@ -405,7 +410,7 @@
             100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
         }
 
-        /* Navigation */
+        /* Navigation - FIX 4: Hamburger menu styles added */
         .navbar {
             background: var(--white);
             box-shadow: var(--shadow);
@@ -418,6 +423,7 @@
             z-index: 999;
             backdrop-filter: blur(10px);
             background: rgba(255,255,255,0.95);
+            width: 100%;
         }
 
         .logo {
@@ -477,10 +483,13 @@
             width: 100%;
         }
 
+        /* FIX 4: Hamburger menu styles */
         .hamburger {
             display: none;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
+            color: var(--primary);
+            z-index: 1000;
         }
 
         /* Hero Section */
@@ -495,6 +504,7 @@
             color: var(--white);
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
 
         .hero::before {
@@ -518,6 +528,9 @@
             position: relative;
             z-index: 1;
             animation: float 6s ease-in-out infinite;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
         }
 
         @keyframes float {
@@ -573,11 +586,13 @@
         /* Sections */
         section {
             padding: 80px 5%;
+            width: 100%;
         }
 
         .section-title {
             text-align: center;
             margin-bottom: 50px;
+            width: 100%;
         }
 
         .section-title h2 {
@@ -612,6 +627,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 50px;
             align-items: center;
+            width: 100%;
         }
 
         .about-image {
@@ -660,6 +676,7 @@
             margin: 50px 0;
             box-shadow: var(--shadow);
             transition: all 0.3s;
+            width: 100%;
         }
 
         .principal-card:hover {
@@ -686,6 +703,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 40px;
             margin: 50px 0;
+            width: 100%;
         }
 
         .vision, .mission {
@@ -739,6 +757,7 @@
             padding: 50px;
             border-radius: 20px;
             margin-top: 50px;
+            width: 100%;
         }
 
         .why-grid {
@@ -746,6 +765,7 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 30px;
             margin-top: 30px;
+            width: 100%;
         }
 
         .why-item {
@@ -778,6 +798,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
+            width: 100%;
         }
 
         .gallery-item {
@@ -823,6 +844,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            width: 100%;
         }
 
         .facility-card {
@@ -886,6 +908,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
+            width: 100%;
         }
 
         .academic-card {
@@ -955,6 +978,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
+            width: 100%;
         }
 
         .achievement-item {
@@ -1003,6 +1027,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
+            width: 100%;
         }
 
         .contact-info {
@@ -1011,6 +1036,7 @@
             border-radius: 20px;
             box-shadow: var(--shadow);
             animation: slideInLeft 1s ease;
+            width: 100%;
         }
 
         @keyframes slideInLeft {
@@ -1067,6 +1093,7 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             animation: slideInRight 1s ease;
+            width: 100%;
         }
 
         @keyframes slideInRight {
@@ -1085,6 +1112,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 15px;
             margin-top: 30px;
+            width: 100%;
         }
 
         .download-btn {
@@ -1127,6 +1155,7 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
+            width: 100%;
         }
 
         .footer-section h3 {
@@ -1316,6 +1345,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 25px;
             margin: 20px 0;
+            width: 100%;
         }
 
         .entry-popup-item {
@@ -1460,53 +1490,251 @@
             display: inline-block;
         }
 
-        /* ========== ONLY MOBILE FIXES - NOTHING ELSE CHANGED ========== */
+        /* ========== FIX 2,3,4: MOBILE RESPONSIVE FIXES ========== */
         @media screen and (max-width: 768px) {
-            /* FIX 1: Gallery images show on mobile */
-            .gallery-item img {
-                width: 100% !important;
-                height: 100% !important;
-                object-fit: cover !important;
-                display: block !important;
+            /* FIX 4: Hamburger menu styles */
+            .hamburger {
+                display: block;
             }
             
-            /* FIX 2: Facilities images show on mobile */
-            .facility-card img {
-                width: 100% !important;
-                height: 220px !important;
-                object-fit: cover !important;
-                display: block !important;
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                text-align: center;
+                box-shadow: var(--shadow);
+                z-index: 999;
+                border-top: 1px solid rgba(0,0,0,0.1);
             }
             
-            /* FIX 3: Achievements images show on mobile */
-            .achievement-item img {
-                width: 100% !important;
-                height: 100% !important;
-                object-fit: cover !important;
-                display: block !important;
+            .nav-links.active {
+                display: flex;
             }
             
-            /* FIX 4: Contact page fix */
-            .contact-grid {
-                grid-template-columns: 1fr !important;
+            .nav-links li {
+                margin: 15px 0;
             }
             
-            .map {
-                min-height: 300px !important;
-                width: 100% !important;
+            .nav-links a {
+                font-size: 1.2rem;
+                display: block;
             }
             
-            .map iframe {
-                width: 100% !important;
-                height: 100% !important;
-            }
-            
-            /* FIX 5: Make all grids single column on mobile */
+            /* FIX 2 & 3: Fix grid layouts for mobile */
             .gallery-grid,
             .facilities-grid,
             .achievements-grid,
             .academics-grid {
-                grid-template-columns: 1fr !important;
+                grid-template-columns: 1fr;
+                gap: 20px;
+                width: 100%;
+            }
+            
+            .gallery-item,
+            .facility-card,
+            .achievement-item,
+            .academic-card {
+                width: 100%;
+                margin: 0 auto;
+            }
+            
+            .gallery-item img,
+            .facility-card img,
+            .achievement-item img,
+            .academic-img img {
+                width: 100%;
+                height: 220px;
+                object-fit: cover;
+            }
+            
+            /* Fix about section */
+            .about-grid,
+            .principal-card,
+            .vision-mission,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .about-image {
+                height: 300px;
+            }
+            
+            .principal-card {
+                padding: 25px;
+            }
+            
+            .principal-card img {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto 20px;
+            }
+            
+            /* Fix contact section */
+            .map {
+                min-height: 300px;
+            }
+            
+            .download-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Fix entry popup */
+            .entry-popup-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .entry-popup-item img {
+                height: 180px;
+            }
+            
+            /* Fix hero section */
+            .hero {
+                height: 70vh;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+                padding: 0 15px;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+            
+            .hero button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            /* Fix section padding and titles */
+            section {
+                padding: 50px 15px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            /* Fix footer */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .footer-section ul {
+                padding: 0;
+            }
+            
+            .footer-section li {
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            /* Fix vision mission */
+            .vision, .mission {
+                padding: 30px 20px;
+            }
+            
+            /* Fix why grid */
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        /* Small mobile devices */
+        @media screen and (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.2rem;
+            }
+            
+            .logo i {
+                font-size: 24px;
+            }
+            
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .gallery-item img,
+            .facility-card img,
+            .achievement-item img,
+            .academic-img img {
+                height: 200px;
+            }
+            
+            .about-image {
+                height: 250px;
+            }
+            
+            .principal-card img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .principal-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .principal-card p {
+                font-size: 0.9rem;
+            }
+            
+            .contact-image {
+                height: 180px;
+            }
+            
+            .entry-popup-item img {
+                height: 160px;
+            }
+            
+            .entry-popup-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .vision h3, .mission h3 {
+                font-size: 1.4rem;
+            }
+            
+            .why-item h4 {
+                font-size: 1.2rem;
+            }
+            
+            .footer-section h3 {
+                font-size: 1.2rem;
+            }
+            
+            .footer-section li {
+                font-size: 0.9rem;
+            }
+            
+            .copyright {
+                font-size: 0.8rem;
             }
         }
 
@@ -1551,20 +1779,47 @@
         img {
             display: block;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
+            max-width: 100%;
+            height: auto;
         }
         
         body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
         }
         
         main {
             flex: 1 0 auto;
+            width: 100%;
         }
         
         .footer {
             flex-shrink: 0;
+            width: 100%;
+        }
+        
+        /* Ensure all containers are responsive */
+        .container,
+        .about-grid,
+        .contact-grid,
+        .vision-mission,
+        .why-grid,
+        .footer-grid,
+        .admin-grid {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        /* Fix any potential overflow */
+        .hero,
+        .navbar,
+        .notice-bar,
+        section,
+        footer {
+            overflow-x: hidden;
         }
     </style>
 </head>
@@ -1721,7 +1976,7 @@
                 <div class="upload-progress-text" id="contactProgressText"></div>
             </div>
 
-            <!-- Downloads -->
+            <!-- Downloads - FIX 5: PDF upload/delete fixed -->
             <div class="admin-card">
                 <h3><i class="fas fa-download"></i> Download Forms (PDF)</h3>
                 <div id="adminDownloads"></div>
@@ -1731,6 +1986,9 @@
                 </div>
                 <button class="add-btn" onclick="document.getElementById('admissionPdfInput').click()" style="margin-bottom: 10px;">📄 Upload Admission Form PDF</button>
                 <button class="add-btn" onclick="document.getElementById('prospectusPdfInput').click()">📚 Upload Prospectus PDF</button>
+                <div style="margin-top: 15px; color: #94a3b8; font-size: 0.9rem;">
+                    <i class="fas fa-info-circle"></i> Supported format: PDF only
+                </div>
             </div>
 
             <!-- Entry Popup Management -->
@@ -1770,7 +2028,7 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Navigation -->
+    <!-- Navigation - FIX 4: Hamburger menu added -->
     <nav class="navbar" role="navigation" aria-label="Main Navigation">
         <div class="logo">
             <i class="fas fa-school" aria-hidden="true"></i>
@@ -2044,6 +2302,7 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
         const auth = firebase.auth();
+        const storage = firebase.storage();
         
         // Admin auth state
         let isLoggedIn = false;
@@ -2058,19 +2317,46 @@
             }
         });
 
-        // Mobile Menu
+        // FIX 4: Mobile Menu Toggle
         document.querySelector('.hamburger').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
+            // Change icon when menu is open
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         });
 
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+                const icon = document.querySelector('.hamburger i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+
+        // Click outside to close mobile menu
         document.addEventListener('click', function(event) {
             const navLinks = document.querySelector('.nav-links');
             const hamburger = document.querySelector('.hamburger');
             
-            if (navLinks.classList.contains('active') && 
+            if (navLinks && navLinks.classList.contains('active') && 
                 !navLinks.contains(event.target) && 
                 !hamburger.contains(event.target)) {
                 navLinks.classList.remove('active');
+                const icon = document.querySelector('.hamburger i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
             }
         });
 
@@ -2985,6 +3271,7 @@
                     }
                 }
 
+                // Load Downloads for admin - FIX 5: PDF upload/delete fixed
                 const downloadsSnapshot = await db.ref('downloads').once('value');
                 const downloads = downloadsSnapshot.val() || {};
                 const adminDownloads = document.getElementById('adminDownloads');
@@ -3201,10 +3488,11 @@
             }
         }
 
-        // PDF Downloads
+        // FIX 5: PDF Downloads - Fixed upload to Firebase Storage
         document.getElementById('admissionPdfInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
             
+            // Validate PDF
             if (this.files[0].type !== 'application/pdf') {
                 showToast('Please select a PDF file', 'error');
                 this.value = '';
@@ -3212,20 +3500,44 @@
             }
             
             try {
-                showToast('Processing PDF...', 'info');
+                showToast('Uploading PDF...', 'info');
                 
-                const reader = new FileReader();
-                reader.readAsDataURL(this.files[0]);
-                reader.onload = async () => {
-                    await db.ref('downloads/admission').set({ 
-                        url: reader.result, 
-                        name: this.files[0].name,
-                        timestamp: firebase.database.ServerValue.TIMESTAMP
-                    });
-                    
-                    await loadAdminPanel();
-                    showToast('Admission form uploaded!');
-                };
+                // Upload PDF to Storage
+                const fileName = `pdfs/admission_${Date.now()}.pdf`;
+                const storageRef = storage.ref().child(fileName);
+                
+                const uploadTask = storageRef.put(this.files[0], {
+                    contentType: 'application/pdf',
+                    cacheControl: 'public, max-age=31536000'
+                });
+                
+                uploadTask.on('state_changed',
+                    (snapshot) => {
+                        // Progress
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log('Upload progress:', progress);
+                    },
+                    (error) => {
+                        console.error('Upload error:', error);
+                        showToast('Upload failed: ' + error.message, 'error');
+                    },
+                    async () => {
+                        try {
+                            const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+                            
+                            await db.ref('downloads/admission').set({ 
+                                url: downloadURL, 
+                                name: this.files[0].name,
+                                timestamp: firebase.database.ServerValue.TIMESTAMP
+                            });
+                            
+                            await loadAdminPanel();
+                            showToast('Admission form uploaded!');
+                        } catch (error) {
+                            showToast('Error saving to database: ' + error.message, 'error');
+                        }
+                    }
+                );
                 
                 this.value = '';
             } catch (error) {
@@ -3236,6 +3548,7 @@
         document.getElementById('prospectusPdfInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
             
+            // Validate PDF
             if (this.files[0].type !== 'application/pdf') {
                 showToast('Please select a PDF file', 'error');
                 this.value = '';
@@ -3243,20 +3556,44 @@
             }
             
             try {
-                showToast('Processing PDF...', 'info');
+                showToast('Uploading PDF...', 'info');
                 
-                const reader = new FileReader();
-                reader.readAsDataURL(this.files[0]);
-                reader.onload = async () => {
-                    await db.ref('downloads/prospectus').set({ 
-                        url: reader.result, 
-                        name: this.files[0].name,
-                        timestamp: firebase.database.ServerValue.TIMESTAMP
-                    });
-                    
-                    await loadAdminPanel();
-                    showToast('Prospectus uploaded!');
-                };
+                // Upload PDF to Storage
+                const fileName = `pdfs/prospectus_${Date.now()}.pdf`;
+                const storageRef = storage.ref().child(fileName);
+                
+                const uploadTask = storageRef.put(this.files[0], {
+                    contentType: 'application/pdf',
+                    cacheControl: 'public, max-age=31536000'
+                });
+                
+                uploadTask.on('state_changed',
+                    (snapshot) => {
+                        // Progress
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log('Upload progress:', progress);
+                    },
+                    (error) => {
+                        console.error('Upload error:', error);
+                        showToast('Upload failed: ' + error.message, 'error');
+                    },
+                    async () => {
+                        try {
+                            const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+                            
+                            await db.ref('downloads/prospectus').set({ 
+                                url: downloadURL, 
+                                name: this.files[0].name,
+                                timestamp: firebase.database.ServerValue.TIMESTAMP
+                            });
+                            
+                            await loadAdminPanel();
+                            showToast('Prospectus uploaded!');
+                        } catch (error) {
+                            showToast('Error saving to database: ' + error.message, 'error');
+                        }
+                    }
+                );
                 
                 this.value = '';
             } catch (error) {
@@ -3278,12 +3615,17 @@
                 const snapshot = await db.ref('downloads/' + type).once('value');
                 const data = snapshot.val();
                 if (data && data.url) {
-                    const link = document.createElement('a');
-                    link.href = data.url;
-                    link.download = data.name || `${type}_form.pdf`;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
+                    if (data.url.startsWith('https://firebasestorage.googleapis.com')) {
+                        // Open storage URL in new tab for download
+                        window.open(data.url, '_blank');
+                    } else {
+                        const link = document.createElement('a');
+                        link.href = data.url;
+                        link.download = data.name || `${type}_form.pdf`;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
                 } else {
                     alert('Form not available');
                 }
