@@ -2110,9 +2110,8 @@
         // Replace with your actual Neon database connection string
         const NEON_CONNECTION_STRING = 'postgresql://neondb_owner:npg_3p4Hykz9KebN@ep-soft-wind-a5j6v3h3-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require';
         
-        // API endpoint for Neon (you'll need to set up a proxy API)
-        
-        const API_ENDPOINT = 'https://daffodilshighschool.onrender.com/api/query'; // NEW
+        // API endpoint for Neon
+        const API_ENDPOINT = 'https://daffodilshighschool.onrender.com/api/query';
         
         // Admin auth state (simple password-based for now)
         const ADMIN_PASSWORD = 'admin123';
@@ -2168,11 +2167,13 @@
             }
         });
 
-        // ==================== NEON API FUNCTIONS ====================
+        // ==================== FIXED NEON API FUNCTIONS ====================
         
-        // Generic function to query Neon
+        // Generic function to query Neon - FIXED to handle response format correctly
         async function queryNeon(sql, params = []) {
             try {
+                console.log('Sending query:', sql, params);
+                
                 const response = await fetch(API_ENDPOINT, {
                     method: 'POST',
                     headers: {
@@ -2181,12 +2182,37 @@
                     body: JSON.stringify({ sql, params })
                 });
                 
-                if (!response.ok) {
-                    throw new Error('Database query failed');
+                // Get response as text first for debugging
+                const responseText = await response.text();
+                console.log('Raw response:', responseText);
+                
+                // Parse JSON
+                let data;
+                try {
+                    data = JSON.parse(responseText);
+                } catch (e) {
+                    console.error('Failed to parse response as JSON:', responseText);
+                    throw new Error('Invalid JSON response from server');
                 }
                 
-                const data = await response.json();
-                return data;
+                if (!response.ok) {
+                    throw new Error(data.error || `HTTP error! status: ${response.status}`);
+                }
+                
+                // IMPORTANT FIX: Our API returns { rows: [...] }
+                // So we need to return data.rows
+                if (data && data.rows) {
+                    console.log('Returning rows:', data.rows);
+                    return data.rows;
+                } else if (Array.isArray(data)) {
+                    // Some endpoints might return array directly
+                    console.log('Returning array data:', data);
+                    return data;
+                } else {
+                    // Single object
+                    console.log('Returning object as array:', [data]);
+                    return [data];
+                }
             } catch (error) {
                 console.error('Neon query error:', error);
                 showToast('Database error: ' + error.message, 'error');
@@ -2540,8 +2566,7 @@
                 await initDatabase();
                 
                 // Load Notices
-                const noticesResult = await queryNeon('SELECT * FROM notices ORDER BY created_at DESC');
-                const notices = noticesResult?.rows || [];
+                const notices = await queryNeon('SELECT * FROM notices ORDER BY created_at DESC') || [];
                 const noticeBar = document.getElementById('noticeBar');
                 if (noticeBar) {
                     noticeBar.innerHTML = '';
@@ -2555,16 +2580,16 @@
                 }
 
                 // Load Banner
-                const bannerResult = await queryNeon('SELECT image_url FROM banner WHERE id = 1');
-                const banner = bannerResult?.rows[0];
+                const bannerData = await queryNeon('SELECT image_url FROM banner WHERE id = 1') || [];
+                const banner = bannerData[0];
                 if (banner && banner.image_url) {
                     document.getElementById('home').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${banner.image_url}')`;
                     safeImageLoad(document.getElementById('bannerPreview'), banner.image_url);
                 }
 
                 // Load School Images
-                const imagesResult = await queryNeon('SELECT school_image, principal_image, contact_image FROM school_images WHERE id = 1');
-                const images = imagesResult?.rows[0] || {};
+                const imagesData = await queryNeon('SELECT school_image, principal_image, contact_image FROM school_images WHERE id = 1') || [];
+                const images = imagesData[0] || {};
                 if (images) {
                     safeImageLoad(document.getElementById('schoolImage'), images.school_image);
                     safeImageLoad(document.getElementById('schoolPreview'), images.school_image);
@@ -2577,8 +2602,7 @@
                 }
 
                 // Load Gallery
-                const galleryResult = await queryNeon('SELECT * FROM gallery ORDER BY created_at DESC');
-                const gallery = galleryResult?.rows || [];
+                const gallery = await queryNeon('SELECT * FROM gallery ORDER BY created_at DESC') || [];
                 const galleryGrid = document.getElementById('galleryGrid');
                 if (galleryGrid) {
                     galleryGrid.innerHTML = '';
@@ -2598,8 +2622,7 @@
                 }
 
                 // Load Facilities
-                const facilitiesResult = await queryNeon('SELECT * FROM facilities ORDER BY created_at DESC');
-                const facilities = facilitiesResult?.rows || [];
+                const facilities = await queryNeon('SELECT * FROM facilities ORDER BY created_at DESC') || [];
                 const facilitiesGrid = document.getElementById('facilitiesGrid');
                 if (facilitiesGrid) {
                     facilitiesGrid.innerHTML = '';
@@ -2629,8 +2652,7 @@
                 }
 
                 // Load Achievements
-                const achievementsResult = await queryNeon('SELECT * FROM achievements ORDER BY created_at DESC');
-                const achievements = achievementsResult?.rows || [];
+                const achievements = await queryNeon('SELECT * FROM achievements ORDER BY created_at DESC') || [];
                 const achievementsGrid = document.getElementById('achievementsGrid');
                 if (achievementsGrid) {
                     achievementsGrid.innerHTML = '';
@@ -2663,8 +2685,8 @@
                 }
 
                 // Load Downloads
-                const downloadsResult = await queryNeon('SELECT admission_url, admission_name, prospectus_url, prospectus_name FROM downloads WHERE id = 1');
-                const downloads = downloadsResult?.rows[0] || {};
+                const downloadsData = await queryNeon('SELECT admission_url, admission_name, prospectus_url, prospectus_name FROM downloads WHERE id = 1') || [];
+                const downloads = downloadsData[0] || {};
 
                 // Load Popup Data
                 await loadPopupFromNeon();
@@ -2681,8 +2703,8 @@
 
         async function loadPopupFromNeon() {
             try {
-                const popupResult = await queryNeon('SELECT title, subtitle, footer, cards FROM popup WHERE id = 1');
-                const popupData = popupResult?.rows[0];
+                const popupDataArray = await queryNeon('SELECT title, subtitle, footer, cards FROM popup WHERE id = 1') || [];
+                const popupData = popupDataArray[0];
                 
                 const popupGrid = document.getElementById('popupGrid');
                 
@@ -3085,8 +3107,7 @@
 
             try {
                 // Load Notices for admin
-                const noticesResult = await queryNeon('SELECT * FROM notices ORDER BY created_at DESC');
-                const notices = noticesResult?.rows || [];
+                const notices = await queryNeon('SELECT * FROM notices ORDER BY created_at DESC') || [];
                 const adminNotices = document.getElementById('adminNotices');
                 if (adminNotices) {
                     adminNotices.innerHTML = '';
@@ -3104,8 +3125,7 @@
                 }
 
                 // Load Gallery for admin
-                const galleryResult = await queryNeon('SELECT * FROM gallery ORDER BY created_at DESC');
-                const gallery = galleryResult?.rows || [];
+                const gallery = await queryNeon('SELECT * FROM gallery ORDER BY created_at DESC') || [];
                 const adminGallery = document.getElementById('adminGallery');
                 if (adminGallery) {
                     adminGallery.innerHTML = '';
@@ -3122,8 +3142,7 @@
                 }
 
                 // Load Facilities for admin
-                const facilitiesResult = await queryNeon('SELECT * FROM facilities ORDER BY created_at DESC');
-                const facilities = facilitiesResult?.rows || [];
+                const facilities = await queryNeon('SELECT * FROM facilities ORDER BY created_at DESC') || [];
                 const adminFacilities = document.getElementById('adminFacilities');
                 if (adminFacilities) {
                     adminFacilities.innerHTML = '';
@@ -3141,8 +3160,7 @@
                 }
 
                 // Load Achievements for admin
-                const achievementsResult = await queryNeon('SELECT * FROM achievements ORDER BY created_at DESC');
-                const achievements = achievementsResult?.rows || [];
+                const achievements = await queryNeon('SELECT * FROM achievements ORDER BY created_at DESC') || [];
                 const adminAchievements = document.getElementById('adminAchievements');
                 if (adminAchievements) {
                     adminAchievements.innerHTML = '';
@@ -3160,8 +3178,8 @@
                 }
 
                 // Load Downloads for admin
-                const downloadsResult = await queryNeon('SELECT admission_url, admission_name, prospectus_url, prospectus_name FROM downloads WHERE id = 1');
-                const downloads = downloadsResult?.rows[0] || {};
+                const downloadsData = await queryNeon('SELECT admission_url, admission_name, prospectus_url, prospectus_name FROM downloads WHERE id = 1') || [];
+                const downloads = downloadsData[0] || {};
                 const adminDownloads = document.getElementById('adminDownloads');
                 if (adminDownloads) {
                     adminDownloads.innerHTML = '';
@@ -3204,8 +3222,8 @@
                 }
 
                 // Load popup data into admin form
-                const popupResult = await queryNeon('SELECT title, subtitle, footer, cards FROM popup WHERE id = 1');
-                const popupData = popupResult?.rows[0];
+                const popupDataArray = await queryNeon('SELECT title, subtitle, footer, cards FROM popup WHERE id = 1') || [];
+                const popupData = popupDataArray[0];
                 if (popupData) {
                     document.getElementById('popupTitleInput').value = popupData.title || '🎓 Welcome to Daffodils High School';
                     document.getElementById('popupSubtitleInput').value = popupData.subtitle || 'Discover what\'s new and happening at our school';
@@ -3453,8 +3471,8 @@
                     type === 'admission' 
                         ? 'SELECT admission_url, admission_name FROM downloads WHERE id = 1'
                         : 'SELECT prospectus_url, prospectus_name FROM downloads WHERE id = 1'
-                );
-                const data = result?.rows[0];
+                ) || [];
+                const data = result[0];
                 
                 if (data && (data.admission_url || data.prospectus_url)) {
                     const url = type === 'admission' ? data.admission_url : data.prospectus_url;
