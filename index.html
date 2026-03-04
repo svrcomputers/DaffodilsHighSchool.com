@@ -43,11 +43,10 @@
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    <!-- Firebase SDKs with Storage -->
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
     
     <style>
         /* ALL ORIGINAL STYLES - WITH ENHANCED MOBILE AND FOOTER FIXES */
@@ -878,7 +877,7 @@
             transform: scaleX(1);
         }
 
-        /* Academics Section - FIXED for mobile */
+        /* Academics Section */
         .academics-section {
             background: var(--light);
         }
@@ -1113,7 +1112,7 @@
             font-size: 20px;
         }
 
-        /* Footer - FIXED: Ensure visibility */
+        /* Footer */
         .footer {
             background: var(--dark);
             color: var(--white);
@@ -1461,20 +1460,8 @@
             display: inline-block;
         }
 
-        /* Upload Mode Indicator */
-        .upload-mode {
-            font-size: 12px;
-            color: #94a3b8;
-            margin-top: 5px;
-            padding: 5px;
-            background: #1e293b;
-            border-radius: 4px;
-            text-align: center;
-        }
-
-        /* Mobile Optimizations - ENHANCED */
+        /* Mobile Optimizations */
         @media screen and (max-width: 768px) {
-            /* Hardware acceleration for smoother rendering */
             .gallery-item img,
             .achievement-item img,
             .facility-card img,
@@ -1486,11 +1473,8 @@
                 backface-visibility: hidden;
                 -webkit-perspective: 1000;
                 perspective: 1000;
-                image-rendering: -webkit-optimize-contrast;
-                image-rendering: crisp-edges;
             }
 
-            /* Reduce motion if user prefers */
             @media (prefers-reduced-motion: reduce) {
                 * {
                     animation-duration: 0.01ms !important;
@@ -1499,19 +1483,16 @@
                 }
             }
 
-            /* Optimize image loading */
             .gallery-item, .achievement-item, .facility-card {
                 will-change: transform;
                 contain: content;
             }
 
-            /* Better placeholder for loading */
             .image-placeholder {
                 min-height: 150px;
             }
         }
 
-        /* Mobile Responsive - FIXED for all devices */
         @media screen and (max-width: 1200px) {
             .hero h1 {
                 font-size: 3.5rem;
@@ -1648,7 +1629,6 @@
                 height: 180px;
             }
             
-            /* Academics mobile fix */
             .academics-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -1711,7 +1691,6 @@
                 right: 20px;
             }
             
-            /* Footer mobile fix */
             .footer-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -1736,7 +1715,6 @@
                 justify-content: center;
             }
 
-            /* Entry popup mobile */
             .entry-popup-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -1828,7 +1806,6 @@
                 grid-template-columns: 1fr;
             }
             
-            /* Academic card mobile extra small */
             .academic-content h3 {
                 font-size: 1.2rem;
             }
@@ -1837,7 +1814,6 @@
                 font-size: 0.85rem;
             }
             
-            /* Footer extra small */
             .footer-section li {
                 font-size: 0.9rem;
             }
@@ -1919,13 +1895,11 @@
             }
         }
 
-        /* Image fallback styles */
         img {
             display: block;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
         
-        /* Ensure footer is always visible */
         body {
             display: flex;
             flex-direction: column;
@@ -2027,34 +2001,31 @@
             <!-- Banner -->
             <div class="admin-card">
                 <h3><i class="fas fa-image"></i> Home Banner</h3>
-                <img id="bannerPreview" class="preview-img" src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80" alt="Banner Preview" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                <img id="bannerPreview" class="preview-img" src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80" alt="Banner Preview">
                 <input type="file" id="bannerInput" accept="image/*" style="display:none;">
                 <button class="add-btn" onclick="document.getElementById('bannerInput').click()">Change Banner</button>
                 <div class="upload-progress" id="bannerProgress"><div class="upload-progress-bar" id="bannerProgressBar"></div></div>
                 <div class="upload-progress-text" id="bannerProgressText"></div>
-                <div class="upload-mode" id="bannerMode">Using Base64 mode (no CORS)</div>
             </div>
 
             <!-- School Image -->
             <div class="admin-card">
                 <h3><i class="fas fa-school"></i> School Image</h3>
-                <img id="schoolPreview" class="preview-img" src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80" alt="School Preview" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                <img id="schoolPreview" class="preview-img" src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80" alt="School Preview">
                 <input type="file" id="schoolInput" accept="image/*" style="display:none;">
                 <button class="add-btn" onclick="document.getElementById('schoolInput').click()">Change Image</button>
                 <div class="upload-progress" id="schoolProgress"><div class="upload-progress-bar" id="schoolProgressBar"></div></div>
                 <div class="upload-progress-text" id="schoolProgressText"></div>
-                <div class="upload-mode" id="schoolMode">Using Base64 mode (no CORS)</div>
             </div>
 
             <!-- Principal Image -->
             <div class="admin-card">
                 <h3><i class="fas fa-user-tie"></i> Principal Image</h3>
-                <img id="principalPreview" class="preview-img" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Principal Preview" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                <img id="principalPreview" class="preview-img" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Principal Preview">
                 <input type="file" id="principalInput" accept="image/*" style="display:none;">
                 <button class="add-btn" onclick="document.getElementById('principalInput').click()">Change Image</button>
                 <div class="upload-progress" id="principalProgress"><div class="upload-progress-bar" id="principalProgressBar"></div></div>
                 <div class="upload-progress-text" id="principalProgressText"></div>
-                <div class="upload-mode" id="principalMode">Using Base64 mode (no CORS)</div>
             </div>
 
             <!-- Gallery -->
@@ -2065,7 +2036,6 @@
                 <button class="add-btn" onclick="document.getElementById('galleryInput').click()">Add Image</button>
                 <div class="upload-progress" id="galleryProgress"><div class="upload-progress-bar" id="galleryProgressBar"></div></div>
                 <div class="upload-progress-text" id="galleryProgressText"></div>
-                <div class="upload-mode" id="galleryMode">Using Base64 mode (no CORS)</div>
             </div>
 
             <!-- Facilities -->
@@ -2076,7 +2046,6 @@
                 <button class="add-btn" onclick="document.getElementById('facilityInput').click()">Add Facility</button>
                 <div class="upload-progress" id="facilityProgress"><div class="upload-progress-bar" id="facilityProgressBar"></div></div>
                 <div class="upload-progress-text" id="facilityProgressText"></div>
-                <div class="upload-mode" id="facilityMode">Using Base64 mode (no CORS)</div>
             </div>
 
             <!-- Achievements -->
@@ -2087,18 +2056,16 @@
                 <button class="add-btn" onclick="document.getElementById('achievementInput').click()">Add Achievement</button>
                 <div class="upload-progress" id="achievementProgress"><div class="upload-progress-bar" id="achievementProgressBar"></div></div>
                 <div class="upload-progress-text" id="achievementProgressText"></div>
-                <div class="upload-mode" id="achievementMode">Using Base64 mode (no CORS)</div>
             </div>
 
             <!-- Contact Image -->
             <div class="admin-card">
                 <h3><i class="fas fa-phone"></i> Contact Image</h3>
-                <img id="contactPreview" class="preview-img" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Contact Preview" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                <img id="contactPreview" class="preview-img" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Contact Preview">
                 <input type="file" id="contactInput" accept="image/*" style="display:none;">
                 <button class="add-btn" onclick="document.getElementById('contactInput').click()">Change Image</button>
                 <div class="upload-progress" id="contactProgress"><div class="upload-progress-bar" id="contactProgressBar"></div></div>
                 <div class="upload-progress-text" id="contactProgressText"></div>
-                <div class="upload-mode" id="contactMode">Using Base64 mode (no CORS)</div>
             </div>
 
             <!-- Downloads -->
@@ -2111,9 +2078,6 @@
                 </div>
                 <button class="add-btn" onclick="document.getElementById('admissionPdfInput').click()" style="margin-bottom: 10px;">📄 Upload Admission Form PDF</button>
                 <button class="add-btn" onclick="document.getElementById('prospectusPdfInput').click()">📚 Upload Prospectus PDF</button>
-                <div style="margin-top: 15px; color: #94a3b8; font-size: 0.9rem;">
-                    <i class="fas fa-info-circle"></i> Supported format: PDF only (Base64 mode)
-                </div>
             </div>
 
             <!-- Entry Popup Management -->
@@ -2131,7 +2095,6 @@
                     <input type="text" id="popupFooterInput" class="popup-input" value="✨ Don't miss this opportunity to be part of excellence ✨">
                 </div>
                 
-                <!-- Dynamic Cards Container -->
                 <div id="popupCardsAdminContainer"></div>
                 
                 <div style="display: flex; gap: 10px; margin-top: 20px;">
@@ -2191,7 +2154,7 @@
         
         <div class="about-grid">
             <div class="about-image" data-aos="fade-right">
-                <img id="schoolImage" src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80" alt="Daffodils High School Building" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                <img id="schoolImage" src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80" alt="Daffodils High School Building">
             </div>
             <div data-aos="fade-left">
                 <h3 style="color: var(--primary); margin-bottom: 20px;">Welcome to Daffodils High School</h3>
@@ -2201,7 +2164,7 @@
         </div>
 
         <div class="principal-card" data-aos="flip-up">
-            <img id="principalImage" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Principal Mr Rama Rao Sir" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+            <img id="principalImage" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Principal Mr Rama Rao Sir">
             <div>
                 <h3 style="color: var(--primary); margin-bottom: 15px;">Principal's Message</h3>
                 <p style="margin-bottom: 15px;">"At Daffodils High School, we believe in creating an environment where every child can discover their potential and develop into confident, compassionate, and capable individuals. Our dedicated team of educators works tirelessly to ensure that students not only excel academically but also develop strong character and values."</p>
@@ -2274,7 +2237,7 @@
         <div class="academics-grid">
             <div class="academic-card" data-aos="fade-right">
                 <div class="academic-img">
-                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1122&q=80" alt="Pre-Primary students learning" loading="lazy" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1122&q=80" alt="Pre-Primary students learning" loading="lazy">
                 </div>
                 <div class="academic-content">
                     <i class="fas fa-child"></i>
@@ -2284,7 +2247,7 @@
             </div>
             <div class="academic-card" data-aos="fade-up">
                 <div class="academic-img">
-                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Primary students in classroom" loading="lazy" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Primary students in classroom" loading="lazy">
                 </div>
                 <div class="academic-content">
                     <i class="fas fa-pencil-alt"></i>
@@ -2294,7 +2257,7 @@
             </div>
             <div class="academic-card" data-aos="fade-left">
                 <div class="academic-img">
-                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Middle school science lab" loading="lazy" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Middle school science lab" loading="lazy">
                 </div>
                 <div class="academic-content">
                     <i class="fas fa-flask"></i>
@@ -2304,7 +2267,7 @@
             </div>
             <div class="academic-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="academic-img">
-                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Secondary students in library" loading="lazy" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Secondary students in library" loading="lazy">
                 </div>
                 <div class="academic-content">
                     <i class="fas fa-graduation-cap"></i>
@@ -2346,7 +2309,7 @@
                 </div>
                 
                 <div class="contact-image">
-                    <img id="contactImage" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Contact Daffodils High School" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg, var(--primary), var(--secondary))';">
+                    <img id="contactImage" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Contact Daffodils High School">
                 </div>
                 
                 <h3 style="margin: 30px 0 20px; color: var(--primary);">Download Forms</h3>
@@ -2428,8 +2391,7 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
         const auth = firebase.auth();
-        const storage = firebase.storage();
-
+        
         // Admin auth state
         let isLoggedIn = false;
 
@@ -2448,7 +2410,6 @@
             document.querySelector('.nav-links').classList.toggle('active');
         });
 
-        // Click outside to close mobile menu
         document.addEventListener('click', function(event) {
             const navLinks = document.querySelector('.nav-links');
             const hamburger = document.querySelector('.hamburger');
@@ -2460,112 +2421,87 @@
             }
         });
 
-        // ==================== CONNECTION MONITORING ====================
-        let isOnline = navigator.onLine;
-
-        window.addEventListener('online', () => {
-            isOnline = true;
-            showToast('Connection restored. Refreshing images...');
-            refreshImages();
-        });
-
-        window.addEventListener('offline', () => {
-            isOnline = false;
-            showToast('No internet connection', 'error');
-        });
-
-        function refreshImages() {
-            if (isOnline) {
-                const images = document.querySelectorAll('img[data-src]');
-                images.forEach(img => {
-                    if (img.classList.contains('failed-load')) {
-                        img.src = img.dataset.src;
-                        img.classList.remove('failed-load');
-                    }
-                });
-            }
-        }
-
-        // ==================== IMAGE ERROR HANDLER ====================
-        function handleImageError(imgElement, retryCount = 0, originalSrc = null) {
-            const maxRetries = 3;
-            const src = originalSrc || imgElement.src;
-            
-            // Check if image actually loaded successfully
-            if (imgElement.complete && imgElement.naturalHeight > 0) {
-                return;
-            }
-            
-            // Don't retry if src is empty or invalid
-            if (!src || src === 'undefined' || src === 'null' || src.includes('[object Object]')) {
-                console.error('Invalid image src:', src);
+        // ==================== SAFE IMAGE LOADING FUNCTION ====================
+        function safeImageLoad(imgElement, imageData) {
+            // Handle null/undefined
+            if (!imageData) {
                 showFallback(imgElement);
                 return;
             }
+
+            // Extract the actual image source string
+            let src = null;
             
-            // Check if we're offline
-            if (!navigator.onLine) {
+            if (typeof imageData === 'string') {
+                // If it's already a string, use it directly
+                src = imageData;
+            } else if (typeof imageData === 'object') {
+                // If it's an object, try to extract the image URL
+                if (imageData.imageUrl) {
+                    src = imageData.imageUrl;
+                } else if (imageData.url) {
+                    src = imageData.url;
+                } else if (imageData.src) {
+                    src = imageData.src;
+                }
+            }
+
+            // Validate the extracted src
+            if (!src || src === 'undefined' || src === 'null' || src === '[object Object]') {
+                console.error('Invalid image source:', src);
                 showFallback(imgElement);
                 return;
             }
-            
-            if (retryCount < maxRetries) {
-                console.log(`Retrying image (attempt ${retryCount + 1}/${maxRetries})`);
-                
+
+            // Set the source and handle errors
+            imgElement.src = src;
+            imgElement.onload = function() {
+                imgElement.style.display = 'block';
                 const parent = imgElement.parentNode;
-                if (!parent) return;
-                
-                parent.style.position = 'relative';
-                
-                const existingBtn = parent.querySelector('.retry-btn');
-                if (existingBtn) existingBtn.remove();
-                
-                const retryBtn = document.createElement('button');
-                retryBtn.className = 'retry-btn';
-                retryBtn.innerHTML = `↻ Retry (${retryCount + 1}/${maxRetries})`;
-                retryBtn.onclick = (e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    retryBtn.remove();
-                    imgElement.style.display = 'block';
-                    const baseSrc = src.split('?')[0];
-                    const newSrc = baseSrc + '?retry=' + Date.now() + '&attempt=' + (retryCount + 1);
-                    imgElement.src = newSrc;
-                    
-                    imgElement.onerror = null;
-                    imgElement.onerror = function() { 
-                        handleImageError(imgElement, retryCount + 1, baseSrc); 
-                    };
-                };
-                
-                parent.appendChild(retryBtn);
-                imgElement.style.display = 'none';
-                
-            } else {
+                if (parent) {
+                    parent.style.background = 'none';
+                    parent.classList.remove('image-placeholder');
+                }
+            };
+            
+            imgElement.onerror = function() {
+                console.error('Failed to load image:', src);
                 showFallback(imgElement);
-            }
+            };
         }
-        
+
         function showFallback(imgElement) {
-            console.log('Showing fallback for image');
             imgElement.style.display = 'none';
             const parent = imgElement.parentNode;
             if (parent) {
                 parent.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
                 parent.classList.add('image-placeholder');
+                
+                // Add a retry button
+                const existingBtn = parent.querySelector('.retry-btn');
+                if (!existingBtn) {
+                    const retryBtn = document.createElement('button');
+                    retryBtn.className = 'retry-btn';
+                    retryBtn.innerHTML = '↻ Retry';
+                    retryBtn.onclick = function(e) {
+                        e.stopPropagation();
+                        this.remove();
+                        imgElement.style.display = 'block';
+                        imgElement.src = imgElement.src; // Retry the same source
+                    };
+                    parent.appendChild(retryBtn);
+                }
             }
         }
 
         // ==================== IMAGE COMPRESSION FUNCTION ====================
         async function compressImage(file, maxWidth = 1600, quality = 0.7) {
             return new Promise((resolve, reject) => {
-                // Check file type
                 if (!file.type.startsWith('image/')) {
                     reject(new Error('Please select an image file'));
                     return;
                 }
 
-                // Check file size (max 10MB before compression)
                 if (file.size > 10 * 1024 * 1024) {
                     reject(new Error('Image too large. Please select an image under 10MB'));
                     return;
@@ -2577,7 +2513,6 @@
                     const img = new Image();
                     img.src = event.target.result;
                     img.onload = () => {
-                        // Calculate new dimensions
                         let width = img.width;
                         let height = img.height;
                         
@@ -2586,7 +2521,6 @@
                             width = maxWidth;
                         }
 
-                        // Create canvas and compress
                         const canvas = document.createElement('canvas');
                         canvas.width = width;
                         canvas.height = height;
@@ -2594,32 +2528,20 @@
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0, width, height);
                         
-                        // Convert to JPEG with quality setting
                         canvas.toBlob((blob) => {
                             if (!blob) {
                                 reject(new Error('Compression failed'));
                                 return;
                             }
                             
-                            // Create compressed file
-                            const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, '.jpg'), {
-                                type: 'image/jpeg',
-                                lastModified: Date.now()
-                            });
-                            
                             console.log(`Original size: ${(file.size / 1024).toFixed(2)}KB`);
                             console.log(`Compressed size: ${(blob.size / 1024).toFixed(2)}KB`);
                             
-                            // Get base64 for storage
                             const reader2 = new FileReader();
                             reader2.readAsDataURL(blob);
                             reader2.onload = () => {
-                                resolve({
-                                    file: compressedFile,
-                                    base64: reader2.result
-                                });
+                                resolve(reader2.result); // Return only the Base64 string
                             };
-                            reader2.onerror = () => reject(new Error('Failed to read compressed image'));
                         }, 'image/jpeg', quality);
                     };
                     img.onerror = () => reject(new Error('Failed to load image'));
@@ -2636,7 +2558,7 @@
             
             if (progressDiv) progressDiv.style.display = 'block';
             if (progressBar) progressBar.style.width = '0%';
-            if (progressText) progressText.textContent = 'Compressing...';
+            if (progressText) progressText.textContent = 'Processing...';
         }
 
         function updateUploadProgress(folder, percent, message) {
@@ -2644,7 +2566,7 @@
             const progressText = document.getElementById(`${folder}ProgressText`);
             
             if (progressBar) progressBar.style.width = `${percent}%`;
-            if (progressText) progressText.textContent = message || `Uploading: ${Math.round(percent)}%`;
+            if (progressText) progressText.textContent = message || `${Math.round(percent)}%`;
         }
 
         function hideUploadProgress(folder) {
@@ -2661,8 +2583,8 @@
             }
         }
 
-        // ==================== COMPLETE IMAGE UPLOAD PIPELINE ====================
-        async function processAndUploadImage(file, dbPath, folder, isGallery = false, extraData = {}) {
+        // ==================== UPLOAD IMAGE FUNCTION ====================
+        async function uploadImage(file, dbPath, folder, isGallery = false, extraData = {}) {
             if (!isLoggedIn) {
                 showToast('Please login first', 'error');
                 return false;
@@ -2673,20 +2595,18 @@
                 showUploadProgress(folder);
                 updateUploadProgress(folder, 10, 'Compressing...');
 
-                // Compress image
-                const result = await compressImage(file);
-                updateUploadProgress(folder, 50, 'Saving to database...');
+                // Get Base64 string directly (not wrapped in an object)
+                const base64Image = await compressImage(file);
+                updateUploadProgress(folder, 70, 'Saving...');
 
-                // Prepare data for database
+                // Save only the Base64 string to database
                 const data = {
-                    imageUrl: result.base64,
+                    imageUrl: base64Image, // Store as string, not object
                     timestamp: firebase.database.ServerValue.TIMESTAMP,
                     fileName: file.name,
-                    storageMode: 'base64',
                     ...extraData
                 };
 
-                // Save to Realtime Database
                 if (isGallery) {
                     const newRef = db.ref(dbPath).push();
                     await newRef.set(data);
@@ -2696,7 +2616,7 @@
 
                 updateUploadProgress(folder, 100, 'Complete!');
                 showToast('Image uploaded successfully!');
-                return result.base64;
+                return base64Image;
             } catch (error) {
                 console.error('Upload error:', error);
                 showToast('Upload failed: ' + error.message, 'error');
@@ -2720,7 +2640,7 @@
             }
         }
 
-        // ==================== LOAD ALL DATA FROM REALTIME DATABASE ====================
+        // ==================== LOAD ALL DATA ====================
         async function loadAll() {
             try {
                 // Load Notices
@@ -2746,27 +2666,23 @@
                 // Load Banner
                 const bannerSnapshot = await db.ref('banner').once('value');
                 const banner = bannerSnapshot.val();
-                if (banner && banner.imageUrl) {
-                    document.getElementById('home').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${banner.imageUrl}')`;
-                    document.getElementById('bannerPreview').src = banner.imageUrl;
+                if (banner) {
+                    safeImageLoad(document.getElementById('home'), banner.imageUrl || banner);
+                    safeImageLoad(document.getElementById('bannerPreview'), banner.imageUrl || banner);
                 }
 
                 // Load School Images
                 const imagesSnapshot = await db.ref('school_images').once('value');
                 const images = imagesSnapshot.val();
                 if (images) {
-                    if (images.schoolImage) {
-                        document.getElementById('schoolImage').src = images.schoolImage;
-                        document.getElementById('schoolPreview').src = images.schoolImage;
-                    }
-                    if (images.principalImage) {
-                        document.getElementById('principalImage').src = images.principalImage;
-                        document.getElementById('principalPreview').src = images.principalImage;
-                    }
-                    if (images.contactImage) {
-                        document.getElementById('contactImage').src = images.contactImage;
-                        document.getElementById('contactPreview').src = images.contactImage;
-                    }
+                    safeImageLoad(document.getElementById('schoolImage'), images.schoolImage || images);
+                    safeImageLoad(document.getElementById('schoolPreview'), images.schoolImage || images);
+                    
+                    safeImageLoad(document.getElementById('principalImage'), images.principalImage || images);
+                    safeImageLoad(document.getElementById('principalPreview'), images.principalImage || images);
+                    
+                    safeImageLoad(document.getElementById('contactImage'), images.contactImage || images);
+                    safeImageLoad(document.getElementById('contactPreview'), images.contactImage || images);
                 }
 
                 // Load Gallery
@@ -2782,17 +2698,17 @@
                         })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                         
                         galleryArray.forEach(item => {
-                            if (!item.imageUrl) return;
-                            
                             const imgDiv = document.createElement('div');
                             imgDiv.className = 'gallery-item';
                             imgDiv.setAttribute('data-aos', 'zoom-in');
                             
                             const img = document.createElement('img');
-                            img.src = item.imageUrl;
                             img.alt = 'Gallery Image';
                             img.loading = 'lazy';
-                            img.onerror = function() { handleImageError(this, 0, item.imageUrl); };
+                            
+                            // Safely load the image
+                            const imageSrc = item.imageUrl || item;
+                            safeImageLoad(img, imageSrc);
                             
                             imgDiv.appendChild(img);
                             galleryGrid.appendChild(imgDiv);
@@ -2813,18 +2729,17 @@
                         })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                         
                         facilitiesArray.forEach((item, index) => {
-                            if (!item.imageUrl) return;
-                            
                             const card = document.createElement('div');
                             card.className = 'facility-card';
                             card.setAttribute('data-aos', 'flip-up');
                             card.setAttribute('data-aos-delay', index * 100);
                             
                             const img = document.createElement('img');
-                            img.src = item.imageUrl;
                             img.alt = item.title || 'Facility';
                             img.loading = 'lazy';
-                            img.onerror = function() { handleImageError(this, 0, item.imageUrl); };
+                            
+                            const imageSrc = item.imageUrl || item;
+                            safeImageLoad(img, imageSrc);
                             
                             card.appendChild(img);
                             
@@ -2854,23 +2769,23 @@
                         })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                         
                         achievementsArray.forEach(item => {
-                            if (!item.imageUrl) return;
-                            
                             const achievementDiv = document.createElement('div');
                             achievementDiv.className = 'achievement-item';
                             achievementDiv.setAttribute('data-aos', 'zoom-in');
                             
                             const img = document.createElement('img');
-                            img.src = item.imageUrl;
                             img.alt = item.title || 'Achievement';
                             img.loading = 'lazy';
-                            img.onerror = function() { handleImageError(this, 0, item.imageUrl); };
+                            
+                            const imageSrc = item.imageUrl || item;
+                            safeImageLoad(img, imageSrc);
                             
                             achievementDiv.appendChild(img);
                             
                             const contentDiv = document.createElement('div');
                             contentDiv.className = 'achievement-content';
-                                            const h4 = document.createElement('h4');
+                            
+                            const h4 = document.createElement('h4');
                             h4.textContent = item.title || 'Achievement';
                             contentDiv.appendChild(h4);
                             
@@ -2887,7 +2802,6 @@
                 // Load Popup Data
                 await loadPopupFromFirebase();
 
-                // Refresh AOS
                 AOS.refresh();
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -2896,11 +2810,8 @@
         }
 
         // ==================== POPUP FUNCTIONS ====================
-        
-        // Global array to store popup cards
         let popupCards = [];
 
-        // Load popup data from Firebase
         async function loadPopupFromFirebase() {
             try {
                 const popupSnapshot = await db.ref('popup').once('value');
@@ -2917,8 +2828,6 @@
                     popupCards = popupData.cards;
                     
                     popupData.cards.forEach((card) => {
-                        if (!card || !card.imageUrl) return;
-                        
                         const cardDiv = document.createElement('div');
                         cardDiv.className = 'entry-popup-item';
                         cardDiv.onclick = function() { 
@@ -2928,10 +2837,12 @@
                         };
                         
                         const img = document.createElement('img');
-                        img.src = card.imageUrl;
                         img.alt = 'Popup Image';
                         img.loading = 'lazy';
-                        img.onerror = function() { handleImageError(this, 0, card.imageUrl); };
+                        
+                        const imageSrc = card.imageUrl || card;
+                        safeImageLoad(img, imageSrc);
+                        
                         cardDiv.appendChild(img);
                         
                         const h3 = document.createElement('h3');
@@ -2993,7 +2904,7 @@
                         img.src = card.imageUrl;
                         img.alt = 'Popup Image';
                         img.loading = 'lazy';
-                        img.onerror = function() { handleImageError(this, 0, card.imageUrl); };
+                        
                         cardDiv.appendChild(img);
                         
                         const h3 = document.createElement('h3');
@@ -3013,7 +2924,6 @@
                     });
                 }
                 
-                // Update admin form if open
                 if (document.getElementById('popupTitleInput')) {
                     document.getElementById('popupTitleInput').value = document.getElementById('popupTitle').textContent;
                     document.getElementById('popupSubtitleInput').value = document.getElementById('popupSubtitle').textContent;
@@ -3025,7 +2935,6 @@
             }
         }
 
-        // Render admin popup cards
         function renderAdminPopupCards() {
             const container = document.getElementById('popupCardsAdminContainer');
             if (!container) return;
@@ -3038,7 +2947,6 @@
                 cardDiv.id = `popupCard_${index}`;
                 cardDiv.style.position = 'relative';
                 
-                // Delete button
                 const deleteBtn = document.createElement('button');
                 deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
                 deleteBtn.style.position = 'absolute';
@@ -3056,7 +2964,6 @@
                 };
                 cardDiv.appendChild(deleteBtn);
                 
-                // Card content
                 const titleLabel = document.createElement('label');
                 titleLabel.className = 'popup-label';
                 titleLabel.textContent = `Card ${index + 1} Image`;
@@ -3070,7 +2977,6 @@
                 img.style.height = '150px';
                 img.style.objectFit = 'cover';
                 img.style.marginBottom = '10px';
-                img.onerror = function() { handleImageError(this, 0, card.imageUrl); };
                 cardDiv.appendChild(img);
                 
                 const imgInput = document.createElement('input');
@@ -3083,10 +2989,10 @@
                     if (!this.files[0]) return;
                     try {
                         showToast('Processing popup image...', 'info');
-                        const downloadURL = await processAndUploadImage(this.files[0], `popup/card${index}`, 'popup', false);
-                        if (downloadURL) {
-                            document.getElementById(`card${index}Preview`).src = downloadURL;
-                            popupCards[index].imageUrl = downloadURL;
+                        const base64Image = await uploadImage(this.files[0], `popup/card${index}`, 'popup', false);
+                        if (base64Image) {
+                            document.getElementById(`card${index}Preview`).src = base64Image;
+                            popupCards[index].imageUrl = base64Image;
                             showToast('Popup image uploaded!');
                         }
                         this.value = '';
@@ -3096,7 +3002,6 @@
                 };
                 cardDiv.appendChild(imgInput);
                 
-                // Title input
                 const titleLabel2 = document.createElement('label');
                 titleLabel2.className = 'popup-label';
                 titleLabel2.textContent = 'Card Title';
@@ -3109,7 +3014,6 @@
                 titleInput.oninput = (e) => { popupCards[index].title = e.target.value; };
                 cardDiv.appendChild(titleInput);
                 
-                // Description textarea
                 const descLabel = document.createElement('label');
                 descLabel.className = 'popup-label';
                 descLabel.textContent = 'Card Description';
@@ -3122,7 +3026,6 @@
                 descInput.oninput = (e) => { popupCards[index].description = e.target.value; };
                 cardDiv.appendChild(descInput);
                 
-                // Link input
                 const linkLabel = document.createElement('label');
                 linkLabel.className = 'popup-label';
                 linkLabel.textContent = 'Link (e.g., #admissions)';
@@ -3135,7 +3038,6 @@
                 linkInput.oninput = (e) => { popupCards[index].link = e.target.value; };
                 cardDiv.appendChild(linkInput);
                 
-                // Button text input
                 const btnLabel = document.createElement('label');
                 btnLabel.className = 'popup-label';
                 btnLabel.textContent = 'Button Text';
@@ -3174,7 +3076,6 @@
             }
         }
 
-        // Preview popup changes
         function previewPopup() {
             document.getElementById('popupTitle').textContent = document.getElementById('popupTitleInput').value;
             document.getElementById('popupSubtitle').textContent = document.getElementById('popupSubtitleInput').value;
@@ -3196,7 +3097,6 @@
                 img.src = card.imageUrl;
                 img.alt = 'Popup Image';
                 img.loading = 'lazy';
-                img.onerror = function() { handleImageError(this, 0, card.imageUrl); };
                 cardDiv.appendChild(img);
                 
                 const h3 = document.createElement('h3');
@@ -3218,7 +3118,6 @@
             showToast('Preview updated!');
         }
 
-        // Save popup to Firebase
         async function savePopupToFirebase() {
             if (!isLoggedIn) return;
             
@@ -3240,7 +3139,6 @@
             }
         }
 
-        // Reset popup to default
         function resetPopupToDefault() {
             document.getElementById('popupTitleInput').value = '🎓 Welcome to Daffodils High School';
             document.getElementById('popupSubtitleInput').value = 'Discover what\'s new and happening at our school';
@@ -3308,7 +3206,6 @@
             showToast('Logged out successfully');
         }
 
-        // Check auth state
         auth.onAuthStateChanged((user) => {
             isLoggedIn = !!user;
         });
@@ -3318,7 +3215,6 @@
             if (!isLoggedIn) return;
 
             try {
-                // Load Notices for admin
                 const noticesSnapshot = await db.ref('notices').once('value');
                 const notices = noticesSnapshot.val();
                 const adminNotices = document.getElementById('adminNotices');
@@ -3344,7 +3240,6 @@
                     }
                 }
 
-                // Load Gallery for admin
                 const gallerySnapshot = await db.ref('gallery').once('value');
                 const gallery = gallerySnapshot.val();
                 const adminGallery = document.getElementById('adminGallery');
@@ -3357,11 +3252,9 @@
                         })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                         
                         galleryArray.forEach(item => {
-                            if (!item.imageUrl) return;
-                            
                             adminGallery.innerHTML += `
                                 <div class="admin-item">
-                                    <img src="${item.imageUrl}" class="thumb-img" alt="Gallery Thumb" loading="lazy" onerror="handleImageError(this, 0, '${item.imageUrl}')">
+                                    <img src="${item.imageUrl || item}" class="thumb-img" alt="Gallery Thumb" loading="lazy">
                                     <div class="admin-actions">
                                         <button class="delete-btn" onclick="deleteGallery('${item.id}')"><i class="fas fa-trash"></i></button>
                                     </div>
@@ -3371,7 +3264,6 @@
                     }
                 }
 
-                // Load Facilities for admin
                 const facilitiesSnapshot = await db.ref('facilities').once('value');
                 const facilities = facilitiesSnapshot.val();
                 const adminFacilities = document.getElementById('adminFacilities');
@@ -3384,11 +3276,9 @@
                         })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                         
                         facilitiesArray.forEach(item => {
-                            if (!item.imageUrl) return;
-                            
                             adminFacilities.innerHTML += `
                                 <div class="admin-item">
-                                    <img src="${item.imageUrl}" class="thumb-img" alt="Facility Thumb" loading="lazy" onerror="handleImageError(this, 0, '${item.imageUrl}')">
+                                    <img src="${item.imageUrl || item}" class="thumb-img" alt="Facility Thumb" loading="lazy">
                                     <span>${item.title || ''}</span>
                                     <div class="admin-actions">
                                         <button class="delete-btn" onclick="deleteFacility('${item.id}')"><i class="fas fa-trash"></i></button>
@@ -3399,7 +3289,6 @@
                     }
                 }
 
-                // Load Achievements for admin
                 const achievementsSnapshot = await db.ref('achievements').once('value');
                 const achievements = achievementsSnapshot.val();
                 const adminAchievements = document.getElementById('adminAchievements');
@@ -3412,11 +3301,9 @@
                         })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                         
                         achievementsArray.forEach(item => {
-                            if (!item.imageUrl) return;
-                            
                             adminAchievements.innerHTML += `
                                 <div class="admin-item">
-                                    <img src="${item.imageUrl}" class="thumb-img" alt="Achievement Thumb" loading="lazy" onerror="handleImageError(this, 0, '${item.imageUrl}')">
+                                    <img src="${item.imageUrl || item}" class="thumb-img" alt="Achievement Thumb" loading="lazy">
                                     <span>${item.title || ''}</span>
                                     <div class="admin-actions">
                                         <button class="delete-btn" onclick="deleteAchievement('${item.id}')"><i class="fas fa-trash"></i></button>
@@ -3427,7 +3314,6 @@
                     }
                 }
 
-                // Load Downloads for admin
                 const downloadsSnapshot = await db.ref('downloads').once('value');
                 const downloads = downloadsSnapshot.val() || {};
                 const adminDownloads = document.getElementById('adminDownloads');
@@ -3471,7 +3357,6 @@
                     }
                 }
 
-                // Load popup data into admin form
                 const popupSnapshot = await db.ref('popup').once('value');
                 const popupData = popupSnapshot.val();
                 if (popupData) {
@@ -3494,7 +3379,6 @@
 
         // ==================== CRUD OPERATIONS ====================
 
-        // Notices
         async function addNotice() {
             if (!isLoggedIn) return;
             const text = prompt('Enter notice text:');
@@ -3534,10 +3418,10 @@
         // Banner upload
         document.getElementById('bannerInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            const downloadURL = await processAndUploadImage(this.files[0], 'banner', 'banner', false);
-            if (downloadURL) {
-                document.getElementById('bannerPreview').src = downloadURL;
-                document.getElementById('home').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${downloadURL}')`;
+            const base64Image = await uploadImage(this.files[0], 'banner', 'banner', false);
+            if (base64Image) {
+                document.getElementById('bannerPreview').src = base64Image;
+                document.getElementById('home').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${base64Image}')`;
             }
             this.value = '';
         };
@@ -3545,30 +3429,30 @@
         // School images uploads
         document.getElementById('schoolInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            const downloadURL = await processAndUploadImage(this.files[0], 'school_images/schoolImage', 'school', false);
-            if (downloadURL) {
-                document.getElementById('schoolPreview').src = downloadURL;
-                document.getElementById('schoolImage').src = downloadURL;
+            const base64Image = await uploadImage(this.files[0], 'school_images/schoolImage', 'school', false);
+            if (base64Image) {
+                document.getElementById('schoolPreview').src = base64Image;
+                document.getElementById('schoolImage').src = base64Image;
             }
             this.value = '';
         };
 
         document.getElementById('principalInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            const downloadURL = await processAndUploadImage(this.files[0], 'school_images/principalImage', 'principal', false);
-            if (downloadURL) {
-                document.getElementById('principalPreview').src = downloadURL;
-                document.getElementById('principalImage').src = downloadURL;
+            const base64Image = await uploadImage(this.files[0], 'school_images/principalImage', 'principal', false);
+            if (base64Image) {
+                document.getElementById('principalPreview').src = base64Image;
+                document.getElementById('principalImage').src = base64Image;
             }
             this.value = '';
         };
 
         document.getElementById('contactInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            const downloadURL = await processAndUploadImage(this.files[0], 'school_images/contactImage', 'contact', false);
-            if (downloadURL) {
-                document.getElementById('contactPreview').src = downloadURL;
-                document.getElementById('contactImage').src = downloadURL;
+            const base64Image = await uploadImage(this.files[0], 'school_images/contactImage', 'contact', false);
+            if (base64Image) {
+                document.getElementById('contactPreview').src = base64Image;
+                document.getElementById('contactImage').src = base64Image;
             }
             this.value = '';
         };
@@ -3581,7 +3465,7 @@
             
             for (let i = 0; i < this.files.length; i++) {
                 showToast(`Uploading image ${i + 1} of ${this.files.length}...`, 'info');
-                await processAndUploadImage(this.files[i], 'gallery', 'gallery', true);
+                await uploadImage(this.files[i], 'gallery', 'gallery', true);
             }
             
             await loadAll();
@@ -3606,7 +3490,7 @@
             const title = prompt('Enter facility name:');
             const desc = prompt('Enter description:');
             if (title && desc) {
-                await processAndUploadImage(this.files[0], 'facilities', 'facilities', true, { title, description: desc });
+                await uploadImage(this.files[0], 'facilities', 'facilities', true, { title, description: desc });
                 await loadAll();
                 await loadAdminPanel();
             }
@@ -3629,7 +3513,7 @@
             const title = prompt('Enter achievement title:');
             const desc = prompt('Enter description:');
             if (title && desc) {
-                await processAndUploadImage(this.files[0], 'achievements', 'achievements', true, { title, description: desc });
+                await uploadImage(this.files[0], 'achievements', 'achievements', true, { title, description: desc });
                 await loadAll();
                 await loadAdminPanel();
             }
@@ -3665,8 +3549,7 @@
                     await db.ref('downloads/admission').set({ 
                         url: reader.result, 
                         name: this.files[0].name,
-                        timestamp: firebase.database.ServerValue.TIMESTAMP,
-                        storageMode: 'base64'
+                        timestamp: firebase.database.ServerValue.TIMESTAMP
                     });
                     
                     await loadAdminPanel();
@@ -3697,8 +3580,7 @@
                     await db.ref('downloads/prospectus').set({ 
                         url: reader.result, 
                         name: this.files[0].name,
-                        timestamp: firebase.database.ServerValue.TIMESTAMP,
-                        storageMode: 'base64'
+                        timestamp: firebase.database.ServerValue.TIMESTAMP
                     });
                     
                     await loadAdminPanel();
@@ -3785,13 +3667,11 @@
         window.savePopupToFirebase = savePopupToFirebase;
         window.resetPopupToDefault = resetPopupToDefault;
         window.renderAdminPopupCards = renderAdminPopupCards;
-        window.handleImageError = handleImageError;
 
         // Initialize
         loadAll();
         initEntryPopup();
 
-        // Add resize listener
         window.addEventListener('resize', () => AOS.refresh());
     </script>
 </body>
