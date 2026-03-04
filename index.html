@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- FIX 1 & 2: Fixed viewport for mobile - prevents zoom out and fits screen -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, shrink-to-fit=no">
     
     <!-- SEO Meta Tags -->
@@ -44,11 +43,8 @@
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    <!-- Firebase SDKs with Storage -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+    <!-- Neon Database API Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@neondatabase/serverless@0.9.0/dist/index.min.js"></script>
     
     <style>
         /* ALL ORIGINAL STYLES - KEEP EVERYTHING EXACTLY AS BEFORE */
@@ -73,6 +69,8 @@
         html {
             scroll-behavior: smooth;
             scroll-padding-top: 80px;
+            width: 100%;
+            overflow-x: hidden;
         }
 
         body {
@@ -83,6 +81,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            width: 100%;
         }
 
         /* Image placeholder styles */
@@ -420,6 +419,7 @@
             z-index: 999;
             backdrop-filter: blur(10px);
             background: rgba(255,255,255,0.95);
+            width: 100%;
         }
 
         .logo {
@@ -479,7 +479,6 @@
             width: 100%;
         }
 
-        /* FIX 3: Hamburger menu styles */
         .hamburger {
             display: none;
             font-size: 28px;
@@ -500,6 +499,7 @@
             color: var(--white);
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
 
         .hero::before {
@@ -523,6 +523,9 @@
             position: relative;
             z-index: 1;
             animation: float 6s ease-in-out infinite;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
         }
 
         @keyframes float {
@@ -578,11 +581,13 @@
         /* Sections */
         section {
             padding: 80px 5%;
+            width: 100%;
         }
 
         .section-title {
             text-align: center;
             margin-bottom: 50px;
+            width: 100%;
         }
 
         .section-title h2 {
@@ -617,6 +622,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 50px;
             align-items: center;
+            width: 100%;
         }
 
         .about-image {
@@ -665,6 +671,7 @@
             margin: 50px 0;
             box-shadow: var(--shadow);
             transition: all 0.3s;
+            width: 100%;
         }
 
         .principal-card:hover {
@@ -691,6 +698,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 40px;
             margin: 50px 0;
+            width: 100%;
         }
 
         .vision, .mission {
@@ -744,6 +752,7 @@
             padding: 50px;
             border-radius: 20px;
             margin-top: 50px;
+            width: 100%;
         }
 
         .why-grid {
@@ -751,6 +760,7 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 30px;
             margin-top: 30px;
+            width: 100%;
         }
 
         .why-item {
@@ -783,6 +793,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
+            width: 100%;
         }
 
         .gallery-item {
@@ -828,6 +839,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            width: 100%;
         }
 
         .facility-card {
@@ -837,6 +849,7 @@
             box-shadow: var(--shadow);
             transition: all 0.3s;
             position: relative;
+            width: 100%;
         }
 
         .facility-card:hover {
@@ -891,6 +904,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
+            width: 100%;
         }
 
         .academic-card {
@@ -960,6 +974,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
+            width: 100%;
         }
 
         .achievement-item {
@@ -1008,6 +1023,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
+            width: 100%;
         }
 
         .contact-info {
@@ -1016,6 +1032,7 @@
             border-radius: 20px;
             box-shadow: var(--shadow);
             animation: slideInLeft 1s ease;
+            width: 100%;
         }
 
         @keyframes slideInLeft {
@@ -1072,6 +1089,7 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             animation: slideInRight 1s ease;
+            width: 100%;
         }
 
         @keyframes slideInRight {
@@ -1090,6 +1108,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 15px;
             margin-top: 30px;
+            width: 100%;
         }
 
         .download-btn {
@@ -1132,6 +1151,7 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
+            width: 100%;
         }
 
         .footer-section h3 {
@@ -1321,6 +1341,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 25px;
             margin: 20px 0;
+            width: 100%;
         }
 
         .entry-popup-item {
@@ -1465,9 +1486,8 @@
             display: inline-block;
         }
 
-        /* ========== FIX 4: Mobile Responsive Styles ========== */
+        /* Mobile Responsive Styles */
         @media screen and (max-width: 768px) {
-            /* FIX 3: Hamburger menu */
             .hamburger {
                 display: block;
             }
@@ -1494,7 +1514,6 @@
                 margin: 10px 0;
             }
             
-            /* FIX 1,2,4: Make all grids single column on mobile */
             .gallery-grid,
             .facilities-grid,
             .achievements-grid,
@@ -1503,14 +1522,6 @@
                 gap: 20px;
             }
             
-            .gallery-item,
-            .facility-card,
-            .achievement-item,
-            .academic-card {
-                width: 100%;
-            }
-            
-            /* Fix about section */
             .about-grid,
             .principal-card,
             .vision-mission,
@@ -1529,7 +1540,6 @@
                 margin: 0 auto 20px;
             }
             
-            /* Fix contact section */
             .map {
                 min-height: 300px;
             }
@@ -1538,12 +1548,10 @@
                 grid-template-columns: 1fr;
             }
             
-            /* Fix entry popup */
             .entry-popup-grid {
                 grid-template-columns: 1fr;
             }
             
-            /* Fix hero section */
             .hero h1 {
                 font-size: 2rem;
             }
@@ -1556,7 +1564,6 @@
                 padding: 12px 25px;
             }
             
-            /* Fix section padding */
             section {
                 padding: 50px 15px;
             }
@@ -1565,7 +1572,6 @@
                 font-size: 2rem;
             }
             
-            /* Fix footer */
             .footer-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -1581,7 +1587,6 @@
             }
         }
         
-        /* Small mobile devices */
         @media screen and (max-width: 480px) {
             .logo h1 {
                 font-size: 1.2rem;
@@ -1618,44 +1623,25 @@
             touch-action: manipulation;
         }
 
-        p, li, span, a {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
         @media print {
             .admin-btn, .whatsapp, .navbar, .footer, .download-btn, .add-btn, .entry-popup {
                 display: none;
-            }
-            
-            body {
-                background: white;
-                color: black;
-            }
-            
-            a {
-                text-decoration: none;
-                color: black;
             }
         }
 
         img {
             display: block;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
+            max-width: 100%;
+            height: auto;
         }
         
         body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-        }
-        
-        main {
-            flex: 1 0 auto;
-        }
-        
-        .footer {
-            flex-shrink: 0;
+            width: 100%;
+            overflow-x: hidden;
         }
     </style>
 </head>
@@ -1701,7 +1687,7 @@
             </div>
             
             <div class="entry-popup-grid" id="popupGrid">
-                <!-- Popup cards will be dynamically loaded from Firebase -->
+                <!-- Popup cards will be dynamically loaded from Neon -->
             </div>
             
             <div class="entry-popup-footer">
@@ -1844,7 +1830,7 @@
                 <div style="display: flex; gap: 10px; margin-top: 20px;">
                     <button class="add-btn" onclick="addPopupCard()" style="background: #10b981;">➕ Add New Card</button>
                     <button class="add-btn" onclick="previewPopup()">👁️ Preview Changes</button>
-                    <button class="add-btn" onclick="savePopupToFirebase()">💾 Save to Database</button>
+                    <button class="add-btn" onclick="savePopupToNeon()">💾 Save to Database</button>
                 </div>
                 <button class="add-btn" onclick="resetPopupToDefault()" style="background: #ef4444; margin-top: 10px;">↺ Reset to Default</button>
             </div>
@@ -1861,7 +1847,7 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Navigation - FIX 3: Hamburger menu added -->
+    <!-- Navigation -->
     <nav class="navbar" role="navigation" aria-label="Main Navigation">
         <div class="logo">
             <i class="fas fa-school" aria-hidden="true"></i>
@@ -2120,24 +2106,15 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // ==================== FIREBASE CONFIGURATION ====================
-        const firebaseConfig = {
-            apiKey: "AIzaSyB5CXXhdCKX5lMwphi-sKqKhNmSnP2jync",
-            authDomain: "daffodils-da11a.firebaseapp.com",
-            databaseURL: "https://daffodils-da11a-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "daffodils-da11a",
-            storageBucket: "daffodils-da11a.firebasestorage.app",
-            messagingSenderId: "286713527097",
-            appId: "1:286713527097:web:52ec389e0855980c1ec6e8"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
-        const auth = firebase.auth();
-        const storage = firebase.storage();
+        // ==================== NEON DATABASE CONFIGURATION ====================
+        // Replace with your actual Neon database connection string
+        const NEON_CONNECTION_STRING = 'postgresql://neondb_owner:npg_3p4Hykz9KebN@ep-soft-wind-a5j6v3h3-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require';
         
-        // Admin auth state
+        // API endpoint for Neon (you'll need to set up a proxy API)
+        const API_ENDPOINT = 'https://your-api-domain.com/api/neon'; // You need to deploy this API
+        
+        // Admin auth state (simple password-based for now)
+        const ADMIN_PASSWORD = 'admin123';
         let isLoggedIn = false;
 
         // Initialize AOS
@@ -2150,10 +2127,9 @@
             }
         });
 
-        // FIX 3: Mobile Menu Toggle
+        // Mobile Menu Toggle
         document.querySelector('.hamburger').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
-            // Change icon when menu is open
             const icon = this.querySelector('i');
             if (icon.classList.contains('fa-bars')) {
                 icon.classList.remove('fa-bars');
@@ -2164,7 +2140,6 @@
             }
         });
 
-        // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 document.querySelector('.nav-links').classList.remove('active');
@@ -2176,7 +2151,6 @@
             });
         });
 
-        // Click outside to close mobile menu
         document.addEventListener('click', function(event) {
             const navLinks = document.querySelector('.nav-links');
             const hamburger = document.querySelector('.hamburger');
@@ -2193,39 +2167,173 @@
             }
         });
 
+        // ==================== NEON API FUNCTIONS ====================
+        
+        // Generic function to query Neon
+        async function queryNeon(sql, params = []) {
+            try {
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ sql, params })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Database query failed');
+                }
+                
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Neon query error:', error);
+                showToast('Database error: ' + error.message, 'error');
+                return null;
+            }
+        }
+
+        // Initialize database tables if they don't exist
+        async function initDatabase() {
+            // Create tables if they don't exist
+            const createTablesSQL = `
+                CREATE TABLE IF NOT EXISTS notices (
+                    id SERIAL PRIMARY KEY,
+                    text TEXT NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+                
+                CREATE TABLE IF NOT EXISTS banner (
+                    id INTEGER PRIMARY KEY DEFAULT 1,
+                    image_url TEXT,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+                
+                CREATE TABLE IF NOT EXISTS school_images (
+                    id INTEGER PRIMARY KEY DEFAULT 1,
+                    school_image TEXT,
+                    principal_image TEXT,
+                    contact_image TEXT,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+                
+                CREATE TABLE IF NOT EXISTS gallery (
+                    id SERIAL PRIMARY KEY,
+                    image_url TEXT NOT NULL,
+                    file_name TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+                
+                CREATE TABLE IF NOT EXISTS facilities (
+                    id SERIAL PRIMARY KEY,
+                    image_url TEXT NOT NULL,
+                    title TEXT,
+                    description TEXT,
+                    file_name TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+                
+                CREATE TABLE IF NOT EXISTS achievements (
+                    id SERIAL PRIMARY KEY,
+                    image_url TEXT NOT NULL,
+                    title TEXT,
+                    description TEXT,
+                    file_name TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+                
+                CREATE TABLE IF NOT EXISTS downloads (
+                    id INTEGER PRIMARY KEY DEFAULT 1,
+                    admission_url TEXT,
+                    admission_name TEXT,
+                    prospectus_url TEXT,
+                    prospectus_name TEXT,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+                
+                CREATE TABLE IF NOT EXISTS popup (
+                    id INTEGER PRIMARY KEY DEFAULT 1,
+                    title TEXT,
+                    subtitle TEXT,
+                    footer TEXT,
+                    cards JSONB,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+                
+                -- Insert default records if they don't exist
+                INSERT INTO banner (id, image_url) VALUES (1, 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80') 
+                ON CONFLICT (id) DO NOTHING;
+                
+                INSERT INTO school_images (id, school_image, principal_image, contact_image) 
+                VALUES (1, 
+                    'https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80',
+                    'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                ) ON CONFLICT (id) DO NOTHING;
+                
+                INSERT INTO downloads (id) VALUES (1) ON CONFLICT (id) DO NOTHING;
+                
+                INSERT INTO popup (id, title, subtitle, footer, cards) 
+                VALUES (1, 
+                    '🎓 Welcome to Daffodils High School',
+                    'Discover what''s new and happening at our school',
+                    '✨ Don''t miss this opportunity to be part of excellence ✨',
+                    '[
+                        {
+                            "imageUrl": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                            "title": "📚 Admissions 2024-25",
+                            "description": "Applications open for Pre-Primary to Class X. Limited seats available. Apply now for the upcoming academic year.",
+                            "link": "#admissions",
+                            "buttonText": "Apply Now"
+                        },
+                        {
+                            "imageUrl": "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                            "title": "🏆 Our Achievements",
+                            "description": "State-level Science Fair winners, Inter-School Sports Champions, and 100% Board Exam results. Celebrating excellence!",
+                            "link": "#achievements",
+                            "buttonText": "View Achievements"
+                        },
+                        {
+                            "imageUrl": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                            "title": "📊 Results 2024",
+                            "description": "100% pass percentage with 95% distinction. Our students have excelled in academics and competitive exams.",
+                            "link": "#results",
+                            "buttonText": "Check Results"
+                        }
+                    ]'::jsonb
+                ) ON CONFLICT (id) DO NOTHING;
+            `;
+            
+            await queryNeon(createTablesSQL);
+        }
+
         // ==================== SAFE IMAGE LOADING FUNCTION ====================
         function safeImageLoad(imgElement, imageData) {
-            // Handle null/undefined
             if (!imageData) {
                 showFallback(imgElement);
                 return;
             }
 
-            // Extract the actual image source string
             let src = null;
             
             if (typeof imageData === 'string') {
-                // If it's already a string, use it directly
                 src = imageData;
             } else if (typeof imageData === 'object') {
-                // If it's an object, try to extract the image URL
-                if (imageData.imageUrl) {
-                    src = imageData.imageUrl;
-                } else if (imageData.url) {
-                    src = imageData.url;
-                } else if (imageData.src) {
-                    src = imageData.src;
-                }
+                if (imageData.image_url) src = imageData.image_url;
+                else if (imageData.imageUrl) src = imageData.imageUrl;
+                else if (imageData.url) src = imageData.url;
+                else if (imageData.src) src = imageData.src;
+                else if (imageData.school_image) src = imageData.school_image;
+                else if (imageData.principal_image) src = imageData.principal_image;
+                else if (imageData.contact_image) src = imageData.contact_image;
             }
 
-            // Validate the extracted src
             if (!src || src === 'undefined' || src === 'null' || src === '[object Object]') {
                 console.error('Invalid image source:', src);
                 showFallback(imgElement);
                 return;
             }
 
-            // Set the source and handle errors
             imgElement.src = src;
             imgElement.style.display = 'block';
             imgElement.style.width = '100%';
@@ -2254,7 +2362,6 @@
                 parent.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
                 parent.classList.add('image-placeholder');
                 
-                // Add a retry button
                 const existingBtn = parent.querySelector('.retry-btn');
                 if (!existingBtn) {
                     const retryBtn = document.createElement('button');
@@ -2267,7 +2374,7 @@
                         imgElement.style.width = '100%';
                         imgElement.style.height = '100%';
                         imgElement.style.objectFit = 'cover';
-                        imgElement.src = imgElement.src; // Retry the same source
+                        imgElement.src = imgElement.src;
                     };
                     parent.appendChild(retryBtn);
                 }
@@ -2320,7 +2427,7 @@
                             const reader2 = new FileReader();
                             reader2.readAsDataURL(blob);
                             reader2.onload = () => {
-                                resolve(reader2.result); // Return only the Base64 string
+                                resolve(reader2.result);
                             };
                         }, 'image/jpeg', quality);
                     };
@@ -2364,7 +2471,7 @@
         }
 
         // ==================== UPLOAD IMAGE FUNCTION ====================
-        async function uploadImage(file, dbPath, folder, isGallery = false, extraData = {}) {
+        async function uploadImage(file, table, column, id = 1, extraData = {}) {
             if (!isLoggedIn) {
                 showToast('Please login first', 'error');
                 return false;
@@ -2372,35 +2479,41 @@
 
             try {
                 showToast('Processing image...', 'info');
-                showUploadProgress(folder);
-                updateUploadProgress(folder, 10, 'Compressing...');
+                showUploadProgress(table);
 
-                // Get Base64 string directly (not wrapped in an object)
                 const base64Image = await compressImage(file);
-                updateUploadProgress(folder, 70, 'Saving...');
+                updateUploadProgress(table, 70, 'Saving to database...');
 
-                // Save only the Base64 string to database
-                const data = {
-                    imageUrl: base64Image, // Store as string, not object
-                    timestamp: firebase.database.ServerValue.TIMESTAMP,
-                    fileName: file.name,
-                    ...extraData
-                };
-
-                if (isGallery) {
-                    const newRef = db.ref(dbPath).push();
-                    await newRef.set(data);
-                } else {
-                    await db.ref(dbPath).set(data);
+                let sql, params;
+                
+                if (table === 'gallery' || table === 'facilities' || table === 'achievements') {
+                    // Insert into collection tables
+                    sql = `INSERT INTO ${table} (image_url, file_name, title, description, created_at) 
+                           VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP) RETURNING id`;
+                    params = [base64Image, file.name, extraData.title || null, extraData.description || null];
+                } else if (table === 'banner') {
+                    // Update banner
+                    sql = `UPDATE banner SET image_url = $1, updated_at = CURRENT_TIMESTAMP WHERE id = 1`;
+                    params = [base64Image];
+                } else if (table === 'school_images') {
+                    // Update specific school image column
+                    sql = `UPDATE school_images SET ${column} = $1, updated_at = CURRENT_TIMESTAMP WHERE id = 1`;
+                    params = [base64Image];
                 }
 
-                updateUploadProgress(folder, 100, 'Complete!');
-                showToast('Image uploaded successfully!');
-                return base64Image;
+                const result = await queryNeon(sql, params);
+                
+                if (result) {
+                    updateUploadProgress(table, 100, 'Complete!');
+                    showToast('Image uploaded successfully!');
+                    return base64Image;
+                } else {
+                    throw new Error('Database insert failed');
+                }
             } catch (error) {
                 console.error('Upload error:', error);
                 showToast('Upload failed: ' + error.message, 'error');
-                hideUploadProgress(folder);
+                hideUploadProgress(table);
                 return false;
             }
         }
@@ -2423,19 +2536,16 @@
         // ==================== LOAD ALL DATA ====================
         async function loadAll() {
             try {
+                await initDatabase();
+                
                 // Load Notices
-                const noticesSnapshot = await db.ref('notices').once('value');
-                const notices = noticesSnapshot.val();
+                const noticesResult = await queryNeon('SELECT * FROM notices ORDER BY created_at DESC');
+                const notices = noticesResult?.rows || [];
                 const noticeBar = document.getElementById('noticeBar');
                 if (noticeBar) {
                     noticeBar.innerHTML = '';
-                    if (notices) {
-                        const noticesArray = Object.keys(notices).map(key => ({
-                            id: key,
-                            ...notices[key]
-                        })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-                        
-                        noticesArray.forEach(notice => {
+                    if (notices.length > 0) {
+                        notices.forEach(notice => {
                             noticeBar.innerHTML += `<span><i class="fas fa-bell"></i> ${notice.text}</span>`;
                         });
                     } else {
@@ -2444,147 +2554,119 @@
                 }
 
                 // Load Banner
-                const bannerSnapshot = await db.ref('banner').once('value');
-                const banner = bannerSnapshot.val();
-                if (banner) {
-                    const bannerElement = document.getElementById('home');
-                    const bannerSrc = banner.imageUrl || banner;
-                    if (bannerSrc && typeof bannerSrc === 'string') {
-                        bannerElement.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${bannerSrc}')`;
-                    }
-                    safeImageLoad(document.getElementById('bannerPreview'), bannerSrc);
+                const bannerResult = await queryNeon('SELECT image_url FROM banner WHERE id = 1');
+                const banner = bannerResult?.rows[0];
+                if (banner && banner.image_url) {
+                    document.getElementById('home').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${banner.image_url}')`;
+                    safeImageLoad(document.getElementById('bannerPreview'), banner.image_url);
                 }
 
                 // Load School Images
-                const imagesSnapshot = await db.ref('school_images').once('value');
-                const images = imagesSnapshot.val();
+                const imagesResult = await queryNeon('SELECT school_image, principal_image, contact_image FROM school_images WHERE id = 1');
+                const images = imagesResult?.rows[0] || {};
                 if (images) {
-                    safeImageLoad(document.getElementById('schoolImage'), images.schoolImage || images);
-                    safeImageLoad(document.getElementById('schoolPreview'), images.schoolImage || images);
+                    safeImageLoad(document.getElementById('schoolImage'), images.school_image);
+                    safeImageLoad(document.getElementById('schoolPreview'), images.school_image);
                     
-                    safeImageLoad(document.getElementById('principalImage'), images.principalImage || images);
-                    safeImageLoad(document.getElementById('principalPreview'), images.principalImage || images);
+                    safeImageLoad(document.getElementById('principalImage'), images.principal_image);
+                    safeImageLoad(document.getElementById('principalPreview'), images.principal_image);
                     
-                    safeImageLoad(document.getElementById('contactImage'), images.contactImage || images);
-                    safeImageLoad(document.getElementById('contactPreview'), images.contactImage || images);
+                    safeImageLoad(document.getElementById('contactImage'), images.contact_image);
+                    safeImageLoad(document.getElementById('contactPreview'), images.contact_image);
                 }
 
                 // Load Gallery
-                const gallerySnapshot = await db.ref('gallery').once('value');
-                const gallery = gallerySnapshot.val();
+                const galleryResult = await queryNeon('SELECT * FROM gallery ORDER BY created_at DESC');
+                const gallery = galleryResult?.rows || [];
                 const galleryGrid = document.getElementById('galleryGrid');
                 if (galleryGrid) {
                     galleryGrid.innerHTML = '';
-                    if (gallery) {
-                        const galleryArray = Object.keys(gallery).map(key => ({
-                            id: key,
-                            ...gallery[key]
-                        })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                    gallery.forEach(item => {
+                        const imgDiv = document.createElement('div');
+                        imgDiv.className = 'gallery-item';
+                        imgDiv.setAttribute('data-aos', 'zoom-in');
                         
-                        galleryArray.forEach(item => {
-                            const imgDiv = document.createElement('div');
-                            imgDiv.className = 'gallery-item';
-                            imgDiv.setAttribute('data-aos', 'zoom-in');
-                            
-                            const img = document.createElement('img');
-                            img.alt = 'Gallery Image';
-                            img.loading = 'lazy';
-                            
-                            // Safely load the image
-                            const imageSrc = item.imageUrl || item;
-                            safeImageLoad(img, imageSrc);
-                            
-                            imgDiv.appendChild(img);
-                            galleryGrid.appendChild(imgDiv);
-                        });
-                    }
+                        const img = document.createElement('img');
+                        img.alt = 'Gallery Image';
+                        img.loading = 'lazy';
+                        safeImageLoad(img, item.image_url);
+                        
+                        imgDiv.appendChild(img);
+                        galleryGrid.appendChild(imgDiv);
+                    });
                 }
 
                 // Load Facilities
-                const facilitiesSnapshot = await db.ref('facilities').once('value');
-                const facilities = facilitiesSnapshot.val();
+                const facilitiesResult = await queryNeon('SELECT * FROM facilities ORDER BY created_at DESC');
+                const facilities = facilitiesResult?.rows || [];
                 const facilitiesGrid = document.getElementById('facilitiesGrid');
                 if (facilitiesGrid) {
                     facilitiesGrid.innerHTML = '';
-                    if (facilities) {
-                        const facilitiesArray = Object.keys(facilities).map(key => ({
-                            id: key,
-                            ...facilities[key]
-                        })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                    facilities.forEach((item, index) => {
+                        const card = document.createElement('div');
+                        card.className = 'facility-card';
+                        card.setAttribute('data-aos', 'flip-up');
+                        card.setAttribute('data-aos-delay', index * 100);
                         
-                        facilitiesArray.forEach((item, index) => {
-                            const card = document.createElement('div');
-                            card.className = 'facility-card';
-                            card.setAttribute('data-aos', 'flip-up');
-                            card.setAttribute('data-aos-delay', index * 100);
-                            
-                            const img = document.createElement('img');
-                            img.alt = item.title || 'Facility';
-                            img.loading = 'lazy';
-                            
-                            const imageSrc = item.imageUrl || item;
-                            safeImageLoad(img, imageSrc);
-                            
-                            card.appendChild(img);
-                            
-                            const h3 = document.createElement('h3');
-                            h3.textContent = item.title || 'Facility';
-                            card.appendChild(h3);
-                            
-                            const p = document.createElement('p');
-                            p.textContent = item.description || '';
-                            card.appendChild(p);
-                            
-                            facilitiesGrid.appendChild(card);
-                        });
-                    }
+                        const img = document.createElement('img');
+                        img.alt = item.title || 'Facility';
+                        img.loading = 'lazy';
+                        safeImageLoad(img, item.image_url);
+                        
+                        card.appendChild(img);
+                        
+                        const h3 = document.createElement('h3');
+                        h3.textContent = item.title || 'Facility';
+                        card.appendChild(h3);
+                        
+                        const p = document.createElement('p');
+                        p.textContent = item.description || '';
+                        card.appendChild(p);
+                        
+                        facilitiesGrid.appendChild(card);
+                    });
                 }
 
                 // Load Achievements
-                const achievementsSnapshot = await db.ref('achievements').once('value');
-                const achievements = achievementsSnapshot.val();
+                const achievementsResult = await queryNeon('SELECT * FROM achievements ORDER BY created_at DESC');
+                const achievements = achievementsResult?.rows || [];
                 const achievementsGrid = document.getElementById('achievementsGrid');
                 if (achievementsGrid) {
                     achievementsGrid.innerHTML = '';
-                    if (achievements) {
-                        const achievementsArray = Object.keys(achievements).map(key => ({
-                            id: key,
-                            ...achievements[key]
-                        })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                    achievements.forEach(item => {
+                        const achievementDiv = document.createElement('div');
+                        achievementDiv.className = 'achievement-item';
+                        achievementDiv.setAttribute('data-aos', 'zoom-in');
                         
-                        achievementsArray.forEach(item => {
-                            const achievementDiv = document.createElement('div');
-                            achievementDiv.className = 'achievement-item';
-                            achievementDiv.setAttribute('data-aos', 'zoom-in');
-                            
-                            const img = document.createElement('img');
-                            img.alt = item.title || 'Achievement';
-                            img.loading = 'lazy';
-                            
-                            const imageSrc = item.imageUrl || item;
-                            safeImageLoad(img, imageSrc);
-                            
-                            achievementDiv.appendChild(img);
-                            
-                            const contentDiv = document.createElement('div');
-                            contentDiv.className = 'achievement-content';
-                            
-                            const h4 = document.createElement('h4');
-                            h4.textContent = item.title || 'Achievement';
-                            contentDiv.appendChild(h4);
-                            
-                            const p = document.createElement('p');
-                            p.textContent = item.description || '';
-                            contentDiv.appendChild(p);
-                            
-                            achievementDiv.appendChild(contentDiv);
-                            achievementsGrid.appendChild(achievementDiv);
-                        });
-                    }
+                        const img = document.createElement('img');
+                        img.alt = item.title || 'Achievement';
+                        img.loading = 'lazy';
+                        safeImageLoad(img, item.image_url);
+                        
+                        achievementDiv.appendChild(img);
+                        
+                        const contentDiv = document.createElement('div');
+                        contentDiv.className = 'achievement-content';
+                        
+                        const h4 = document.createElement('h4');
+                        h4.textContent = item.title || 'Achievement';
+                        contentDiv.appendChild(h4);
+                        
+                        const p = document.createElement('p');
+                        p.textContent = item.description || '';
+                        contentDiv.appendChild(p);
+                        
+                        achievementDiv.appendChild(contentDiv);
+                        achievementsGrid.appendChild(achievementDiv);
+                    });
                 }
 
+                // Load Downloads
+                const downloadsResult = await queryNeon('SELECT admission_url, admission_name, prospectus_url, prospectus_name FROM downloads WHERE id = 1');
+                const downloads = downloadsResult?.rows[0] || {};
+
                 // Load Popup Data
-                await loadPopupFromFirebase();
+                await loadPopupFromNeon();
 
                 AOS.refresh();
             } catch (error) {
@@ -2596,10 +2678,10 @@
         // ==================== POPUP FUNCTIONS ====================
         let popupCards = [];
 
-        async function loadPopupFromFirebase() {
+        async function loadPopupFromNeon() {
             try {
-                const popupSnapshot = await db.ref('popup').once('value');
-                const popupData = popupSnapshot.val();
+                const popupResult = await queryNeon('SELECT title, subtitle, footer, cards FROM popup WHERE id = 1');
+                const popupData = popupResult?.rows[0];
                 
                 const popupGrid = document.getElementById('popupGrid');
                 
@@ -2623,9 +2705,7 @@
                         const img = document.createElement('img');
                         img.alt = 'Popup Image';
                         img.loading = 'lazy';
-                        
-                        const imageSrc = card.imageUrl || card;
-                        safeImageLoad(img, imageSrc);
+                        safeImageLoad(img, card.imageUrl);
                         
                         cardDiv.appendChild(img);
                         
@@ -2776,11 +2856,11 @@
                     if (!this.files[0]) return;
                     try {
                         showToast('Processing popup image...', 'info');
-                        const base64Image = await uploadImage(this.files[0], `popup/card${index}`, 'popup', false);
+                        const base64Image = await compressImage(this.files[0]);
                         if (base64Image) {
                             document.getElementById(`card${index}Preview`).src = base64Image;
                             popupCards[index].imageUrl = base64Image;
-                            showToast('Popup image uploaded!');
+                            showToast('Popup image ready! Click Save to Database to store.');
                         }
                         this.value = '';
                     } catch (error) {
@@ -2908,7 +2988,7 @@
             showToast('Preview updated!');
         }
 
-        async function savePopupToFirebase() {
+        async function savePopupToNeon() {
             if (!isLoggedIn) return;
             
             try {
@@ -2916,12 +2996,18 @@
                     title: document.getElementById('popupTitleInput').value,
                     subtitle: document.getElementById('popupSubtitleInput').value,
                     footer: document.getElementById('popupFooterInput').value,
-                    cards: popupCards,
-                    timestamp: firebase.database.ServerValue.TIMESTAMP
+                    cards: popupCards
                 };
                 
-                await db.ref('popup').set(popupData);
-                await loadPopupFromFirebase();
+                const sql = `
+                    UPDATE popup 
+                    SET title = $1, subtitle = $2, footer = $3, cards = $4::jsonb, updated_at = CURRENT_TIMESTAMP 
+                    WHERE id = 1
+                `;
+                const params = [popupData.title, popupData.subtitle, popupData.footer, JSON.stringify(popupData.cards)];
+                
+                await queryNeon(sql, params);
+                await loadPopupFromNeon();
                 showToast('Popup saved to database!');
             } catch (error) {
                 console.error('Error saving popup:', error);
@@ -2973,148 +3059,117 @@
         }
 
         async function login() {
-            const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            try {
-                await auth.signInWithEmailAndPassword(email, password);
+            if (password === ADMIN_PASSWORD) {
                 isLoggedIn = true;
                 closeModal();
                 document.getElementById('adminPanel').classList.add('active');
                 await loadAdminPanel();
                 showToast('Login successful!');
-            } catch (error) {
-                console.error('Login error:', error);
-                alert('Login failed! Please use admin@daffodils.com / admin123');
+            } else {
+                alert('Login failed! Please use password: admin123');
             }
         }
 
         function logout() {
-            auth.signOut();
             isLoggedIn = false;
             document.getElementById('adminPanel').classList.remove('active');
             showToast('Logged out successfully');
         }
-
-        auth.onAuthStateChanged((user) => {
-            isLoggedIn = !!user;
-        });
 
         // ==================== ADMIN PANEL LOAD ====================
         async function loadAdminPanel() {
             if (!isLoggedIn) return;
 
             try {
-                const noticesSnapshot = await db.ref('notices').once('value');
-                const notices = noticesSnapshot.val();
+                // Load Notices for admin
+                const noticesResult = await queryNeon('SELECT * FROM notices ORDER BY created_at DESC');
+                const notices = noticesResult?.rows || [];
                 const adminNotices = document.getElementById('adminNotices');
                 if (adminNotices) {
                     adminNotices.innerHTML = '';
-                    if (notices) {
-                        const noticesArray = Object.keys(notices).map(key => ({
-                            id: key,
-                            ...notices[key]
-                        })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-                        
-                        noticesArray.forEach(notice => {
-                            adminNotices.innerHTML += `
-                                <div class="admin-item">
-                                    <span>${notice.text}</span>
-                                    <div class="admin-actions">
-                                        <button class="edit-btn" onclick="editNotice('${notice.id}')"><i class="fas fa-edit"></i></button>
-                                        <button class="delete-btn" onclick="deleteNotice('${notice.id}')"><i class="fas fa-trash"></i></button>
-                                    </div>
+                    notices.forEach(notice => {
+                        adminNotices.innerHTML += `
+                            <div class="admin-item">
+                                <span>${notice.text}</span>
+                                <div class="admin-actions">
+                                    <button class="edit-btn" onclick="editNotice(${notice.id})"><i class="fas fa-edit"></i></button>
+                                    <button class="delete-btn" onclick="deleteNotice(${notice.id})"><i class="fas fa-trash"></i></button>
                                 </div>
-                            `;
-                        });
-                    }
+                            </div>
+                        `;
+                    });
                 }
 
-                const gallerySnapshot = await db.ref('gallery').once('value');
-                const gallery = gallerySnapshot.val();
+                // Load Gallery for admin
+                const galleryResult = await queryNeon('SELECT * FROM gallery ORDER BY created_at DESC');
+                const gallery = galleryResult?.rows || [];
                 const adminGallery = document.getElementById('adminGallery');
                 if (adminGallery) {
                     adminGallery.innerHTML = '';
-                    if (gallery) {
-                        const galleryArray = Object.keys(gallery).map(key => ({
-                            id: key,
-                            ...gallery[key]
-                        })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-                        
-                        galleryArray.forEach(item => {
-                            adminGallery.innerHTML += `
-                                <div class="admin-item">
-                                    <img src="${item.imageUrl || item}" class="thumb-img" alt="Gallery Thumb" loading="lazy">
-                                    <div class="admin-actions">
-                                        <button class="delete-btn" onclick="deleteGallery('${item.id}')"><i class="fas fa-trash"></i></button>
-                                    </div>
+                    gallery.forEach(item => {
+                        adminGallery.innerHTML += `
+                            <div class="admin-item">
+                                <img src="${item.image_url}" class="thumb-img" alt="Gallery Thumb" loading="lazy">
+                                <div class="admin-actions">
+                                    <button class="delete-btn" onclick="deleteGallery(${item.id})"><i class="fas fa-trash"></i></button>
                                 </div>
-                            `;
-                        });
-                    }
+                            </div>
+                        `;
+                    });
                 }
 
-                const facilitiesSnapshot = await db.ref('facilities').once('value');
-                const facilities = facilitiesSnapshot.val();
+                // Load Facilities for admin
+                const facilitiesResult = await queryNeon('SELECT * FROM facilities ORDER BY created_at DESC');
+                const facilities = facilitiesResult?.rows || [];
                 const adminFacilities = document.getElementById('adminFacilities');
                 if (adminFacilities) {
                     adminFacilities.innerHTML = '';
-                    if (facilities) {
-                        const facilitiesArray = Object.keys(facilities).map(key => ({
-                            id: key,
-                            ...facilities[key]
-                        })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-                        
-                        facilitiesArray.forEach(item => {
-                            adminFacilities.innerHTML += `
-                                <div class="admin-item">
-                                    <img src="${item.imageUrl || item}" class="thumb-img" alt="Facility Thumb" loading="lazy">
-                                    <span>${item.title || ''}</span>
-                                    <div class="admin-actions">
-                                        <button class="delete-btn" onclick="deleteFacility('${item.id}')"><i class="fas fa-trash"></i></button>
-                                    </div>
+                    facilities.forEach(item => {
+                        adminFacilities.innerHTML += `
+                            <div class="admin-item">
+                                <img src="${item.image_url}" class="thumb-img" alt="Facility Thumb" loading="lazy">
+                                <span>${item.title || ''}</span>
+                                <div class="admin-actions">
+                                    <button class="delete-btn" onclick="deleteFacility(${item.id})"><i class="fas fa-trash"></i></button>
                                 </div>
-                            `;
-                        });
-                    }
+                            </div>
+                        `;
+                    });
                 }
 
-                const achievementsSnapshot = await db.ref('achievements').once('value');
-                const achievements = achievementsSnapshot.val();
+                // Load Achievements for admin
+                const achievementsResult = await queryNeon('SELECT * FROM achievements ORDER BY created_at DESC');
+                const achievements = achievementsResult?.rows || [];
                 const adminAchievements = document.getElementById('adminAchievements');
                 if (adminAchievements) {
                     adminAchievements.innerHTML = '';
-                    if (achievements) {
-                        const achievementsArray = Object.keys(achievements).map(key => ({
-                            id: key,
-                            ...achievements[key]
-                        })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-                        
-                        achievementsArray.forEach(item => {
-                            adminAchievements.innerHTML += `
-                                <div class="admin-item">
-                                    <img src="${item.imageUrl || item}" class="thumb-img" alt="Achievement Thumb" loading="lazy">
-                                    <span>${item.title || ''}</span>
-                                    <div class="admin-actions">
-                                        <button class="delete-btn" onclick="deleteAchievement('${item.id}')"><i class="fas fa-trash"></i></button>
-                                    </div>
+                    achievements.forEach(item => {
+                        adminAchievements.innerHTML += `
+                            <div class="admin-item">
+                                <img src="${item.image_url}" class="thumb-img" alt="Achievement Thumb" loading="lazy">
+                                <span>${item.title || ''}</span>
+                                <div class="admin-actions">
+                                    <button class="delete-btn" onclick="deleteAchievement(${item.id})"><i class="fas fa-trash"></i></button>
                                 </div>
-                            `;
-                        });
-                    }
+                            </div>
+                        `;
+                    });
                 }
 
-                const downloadsSnapshot = await db.ref('downloads').once('value');
-                const downloads = downloadsSnapshot.val() || {};
+                // Load Downloads for admin
+                const downloadsResult = await queryNeon('SELECT admission_url, admission_name, prospectus_url, prospectus_name FROM downloads WHERE id = 1');
+                const downloads = downloadsResult?.rows[0] || {};
                 const adminDownloads = document.getElementById('adminDownloads');
                 if (adminDownloads) {
                     adminDownloads.innerHTML = '';
                     
-                    if (downloads.admission) {
+                    if (downloads.admission_url) {
                         adminDownloads.innerHTML += `
                             <div class="admin-item">
                                 <i class="fas fa-file-pdf" style="color: #f44336; font-size: 24px;"></i>
-                                <span>Admission Form: ${downloads.admission.name || 'Available'}</span>
+                                <span>Admission Form: ${downloads.admission_name || 'Available'}</span>
                                 <div class="admin-actions">
                                     <button class="delete-btn" onclick="deletePDF('admission')"><i class="fas fa-trash"></i></button>
                                 </div>
@@ -3128,11 +3183,11 @@
                         `;
                     }
                     
-                    if (downloads.prospectus) {
+                    if (downloads.prospectus_url) {
                         adminDownloads.innerHTML += `
                             <div class="admin-item">
                                 <i class="fas fa-file-pdf" style="color: #f44336; font-size: 24px;"></i>
-                                <span>Prospectus: ${downloads.prospectus.name || 'Available'}</span>
+                                <span>Prospectus: ${downloads.prospectus_name || 'Available'}</span>
                                 <div class="admin-actions">
                                     <button class="delete-btn" onclick="deletePDF('prospectus')"><i class="fas fa-trash"></i></button>
                                 </div>
@@ -3147,8 +3202,9 @@
                     }
                 }
 
-                const popupSnapshot = await db.ref('popup').once('value');
-                const popupData = popupSnapshot.val();
+                // Load popup data into admin form
+                const popupResult = await queryNeon('SELECT title, subtitle, footer, cards FROM popup WHERE id = 1');
+                const popupData = popupResult?.rows[0];
                 if (popupData) {
                     document.getElementById('popupTitleInput').value = popupData.title || '🎓 Welcome to Daffodils High School';
                     document.getElementById('popupSubtitleInput').value = popupData.subtitle || 'Discover what\'s new and happening at our school';
@@ -3173,11 +3229,7 @@
             if (!isLoggedIn) return;
             const text = prompt('Enter notice text:');
             if (text) {
-                const newNoticeRef = db.ref('notices').push();
-                await newNoticeRef.set({ 
-                    text, 
-                    timestamp: firebase.database.ServerValue.TIMESTAMP 
-                });
+                await queryNeon('INSERT INTO notices (text) VALUES ($1)', [text]);
                 loadAll();
                 loadAdminPanel();
                 showToast('Notice added successfully!');
@@ -3188,7 +3240,7 @@
             if (!isLoggedIn) return;
             const newText = prompt('Enter new notice text:');
             if (newText) {
-                await db.ref('notices/' + id).update({ text: newText, timestamp: firebase.database.ServerValue.TIMESTAMP });
+                await queryNeon('UPDATE notices SET text = $1 WHERE id = $2', [newText, id]);
                 loadAll();
                 loadAdminPanel();
                 showToast('Notice updated successfully!');
@@ -3198,7 +3250,7 @@
         async function deleteNotice(id) {
             if (!isLoggedIn) return;
             if (confirm('Delete this notice?')) {
-                await db.ref('notices/' + id).remove();
+                await queryNeon('DELETE FROM notices WHERE id = $1', [id]);
                 loadAll();
                 loadAdminPanel();
                 showToast('Notice deleted successfully!');
@@ -3208,7 +3260,7 @@
         // Banner upload
         document.getElementById('bannerInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            const base64Image = await uploadImage(this.files[0], 'banner', 'banner', false);
+            const base64Image = await uploadImage(this.files[0], 'banner');
             if (base64Image) {
                 document.getElementById('bannerPreview').src = base64Image;
                 document.getElementById('home').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${base64Image}')`;
@@ -3219,7 +3271,7 @@
         // School images uploads
         document.getElementById('schoolInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            const base64Image = await uploadImage(this.files[0], 'school_images/schoolImage', 'school', false);
+            const base64Image = await uploadImage(this.files[0], 'school_images', 'school_image');
             if (base64Image) {
                 document.getElementById('schoolPreview').src = base64Image;
                 document.getElementById('schoolImage').src = base64Image;
@@ -3229,7 +3281,7 @@
 
         document.getElementById('principalInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            const base64Image = await uploadImage(this.files[0], 'school_images/principalImage', 'principal', false);
+            const base64Image = await uploadImage(this.files[0], 'school_images', 'principal_image');
             if (base64Image) {
                 document.getElementById('principalPreview').src = base64Image;
                 document.getElementById('principalImage').src = base64Image;
@@ -3239,7 +3291,7 @@
 
         document.getElementById('contactInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            const base64Image = await uploadImage(this.files[0], 'school_images/contactImage', 'contact', false);
+            const base64Image = await uploadImage(this.files[0], 'school_images', 'contact_image');
             if (base64Image) {
                 document.getElementById('contactPreview').src = base64Image;
                 document.getElementById('contactImage').src = base64Image;
@@ -3255,7 +3307,7 @@
             
             for (let i = 0; i < this.files.length; i++) {
                 showToast(`Uploading image ${i + 1} of ${this.files.length}...`, 'info');
-                await uploadImage(this.files[i], 'gallery', 'gallery', true);
+                await uploadImage(this.files[i], 'gallery');
             }
             
             await loadAll();
@@ -3267,7 +3319,7 @@
         async function deleteGallery(id) {
             if (!isLoggedIn) return;
             if (confirm('Delete this image?')) {
-                await db.ref('gallery/' + id).remove();
+                await queryNeon('DELETE FROM gallery WHERE id = $1', [id]);
                 loadAll();
                 loadAdminPanel();
                 showToast('Image deleted!');
@@ -3280,7 +3332,7 @@
             const title = prompt('Enter facility name:');
             const desc = prompt('Enter description:');
             if (title && desc) {
-                await uploadImage(this.files[0], 'facilities', 'facilities', true, { title, description: desc });
+                await uploadImage(this.files[0], 'facilities', null, 1, { title, description: desc });
                 await loadAll();
                 await loadAdminPanel();
             }
@@ -3290,7 +3342,7 @@
         async function deleteFacility(id) {
             if (!isLoggedIn) return;
             if (confirm('Delete this facility?')) {
-                await db.ref('facilities/' + id).remove();
+                await queryNeon('DELETE FROM facilities WHERE id = $1', [id]);
                 loadAll();
                 loadAdminPanel();
                 showToast('Facility deleted!');
@@ -3303,7 +3355,7 @@
             const title = prompt('Enter achievement title:');
             const desc = prompt('Enter description:');
             if (title && desc) {
-                await uploadImage(this.files[0], 'achievements', 'achievements', true, { title, description: desc });
+                await uploadImage(this.files[0], 'achievements', null, 1, { title, description: desc });
                 await loadAll();
                 await loadAdminPanel();
             }
@@ -3313,7 +3365,7 @@
         async function deleteAchievement(id) {
             if (!isLoggedIn) return;
             if (confirm('Delete this achievement?')) {
-                await db.ref('achievements/' + id).remove();
+                await queryNeon('DELETE FROM achievements WHERE id = $1', [id]);
                 loadAll();
                 loadAdminPanel();
                 showToast('Achievement deleted!');
@@ -3336,11 +3388,10 @@
                 const reader = new FileReader();
                 reader.readAsDataURL(this.files[0]);
                 reader.onload = async () => {
-                    await db.ref('downloads/admission').set({ 
-                        url: reader.result, 
-                        name: this.files[0].name,
-                        timestamp: firebase.database.ServerValue.TIMESTAMP
-                    });
+                    await queryNeon(
+                        'UPDATE downloads SET admission_url = $1, admission_name = $2, updated_at = CURRENT_TIMESTAMP WHERE id = 1',
+                        [reader.result, this.files[0].name]
+                    );
                     
                     await loadAdminPanel();
                     showToast('Admission form uploaded!');
@@ -3367,11 +3418,10 @@
                 const reader = new FileReader();
                 reader.readAsDataURL(this.files[0]);
                 reader.onload = async () => {
-                    await db.ref('downloads/prospectus').set({ 
-                        url: reader.result, 
-                        name: this.files[0].name,
-                        timestamp: firebase.database.ServerValue.TIMESTAMP
-                    });
+                    await queryNeon(
+                        'UPDATE downloads SET prospectus_url = $1, prospectus_name = $2, updated_at = CURRENT_TIMESTAMP WHERE id = 1',
+                        [reader.result, this.files[0].name]
+                    );
                     
                     await loadAdminPanel();
                     showToast('Prospectus uploaded!');
@@ -3386,7 +3436,11 @@
         async function deletePDF(type) {
             if (!isLoggedIn) return;
             if (confirm(`Delete this ${type} form?`)) {
-                await db.ref(`downloads/${type}`).remove();
+                if (type === 'admission') {
+                    await queryNeon('UPDATE downloads SET admission_url = NULL, admission_name = NULL WHERE id = 1');
+                } else {
+                    await queryNeon('UPDATE downloads SET prospectus_url = NULL, prospectus_name = NULL WHERE id = 1');
+                }
                 await loadAdminPanel();
                 showToast(`${type} form deleted!`);
             }
@@ -3394,12 +3448,20 @@
 
         async function downloadForm(type) {
             try {
-                const snapshot = await db.ref('downloads/' + type).once('value');
-                const data = snapshot.val();
-                if (data && data.url) {
+                const result = await queryNeon(
+                    type === 'admission' 
+                        ? 'SELECT admission_url, admission_name FROM downloads WHERE id = 1'
+                        : 'SELECT prospectus_url, prospectus_name FROM downloads WHERE id = 1'
+                );
+                const data = result?.rows[0];
+                
+                if (data && (data.admission_url || data.prospectus_url)) {
+                    const url = type === 'admission' ? data.admission_url : data.prospectus_url;
+                    const name = type === 'admission' ? data.admission_name : data.prospectus_name;
+                    
                     const link = document.createElement('a');
-                    link.href = data.url;
-                    link.download = data.name || `${type}_form.pdf`;
+                    link.href = url;
+                    link.download = name || `${type}_form.pdf`;
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
@@ -3454,7 +3516,7 @@
         window.addPopupCard = addPopupCard;
         window.deletePopupCard = deletePopupCard;
         window.previewPopup = previewPopup;
-        window.savePopupToFirebase = savePopupToFirebase;
+        window.savePopupToNeon = savePopupToNeon;
         window.resetPopupToDefault = resetPopupToDefault;
         window.renderAdminPopupCards = renderAdminPopupCards;
 
