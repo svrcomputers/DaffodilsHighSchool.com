@@ -71,8 +71,6 @@
         html {
             scroll-behavior: smooth;
             scroll-padding-top: 80px;
-            width: 100%;
-            overflow-x: hidden;
         }
 
         body {
@@ -83,20 +81,6 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            width: 100%;
-            position: relative;
-        }
-
-        /* Image styles - CRITICAL FIX */
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
         }
 
         /* Image placeholder styles */
@@ -434,7 +418,6 @@
             z-index: 999;
             backdrop-filter: blur(10px);
             background: rgba(255,255,255,0.95);
-            width: 100%;
         }
 
         .logo {
@@ -512,7 +495,6 @@
             color: var(--white);
             position: relative;
             overflow: hidden;
-            width: 100%;
         }
 
         .hero::before {
@@ -536,9 +518,6 @@
             position: relative;
             z-index: 1;
             animation: float 6s ease-in-out infinite;
-            width: 100%;
-            max-width: 1200px;
-            padding: 0 20px;
         }
 
         @keyframes float {
@@ -594,8 +573,6 @@
         /* Sections */
         section {
             padding: 80px 5%;
-            width: 100%;
-            overflow: hidden;
         }
 
         .section-title {
@@ -635,7 +612,6 @@
             grid-template-columns: 1fr 1fr;
             gap: 50px;
             align-items: center;
-            width: 100%;
         }
 
         .about-image {
@@ -684,7 +660,6 @@
             margin: 50px 0;
             box-shadow: var(--shadow);
             transition: all 0.3s;
-            width: 100%;
         }
 
         .principal-card:hover {
@@ -711,7 +686,6 @@
             grid-template-columns: 1fr 1fr;
             gap: 40px;
             margin: 50px 0;
-            width: 100%;
         }
 
         .vision, .mission {
@@ -765,7 +739,6 @@
             padding: 50px;
             border-radius: 20px;
             margin-top: 50px;
-            width: 100%;
         }
 
         .why-grid {
@@ -773,7 +746,6 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 30px;
             margin-top: 30px;
-            width: 100%;
         }
 
         .why-item {
@@ -806,7 +778,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            width: 100%;
         }
 
         .gallery-item {
@@ -825,6 +796,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
+            display: block;
         }
 
         .gallery-item:hover img {
@@ -852,7 +824,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            width: 100%;
         }
 
         .facility-card {
@@ -862,10 +833,6 @@
             box-shadow: var(--shadow);
             transition: all 0.3s;
             position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
         }
 
         .facility-card:hover {
@@ -879,6 +846,7 @@
             object-fit: cover;
             transition: transform 0.5s;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: block;
         }
 
         .facility-card:hover img {
@@ -920,7 +888,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            width: 100%;
         }
 
         .academic-card {
@@ -952,6 +919,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
+            display: block;
         }
 
         .academic-card:hover .academic-img img {
@@ -990,7 +958,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            width: 100%;
         }
 
         .achievement-item {
@@ -1008,6 +975,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
+            display: block;
         }
 
         .achievement-item:hover img {
@@ -1039,7 +1007,6 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
-            width: 100%;
         }
 
         .contact-info {
@@ -1048,7 +1015,6 @@
             border-radius: 20px;
             box-shadow: var(--shadow);
             animation: slideInLeft 1s ease;
-            width: 100%;
         }
 
         @keyframes slideInLeft {
@@ -1091,6 +1057,7 @@
             height: 100%;
             object-fit: cover;
             transition: all 0.3s;
+            display: block;
         }
 
         .contact-image:hover img {
@@ -1165,7 +1132,6 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
-            width: 100%;
         }
 
         .footer-section h3 {
@@ -1355,7 +1321,6 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 25px;
             margin: 20px 0;
-            width: 100%;
         }
 
         .entry-popup-item {
@@ -1382,6 +1347,7 @@
             margin-bottom: 15px;
             transition: transform 0.5s;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: block;
         }
 
         .entry-popup-item:hover img {
@@ -1500,33 +1466,32 @@
             display: inline-block;
         }
 
-        /* Mobile Responsive Fixes - CRITICAL */
+        /* ========== MOBILE FIXES - ONLY UPDATES ========== */
         @media screen and (max-width: 768px) {
-            /* Fix all grid layouts for mobile */
+            /* Fix grid layouts for mobile */
             .gallery-grid,
             .facilities-grid,
-            .achievements-grid,
-            .academics-grid {
-                grid-template-columns: 1fr !important;
+            .achievements-grid {
+                grid-template-columns: 1fr;
                 gap: 20px;
                 width: 100%;
             }
             
             .gallery-item,
             .facility-card,
-            .achievement-item,
-            .academic-card {
+            .achievement-item {
                 width: 100%;
-                margin: 0 auto;
+                height: auto;
+                min-height: 250px;
             }
             
             .gallery-item img,
             .facility-card img,
-            .achievement-item img,
-            .academic-img img {
+            .achievement-item img {
                 width: 100%;
                 height: 220px;
                 object-fit: cover;
+                display: block !important;
             }
             
             /* Fix about section */
@@ -1538,9 +1503,7 @@
                 gap: 30px;
             }
             
-            .about-image,
-            .principal-card img {
-                width: 100%;
+            .about-image {
                 height: 300px;
             }
             
@@ -1555,11 +1518,6 @@
             }
             
             /* Fix contact section */
-            .contact-info,
-            .map {
-                width: 100%;
-            }
-            
             .map {
                 min-height: 300px;
             }
@@ -1611,8 +1569,7 @@
         @media screen and (max-width: 480px) {
             .gallery-item img,
             .facility-card img,
-            .achievement-item img,
-            .academic-img img {
+            .achievement-item img {
                 height: 200px;
             }
             
@@ -1671,44 +1628,24 @@
                 color: black;
             }
         }
+
+        img {
+            display: block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
         
         body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            width: 100%;
-            overflow-x: hidden;
         }
         
         main {
             flex: 1 0 auto;
-            width: 100%;
         }
         
         .footer {
             flex-shrink: 0;
-            width: 100%;
-        }
-        
-        /* Ensure all grid containers are responsive */
-        .gallery-grid,
-        .facilities-grid,
-        .achievements-grid,
-        .academics-grid,
-        .why-grid,
-        .footer-grid,
-        .admin-grid {
-            width: 100%;
-            max-width: 100%;
-        }
-        
-        /* Fix any potential overflow */
-        .hero,
-        .navbar,
-        .notice-bar,
-        section,
-        footer {
-            overflow-x: hidden;
         }
     </style>
 </head>
