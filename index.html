@@ -1680,6 +1680,82 @@
             "longitude": "79.544370"
         }
     }
+/* Universal Responsive Fix */
+
+*{
+  box-sizing: border-box;
+}
+
+body{
+  margin:0;
+  padding:0;
+  overflow-x:hidden;
+}
+
+img{
+  max-width:100%;
+  height:auto;
+  display:block;
+}
+
+.container{
+  width:100%;
+  max-width:1200px;
+  margin:auto;
+  padding:10px;
+}
+
+/* Navbar Responsive */
+.menu-toggle{
+  display:none;
+  font-size:28px;
+  cursor:pointer;
+}
+
+.nav-links{
+  display:flex;
+  gap:20px;
+}
+
+/* Mobile Styles */
+@media (max-width:768px){
+
+  .menu-toggle{
+    display:block;
+  }
+
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    width:100%;
+    background:#fff;
+    position:absolute;
+    top:60px;
+    left:0;
+    padding:10px;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+
+  .container{
+    padding:10px;
+  }
+
+  h1{
+    font-size:22px;
+  }
+
+  h2{
+    font-size:20px;
+  }
+
+  p{
+    font-size:14px;
+  }
+
+}
     </script>
 
     <!-- Entry Popup Modal -->
