@@ -2032,7 +2032,7 @@
                 <button class="add-btn" onclick="document.getElementById('bannerInput').click()">Change Banner</button>
                 <div class="upload-progress" id="bannerProgress"><div class="upload-progress-bar" id="bannerProgressBar"></div></div>
                 <div class="upload-progress-text" id="bannerProgressText"></div>
-                <div class="upload-mode" id="bannerMode"></div>
+                <div class="upload-mode" id="bannerMode">Using Base64 mode (no CORS)</div>
             </div>
 
             <!-- School Image -->
@@ -2043,7 +2043,7 @@
                 <button class="add-btn" onclick="document.getElementById('schoolInput').click()">Change Image</button>
                 <div class="upload-progress" id="schoolProgress"><div class="upload-progress-bar" id="schoolProgressBar"></div></div>
                 <div class="upload-progress-text" id="schoolProgressText"></div>
-                <div class="upload-mode" id="schoolMode"></div>
+                <div class="upload-mode" id="schoolMode">Using Base64 mode (no CORS)</div>
             </div>
 
             <!-- Principal Image -->
@@ -2054,7 +2054,7 @@
                 <button class="add-btn" onclick="document.getElementById('principalInput').click()">Change Image</button>
                 <div class="upload-progress" id="principalProgress"><div class="upload-progress-bar" id="principalProgressBar"></div></div>
                 <div class="upload-progress-text" id="principalProgressText"></div>
-                <div class="upload-mode" id="principalMode"></div>
+                <div class="upload-mode" id="principalMode">Using Base64 mode (no CORS)</div>
             </div>
 
             <!-- Gallery -->
@@ -2065,7 +2065,7 @@
                 <button class="add-btn" onclick="document.getElementById('galleryInput').click()">Add Image</button>
                 <div class="upload-progress" id="galleryProgress"><div class="upload-progress-bar" id="galleryProgressBar"></div></div>
                 <div class="upload-progress-text" id="galleryProgressText"></div>
-                <div class="upload-mode" id="galleryMode"></div>
+                <div class="upload-mode" id="galleryMode">Using Base64 mode (no CORS)</div>
             </div>
 
             <!-- Facilities -->
@@ -2076,7 +2076,7 @@
                 <button class="add-btn" onclick="document.getElementById('facilityInput').click()">Add Facility</button>
                 <div class="upload-progress" id="facilityProgress"><div class="upload-progress-bar" id="facilityProgressBar"></div></div>
                 <div class="upload-progress-text" id="facilityProgressText"></div>
-                <div class="upload-mode" id="facilityMode"></div>
+                <div class="upload-mode" id="facilityMode">Using Base64 mode (no CORS)</div>
             </div>
 
             <!-- Achievements -->
@@ -2087,7 +2087,7 @@
                 <button class="add-btn" onclick="document.getElementById('achievementInput').click()">Add Achievement</button>
                 <div class="upload-progress" id="achievementProgress"><div class="upload-progress-bar" id="achievementProgressBar"></div></div>
                 <div class="upload-progress-text" id="achievementProgressText"></div>
-                <div class="upload-mode" id="achievementMode"></div>
+                <div class="upload-mode" id="achievementMode">Using Base64 mode (no CORS)</div>
             </div>
 
             <!-- Contact Image -->
@@ -2098,10 +2098,10 @@
                 <button class="add-btn" onclick="document.getElementById('contactInput').click()">Change Image</button>
                 <div class="upload-progress" id="contactProgress"><div class="upload-progress-bar" id="contactProgressBar"></div></div>
                 <div class="upload-progress-text" id="contactProgressText"></div>
-                <div class="upload-mode" id="contactMode"></div>
+                <div class="upload-mode" id="contactMode">Using Base64 mode (no CORS)</div>
             </div>
 
-            <!-- Downloads - FIXED: Added delete functionality and better management -->
+            <!-- Downloads -->
             <div class="admin-card">
                 <h3><i class="fas fa-download"></i> Download Forms (PDF)</h3>
                 <div id="adminDownloads"></div>
@@ -2112,11 +2112,11 @@
                 <button class="add-btn" onclick="document.getElementById('admissionPdfInput').click()" style="margin-bottom: 10px;">📄 Upload Admission Form PDF</button>
                 <button class="add-btn" onclick="document.getElementById('prospectusPdfInput').click()">📚 Upload Prospectus PDF</button>
                 <div style="margin-top: 15px; color: #94a3b8; font-size: 0.9rem;">
-                    <i class="fas fa-info-circle"></i> Supported format: PDF only
+                    <i class="fas fa-info-circle"></i> Supported format: PDF only (Base64 mode)
                 </div>
             </div>
 
-            <!-- Entry Popup Management - FIXED: Dynamic card management -->
+            <!-- Entry Popup Management -->
             <div class="admin-card">
                 <h3><i class="fas fa-window-maximize"></i> Entry Popup Manager</h3>
                 
@@ -2432,9 +2432,6 @@
 
         // Admin auth state
         let isLoggedIn = false;
-        
-        // Upload mode detection (true = use Storage, false = use Base64)
-        let useStorage = true;
 
         // Initialize AOS
         AOS.init({
@@ -2445,12 +2442,6 @@
                 return window.innerWidth < 768;
             }
         });
-
-        // Check if running locally (file protocol)
-        if (window.location.protocol === 'file:') {
-            useStorage = false;
-            console.log('Running locally - using Base64 upload mode');
-        }
 
         // Mobile Menu
         document.querySelector('.hamburger').addEventListener('click', function() {
@@ -2500,10 +2491,8 @@
             const maxRetries = 3;
             const src = originalSrc || imgElement.src;
             
-            // CRITICAL FIX: Check if image actually loaded successfully
+            // Check if image actually loaded successfully
             if (imgElement.complete && imgElement.naturalHeight > 0) {
-                // Image loaded successfully, remove any error handlers and return
-                console.log('Image loaded successfully, ignoring error handler');
                 return;
             }
             
@@ -2516,7 +2505,6 @@
             
             // Check if we're offline
             if (!navigator.onLine) {
-                console.log('Offline, showing fallback');
                 showFallback(imgElement);
                 return;
             }
@@ -2524,13 +2512,11 @@
             if (retryCount < maxRetries) {
                 console.log(`Retrying image (attempt ${retryCount + 1}/${maxRetries})`);
                 
-                // Add retry button
                 const parent = imgElement.parentNode;
                 if (!parent) return;
                 
                 parent.style.position = 'relative';
                 
-                // Remove any existing retry buttons
                 const existingBtn = parent.querySelector('.retry-btn');
                 if (existingBtn) existingBtn.remove();
                 
@@ -2542,12 +2528,10 @@
                     e.preventDefault();
                     retryBtn.remove();
                     imgElement.style.display = 'block';
-                    // Add cache busting parameter
                     const baseSrc = src.split('?')[0];
                     const newSrc = baseSrc + '?retry=' + Date.now() + '&attempt=' + (retryCount + 1);
                     imgElement.src = newSrc;
                     
-                    // Clear the old error handler and set a new one
                     imgElement.onerror = null;
                     imgElement.onerror = function() { 
                         handleImageError(imgElement, retryCount + 1, baseSrc); 
@@ -2563,7 +2547,7 @@
         }
         
         function showFallback(imgElement) {
-            console.log('Max retries reached for image, showing fallback');
+            console.log('Showing fallback for image');
             imgElement.style.display = 'none';
             const parent = imgElement.parentNode;
             if (parent) {
@@ -2626,12 +2610,14 @@
                             console.log(`Original size: ${(file.size / 1024).toFixed(2)}KB`);
                             console.log(`Compressed size: ${(blob.size / 1024).toFixed(2)}KB`);
                             
-                            // Also get base64 for fallback mode
+                            // Get base64 for storage
                             const reader2 = new FileReader();
                             reader2.readAsDataURL(blob);
                             reader2.onload = () => {
-                                compressedFile.base64 = reader2.result;
-                                resolve(compressedFile);
+                                resolve({
+                                    file: compressedFile,
+                                    base64: reader2.result
+                                });
                             };
                             reader2.onerror = () => reject(new Error('Failed to read compressed image'));
                         }, 'image/jpeg', quality);
@@ -2642,72 +2628,6 @@
             });
         }
 
-        // ==================== UPLOAD TO STORAGE WITH PROGRESS ====================
-        async function uploadToStorage(file, folder) {
-            // Create safe filename
-            const timestamp = Date.now();
-            const randomString = Math.random().toString(36).substring(2, 8);
-            const extension = 'jpg';
-            const fileName = `${folder}/${timestamp}_${randomString}.${extension}`;
-            
-            // Create storage reference
-            const storageRef = storage.ref().child(fileName);
-            
-            // Create upload task
-            const uploadTask = storageRef.put(file, {
-                contentType: 'image/jpeg',
-                cacheControl: 'public, max-age=31536000'
-            });
-            
-            return new Promise((resolve, reject) => {
-                uploadTask.on('state_changed',
-                    (snapshot) => {
-                        // Progress tracking
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        updateUploadProgress(folder, progress);
-                    },
-                    (error) => {
-                        console.error('Upload error:', error);
-                        
-                        // If CORS error, switch to Base64 mode
-                        if (error.code === 'storage/unauthorized' || error.message.includes('CORS')) {
-                            useStorage = false;
-                            updateUploadModeDisplay(folder, 'Switched to Base64 mode');
-                            reject(new Error('CORS error - use Base64 mode'));
-                        } else {
-                            reject(error);
-                        }
-                    },
-                    async () => {
-                        try {
-                            const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
-                            hideUploadProgress(folder);
-                            resolve(downloadURL);
-                        } catch (error) {
-                            reject(error);
-                        }
-                    }
-                );
-            });
-        }
-
-        // ==================== BASE64 UPLOAD TO DATABASE ====================
-        async function uploadBase64ToDatabase(base64Data, dbPath, folder, extraData = {}) {
-            updateUploadProgress(folder, 50);
-            
-            const data = {
-                imageUrl: base64Data,
-                timestamp: firebase.database.ServerValue.TIMESTAMP,
-                isBase64: true,
-                ...extraData
-            };
-
-            await db.ref(dbPath).set(data);
-            updateUploadProgress(folder, 100);
-            
-            return base64Data;
-        }
-
         // ==================== PROGRESS BAR FUNCTIONS ====================
         function showUploadProgress(folder) {
             const progressDiv = document.getElementById(`${folder}Progress`);
@@ -2716,36 +2636,28 @@
             
             if (progressDiv) progressDiv.style.display = 'block';
             if (progressBar) progressBar.style.width = '0%';
-            if (progressText) progressText.textContent = 'Processing...';
+            if (progressText) progressText.textContent = 'Compressing...';
         }
 
-        function updateUploadProgress(folder, percent) {
+        function updateUploadProgress(folder, percent, message) {
             const progressBar = document.getElementById(`${folder}ProgressBar`);
             const progressText = document.getElementById(`${folder}ProgressText`);
             
             if (progressBar) progressBar.style.width = `${percent}%`;
-            if (progressText) progressText.textContent = `Uploading: ${Math.round(percent)}%`;
+            if (progressText) progressText.textContent = message || `Uploading: ${Math.round(percent)}%`;
         }
 
         function hideUploadProgress(folder) {
             const progressDiv = document.getElementById(`${folder}Progress`);
             const progressText = document.getElementById(`${folder}ProgressText`);
             
-            if (progressText) progressText.textContent = 'Upload complete!';
+            if (progressText) progressText.textContent = 'Complete!';
             
             if (progressDiv) {
                 setTimeout(() => {
                     progressDiv.style.display = 'none';
                     if (progressText) progressText.textContent = '';
                 }, 2000);
-            }
-        }
-
-        function updateUploadModeDisplay(folder, message) {
-            const modeDiv = document.getElementById(`${folder}Mode`);
-            if (modeDiv) {
-                modeDiv.textContent = message;
-                modeDiv.style.color = '#f59e0b';
             }
         }
 
@@ -2757,53 +2669,22 @@
             }
 
             try {
-                // Validate file
-                if (!file || !file.type.startsWith('image/')) {
-                    showToast('Please select a valid image file', 'error');
-                    return false;
-                }
-
-                showToast('Compressing image...', 'info');
+                showToast('Processing image...', 'info');
                 showUploadProgress(folder);
-                updateUploadModeDisplay(folder, useStorage ? 'Using Firebase Storage' : 'Using Base64 mode');
+                updateUploadProgress(folder, 10, 'Compressing...');
 
                 // Compress image
-                const compressedFile = await compressImage(file);
-                
-                let imageUrl;
-                
-                if (useStorage) {
-                    // Try Storage first
-                    try {
-                        showToast('Uploading to storage...', 'info');
-                        imageUrl = await uploadToStorage(compressedFile, folder);
-                    } catch (storageError) {
-                        console.log('Storage failed, falling back to Base64', storageError);
-                        useStorage = false;
-                        updateUploadModeDisplay(folder, 'Falling back to Base64');
-                        imageUrl = compressedFile.base64;
-                    }
-                } else {
-                    // Use Base64 directly
-                    imageUrl = compressedFile.base64;
-                }
-
-                if (!imageUrl) {
-                    throw new Error('Failed to get image URL');
-                }
+                const result = await compressImage(file);
+                updateUploadProgress(folder, 50, 'Saving to database...');
 
                 // Prepare data for database
                 const data = {
-                    imageUrl: imageUrl,
+                    imageUrl: result.base64,
                     timestamp: firebase.database.ServerValue.TIMESTAMP,
                     fileName: file.name,
+                    storageMode: 'base64',
                     ...extraData
                 };
-
-                // Add mode indicator
-                if (!useStorage) {
-                    data.storageMode = 'base64';
-                }
 
                 // Save to Realtime Database
                 if (isGallery) {
@@ -2813,10 +2694,11 @@
                     await db.ref(dbPath).set(data);
                 }
 
+                updateUploadProgress(folder, 100, 'Complete!');
                 showToast('Image uploaded successfully!');
-                return imageUrl;
+                return result.base64;
             } catch (error) {
-                console.error('Upload pipeline error:', error);
+                console.error('Upload error:', error);
                 showToast('Upload failed: ' + error.message, 'error');
                 hideUploadProgress(folder);
                 return false;
@@ -2825,7 +2707,7 @@
 
         // ==================== TOAST FUNCTION ====================
         function showToast(msg, type = 'success') {
-            let toast = document.getElementById('toast');
+            const toast = document.getElementById('toast');
             if (toast) {
                 toast.style.display = 'block';
                 toast.style.background = type === 'success' ? 'var(--primary)' : 
@@ -2844,7 +2726,7 @@
                 // Load Notices
                 const noticesSnapshot = await db.ref('notices').once('value');
                 const notices = noticesSnapshot.val();
-                let noticeBar = document.getElementById('noticeBar');
+                const noticeBar = document.getElementById('noticeBar');
                 if (noticeBar) {
                     noticeBar.innerHTML = '';
                     if (notices) {
@@ -2873,38 +2755,24 @@
                 const imagesSnapshot = await db.ref('school_images').once('value');
                 const images = imagesSnapshot.val();
                 if (images) {
-                    // School Image
                     if (images.schoolImage) {
-                        const schoolImg = document.getElementById('schoolImage');
-                        schoolImg.src = images.schoolImage;
-                        schoolImg.onerror = null;
-                        const schoolPreview = document.getElementById('schoolPreview');
-                        if (schoolPreview) schoolPreview.src = images.schoolImage;
+                        document.getElementById('schoolImage').src = images.schoolImage;
+                        document.getElementById('schoolPreview').src = images.schoolImage;
                     }
-                    
-                    // Principal Image
                     if (images.principalImage) {
-                        const principalImg = document.getElementById('principalImage');
-                        principalImg.src = images.principalImage;
-                        principalImg.onerror = null;
-                        const principalPreview = document.getElementById('principalPreview');
-                        if (principalPreview) principalPreview.src = images.principalImage;
+                        document.getElementById('principalImage').src = images.principalImage;
+                        document.getElementById('principalPreview').src = images.principalImage;
                     }
-                    
-                    // Contact Image
                     if (images.contactImage) {
-                        const contactImg = document.getElementById('contactImage');
-                        contactImg.src = images.contactImage;
-                        contactImg.onerror = null;
-                        const contactPreview = document.getElementById('contactPreview');
-                        if (contactPreview) contactPreview.src = images.contactImage;
+                        document.getElementById('contactImage').src = images.contactImage;
+                        document.getElementById('contactPreview').src = images.contactImage;
                     }
                 }
 
                 // Load Gallery
                 const gallerySnapshot = await db.ref('gallery').once('value');
                 const gallery = gallerySnapshot.val();
-                let galleryGrid = document.getElementById('galleryGrid');
+                const galleryGrid = document.getElementById('galleryGrid');
                 if (galleryGrid) {
                     galleryGrid.innerHTML = '';
                     if (gallery) {
@@ -2923,7 +2791,6 @@
                             const img = document.createElement('img');
                             img.src = item.imageUrl;
                             img.alt = 'Gallery Image';
-                            img.setAttribute('data-src', item.imageUrl);
                             img.loading = 'lazy';
                             img.onerror = function() { handleImageError(this, 0, item.imageUrl); };
                             
@@ -2936,7 +2803,7 @@
                 // Load Facilities
                 const facilitiesSnapshot = await db.ref('facilities').once('value');
                 const facilities = facilitiesSnapshot.val();
-                let facilitiesGrid = document.getElementById('facilitiesGrid');
+                const facilitiesGrid = document.getElementById('facilitiesGrid');
                 if (facilitiesGrid) {
                     facilitiesGrid.innerHTML = '';
                     if (facilities) {
@@ -2956,7 +2823,6 @@
                             const img = document.createElement('img');
                             img.src = item.imageUrl;
                             img.alt = item.title || 'Facility';
-                            img.setAttribute('data-src', item.imageUrl);
                             img.loading = 'lazy';
                             img.onerror = function() { handleImageError(this, 0, item.imageUrl); };
                             
@@ -2978,7 +2844,7 @@
                 // Load Achievements
                 const achievementsSnapshot = await db.ref('achievements').once('value');
                 const achievements = achievementsSnapshot.val();
-                let achievementsGrid = document.getElementById('achievementsGrid');
+                const achievementsGrid = document.getElementById('achievementsGrid');
                 if (achievementsGrid) {
                     achievementsGrid.innerHTML = '';
                     if (achievements) {
@@ -2997,7 +2863,6 @@
                             const img = document.createElement('img');
                             img.src = item.imageUrl;
                             img.alt = item.title || 'Achievement';
-                            img.setAttribute('data-src', item.imageUrl);
                             img.loading = 'lazy';
                             img.onerror = function() { handleImageError(this, 0, item.imageUrl); };
                             
@@ -3005,8 +2870,7 @@
                             
                             const contentDiv = document.createElement('div');
                             contentDiv.className = 'achievement-content';
-                            
-                            const h4 = document.createElement('h4');
+                                            const h4 = document.createElement('h4');
                             h4.textContent = item.title || 'Achievement';
                             contentDiv.appendChild(h4);
                             
@@ -3052,7 +2916,7 @@
                     popupGrid.innerHTML = '';
                     popupCards = popupData.cards;
                     
-                    popupData.cards.forEach((card, index) => {
+                    popupData.cards.forEach((card) => {
                         if (!card || !card.imageUrl) return;
                         
                         const cardDiv = document.createElement('div');
@@ -3066,7 +2930,6 @@
                         const img = document.createElement('img');
                         img.src = card.imageUrl;
                         img.alt = 'Popup Image';
-                        img.setAttribute('data-src', card.imageUrl);
                         img.loading = 'lazy';
                         img.onerror = function() { handleImageError(this, 0, card.imageUrl); };
                         cardDiv.appendChild(img);
@@ -3117,7 +2980,7 @@
                     document.getElementById('popupFooter').textContent = '✨ Don\'t miss this opportunity to be part of excellence ✨';
                     
                     popupGrid.innerHTML = '';
-                    popupCards.forEach((card, index) => {
+                    popupCards.forEach((card) => {
                         const cardDiv = document.createElement('div');
                         cardDiv.className = 'entry-popup-item';
                         cardDiv.onclick = function() { 
@@ -3129,7 +2992,6 @@
                         const img = document.createElement('img');
                         img.src = card.imageUrl;
                         img.alt = 'Popup Image';
-                        img.setAttribute('data-src', card.imageUrl);
                         img.loading = 'lazy';
                         img.onerror = function() { handleImageError(this, 0, card.imageUrl); };
                         cardDiv.appendChild(img);
@@ -3321,7 +3183,7 @@
             const popupGrid = document.getElementById('popupGrid');
             popupGrid.innerHTML = '';
             
-            popupCards.forEach((card, index) => {
+            popupCards.forEach((card) => {
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'entry-popup-item';
                 cardDiv.onclick = function() { 
@@ -3423,11 +3285,11 @@
         }
 
         async function login() {
-            let email = document.getElementById('email').value;
-            let password = document.getElementById('password').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
             try {
-                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                await auth.signInWithEmailAndPassword(email, password);
                 isLoggedIn = true;
                 closeModal();
                 document.getElementById('adminPanel').classList.add('active');
@@ -3448,11 +3310,7 @@
 
         // Check auth state
         auth.onAuthStateChanged((user) => {
-            if (user) {
-                isLoggedIn = true;
-            } else {
-                isLoggedIn = false;
-            }
+            isLoggedIn = !!user;
         });
 
         // ==================== ADMIN PANEL LOAD ====================
@@ -3463,7 +3321,7 @@
                 // Load Notices for admin
                 const noticesSnapshot = await db.ref('notices').once('value');
                 const notices = noticesSnapshot.val();
-                let adminNotices = document.getElementById('adminNotices');
+                const adminNotices = document.getElementById('adminNotices');
                 if (adminNotices) {
                     adminNotices.innerHTML = '';
                     if (notices) {
@@ -3489,7 +3347,7 @@
                 // Load Gallery for admin
                 const gallerySnapshot = await db.ref('gallery').once('value');
                 const gallery = gallerySnapshot.val();
-                let adminGallery = document.getElementById('adminGallery');
+                const adminGallery = document.getElementById('adminGallery');
                 if (adminGallery) {
                     adminGallery.innerHTML = '';
                     if (gallery) {
@@ -3516,7 +3374,7 @@
                 // Load Facilities for admin
                 const facilitiesSnapshot = await db.ref('facilities').once('value');
                 const facilities = facilitiesSnapshot.val();
-                let adminFacilities = document.getElementById('adminFacilities');
+                const adminFacilities = document.getElementById('adminFacilities');
                 if (adminFacilities) {
                     adminFacilities.innerHTML = '';
                     if (facilities) {
@@ -3544,7 +3402,7 @@
                 // Load Achievements for admin
                 const achievementsSnapshot = await db.ref('achievements').once('value');
                 const achievements = achievementsSnapshot.val();
-                let adminAchievements = document.getElementById('adminAchievements');
+                const adminAchievements = document.getElementById('adminAchievements');
                 if (adminAchievements) {
                     adminAchievements.innerHTML = '';
                     if (achievements) {
@@ -3569,30 +3427,10 @@
                     }
                 }
 
-                // Load banner preview
-                const bannerSnapshot = await db.ref('banner').once('value');
-                const banner = bannerSnapshot.val();
-                if (banner && banner.imageUrl) {
-                    document.getElementById('bannerPreview').src = banner.imageUrl;
-                }
-
-                // Load school images preview
-                const imagesSnapshot = await db.ref('school_images').once('value');
-                const images = imagesSnapshot.val() || {};
-                if (images.schoolImage) {
-                    document.getElementById('schoolPreview').src = images.schoolImage;
-                }
-                if (images.principalImage) {
-                    document.getElementById('principalPreview').src = images.principalImage;
-                }
-                if (images.contactImage) {
-                    document.getElementById('contactPreview').src = images.contactImage;
-                }
-
                 // Load Downloads for admin
                 const downloadsSnapshot = await db.ref('downloads').once('value');
                 const downloads = downloadsSnapshot.val() || {};
-                let adminDownloads = document.getElementById('adminDownloads');
+                const adminDownloads = document.getElementById('adminDownloads');
                 if (adminDownloads) {
                     adminDownloads.innerHTML = '';
                     
@@ -3659,7 +3497,7 @@
         // Notices
         async function addNotice() {
             if (!isLoggedIn) return;
-            let text = prompt('Enter notice text:');
+            const text = prompt('Enter notice text:');
             if (text) {
                 const newNoticeRef = db.ref('notices').push();
                 await newNoticeRef.set({ 
@@ -3674,7 +3512,7 @@
 
         async function editNotice(id) {
             if (!isLoggedIn) return;
-            let newText = prompt('Enter new notice text:');
+            const newText = prompt('Enter new notice text:');
             if (newText) {
                 await db.ref('notices/' + id).update({ text: newText, timestamp: firebase.database.ServerValue.TIMESTAMP });
                 loadAll();
@@ -3765,14 +3603,12 @@
         // Facilities
         document.getElementById('facilityInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            let title = prompt('Enter facility name:');
-            let desc = prompt('Enter description:');
+            const title = prompt('Enter facility name:');
+            const desc = prompt('Enter description:');
             if (title && desc) {
-                const downloadURL = await processAndUploadImage(this.files[0], 'facilities', 'facilities', true, { title, description: desc });
-                if (downloadURL) {
-                    await loadAll();
-                    await loadAdminPanel();
-                }
+                await processAndUploadImage(this.files[0], 'facilities', 'facilities', true, { title, description: desc });
+                await loadAll();
+                await loadAdminPanel();
             }
             this.value = '';
         };
@@ -3790,14 +3626,12 @@
         // Achievements
         document.getElementById('achievementInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
-            let title = prompt('Enter achievement title:');
-            let desc = prompt('Enter description:');
+            const title = prompt('Enter achievement title:');
+            const desc = prompt('Enter description:');
             if (title && desc) {
-                const downloadURL = await processAndUploadImage(this.files[0], 'achievements', 'achievements', true, { title, description: desc });
-                if (downloadURL) {
-                    await loadAll();
-                    await loadAdminPanel();
-                }
+                await processAndUploadImage(this.files[0], 'achievements', 'achievements', true, { title, description: desc });
+                await loadAll();
+                await loadAdminPanel();
             }
             this.value = '';
         };
@@ -3816,7 +3650,6 @@
         document.getElementById('admissionPdfInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
             
-            // Validate PDF
             if (this.files[0].type !== 'application/pdf') {
                 showToast('Please select a PDF file', 'error');
                 this.value = '';
@@ -3824,44 +3657,21 @@
             }
             
             try {
-                showToast('Uploading PDF...', 'info');
+                showToast('Processing PDF...', 'info');
                 
-                // Upload PDF to Storage
-                const fileName = `pdfs/admission_${Date.now()}.pdf`;
-                const storageRef = storage.ref().child(fileName);
-                
-                const uploadTask = storageRef.put(this.files[0], {
-                    contentType: 'application/pdf',
-                    cacheControl: 'public, max-age=31536000'
-                });
-                
-                uploadTask.on('state_changed',
-                    (snapshot) => {
-                        // Progress
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        console.log('Upload progress:', progress);
-                    },
-                    (error) => {
-                        console.error('Upload error:', error);
-                        showToast('Upload failed: ' + error.message, 'error');
-                    },
-                    async () => {
-                        try {
-                            const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
-                            
-                            await db.ref('downloads/admission').set({ 
-                                url: downloadURL, 
-                                name: this.files[0].name,
-                                timestamp: firebase.database.ServerValue.TIMESTAMP
-                            });
-                            
-                            await loadAdminPanel();
-                            showToast('Admission form uploaded!');
-                        } catch (error) {
-                            showToast('Error saving to database: ' + error.message, 'error');
-                        }
-                    }
-                );
+                const reader = new FileReader();
+                reader.readAsDataURL(this.files[0]);
+                reader.onload = async () => {
+                    await db.ref('downloads/admission').set({ 
+                        url: reader.result, 
+                        name: this.files[0].name,
+                        timestamp: firebase.database.ServerValue.TIMESTAMP,
+                        storageMode: 'base64'
+                    });
+                    
+                    await loadAdminPanel();
+                    showToast('Admission form uploaded!');
+                };
                 
                 this.value = '';
             } catch (error) {
@@ -3872,7 +3682,6 @@
         document.getElementById('prospectusPdfInput').onchange = async function() {
             if (!isLoggedIn || !this.files[0]) return;
             
-            // Validate PDF
             if (this.files[0].type !== 'application/pdf') {
                 showToast('Please select a PDF file', 'error');
                 this.value = '';
@@ -3880,44 +3689,21 @@
             }
             
             try {
-                showToast('Uploading PDF...', 'info');
+                showToast('Processing PDF...', 'info');
                 
-                // Upload PDF to Storage
-                const fileName = `pdfs/prospectus_${Date.now()}.pdf`;
-                const storageRef = storage.ref().child(fileName);
-                
-                const uploadTask = storageRef.put(this.files[0], {
-                    contentType: 'application/pdf',
-                    cacheControl: 'public, max-age=31536000'
-                });
-                
-                uploadTask.on('state_changed',
-                    (snapshot) => {
-                        // Progress
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        console.log('Upload progress:', progress);
-                    },
-                    (error) => {
-                        console.error('Upload error:', error);
-                        showToast('Upload failed: ' + error.message, 'error');
-                    },
-                    async () => {
-                        try {
-                            const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
-                            
-                            await db.ref('downloads/prospectus').set({ 
-                                url: downloadURL, 
-                                name: this.files[0].name,
-                                timestamp: firebase.database.ServerValue.TIMESTAMP
-                            });
-                            
-                            await loadAdminPanel();
-                            showToast('Prospectus uploaded!');
-                        } catch (error) {
-                            showToast('Error saving to database: ' + error.message, 'error');
-                        }
-                    }
-                );
+                const reader = new FileReader();
+                reader.readAsDataURL(this.files[0]);
+                reader.onload = async () => {
+                    await db.ref('downloads/prospectus').set({ 
+                        url: reader.result, 
+                        name: this.files[0].name,
+                        timestamp: firebase.database.ServerValue.TIMESTAMP,
+                        storageMode: 'base64'
+                    });
+                    
+                    await loadAdminPanel();
+                    showToast('Prospectus uploaded!');
+                };
                 
                 this.value = '';
             } catch (error) {
@@ -3939,19 +3725,12 @@
                 const snapshot = await db.ref('downloads/' + type).once('value');
                 const data = snapshot.val();
                 if (data && data.url) {
-                    if (data.url.startsWith('https://firebasestorage.googleapis.com')) {
-                        // Open storage URL in new tab for download
-                        window.open(data.url, '_blank');
-                    } else if (data.url.startsWith('data:application/pdf')) {
-                        const link = document.createElement('a');
-                        link.href = data.url;
-                        link.download = data.name || `${type}_form.pdf`;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                    } else {
-                        window.open(data.url, '_blank');
-                    }
+                    const link = document.createElement('a');
+                    link.href = data.url;
+                    link.download = data.name || `${type}_form.pdf`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
                 } else {
                     alert('Form not available');
                 }
@@ -3965,14 +3744,11 @@
             const popup = document.getElementById('entryPopup');
             const closeBtn = document.querySelector('.entry-popup-close');
             
-            // Check if popup has been shown in this session
             if (!sessionStorage.getItem('popupShown')) {
-                // Show popup after 2 seconds
                 setTimeout(() => {
                     popup.style.display = 'block';
                     document.body.style.overflow = 'hidden';
                     
-                    // Close when clicking outside
                     popup.addEventListener('click', function(e) {
                         if (e.target === popup) {
                             popup.style.display = 'none';
@@ -4015,10 +3791,8 @@
         loadAll();
         initEntryPopup();
 
-        // Add resize listener to handle orientation changes
-        window.addEventListener('resize', function() {
-            AOS.refresh();
-        });
+        // Add resize listener
+        window.addEventListener('resize', () => AOS.refresh());
     </script>
 </body>
 </html>
