@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <!-- FIX 1 & 2: Fixed viewport for mobile - prevents zoom out and fits screen -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, shrink-to-fit=no">
     
     <!-- SEO Meta Tags -->
     <title>Daffodils High School | Best School in Hanamkonda | Excellence in Education</title>
@@ -478,10 +479,13 @@
             width: 100%;
         }
 
+        /* FIX 3: Hamburger menu styles */
         .hamburger {
             display: none;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
+            color: var(--primary);
+            z-index: 1000;
         }
 
         /* Hero Section */
@@ -1461,40 +1465,49 @@
             display: inline-block;
         }
 
-        /* ========== ONLY ONE FIX - MAKE IMAGES VISIBLE ON MOBILE ========== */
+        /* ========== FIX 4: Mobile Responsive Styles ========== */
         @media screen and (max-width: 768px) {
-            /* FIX: Force all images to display on mobile */
-            .gallery-item img,
-            .facility-card img,
-            .achievement-item img,
-            .academic-img img,
-            .principal-card img,
-            .about-image img,
-            .contact-image img,
-            .entry-popup-item img {
-                display: block !important;
-                visibility: visible !important;
-                opacity: 1 !important;
-                width: 100% !important;
-                height: 100% !important;
-                object-fit: cover !important;
+            /* FIX 3: Hamburger menu */
+            .hamburger {
+                display: block;
             }
             
-            /* Fix grid layouts for mobile */
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                text-align: center;
+                box-shadow: var(--shadow);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            /* FIX 1,2,4: Make all grids single column on mobile */
             .gallery-grid,
             .facilities-grid,
             .achievements-grid,
             .academics-grid {
-                grid-template-columns: 1fr !important;
-                gap: 20px !important;
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .gallery-item,
             .facility-card,
-            .achievement-item {
-                width: 100% !important;
-                height: auto !important;
-                min-height: 250px !important;
+            .achievement-item,
+            .academic-card {
+                width: 100%;
             }
             
             /* Fix about section */
@@ -1502,17 +1515,89 @@
             .principal-card,
             .vision-mission,
             .contact-grid {
-                grid-template-columns: 1fr !important;
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .principal-card {
+                padding: 20px;
+            }
+            
+            .principal-card img {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto 20px;
+            }
+            
+            /* Fix contact section */
+            .map {
+                min-height: 300px;
+            }
+            
+            .download-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Fix entry popup */
+            .entry-popup-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Fix hero section */
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero button {
+                padding: 12px 25px;
+            }
+            
+            /* Fix section padding */
+            section {
+                padding: 50px 15px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            /* Fix footer */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
             }
         }
         
         /* Small mobile devices */
         @media screen and (max-width: 480px) {
-            .gallery-item img,
-            .facility-card img,
-            .achievement-item img,
-            .academic-img img {
-                height: 200px !important;
+            .logo h1 {
+                font-size: 1.2rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .principal-card img {
+                width: 150px;
+                height: 150px;
             }
         }
 
@@ -1776,7 +1861,7 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Navigation -->
+    <!-- Navigation - FIX 3: Hamburger menu added -->
     <nav class="navbar" role="navigation" aria-label="Main Navigation">
         <div class="logo">
             <i class="fas fa-school" aria-hidden="true"></i>
@@ -2065,19 +2150,46 @@
             }
         });
 
-        // Mobile Menu
+        // FIX 3: Mobile Menu Toggle
         document.querySelector('.hamburger').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
+            // Change icon when menu is open
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         });
 
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+                const icon = document.querySelector('.hamburger i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+
+        // Click outside to close mobile menu
         document.addEventListener('click', function(event) {
             const navLinks = document.querySelector('.nav-links');
             const hamburger = document.querySelector('.hamburger');
             
-            if (navLinks.classList.contains('active') && 
+            if (navLinks && navLinks.classList.contains('active') && 
                 !navLinks.contains(event.target) && 
                 !hamburger.contains(event.target)) {
                 navLinks.classList.remove('active');
+                const icon = document.querySelector('.hamburger i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
             }
         });
 
