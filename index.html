@@ -43,9 +43,6 @@
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    <!-- Neon Database API Client -->
-    <script src="https://cdn.jsdelivr.net/npm/@neondatabase/serverless@0.9.0/dist/index.min.js"></script>
-    
     <style>
         /* ALL ORIGINAL STYLES - KEEP EVERYTHING EXACTLY AS BEFORE */
         * {
@@ -1709,7 +1706,7 @@
             <input type="email" id="email" placeholder="Enter Email" style="width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #e2e8f0; border-radius: 8px;" value="admin@daffodils.com" aria-label="Email">
             <input type="password" id="password" placeholder="Enter Password" style="width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #e2e8f0; border-radius: 8px;" value="admin123" aria-label="Password">
             <button onclick="login()" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Login</button>
-            <p style="text-align: center; margin-top: 15px; color: #64748b; font-size: 14px;">Use Email: admin@daffodils.com | Password: admin123</p>
+            <p style="text-align: center; margin-top: 15px; color: #64748b; font-size: 14px;">Use Password: admin123</p>
         </div>
     </div>
 
@@ -2107,13 +2104,10 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // ==================== NEON DATABASE CONFIGURATION ====================
-        // Replace with your actual Neon database connection string
-        const NEON_CONNECTION_STRING = 'postgresql://neondb_owner:npg_3p4Hykz9KebN@ep-soft-wind-a5j6v3h3-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require';
-        
-        // API endpoint for Neon
+        // ✅ FIXED: Your actual API endpoint
         const API_ENDPOINT = 'https://daffodilshighschool.onrender.com/api/query';
         
-        // Admin auth state (simple password-based for now)
+        // Admin auth state (simple password-based)
         const ADMIN_PASSWORD = 'admin123';
         let isLoggedIn = false;
 
@@ -2167,13 +2161,11 @@
             }
         });
 
-        // ==================== FIXED NEON API FUNCTIONS ====================
+        // ==================== NEON API FUNCTIONS ====================
         
-        // Generic function to query Neon - FIXED to handle response format correctly
+        // Generic function to query Neon
         async function queryNeon(sql, params = []) {
             try {
-                console.log('Sending query:', sql, params);
-                
                 const response = await fetch(API_ENDPOINT, {
                     method: 'POST',
                     headers: {
@@ -2182,199 +2174,17 @@
                     body: JSON.stringify({ sql, params })
                 });
                 
-                // Get response as text first for debugging
-                const responseText = await response.text();
-                console.log('Raw response:', responseText);
-                
-                // Parse JSON
-                let data;
-                try {
-                    data = JSON.parse(responseText);
-                } catch (e) {
-                    console.error('Failed to parse response as JSON:', responseText);
-                    throw new Error('Invalid JSON response from server');
-                }
-                
                 if (!response.ok) {
-                    // Log the full error for debugging
-                    console.error('Server error response:', data);
-                    
-                    // Create a more helpful error message
-                    let errorMessage = data.error || `HTTP error! status: ${response.status}`;
-                    if (data.hint) {
-                        errorMessage += ` - ${data.hint}`;
-                    }
-                    throw new Error(errorMessage);
+                    const error = await response.text();
+                    throw new Error(`Database query failed: ${error}`);
                 }
                 
-                // IMPORTANT FIX: Our API returns { rows: [...] }
-                // So we need to return data.rows
-                if (data && data.rows) {
-                    console.log('Returning rows:', data.rows);
-                    return data.rows;
-                } else if (Array.isArray(data)) {
-                    // Some endpoints might return array directly
-                    console.log('Returning array data:', data);
-                    return data;
-                } else {
-                    // Single object
-                    console.log('Returning object as array:', [data]);
-                    return [data];
-                }
+                const data = await response.json();
+                return data;
             } catch (error) {
                 console.error('Neon query error:', error);
                 showToast('Database error: ' + error.message, 'error');
                 return null;
-            }
-        }
-
-        // Initialize database tables if they don't exist - FIXED to run one query at a time
-        async function initDatabase() {
-            try {
-                console.log('Initializing database tables...');
-                
-                // Create tables one by one - not in a single multi-statement query
-                const queries = [
-                    `CREATE TABLE IF NOT EXISTS notices (
-                        id SERIAL PRIMARY KEY,
-                        text TEXT NOT NULL,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    );`,
-                    
-                    `CREATE TABLE IF NOT EXISTS banner (
-                        id INTEGER PRIMARY KEY DEFAULT 1,
-                        image_url TEXT,
-                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    );`,
-                    
-                    `CREATE TABLE IF NOT EXISTS school_images (
-                        id INTEGER PRIMARY KEY DEFAULT 1,
-                        school_image TEXT,
-                        principal_image TEXT,
-                        contact_image TEXT,
-                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    );`,
-                    
-                    `CREATE TABLE IF NOT EXISTS gallery (
-                        id SERIAL PRIMARY KEY,
-                        image_url TEXT NOT NULL,
-                        file_name TEXT,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    );`,
-                    
-                    `CREATE TABLE IF NOT EXISTS facilities (
-                        id SERIAL PRIMARY KEY,
-                        image_url TEXT NOT NULL,
-                        title TEXT,
-                        description TEXT,
-                        file_name TEXT,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    );`,
-                    
-                    `CREATE TABLE IF NOT EXISTS achievements (
-                        id SERIAL PRIMARY KEY,
-                        image_url TEXT NOT NULL,
-                        title TEXT,
-                        description TEXT,
-                        file_name TEXT,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    );`,
-                    
-                    `CREATE TABLE IF NOT EXISTS downloads (
-                        id INTEGER PRIMARY KEY DEFAULT 1,
-                        admission_url TEXT,
-                        admission_name TEXT,
-                        prospectus_url TEXT,
-                        prospectus_name TEXT,
-                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    );`,
-                    
-                    `CREATE TABLE IF NOT EXISTS popup (
-                        id INTEGER PRIMARY KEY DEFAULT 1,
-                        title TEXT,
-                        subtitle TEXT,
-                        footer TEXT,
-                        cards JSONB,
-                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    );`
-                ];
-                
-                // Execute each query separately
-                for (const query of queries) {
-                    await queryNeon(query);
-                }
-                
-                console.log('Tables created successfully');
-                
-                // Insert default records if they don't exist
-                const defaultInserts = [
-                    {
-                        sql: `INSERT INTO banner (id, image_url) 
-                              VALUES ($1, $2) 
-                              ON CONFLICT (id) DO NOTHING`,
-                        params: [1, 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80']
-                    },
-                    {
-                        sql: `INSERT INTO school_images (id, school_image, principal_image, contact_image) 
-                              VALUES ($1, $2, $3, $4) 
-                              ON CONFLICT (id) DO NOTHING`,
-                        params: [
-                            1,
-                            'https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80',
-                            'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                            'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-                        ]
-                    },
-                    {
-                        sql: `INSERT INTO downloads (id) VALUES ($1) ON CONFLICT (id) DO NOTHING`,
-                        params: [1]
-                    },
-                    {
-                        sql: `INSERT INTO popup (id, title, subtitle, footer, cards) 
-                              VALUES ($1, $2, $3, $4, $5::jsonb) 
-                              ON CONFLICT (id) DO NOTHING`,
-                        params: [
-                            1,
-                            '🎓 Welcome to Daffodils High School',
-                            'Discover what\'s new and happening at our school',
-                            '✨ Don\'t miss this opportunity to be part of excellence ✨',
-                            JSON.stringify([
-                                {
-                                    imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                                    title: '📚 Admissions 2024-25',
-                                    description: 'Applications open for Pre-Primary to Class X. Limited seats available. Apply now for the upcoming academic year.',
-                                    link: '#admissions',
-                                    buttonText: 'Apply Now'
-                                },
-                                {
-                                    imageUrl: 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                                    title: '🏆 Our Achievements',
-                                    description: 'State-level Science Fair winners, Inter-School Sports Champions, and 100% Board Exam results. Celebrating excellence!',
-                                    link: '#achievements',
-                                    buttonText: 'View Achievements'
-                                },
-                                {
-                                    imageUrl: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                                    title: '📊 Results 2024',
-                                    description: '100% pass percentage with 95% distinction. Our students have excelled in academics and competitive exams.',
-                                    link: '#results',
-                                    buttonText: 'Check Results'
-                                }
-                            ])
-                        ]
-                    }
-                ];
-                
-                // Execute each insert separately
-                for (const insert of defaultInserts) {
-                    await queryNeon(insert.sql, insert.params);
-                }
-                
-                console.log('Default records inserted successfully');
-                
-            } catch (error) {
-                console.error('Database initialization error:', error);
-                // Don't show toast for initialization errors as they might be expected if tables already exist
             }
         }
 
@@ -2542,7 +2352,7 @@
         }
 
         // ==================== UPLOAD IMAGE FUNCTION ====================
-        async function uploadImage(file, table, column, id = 1, extraData = {}) {
+        async function uploadImage(file, table, column = null, extraData = {}) {
             if (!isLoggedIn) {
                 showToast('Please login first', 'error');
                 return false;
@@ -2557,24 +2367,26 @@
 
                 let sql, params;
                 
-                if (table === 'gallery' || table === 'facilities' || table === 'achievements') {
-                    // Insert into collection tables
-                    sql = `INSERT INTO ${table} (image_url, file_name, title, description, created_at) 
-                           VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP) RETURNING id`;
-                    params = [base64Image, file.name, extraData.title || null, extraData.description || null];
+                if (table === 'gallery') {
+                    sql = `INSERT INTO gallery (image_url, file_name) VALUES ($1, $2)`;
+                    params = [base64Image, file.name];
+                } else if (table === 'facilities') {
+                    sql = `INSERT INTO facilities (image_url, title, description, file_name) VALUES ($1, $2, $3, $4)`;
+                    params = [base64Image, extraData.title || null, extraData.description || null, file.name];
+                } else if (table === 'achievements') {
+                    sql = `INSERT INTO achievements (image_url, title, description, file_name) VALUES ($1, $2, $3, $4)`;
+                    params = [base64Image, extraData.title || null, extraData.description || null, file.name];
                 } else if (table === 'banner') {
-                    // Update banner
                     sql = `UPDATE banner SET image_url = $1, updated_at = CURRENT_TIMESTAMP WHERE id = 1`;
                     params = [base64Image];
-                } else if (table === 'school_images') {
-                    // Update specific school image column
+                } else if (table === 'school_images' && column) {
                     sql = `UPDATE school_images SET ${column} = $1, updated_at = CURRENT_TIMESTAMP WHERE id = 1`;
                     params = [base64Image];
                 }
 
                 const result = await queryNeon(sql, params);
                 
-                if (result) {
+                if (result !== null) {
                     updateUploadProgress(table, 100, 'Complete!');
                     showToast('Image uploaded successfully!');
                     return base64Image;
@@ -2607,10 +2419,9 @@
         // ==================== LOAD ALL DATA ====================
         async function loadAll() {
             try {
-                await initDatabase();
-                
                 // Load Notices
-                const notices = await queryNeon('SELECT * FROM notices ORDER BY created_at DESC') || [];
+                const noticesResult = await queryNeon('SELECT * FROM notices ORDER BY created_at DESC');
+                const notices = noticesResult?.rows || [];
                 const noticeBar = document.getElementById('noticeBar');
                 if (noticeBar) {
                     noticeBar.innerHTML = '';
@@ -2624,16 +2435,16 @@
                 }
 
                 // Load Banner
-                const bannerData = await queryNeon('SELECT image_url FROM banner WHERE id = 1') || [];
-                const banner = bannerData[0];
+                const bannerResult = await queryNeon('SELECT image_url FROM banner WHERE id = 1');
+                const banner = bannerResult?.rows[0];
                 if (banner && banner.image_url) {
                     document.getElementById('home').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${banner.image_url}')`;
                     safeImageLoad(document.getElementById('bannerPreview'), banner.image_url);
                 }
 
                 // Load School Images
-                const imagesData = await queryNeon('SELECT school_image, principal_image, contact_image FROM school_images WHERE id = 1') || [];
-                const images = imagesData[0] || {};
+                const imagesResult = await queryNeon('SELECT school_image, principal_image, contact_image FROM school_images WHERE id = 1');
+                const images = imagesResult?.rows[0] || {};
                 if (images) {
                     safeImageLoad(document.getElementById('schoolImage'), images.school_image);
                     safeImageLoad(document.getElementById('schoolPreview'), images.school_image);
@@ -2646,7 +2457,8 @@
                 }
 
                 // Load Gallery
-                const gallery = await queryNeon('SELECT * FROM gallery ORDER BY created_at DESC') || [];
+                const galleryResult = await queryNeon('SELECT * FROM gallery ORDER BY created_at DESC');
+                const gallery = galleryResult?.rows || [];
                 const galleryGrid = document.getElementById('galleryGrid');
                 if (galleryGrid) {
                     galleryGrid.innerHTML = '';
@@ -2666,7 +2478,8 @@
                 }
 
                 // Load Facilities
-                const facilities = await queryNeon('SELECT * FROM facilities ORDER BY created_at DESC') || [];
+                const facilitiesResult = await queryNeon('SELECT * FROM facilities ORDER BY created_at DESC');
+                const facilities = facilitiesResult?.rows || [];
                 const facilitiesGrid = document.getElementById('facilitiesGrid');
                 if (facilitiesGrid) {
                     facilitiesGrid.innerHTML = '';
@@ -2696,7 +2509,8 @@
                 }
 
                 // Load Achievements
-                const achievements = await queryNeon('SELECT * FROM achievements ORDER BY created_at DESC') || [];
+                const achievementsResult = await queryNeon('SELECT * FROM achievements ORDER BY created_at DESC');
+                const achievements = achievementsResult?.rows || [];
                 const achievementsGrid = document.getElementById('achievementsGrid');
                 if (achievementsGrid) {
                     achievementsGrid.innerHTML = '';
@@ -2729,8 +2543,8 @@
                 }
 
                 // Load Downloads
-                const downloadsData = await queryNeon('SELECT admission_url, admission_name, prospectus_url, prospectus_name FROM downloads WHERE id = 1') || [];
-                const downloads = downloadsData[0] || {};
+                const downloadsResult = await queryNeon('SELECT admission_url, admission_name, prospectus_url, prospectus_name FROM downloads WHERE id = 1');
+                const downloads = downloadsResult?.rows[0] || {};
 
                 // Load Popup Data
                 await loadPopupFromNeon();
@@ -2747,8 +2561,8 @@
 
         async function loadPopupFromNeon() {
             try {
-                const popupDataArray = await queryNeon('SELECT title, subtitle, footer, cards FROM popup WHERE id = 1') || [];
-                const popupData = popupDataArray[0];
+                const popupResult = await queryNeon('SELECT title, subtitle, footer, cards FROM popup WHERE id = 1');
+                const popupData = popupResult?.rows[0];
                 
                 const popupGrid = document.getElementById('popupGrid');
                 
@@ -3151,7 +2965,8 @@
 
             try {
                 // Load Notices for admin
-                const notices = await queryNeon('SELECT * FROM notices ORDER BY created_at DESC') || [];
+                const noticesResult = await queryNeon('SELECT * FROM notices ORDER BY created_at DESC');
+                const notices = noticesResult?.rows || [];
                 const adminNotices = document.getElementById('adminNotices');
                 if (adminNotices) {
                     adminNotices.innerHTML = '';
@@ -3169,7 +2984,8 @@
                 }
 
                 // Load Gallery for admin
-                const gallery = await queryNeon('SELECT * FROM gallery ORDER BY created_at DESC') || [];
+                const galleryResult = await queryNeon('SELECT * FROM gallery ORDER BY created_at DESC');
+                const gallery = galleryResult?.rows || [];
                 const adminGallery = document.getElementById('adminGallery');
                 if (adminGallery) {
                     adminGallery.innerHTML = '';
@@ -3186,7 +3002,8 @@
                 }
 
                 // Load Facilities for admin
-                const facilities = await queryNeon('SELECT * FROM facilities ORDER BY created_at DESC') || [];
+                const facilitiesResult = await queryNeon('SELECT * FROM facilities ORDER BY created_at DESC');
+                const facilities = facilitiesResult?.rows || [];
                 const adminFacilities = document.getElementById('adminFacilities');
                 if (adminFacilities) {
                     adminFacilities.innerHTML = '';
@@ -3204,7 +3021,8 @@
                 }
 
                 // Load Achievements for admin
-                const achievements = await queryNeon('SELECT * FROM achievements ORDER BY created_at DESC') || [];
+                const achievementsResult = await queryNeon('SELECT * FROM achievements ORDER BY created_at DESC');
+                const achievements = achievementsResult?.rows || [];
                 const adminAchievements = document.getElementById('adminAchievements');
                 if (adminAchievements) {
                     adminAchievements.innerHTML = '';
@@ -3222,8 +3040,8 @@
                 }
 
                 // Load Downloads for admin
-                const downloadsData = await queryNeon('SELECT admission_url, admission_name, prospectus_url, prospectus_name FROM downloads WHERE id = 1') || [];
-                const downloads = downloadsData[0] || {};
+                const downloadsResult = await queryNeon('SELECT admission_url, admission_name, prospectus_url, prospectus_name FROM downloads WHERE id = 1');
+                const downloads = downloadsResult?.rows[0] || {};
                 const adminDownloads = document.getElementById('adminDownloads');
                 if (adminDownloads) {
                     adminDownloads.innerHTML = '';
@@ -3266,8 +3084,8 @@
                 }
 
                 // Load popup data into admin form
-                const popupDataArray = await queryNeon('SELECT title, subtitle, footer, cards FROM popup WHERE id = 1') || [];
-                const popupData = popupDataArray[0];
+                const popupResult = await queryNeon('SELECT title, subtitle, footer, cards FROM popup WHERE id = 1');
+                const popupData = popupResult?.rows[0];
                 if (popupData) {
                     document.getElementById('popupTitleInput').value = popupData.title || '🎓 Welcome to Daffodils High School';
                     document.getElementById('popupSubtitleInput').value = popupData.subtitle || 'Discover what\'s new and happening at our school';
@@ -3395,7 +3213,7 @@
             const title = prompt('Enter facility name:');
             const desc = prompt('Enter description:');
             if (title && desc) {
-                await uploadImage(this.files[0], 'facilities', null, 1, { title, description: desc });
+                await uploadImage(this.files[0], 'facilities', null, { title, description: desc });
                 await loadAll();
                 await loadAdminPanel();
             }
@@ -3418,7 +3236,7 @@
             const title = prompt('Enter achievement title:');
             const desc = prompt('Enter description:');
             if (title && desc) {
-                await uploadImage(this.files[0], 'achievements', null, 1, { title, description: desc });
+                await uploadImage(this.files[0], 'achievements', null, { title, description: desc });
                 await loadAll();
                 await loadAdminPanel();
             }
@@ -3515,8 +3333,8 @@
                     type === 'admission' 
                         ? 'SELECT admission_url, admission_name FROM downloads WHERE id = 1'
                         : 'SELECT prospectus_url, prospectus_name FROM downloads WHERE id = 1'
-                ) || [];
-                const data = result[0];
+                );
+                const data = result?.rows[0];
                 
                 if (data && (data.admission_url || data.prospectus_url)) {
                     const url = type === 'admission' ? data.admission_url : data.prospectus_url;
