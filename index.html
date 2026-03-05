@@ -292,59 +292,118 @@
       background: var(--soft-gold);
     }
     
-    /* Admin Panel */
-    .admin-card {
-      background: white;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-    }
-    
-    .admin-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(10,36,114,0.2);
-    }
-    
-    /* Mobile Menu */
-    .mobile-menu-btn {
+    /* Admin Panel - Hidden by Default */
+    #admin-section {
       display: none;
     }
     
-    @media (max-width: 768px) {
-      .desktop-menu {
-        display: none !important;
-      }
-      
-      .mobile-menu-btn {
-        display: block;
-      }
-    }
-    
-    /* Form Styles */
-    input, textarea, select {
+    /* Admin Login Button */
+    .admin-login-btn {
+      background: var(--deep-blue);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 14px;
+      cursor: pointer;
       transition: all 0.3s ease;
     }
     
-    input:focus, textarea:focus, select:focus {
+    .admin-login-btn:hover {
+      background: var(--soft-gold);
+      color: var(--deep-blue);
+    }
+    
+    /* Admin Dashboard */
+    .admin-dashboard {
+      background: white;
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+    }
+    
+    .admin-card {
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 25px;
+      transition: all 0.3s ease;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .admin-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(10,36,114,0.1);
       border-color: var(--soft-gold);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
     }
     
-    /* Loading Animation */
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255,255,255,.3);
+    /* Image Preview */
+    .image-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .preview-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 1;
+    }
+    
+    .preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .preview-item .delete-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: red;
+      color: white;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
-      border-top-color: var(--soft-gold);
-      animation: spin 1s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
     
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .preview-item:hover .delete-btn {
+      opacity: 1;
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal.active {
+      display: flex;
+    }
+    
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
     }
     
     /* Toast Notification */
@@ -359,6 +418,7 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
       z-index: 1000;
       animation: slideIn 0.3s ease;
+      display: none;
     }
     
     @keyframes slideIn {
@@ -369,6 +429,21 @@
       to {
         transform: translateX(0);
         opacity: 1;
+      }
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      .desktop-menu {
+        display: none !important;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
       }
     }
   </style>
@@ -400,14 +475,13 @@
         <a onclick="scrollToSection('achievements')" class="nav-link text-gray-700 hover:text-deep-blue" id="nav-achievements">Achievements</a>
         <a onclick="scrollToSection('admissions')" class="nav-link text-gray-700 hover:text-deep-blue" id="nav-admissions">Admissions</a>
         <a onclick="scrollToSection('contact')" class="nav-link text-gray-700 hover:text-deep-blue" id="nav-contact">Contact</a>
-        <a onclick="scrollToSection('admin-section')" class="nav-link text-gray-700 hover:text-deep-blue" id="nav-admin">Admin</a>
       </div>
       
-      <!-- Admin Button & Mobile Menu -->
+      <!-- Admin Login Button & Mobile Menu -->
       <div class="flex items-center space-x-4">
-        <a onclick="scrollToSection('admin-section')" class="bg-deep-blue text-white px-4 py-2 rounded-full text-sm hover:bg-opacity-90 transition cursor-pointer hidden md:block">
-          <i class="fas fa-lock mr-1"></i> Admin
-        </a>
+        <button onclick="showAdminLogin()" class="admin-login-btn hidden md:block">
+          <i class="fas fa-lock mr-1"></i> Admin Login
+        </button>
         
         <!-- Mobile Menu Button -->
         <button class="mobile-menu-btn md:hidden" onclick="toggleMobileMenu()">
@@ -426,7 +500,9 @@
       <a onclick="scrollToSection('achievements'); toggleMobileMenu()" class="block py-3 px-2 text-gray-700 hover:bg-gray-50 cursor-pointer">Achievements</a>
       <a onclick="scrollToSection('admissions'); toggleMobileMenu()" class="block py-3 px-2 text-gray-700 hover:bg-gray-50 cursor-pointer">Admissions</a>
       <a onclick="scrollToSection('contact'); toggleMobileMenu()" class="block py-3 px-2 text-gray-700 hover:bg-gray-50 cursor-pointer">Contact</a>
-      <a onclick="scrollToSection('admin-section'); toggleMobileMenu()" class="block py-3 px-2 bg-deep-blue text-white cursor-pointer">Admin Panel</a>
+      <button onclick="showAdminLogin(); toggleMobileMenu()" class="block w-full text-left py-3 px-2 bg-deep-blue text-white cursor-pointer">
+        <i class="fas fa-lock mr-2"></i> Admin Login
+      </button>
     </div>
   </div>
 </nav>
@@ -435,37 +511,9 @@
 <section id="home" class="pt-0">
   <!-- Hero Slider -->
   <div class="swiper heroSwiper">
-    <div class="swiper-wrapper">
-      <!-- Slide 1 -->
-      <div class="swiper-slide">
-        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600')">
-          <div class="container mx-auto px-4 h-full flex items-center relative z-10">
-            <div data-aos="fade-up">
-              <span class="bg-gold text-deep-blue px-4 py-2 rounded-full text-sm font-bold">Welcome to</span>
-              <h1 class="text-5xl md:text-7xl font-bold text-white mt-6 mb-4">Daffodils High<br>International School</h1>
-              <p class="text-xl text-white mb-8">Nurturing minds, Building futures since 1995</p>
-              <a onclick="scrollToSection('admissions')" class="bg-gold text-deep-blue px-8 py-3 rounded-full font-bold hover:bg-opacity-90 transition cursor-pointer inline-block">Enroll Now</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Slide 2 -->
-      <div class="swiper-slide">
-        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600')">
-          <div class="container mx-auto px-4 h-full flex items-center relative z-10">
-            <div data-aos="fade-up">
-              <span class="bg-gold text-deep-blue px-4 py-2 rounded-full text-sm font-bold">Excellence in Education</span>
-              <h1 class="text-5xl md:text-7xl font-bold text-white mt-6 mb-4">Where Every Child<br>Shines Bright</h1>
-              <p class="text-xl text-white mb-8">Cambridge & CBSE Curriculum</p>
-              <a onclick="scrollToSection('about')" class="bg-white text-deep-blue px-8 py-3 rounded-full font-bold hover:bg-opacity-90 transition cursor-pointer inline-block">Learn More</a>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="swiper-wrapper" id="hero-slider-container">
+      <!-- Slides will be loaded dynamically -->
     </div>
-    
-    <!-- Slider Navigation -->
     <div class="swiper-pagination"></div>
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
@@ -519,37 +567,18 @@
     </div>
   </div>
   
-  <!-- Latest Notices & Featured Facilities -->
+  <!-- Latest Notices -->
   <div class="container mx-auto px-4 mt-20">
     <div class="grid md:grid-cols-2 gap-12">
-      <!-- Notices -->
       <div data-aos="fade-right">
         <h2 class="text-3xl font-bold text-deep-blue mb-8">📢 Latest Notices</h2>
-        <div id="notice-board">
-          <!-- Notices will be loaded dynamically -->
-        </div>
+        <div id="notice-board"></div>
       </div>
       
-      <!-- Featured Facilities -->
       <div data-aos="fade-left">
         <h2 class="text-3xl font-bold text-deep-blue mb-8">🏛️ Featured Facilities</h2>
-        <div class="grid grid-cols-2 gap-6">
-          <div class="bg-white p-4 rounded-lg shadow hover-lift text-center">
-            <span class="text-4xl">📚</span>
-            <h3 class="font-bold mt-2">Library</h3>
-          </div>
-          <div class="bg-white p-4 rounded-lg shadow hover-lift text-center">
-            <span class="text-4xl">🔬</span>
-            <h3 class="font-bold mt-2">Science Lab</h3>
-          </div>
-          <div class="bg-white p-4 rounded-lg shadow hover-lift text-center">
-            <span class="text-4xl">💻</span>
-            <h3 class="font-bold mt-2">Computer Lab</h3>
-          </div>
-          <div class="bg-white p-4 rounded-lg shadow hover-lift text-center">
-            <span class="text-4xl">⚽</span>
-            <h3 class="font-bold mt-2">Sports Complex</h3>
-          </div>
+        <div class="grid grid-cols-2 gap-6" id="featured-facilities">
+          <!-- Will be loaded dynamically -->
         </div>
       </div>
     </div>
@@ -563,11 +592,11 @@
     
     <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
       <div data-aos="fade-right">
-        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800" alt="School" class="rounded-2xl shadow-2xl w-full">
+        <img id="school-image" src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800" alt="School" class="rounded-2xl shadow-2xl w-full">
       </div>
       <div data-aos="fade-left">
-        <h2 class="text-3xl font-bold text-deep-blue mb-4">Welcome to Daffodils High School</h2>
-        <p class="text-gray-600 mb-6 leading-relaxed">Founded in 1995, Daffodils High School has been a beacon of educational excellence. We provide a nurturing environment where students develop academically, socially, and emotionally.</p>
+        <h2 class="text-3xl font-bold text-deep-blue mb-4" id="about-title">Welcome to Daffodils High School</h2>
+        <p class="text-gray-600 mb-6 leading-relaxed" id="about-description">Founded in 1995, Daffodils High School has been a beacon of educational excellence. We provide a nurturing environment where students develop academically, socially, and emotionally.</p>
         <p class="text-gray-600 mb-6">Our mission is to empower students with knowledge, skills, and values to become responsible global citizens.</p>
         <div class="flex space-x-8">
           <div class="text-center">
@@ -586,12 +615,12 @@
     <div class="bg-white rounded-3xl p-8 shadow-2xl mb-16" data-aos="fade-up">
       <div class="grid md:grid-cols-3 gap-8 items-center">
         <div class="md:col-span-1">
-          <img src="https://images.unsplash.com/photo-1544717302-de2939b7ef71?w=400" alt="Principal" class="rounded-2xl shadow-lg w-full">
+          <img id="principal-image" src="https://images.unsplash.com/photo-1544717302-de2939b7ef71?w=400" alt="Principal" class="rounded-2xl shadow-lg w-full">
         </div>
         <div class="md:col-span-2">
           <h2 class="text-3xl font-bold text-deep-blue mb-4">Principal's Message</h2>
-          <p class="text-gray-600 italic mb-4">"At Daffodils, we believe every child is unique and has the potential to excel. Our dedicated team works tirelessly to create an environment where students love to learn and grow."</p>
-          <p class="font-bold">- Dr. Sarah Johnson</p>
+          <p class="text-gray-600 italic mb-4" id="principal-message">"At Daffodils, we believe every child is unique and has the potential to excel. Our dedicated team works tirelessly to create an environment where students love to learn and grow."</p>
+          <p class="font-bold" id="principal-name">- Dr. Sarah Johnson</p>
           <p class="text-sm text-gold">Principal</p>
         </div>
       </div>
@@ -601,11 +630,11 @@
     <div class="grid md:grid-cols-2 gap-8">
       <div class="bg-deep-blue text-white p-8 rounded-3xl" data-aos="fade-right">
         <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
-        <p>To provide quality education that nurtures intellectual curiosity, creativity, and character development in every student.</p>
+        <p id="mission-text">To provide quality education that nurtures intellectual curiosity, creativity, and character development in every student.</p>
       </div>
       <div class="bg-gold text-deep-blue p-8 rounded-3xl" data-aos="fade-left">
         <h3 class="text-2xl font-bold mb-4">Our Vision</h3>
-        <p>To be a leading educational institution that produces confident, compassionate, and capable global citizens.</p>
+        <p id="vision-text">To be a leading educational institution that produces confident, compassionate, and capable global citizens.</p>
       </div>
     </div>
   </div>
@@ -616,62 +645,8 @@
   <div class="container mx-auto px-4">
     <h1 class="text-5xl font-bold text-deep-blue mb-8 text-center" data-aos="fade-up">Academics</h1>
     
-    <div class="grid md:grid-cols-2 gap-8">
-      <!-- Pre-Primary -->
-      <div class="bg-white rounded-2xl overflow-hidden shadow-2xl hover-lift" data-aos="fade-up">
-        <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=600" alt="Pre-Primary" class="w-full h-64 object-cover">
-        <div class="p-6">
-          <h2 class="text-2xl font-bold text-deep-blue mb-3">Pre-Primary (Age 3-5)</h2>
-          <p class="text-gray-600 mb-4">Play-based learning with focus on social skills, creativity, and foundational literacy.</p>
-          <ul class="space-y-2">
-            <li class="flex items-center"><span class="text-gold mr-2">✓</span> Montessori Method</li>
-            <li class="flex items-center"><span class="text-gold mr-2">✓</span> Activity-based Learning</li>
-            <li class="flex items-center"><span class="text-gold mr-2">✓</span> Music & Movement</li>
-          </ul>
-        </div>
-      </div>
-      
-      <!-- Primary -->
-      <div class="bg-white rounded-2xl overflow-hidden shadow-2xl hover-lift" data-aos="fade-up" data-aos-delay="100">
-        <img src="https://images.unsplash.com/photo-1503676260728-517c89057f3e?w=600" alt="Primary" class="w-full h-64 object-cover">
-        <div class="p-6">
-          <h2 class="text-2xl font-bold text-deep-blue mb-3">Primary (Grades 1-5)</h2>
-          <p class="text-gray-600 mb-4">Strong foundation in core subjects with emphasis on conceptual understanding.</p>
-          <ul class="space-y-2">
-            <li class="flex items-center"><span class="text-gold mr-2">✓</span> English, Math, Science</li>
-            <li class="flex items-center"><span class="text-gold mr-2">✓</span> Second Language</li>
-            <li class="flex items-center"><span class="text-gold mr-2">✓</span> Computer Education</li>
-          </ul>
-        </div>
-      </div>
-      
-      <!-- Upper Primary -->
-      <div class="bg-white rounded-2xl overflow-hidden shadow-2xl hover-lift" data-aos="fade-up">
-        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=600" alt="Upper Primary" class="w-full h-64 object-cover">
-        <div class="p-6">
-          <h2 class="text-2xl font-bold text-deep-blue mb-3">Upper Primary (Grades 6-8)</h2>
-          <p class="text-gray-600 mb-4">Subject specialization and critical thinking development.</p>
-          <ul class="space-y-2">
-            <li class="flex items-center"><span class="text-gold mr-2">✓</span> Advanced Sciences</li>
-            <li class="flex items-center"><span class="text-gold mr-2">✓</span> Mathematics</li>
-            <li class="flex items-center"><span class="text-gold mr-2">✓</span> Social Studies</li>
-          </ul>
-        </div>
-      </div>
-      
-      <!-- High School -->
-      <div class="bg-white rounded-2xl overflow-hidden shadow-2xl hover-lift" data-aos="fade-up" data-aos-delay="100">
-        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600" alt="High School" class="w-full h-64 object-cover">
-        <div class="p-6">
-          <h2 class="text-2xl font-bold text-deep-blue mb-3">High School (Grades 9-12)</h2>
-          <p class="text-gray-600 mb-4">CBSE & Cambridge curriculum with career counseling.</p>
-          <ul class="space-y-2">
-            <li class="flex items-center"><span class="text-gold mr-2">✓</span> Science, Commerce, Humanities</li>
-            <li class="flex items-center"><span class="text-gold mr-2">✓</span> Competitive Exam Prep</li>
-            <li class="flex items-center"><span class="text-gold mr-2">✓</span> Career Guidance</li>
-          </ul>
-        </div>
-      </div>
+    <div class="grid md:grid-cols-2 gap-8" id="academics-container">
+      <!-- Will be loaded dynamically -->
     </div>
   </div>
 </section>
@@ -681,69 +656,8 @@
   <div class="container mx-auto px-4">
     <h1 class="text-5xl font-bold text-deep-blue mb-8 text-center" data-aos="fade-up">Our Facilities</h1>
     
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-      <!-- Smart Classrooms -->
-      <div class="bg-white p-6 rounded-xl shadow-lg hover-lift text-center" data-aos="zoom-in">
-        <div class="facility-icon mx-auto">💡</div>
-        <h3 class="text-xl font-bold mb-2">Smart Classrooms</h3>
-        <p class="text-gray-600 text-sm">Interactive whiteboards and digital learning</p>
-      </div>
-      
-      <!-- Computer Lab -->
-      <div class="bg-white p-6 rounded-xl shadow-lg hover-lift text-center" data-aos="zoom-in" data-aos-delay="50">
-        <div class="facility-icon mx-auto">💻</div>
-        <h3 class="text-xl font-bold mb-2">Computer Lab</h3>
-        <p class="text-gray-600 text-sm">50+ systems with latest software</p>
-      </div>
-      
-      <!-- Science Lab -->
-      <div class="bg-white p-6 rounded-xl shadow-lg hover-lift text-center" data-aos="zoom-in" data-aos-delay="100">
-        <div class="facility-icon mx-auto">🔬</div>
-        <h3 class="text-xl font-bold mb-2">Science Lab</h3>
-        <p class="text-gray-600 text-sm">Physics, Chemistry, Biology labs</p>
-      </div>
-      
-      <!-- Library -->
-      <div class="bg-white p-6 rounded-xl shadow-lg hover-lift text-center" data-aos="zoom-in">
-        <div class="facility-icon mx-auto">📚</div>
-        <h3 class="text-xl font-bold mb-2">Library</h3>
-        <p class="text-gray-600 text-sm">10,000+ books and digital resources</p>
-      </div>
-      
-      <!-- Transport -->
-      <div class="bg-white p-6 rounded-xl shadow-lg hover-lift text-center" data-aos="zoom-in" data-aos-delay="50">
-        <div class="facility-icon mx-auto">🚌</div>
-        <h3 class="text-xl font-bold mb-2">Transport</h3>
-        <p class="text-gray-600 text-sm">30+ buses with GPS tracking</p>
-      </div>
-      
-      <!-- Hostel -->
-      <div class="bg-white p-6 rounded-xl shadow-lg hover-lift text-center" data-aos="zoom-in" data-aos-delay="100">
-        <div class="facility-icon mx-auto">🏠</div>
-        <h3 class="text-xl font-bold mb-2">Hostel</h3>
-        <p class="text-gray-600 text-sm">Separate boys & girls hostel</p>
-      </div>
-      
-      <!-- Sports -->
-      <div class="bg-white p-6 rounded-xl shadow-lg hover-lift text-center" data-aos="zoom-in">
-        <div class="facility-icon mx-auto">⚽</div>
-        <h3 class="text-xl font-bold mb-2">Sports Complex</h3>
-        <p class="text-gray-600 text-sm">Basketball, football, tennis courts</p>
-      </div>
-      
-      <!-- Playground -->
-      <div class="bg-white p-6 rounded-xl shadow-lg hover-lift text-center" data-aos="zoom-in" data-aos-delay="50">
-        <div class="facility-icon mx-auto">🌳</div>
-        <h3 class="text-xl font-bold mb-2">Playground</h3>
-        <p class="text-gray-600 text-sm">5-acre playground with track</p>
-      </div>
-      
-      <!-- Art Room -->
-      <div class="bg-white p-6 rounded-xl shadow-lg hover-lift text-center" data-aos="zoom-in" data-aos-delay="100">
-        <div class="facility-icon mx-auto">🎨</div>
-        <h3 class="text-xl font-bold mb-2">Art Room</h3>
-        <p class="text-gray-600 text-sm">Painting, crafts, and creative arts</p>
-      </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-6" id="facilities-container">
+      <!-- Will be loaded dynamically -->
     </div>
   </div>
 </section>
@@ -753,9 +667,7 @@
   <div class="container mx-auto px-4">
     <h1 class="text-5xl font-bold text-deep-blue mb-8 text-center" data-aos="fade-up">Photo Gallery</h1>
     
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="gallery-container">
-      <!-- Gallery items will be loaded dynamically -->
-    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="gallery-container"></div>
   </div>
 </section>
 
@@ -764,9 +676,7 @@
   <div class="container mx-auto px-4">
     <h1 class="text-5xl font-bold text-deep-blue mb-8 text-center" data-aos="fade-up">Our Achievements</h1>
     
-    <div class="grid md:grid-cols-3 gap-8" id="achievements-container">
-      <!-- Achievements will be loaded dynamically -->
-    </div>
+    <div class="grid md:grid-cols-3 gap-8" id="achievements-container"></div>
   </div>
 </section>
 
@@ -799,10 +709,10 @@
         </ol>
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#" class="bg-deep-blue text-white px-8 py-3 rounded-full text-center hover:bg-opacity-90 inline-flex items-center justify-center">
+          <a href="#" id="admission-form-link" class="bg-deep-blue text-white px-8 py-3 rounded-full text-center hover:bg-opacity-90 inline-flex items-center justify-center">
             <i class="fas fa-download mr-2"></i> Download Admission Form
           </a>
-          <a href="#" class="bg-gold text-deep-blue px-8 py-3 rounded-full text-center hover:bg-opacity-90 inline-flex items-center justify-center">
+          <a href="#" id="prospectus-link" class="bg-gold text-deep-blue px-8 py-3 rounded-full text-center hover:bg-opacity-90 inline-flex items-center justify-center">
             <i class="fas fa-book mr-2"></i> Download Prospectus
           </a>
         </div>
@@ -826,7 +736,7 @@
               <span class="text-gold text-2xl mr-4"><i class="fas fa-map-marker-alt"></i></span>
               <div>
                 <p class="font-bold">Address</p>
-                <p class="text-gray-600">12 Lakeview Avenue, Whitefield, Bangalore - 560066</p>
+                <p class="text-gray-600" id="contact-address">12 Lakeview Avenue, Whitefield, Bangalore - 560066</p>
               </div>
             </div>
             
@@ -834,7 +744,7 @@
               <span class="text-gold text-2xl mr-4"><i class="fas fa-phone"></i></span>
               <div>
                 <p class="font-bold">Phone</p>
-                <p class="text-gray-600">+91 80 4123 4567</p>
+                <p class="text-gray-600" id="contact-phone">+91 80 4123 4567</p>
               </div>
             </div>
             
@@ -842,7 +752,7 @@
               <span class="text-gold text-2xl mr-4"><i class="fas fa-envelope"></i></span>
               <div>
                 <p class="font-bold">Email</p>
-                <p class="text-gray-600">info@daffodilshigh.edu</p>
+                <p class="text-gray-600" id="contact-email">info@daffodilshigh.edu</p>
               </div>
             </div>
           </div>
@@ -879,107 +789,278 @@
   </div>
 </section>
 
-<!-- ==================== ADMIN SECTION ==================== -->
-<section id="admin-section" class="bg-deep-blue text-white">
-  <div class="container mx-auto px-4">
-    <h1 class="text-5xl font-bold text-white mb-8 text-center" data-aos="fade-up">Admin Dashboard</h1>
-    
-    <div class="max-w-4xl mx-auto">
-      <!-- Login Form -->
-      <div id="adminLoginForm" class="bg-white/10 backdrop-blur-lg p-8 rounded-3xl mb-8">
-        <h2 class="text-2xl font-bold mb-6 text-gold">Admin Login</h2>
-        <form onsubmit="adminLogin(event)">
-          <div class="mb-4">
-            <input type="text" placeholder="Username" class="w-full p-3 rounded-lg bg-white/20 text-white border border-white/30 focus:border-gold" id="adminUsername">
-          </div>
-          <div class="mb-4">
-            <input type="password" placeholder="Password" class="w-full p-3 rounded-lg bg-white/20 text-white border border-white/30 focus:border-gold" id="adminPassword">
-          </div>
-          <button type="submit" class="bg-gold text-deep-blue px-8 py-3 rounded-lg font-bold hover:bg-opacity-90 w-full">
-            <i class="fas fa-sign-in-alt mr-2"></i> Login
+<!-- ==================== ADMIN SECTION (HIDDEN) ==================== -->
+<section id="admin-section">
+  <div class="container mx-auto px-4 py-20">
+    <div class="max-w-6xl mx-auto">
+      <!-- Admin Dashboard -->
+      <div class="admin-dashboard">
+        <div class="flex justify-between items-center mb-8">
+          <h1 class="text-3xl font-bold text-deep-blue">Admin Dashboard</h1>
+          <button onclick="hideAdminPanel()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+            <i class="fas fa-times mr-2"></i> Close
           </button>
-        </form>
-      </div>
-      
-      <!-- Admin Panel (hidden by default) -->
-      <div id="adminPanel" style="display: none;">
-        <div class="grid md:grid-cols-2 gap-6">
-          <!-- Gallery Upload -->
-          <div class="admin-card bg-white text-gray-800">
-            <h3 class="text-xl font-bold mb-4 flex items-center">
-              <i class="fas fa-images text-gold mr-2"></i> Upload Gallery Images
-            </h3>
-            <input type="file" multiple accept="image/*" class="mb-4 w-full p-2 border rounded" id="galleryUpload">
-            <button onclick="uploadGallery()" class="bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full">
-              <i class="fas fa-upload mr-2"></i> Upload
-            </button>
-          </div>
-          
-          <!-- Notices Management -->
-          <div class="admin-card bg-white text-gray-800">
-            <h3 class="text-xl font-bold mb-4 flex items-center">
-              <i class="fas fa-bullhorn text-gold mr-2"></i> Manage Notices
-            </h3>
-            <input type="text" placeholder="Notice Title" class="w-full p-2 border rounded mb-2" id="noticeTitle">
-            <textarea placeholder="Notice Description" class="w-full p-2 border rounded mb-2" rows="2" id="noticeDesc"></textarea>
-            <button onclick="addNotice()" class="bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full">
-              <i class="fas fa-plus mr-2"></i> Add Notice
-            </button>
-          </div>
-          
-          <!-- PDF Uploads -->
-          <div class="admin-card bg-white text-gray-800">
-            <h3 class="text-xl font-bold mb-4 flex items-center">
-              <i class="fas fa-file-pdf text-gold mr-2"></i> Upload PDFs
-            </h3>
-            <div class="mb-3">
-              <label class="block mb-1 text-sm font-bold">Admission Form:</label>
-              <input type="file" accept=".pdf" class="w-full p-2 border rounded" id="admissionFormUpload">
+        </div>
+        
+        <!-- Admin Tabs -->
+        <div class="flex flex-wrap gap-2 mb-8">
+          <button onclick="showAdminTab('images')" class="tab-btn bg-deep-blue text-white px-4 py-2 rounded-lg" id="tab-images">Images</button>
+          <button onclick="showAdminTab('notices')" class="tab-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg" id="tab-notices">Notices</button>
+          <button onclick="showAdminTab('facilities')" class="tab-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg" id="tab-facilities">Facilities</button>
+          <button onclick="showAdminTab('achievements')" class="tab-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg" id="tab-achievements">Achievements</button>
+          <button onclick="showAdminTab('content')" class="tab-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg" id="tab-content">Content</button>
+          <button onclick="showAdminTab('pdfs')" class="tab-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg" id="tab-pdfs">PDFs</button>
+        </div>
+        
+        <!-- Images Tab -->
+        <div id="tab-images-content" class="tab-content">
+          <div class="grid md:grid-cols-3 gap-6">
+            <!-- Hero Images -->
+            <div class="admin-card">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-images text-gold mr-2"></i> Hero Slider Images
+              </h3>
+              <input type="file" multiple accept="image/*" class="mb-4 w-full p-2 border rounded" id="heroUpload" onchange="previewHeroImages(this)">
+              <div class="image-preview" id="heroPreview"></div>
+              <button onclick="uploadHeroImages()" class="mt-4 bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full">
+                <i class="fas fa-upload mr-2"></i> Upload Hero Images
+              </button>
             </div>
-            <div>
-              <label class="block mb-1 text-sm font-bold">Prospectus:</label>
-              <input type="file" accept=".pdf" class="w-full p-2 border rounded" id="prospectusUpload">
+            
+            <!-- Gallery Images -->
+            <div class="admin-card">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-images text-gold mr-2"></i> Gallery Images
+              </h3>
+              <input type="file" multiple accept="image/*" class="mb-4 w-full p-2 border rounded" id="galleryUpload" onchange="previewGalleryImages(this)">
+              <div class="image-preview" id="galleryPreview"></div>
+              <button onclick="uploadGalleryImages()" class="mt-4 bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full">
+                <i class="fas fa-upload mr-2"></i> Upload Gallery Images
+              </button>
             </div>
-            <button onclick="uploadPDFs()" class="bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full mt-4">
-              <i class="fas fa-upload mr-2"></i> Upload PDFs
-            </button>
-          </div>
-          
-          <!-- Content Editor -->
-          <div class="admin-card bg-white text-gray-800">
-            <h3 class="text-xl font-bold mb-4 flex items-center">
-              <i class="fas fa-edit text-gold mr-2"></i> Edit Content
-            </h3>
-            <select class="w-full p-2 border rounded mb-2" id="contentSection">
-              <option value="home">Home Page</option>
-              <option value="about">About Page</option>
-              <option value="academics">Academics</option>
-            </select>
-            <textarea class="w-full p-2 border rounded mb-2" rows="3" id="contentText"></textarea>
-            <button onclick="saveContent()" class="bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full">
-              <i class="fas fa-save mr-2"></i> Save Changes
-            </button>
+            
+            <!-- Facilities Images -->
+            <div class="admin-card">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-building text-gold mr-2"></i> Facilities Images
+              </h3>
+              <input type="file" multiple accept="image/*" class="mb-4 w-full p-2 border rounded" id="facilitiesUpload" onchange="previewFacilitiesImages(this)">
+              <div class="image-preview" id="facilitiesPreview"></div>
+              <button onclick="uploadFacilitiesImages()" class="mt-4 bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full">
+                <i class="fas fa-upload mr-2"></i> Upload Facilities Images
+              </button>
+            </div>
+            
+            <!-- Achievements Images -->
+            <div class="admin-card">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-trophy text-gold mr-2"></i> Achievements Images
+              </h3>
+              <input type="file" multiple accept="image/*" class="mb-4 w-full p-2 border rounded" id="achievementsUpload" onchange="previewAchievementsImages(this)">
+              <div class="image-preview" id="achievementsPreview"></div>
+              <button onclick="uploadAchievementsImages()" class="mt-4 bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full">
+                <i class="fas fa-upload mr-2"></i> Upload Achievements Images
+              </button>
+            </div>
+            
+            <!-- School Image -->
+            <div class="admin-card">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-school text-gold mr-2"></i> School Image
+              </h3>
+              <input type="file" accept="image/*" class="mb-4 w-full p-2 border rounded" id="schoolImageUpload" onchange="previewSchoolImage(this)">
+              <div class="image-preview" id="schoolImagePreview"></div>
+              <button onclick="uploadSchoolImage()" class="mt-4 bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full">
+                <i class="fas fa-upload mr-2"></i> Update School Image
+              </button>
+            </div>
+            
+            <!-- Principal Image -->
+            <div class="admin-card">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-user-tie text-gold mr-2"></i> Principal Image
+              </h3>
+              <input type="file" accept="image/*" class="mb-4 w-full p-2 border rounded" id="principalImageUpload" onchange="previewPrincipalImage(this)">
+              <div class="image-preview" id="principalImagePreview"></div>
+              <button onclick="uploadPrincipalImage()" class="mt-4 bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full">
+                <i class="fas fa-upload mr-2"></i> Update Principal Image
+              </button>
+            </div>
           </div>
         </div>
         
-        <!-- Current Notices List -->
-        <div class="admin-card bg-white text-gray-800 mt-6">
-          <h3 class="text-xl font-bold mb-4 flex items-center">
-            <i class="fas fa-list text-gold mr-2"></i> Current Notices
-          </h3>
-          <div id="adminNoticesList" class="space-y-2">
-            <!-- Notices will be listed here -->
+        <!-- Notices Tab -->
+        <div id="tab-notices-content" class="tab-content hidden">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="admin-card">
+              <h3 class="text-xl font-bold mb-4">Add New Notice</h3>
+              <input type="text" placeholder="Notice Title" class="w-full p-2 border rounded mb-2" id="noticeTitle">
+              <textarea placeholder="Notice Description" class="w-full p-2 border rounded mb-2" rows="3" id="noticeDesc"></textarea>
+              <button onclick="addNotice()" class="bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full">
+                <i class="fas fa-plus mr-2"></i> Add Notice
+              </button>
+            </div>
+            
+            <div class="admin-card">
+              <h3 class="text-xl font-bold mb-4">Current Notices</h3>
+              <div id="adminNoticesList" class="space-y-3 max-h-96 overflow-y-auto"></div>
+            </div>
           </div>
         </div>
         
-        <!-- Logout Button -->
-        <button onclick="adminLogout()" class="mt-6 bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 w-full">
-          <i class="fas fa-sign-out-alt mr-2"></i> Logout
-        </button>
+        <!-- Facilities Tab -->
+        <div id="tab-facilities-content" class="tab-content hidden">
+          <div class="admin-card">
+            <h3 class="text-xl font-bold mb-4">Manage Facilities</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block mb-2">Facility Name</label>
+                <input type="text" class="w-full p-2 border rounded mb-4" id="facilityName" placeholder="e.g., Smart Classrooms">
+              </div>
+              <div>
+                <label class="block mb-2">Facility Icon (emoji)</label>
+                <input type="text" class="w-full p-2 border rounded mb-4" id="facilityIcon" placeholder="e.g., 💡">
+              </div>
+              <div>
+                <label class="block mb-2">Description</label>
+                <input type="text" class="w-full p-2 border rounded mb-4" id="facilityDesc" placeholder="Short description">
+              </div>
+              <div>
+                <label class="block mb-2">Facility Image</label>
+                <input type="file" accept="image/*" class="w-full p-2 border rounded mb-4" id="facilityImage">
+              </div>
+            </div>
+            <button onclick="addFacility()" class="bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90">
+              <i class="fas fa-plus mr-2"></i> Add Facility
+            </button>
+            
+            <div class="mt-8">
+              <h4 class="font-bold mb-4">Current Facilities</h4>
+              <div id="adminFacilitiesList" class="space-y-3"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Achievements Tab -->
+        <div id="tab-achievements-content" class="tab-content hidden">
+          <div class="admin-card">
+            <h3 class="text-xl font-bold mb-4">Manage Achievements</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block mb-2">Achievement Title</label>
+                <input type="text" class="w-full p-2 border rounded mb-4" id="achievementTitle">
+              </div>
+              <div>
+                <label class="block mb-2">Student/Team Name</label>
+                <input type="text" class="w-full p-2 border rounded mb-4" id="achievementStudent">
+              </div>
+              <div>
+                <label class="block mb-2">Year</label>
+                <input type="text" class="w-full p-2 border rounded mb-4" id="achievementYear">
+              </div>
+              <div>
+                <label class="block mb-2">Achievement Image</label>
+                <input type="file" accept="image/*" class="w-full p-2 border rounded mb-4" id="achievementImage">
+              </div>
+            </div>
+            <button onclick="addAchievement()" class="bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90">
+              <i class="fas fa-plus mr-2"></i> Add Achievement
+            </button>
+            
+            <div class="mt-8">
+              <h4 class="font-bold mb-4">Current Achievements</h4>
+              <div id="adminAchievementsList" class="space-y-3"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Content Tab -->
+        <div id="tab-content-content" class="tab-content hidden">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="admin-card">
+              <h3 class="text-xl font-bold mb-4">About Page Content</h3>
+              <label class="block mb-2">About Title</label>
+              <input type="text" class="w-full p-2 border rounded mb-4" id="aboutTitleInput" value="Welcome to Daffodils High School">
+              
+              <label class="block mb-2">About Description</label>
+              <textarea class="w-full p-2 border rounded mb-4" rows="3" id="aboutDescInput">Founded in 1995, Daffodils High School has been a beacon of educational excellence. We provide a nurturing environment where students develop academically, socially, and emotionally.</textarea>
+              
+              <label class="block mb-2">Principal Message</label>
+              <textarea class="w-full p-2 border rounded mb-4" rows="3" id="principalMsgInput">"At Daffodils, we believe every child is unique and has the potential to excel. Our dedicated team works tirelessly to create an environment where students love to learn and grow."</textarea>
+              
+              <label class="block mb-2">Principal Name</label>
+              <input type="text" class="w-full p-2 border rounded mb-4" id="principalNameInput" value="Dr. Sarah Johnson">
+              
+              <label class="block mb-2">Mission</label>
+              <textarea class="w-full p-2 border rounded mb-4" rows="2" id="missionInput">To provide quality education that nurtures intellectual curiosity, creativity, and character development in every student.</textarea>
+              
+              <label class="block mb-2">Vision</label>
+              <textarea class="w-full p-2 border rounded mb-4" rows="2" id="visionInput">To be a leading educational institution that produces confident, compassionate, and capable global citizens.</textarea>
+              
+              <button onclick="saveAboutContent()" class="bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full">
+                <i class="fas fa-save mr-2"></i> Save About Content
+              </button>
+            </div>
+            
+            <div class="admin-card">
+              <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+              <label class="block mb-2">Address</label>
+              <input type="text" class="w-full p-2 border rounded mb-4" id="addressInput" value="12 Lakeview Avenue, Whitefield, Bangalore - 560066">
+              
+              <label class="block mb-2">Phone</label>
+              <input type="text" class="w-full p-2 border rounded mb-4" id="phoneInput" value="+91 80 4123 4567">
+              
+              <label class="block mb-2">Email</label>
+              <input type="email" class="w-full p-2 border rounded mb-4" id="emailInput" value="info@daffodilshigh.edu">
+              
+              <button onclick="saveContactInfo()" class="bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full">
+                <i class="fas fa-save mr-2"></i> Save Contact Info
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- PDFs Tab -->
+        <div id="tab-pdfs-content" class="tab-content hidden">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="admin-card">
+              <h3 class="text-xl font-bold mb-4">Admission Form PDF</h3>
+              <input type="file" accept=".pdf" class="w-full p-2 border rounded mb-4" id="admissionFormUpload">
+              <button onclick="uploadAdmissionForm()" class="bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full">
+                <i class="fas fa-upload mr-2"></i> Upload Admission Form
+              </button>
+            </div>
+            
+            <div class="admin-card">
+              <h3 class="text-xl font-bold mb-4">Prospectus PDF</h3>
+              <input type="file" accept=".pdf" class="w-full p-2 border rounded mb-4" id="prospectusUpload">
+              <button onclick="uploadProspectus()" class="bg-deep-blue text-white px-4 py-2 rounded hover:bg-opacity-90 w-full">
+                <i class="fas fa-upload mr-2"></i> Upload Prospectus
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ==================== LOGIN MODAL ==================== -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <h2 class="text-2xl font-bold mb-6">Admin Login</h2>
+    <form onsubmit="adminLogin(event)">
+      <div class="mb-4">
+        <input type="text" placeholder="Username" class="w-full p-3 border rounded-lg" id="username">
+      </div>
+      <div class="mb-4">
+        <input type="password" placeholder="Password" class="w-full p-3 border rounded-lg" id="password">
+      </div>
+      <button type="submit" class="bg-deep-blue text-white px-6 py-3 rounded-lg w-full">Login</button>
+    </form>
+    <button onclick="hideLoginModal()" class="mt-4 text-gray-600 hover:text-gray-800 w-full">Cancel</button>
+  </div>
+</div>
 
 <!-- ==================== FOOTER ==================== -->
 <footer class="bg-deep-blue text-white py-12">
@@ -1001,7 +1082,7 @@
       
       <div>
         <h4 class="font-bold mb-4 text-gold">Contact</h4>
-        <p class="text-gray-300">12 Lakeview Avenue<br>Whitefield, Bangalore<br>+91 80 4123 4567</p>
+        <p class="text-gray-300" id="footer-address">12 Lakeview Avenue<br>Whitefield, Bangalore<br>+91 80 4123 4567</p>
       </div>
       
       <div>
@@ -1022,7 +1103,7 @@
 </footer>
 
 <!-- Toast Notification -->
-<div id="toast" class="toast hidden"></div>
+<div id="toast" class="toast"></div>
 
 <!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -1032,39 +1113,13 @@
 <script>
   // ==================== INITIALIZATION ====================
   
-  // Initialize AOS
-  AOS.init({
-    duration: 1000,
-    once: true,
-    offset: 100
-  });
+  AOS.init({ duration: 1000, once: true, offset: 100 });
   
-  // Initialize Swiper
-  const swiper = new Swiper('.heroSwiper', {
-    loop: true,
-    autoplay: {
-      delay: 5000,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  });
-  
-  // Lightbox configuration
-  lightbox.option({
-    'resizeDuration': 200,
-    'wrapAround': true,
-    'albumLabel': 'Image %1 of %2'
-  });
+  lightbox.option({ resizeDuration: 200, wrapAround: true, albumLabel: 'Image %1 of %2' });
   
   // ==================== DATA STORAGE ====================
   
-  // Initialize localStorage data if not exists
+  // Initialize default data if not exists
   if (!localStorage.getItem('notices')) {
     const defaultNotices = [
       { id: 1, title: "School Reopening", description: "School reopens on June 10th, 2024", date: "2024-06-10" },
@@ -1088,6 +1143,20 @@
     localStorage.setItem('gallery', JSON.stringify(defaultGallery));
   }
   
+  if (!localStorage.getItem('facilities')) {
+    const defaultFacilities = [
+      { id: 1, name: "Smart Classrooms", icon: "💡", description: "Interactive whiteboards and digital learning", image: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=400" },
+      { id: 2, name: "Computer Lab", icon: "💻", description: "50+ systems with latest software", image: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400" },
+      { id: 3, name: "Science Lab", icon: "🔬", description: "Physics, Chemistry, Biology labs", image: "https://images.unsplash.com/photo-1581092335871-4c7c1b3f5b9a?w=400" },
+      { id: 4, name: "Library", icon: "📚", description: "10,000+ books and digital resources", image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400" },
+      { id: 5, name: "Transport", icon: "🚌", description: "30+ buses with GPS tracking", image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400" },
+      { id: 6, name: "Hostel", icon: "🏠", description: "Separate boys & girls hostel", image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=400" },
+      { id: 7, name: "Sports Complex", icon: "⚽", description: "Basketball, football, tennis courts", image: "https://images.unsplash.com/photo-1575361204480-a5d5b7b2b5b5?w=400" },
+      { id: 8, name: "Playground", icon: "🌳", description: "5-acre playground with track", image: "https://images.unsplash.com/photo-1575361204480-a5d5b7b2b5b5?w=400" }
+    ];
+    localStorage.setItem('facilities', JSON.stringify(defaultFacilities));
+  }
+  
   if (!localStorage.getItem('achievements')) {
     const defaultAchievements = [
       { id: 1, title: "Chess Champion", student: "Rohan Mehta", year: "2024", image: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=600" },
@@ -1097,9 +1166,59 @@
     localStorage.setItem('achievements', JSON.stringify(defaultAchievements));
   }
   
+  if (!localStorage.getItem('hero')) {
+    const defaultHero = [
+      { id: 1, url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600", title: "Welcome" },
+      { id: 2, url: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600", title: "Excellence" }
+    ];
+    localStorage.setItem('hero', JSON.stringify(defaultHero));
+  }
+  
   // ==================== DISPLAY FUNCTIONS ====================
   
-  // Display Notices
+  function displayAll() {
+    displayHero();
+    displayNotices();
+    displayGallery();
+    displayFacilities();
+    displayAchievements();
+    displayAcademics();
+    loadAboutContent();
+    loadContactInfo();
+    updateCounters();
+  }
+  
+  function displayHero() {
+    const hero = JSON.parse(localStorage.getItem('hero')) || [];
+    const container = document.getElementById('hero-slider-container');
+    
+    container.innerHTML = hero.map(slide => `
+      <div class="swiper-slide">
+        <div class="hero-slide" style="background-image: url('${slide.url}')">
+          <div class="container mx-auto px-4 h-full flex items-center relative z-10">
+            <div>
+              <span class="bg-gold text-deep-blue px-4 py-2 rounded-full text-sm font-bold">${slide.title}</span>
+              <h1 class="text-5xl md:text-7xl font-bold text-white mt-6 mb-4">Daffodils High<br>International School</h1>
+              <p class="text-xl text-white mb-8">Nurturing minds, Building futures since 1995</p>
+              <a onclick="scrollToSection('admissions')" class="bg-gold text-deep-blue px-8 py-3 rounded-full font-bold hover:bg-opacity-90 transition cursor-pointer inline-block">Enroll Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+    
+    // Reinitialize Swiper after updating content
+    if (window.heroSwiper) {
+      window.heroSwiper.destroy();
+    }
+    window.heroSwiper = new Swiper('.heroSwiper', {
+      loop: true,
+      autoplay: { delay: 5000 },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+    });
+  }
+  
   function displayNotices() {
     const notices = JSON.parse(localStorage.getItem('notices')) || [];
     const noticeBoard = document.getElementById('notice-board');
@@ -1111,51 +1230,212 @@
         <small class="text-gold">Posted: ${notice.date}</small>
       </div>
     `).join('');
-    
-    // Also update admin notices list if admin is logged in
-    if (document.getElementById('adminPanel').style.display === 'block') {
-      displayAdminNotices();
-    }
   }
   
-  // Display Gallery
   function displayGallery() {
     const gallery = JSON.parse(localStorage.getItem('gallery')) || [];
-    const galleryContainer = document.getElementById('gallery-container');
+    const container = document.getElementById('gallery-container');
     
-    galleryContainer.innerHTML = gallery.map(item => `
+    container.innerHTML = gallery.map(item => `
       <a href="${item.url}" data-lightbox="school-gallery" data-title="${item.title}">
-        <img src="${item.thumb}" alt="${item.title}" class="gallery-item w-full h-48 object-cover rounded-lg">
+        <img src="${item.thumb || item.url}" alt="${item.title}" class="gallery-item w-full h-48 object-cover rounded-lg">
       </a>
     `).join('');
   }
   
-  // Display Achievements
+  function displayFacilities() {
+    const facilities = JSON.parse(localStorage.getItem('facilities')) || [];
+    const container = document.getElementById('facilities-container');
+    const featuredContainer = document.getElementById('featured-facilities');
+    
+    container.innerHTML = facilities.map(f => `
+      <div class="bg-white p-6 rounded-xl shadow-lg hover-lift text-center" data-aos="zoom-in">
+        <div class="facility-icon mx-auto">${f.icon}</div>
+        <h3 class="text-xl font-bold mb-2">${f.name}</h3>
+        <p class="text-gray-600 text-sm">${f.description}</p>
+      </div>
+    `).join('');
+    
+    // Show first 4 in featured
+    featuredContainer.innerHTML = facilities.slice(0, 4).map(f => `
+      <div class="bg-white p-4 rounded-lg shadow hover-lift text-center">
+        <span class="text-4xl">${f.icon}</span>
+        <h3 class="font-bold mt-2">${f.name}</h3>
+      </div>
+    `).join('');
+  }
+  
   function displayAchievements() {
     const achievements = JSON.parse(localStorage.getItem('achievements')) || [];
-    const achievementsContainer = document.getElementById('achievements-container');
+    const container = document.getElementById('achievements-container');
     
-    achievementsContainer.innerHTML = achievements.map(achievement => `
+    container.innerHTML = achievements.map(a => `
       <div class="bg-white rounded-xl overflow-hidden shadow-2xl hover-lift" data-aos="fade-up">
-        <img src="${achievement.image}" class="w-full h-48 object-cover">
+        <img src="${a.image}" class="w-full h-48 object-cover">
         <div class="p-6">
-          <h3 class="font-bold text-xl mb-2">${achievement.title}</h3>
-          <p class="text-gold">${achievement.student} - ${achievement.year}</p>
+          <h3 class="font-bold text-xl mb-2">${a.title}</h3>
+          <p class="text-gold">${a.student} - ${a.year}</p>
         </div>
       </div>
     `).join('');
   }
   
-  // Display Admin Notices List
+  function displayAcademics() {
+    const container = document.getElementById('academics-container');
+    const academics = [
+      { level: "Pre-Primary", age: "Age 3-5", desc: "Play-based learning with focus on social skills", img: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=600", features: ["Montessori Method", "Activity-based Learning", "Music & Movement"] },
+      { level: "Primary", age: "Grades 1-5", desc: "Strong foundation in core subjects", img: "https://images.unsplash.com/photo-1503676260728-517c89057f3e?w=600", features: ["English, Math, Science", "Second Language", "Computer Education"] },
+      { level: "Upper Primary", age: "Grades 6-8", desc: "Subject specialization", img: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=600", features: ["Advanced Sciences", "Mathematics", "Social Studies"] },
+      { level: "High School", age: "Grades 9-12", desc: "CBSE & Cambridge curriculum", img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600", features: ["Science, Commerce", "Competitive Exam Prep", "Career Guidance"] }
+    ];
+    
+    container.innerHTML = academics.map(a => `
+      <div class="bg-white rounded-2xl overflow-hidden shadow-2xl hover-lift" data-aos="fade-up">
+        <img src="${a.img}" alt="${a.level}" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h2 class="text-2xl font-bold text-deep-blue mb-3">${a.level} (${a.age})</h2>
+          <p class="text-gray-600 mb-4">${a.desc}</p>
+          <ul class="space-y-2">
+            ${a.features.map(f => `<li class="flex items-center"><span class="text-gold mr-2">✓</span> ${f}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    `).join('');
+  }
+  
+  function loadAboutContent() {
+    const aboutTitle = localStorage.getItem('aboutTitle') || "Welcome to Daffodils High School";
+    const aboutDesc = localStorage.getItem('aboutDesc') || "Founded in 1995, Daffodils High School has been a beacon of educational excellence. We provide a nurturing environment where students develop academically, socially, and emotionally.";
+    const principalMsg = localStorage.getItem('principalMsg') || "At Daffodils, we believe every child is unique and has the potential to excel. Our dedicated team works tirelessly to create an environment where students love to learn and grow.";
+    const principalName = localStorage.getItem('principalName') || "Dr. Sarah Johnson";
+    const mission = localStorage.getItem('mission') || "To provide quality education that nurtures intellectual curiosity, creativity, and character development in every student.";
+    const vision = localStorage.getItem('vision') || "To be a leading educational institution that produces confident, compassionate, and capable global citizens.";
+    
+    document.getElementById('about-title').textContent = aboutTitle;
+    document.getElementById('about-description').textContent = aboutDesc;
+    document.getElementById('principal-message').textContent = principalMsg;
+    document.getElementById('principal-name').textContent = principalName;
+    document.getElementById('mission-text').textContent = mission;
+    document.getElementById('vision-text').textContent = vision;
+    
+    // Load images
+    const schoolImage = localStorage.getItem('schoolImage');
+    if (schoolImage) document.getElementById('school-image').src = schoolImage;
+    
+    const principalImage = localStorage.getItem('principalImage');
+    if (principalImage) document.getElementById('principal-image').src = principalImage;
+  }
+  
+  function loadContactInfo() {
+    const address = localStorage.getItem('address') || "12 Lakeview Avenue, Whitefield, Bangalore - 560066";
+    const phone = localStorage.getItem('phone') || "+91 80 4123 4567";
+    const email = localStorage.getItem('email') || "info@daffodilshigh.edu";
+    
+    document.getElementById('contact-address').textContent = address;
+    document.getElementById('contact-phone').textContent = phone;
+    document.getElementById('contact-email').textContent = email;
+    document.getElementById('footer-address').innerHTML = address.replace(', ', '<br>');
+  }
+  
+  function updateCounters() {
+    const counters = [
+      { id: 'counter1', target: 850 },
+      { id: 'counter2', target: 98 },
+      { id: 'counter3', target: 35 },
+      { id: 'counter4', target: 22 }
+    ];
+    
+    counters.forEach(c => {
+      const el = document.getElementById(c.id);
+      if (el) {
+        let current = 0;
+        const increment = c.target / 50;
+        const update = () => {
+          if (current < c.target) {
+            current += increment;
+            el.innerText = Math.ceil(current);
+            setTimeout(update, 20);
+          } else {
+            el.innerText = c.target;
+          }
+        };
+        update();
+      }
+    });
+  }
+  
+  // ==================== ADMIN FUNCTIONS ====================
+  
+  function showAdminLogin() {
+    document.getElementById('loginModal').classList.add('active');
+  }
+  
+  function hideLoginModal() {
+    document.getElementById('loginModal').classList.remove('active');
+  }
+  
+  function adminLogin(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    
+    if (username === 'admin' && password === 'admin123') {
+      hideLoginModal();
+      document.getElementById('admin-section').style.display = 'block';
+      document.getElementById('admin-section').scrollIntoView({ behavior: 'smooth' });
+      showToast('Login successful!', 'success');
+      loadAdminData();
+    } else {
+      showToast('Invalid credentials! Try admin/admin123', 'error');
+    }
+  }
+  
+  function hideAdminPanel() {
+    document.getElementById('admin-section').style.display = 'none';
+    showToast('Logged out', 'success');
+  }
+  
+  function showAdminTab(tabName) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.classList.remove('bg-deep-blue', 'text-white');
+      btn.classList.add('bg-gray-200', 'text-gray-700');
+    });
+    
+    // Show selected tab
+    document.getElementById(`tab-${tabName}-content`).classList.remove('hidden');
+    document.getElementById(`tab-${tabName}`).classList.remove('bg-gray-200', 'text-gray-700');
+    document.getElementById(`tab-${tabName}`).classList.add('bg-deep-blue', 'text-white');
+  }
+  
+  function loadAdminData() {
+    displayAdminNotices();
+    displayAdminFacilities();
+    displayAdminAchievements();
+    
+    // Load content into input fields
+    document.getElementById('aboutTitleInput').value = localStorage.getItem('aboutTitle') || "Welcome to Daffodils High School";
+    document.getElementById('aboutDescInput').value = localStorage.getItem('aboutDesc') || "Founded in 1995, Daffodils High School has been a beacon of educational excellence.";
+    document.getElementById('principalMsgInput').value = localStorage.getItem('principalMsg') || "At Daffodils, we believe every child is unique...";
+    document.getElementById('principalNameInput').value = localStorage.getItem('principalName') || "Dr. Sarah Johnson";
+    document.getElementById('missionInput').value = localStorage.getItem('mission') || "To provide quality education...";
+    document.getElementById('visionInput').value = localStorage.getItem('vision') || "To be a leading educational institution...";
+    document.getElementById('addressInput').value = localStorage.getItem('address') || "12 Lakeview Avenue, Whitefield, Bangalore - 560066";
+    document.getElementById('phoneInput').value = localStorage.getItem('phone') || "+91 80 4123 4567";
+    document.getElementById('emailInput').value = localStorage.getItem('email') || "info@daffodilshigh.edu";
+  }
+  
   function displayAdminNotices() {
     const notices = JSON.parse(localStorage.getItem('notices')) || [];
-    const adminNoticesList = document.getElementById('adminNoticesList');
+    const container = document.getElementById('adminNoticesList');
     
-    adminNoticesList.innerHTML = notices.map(notice => `
+    container.innerHTML = notices.map(notice => `
       <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
         <div>
           <p class="font-bold">${notice.title}</p>
           <p class="text-sm text-gray-600">${notice.description}</p>
+          <small class="text-gold">${notice.date}</small>
         </div>
         <button onclick="deleteNotice(${notice.id})" class="text-red-500 hover:text-red-700">
           <i class="fas fa-trash"></i>
@@ -1164,117 +1444,48 @@
     `).join('');
   }
   
-  // ==================== COUNTER ANIMATION ====================
-  
-  function animateCounters() {
-    const counters = [
-      { element: document.getElementById('counter1'), target: 850 },
-      { element: document.getElementById('counter2'), target: 98 },
-      { element: document.getElementById('counter3'), target: 35 },
-      { element: document.getElementById('counter4'), target: 22 }
-    ];
+  function displayAdminFacilities() {
+    const facilities = JSON.parse(localStorage.getItem('facilities')) || [];
+    const container = document.getElementById('adminFacilitiesList');
     
-    counters.forEach(counter => {
-      if (!counter.element) return;
-      
-      let current = 0;
-      const increment = counter.target / 50;
-      
-      const updateCounter = () => {
-        if (current < counter.target) {
-          current += increment;
-          counter.element.innerText = Math.ceil(current);
-          setTimeout(updateCounter, 20);
-        } else {
-          counter.element.innerText = counter.target;
-        }
-      };
-      
-      updateCounter();
-    });
-  }
-  
-  // ==================== NAVIGATION ====================
-  
-  function scrollToSection(sectionId) {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const offset = 80; // Height of navbar
-      const sectionTop = section.offsetTop - offset;
-      window.scrollTo({
-        top: sectionTop,
-        behavior: 'smooth'
-      });
-      
-      // Update active nav link
-      updateActiveNavLink(sectionId);
-    }
-  }
-  
-  function updateActiveNavLink(sectionId) {
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.remove('active');
-    });
+    if (!container) return;
     
-    const activeNav = document.getElementById(`nav-${sectionId}`);
-    if (activeNav) {
-      activeNav.classList.add('active');
-    }
+    container.innerHTML = facilities.map(f => `
+      <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+        <div class="flex items-center">
+          <span class="text-2xl mr-3">${f.icon}</span>
+          <div>
+            <p class="font-bold">${f.name}</p>
+            <p class="text-sm text-gray-600">${f.description}</p>
+          </div>
+        </div>
+        <button onclick="deleteFacility(${f.id})" class="text-red-500 hover:text-red-700">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    `).join('');
   }
   
-  // Update active nav link on scroll
-  window.addEventListener('scroll', () => {
-    const sections = ['home', 'about', 'academics', 'facilities', 'gallery', 'achievements', 'admissions', 'contact', 'admin-section'];
-    const scrollPosition = window.scrollY + 100;
+  function displayAdminAchievements() {
+    const achievements = JSON.parse(localStorage.getItem('achievements')) || [];
+    const container = document.getElementById('adminAchievementsList');
     
-    for (const sectionId of sections) {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        const sectionTop = section.offsetTop;
-        const sectionBottom = sectionTop + section.offsetHeight;
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-          updateActiveNavLink(sectionId);
-          break;
-        }
-      }
-    }
-  });
-  
-  // ==================== MOBILE MENU ====================
-  
-  function toggleMobileMenu() {
-    const menu = document.getElementById('mobileDropdown');
-    menu.classList.toggle('hidden');
-  }
-  
-  // ==================== ADMIN FUNCTIONS ====================
-  
-  function adminLogin(event) {
-    event.preventDefault();
-    const username = document.getElementById('adminUsername').value;
-    const password = document.getElementById('adminPassword').value;
+    if (!container) return;
     
-    // Simple demo login (in real app, use proper authentication)
-    if (username === 'admin' && password === 'admin123') {
-      document.getElementById('adminLoginForm').style.display = 'none';
-      document.getElementById('adminPanel').style.display = 'block';
-      showToast('Login successful!', 'success');
-      displayAdminNotices();
-    } else {
-      showToast('Invalid credentials! Try admin/admin123', 'error');
-    }
+    container.innerHTML = achievements.map(a => `
+      <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+        <div>
+          <p class="font-bold">${a.title}</p>
+          <p class="text-sm text-gray-600">${a.student} - ${a.year}</p>
+        </div>
+        <button onclick="deleteAchievement(${a.id})" class="text-red-500 hover:text-red-700">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    `).join('');
   }
   
-  function adminLogout() {
-    document.getElementById('adminLoginForm').style.display = 'block';
-    document.getElementById('adminPanel').style.display = 'none';
-    document.getElementById('adminUsername').value = '';
-    document.getElementById('adminPassword').value = '';
-    showToast('Logged out successfully', 'success');
-  }
-  
-  // Add Notice
+  // Notice Functions
   function addNotice() {
     const title = document.getElementById('noticeTitle').value;
     const desc = document.getElementById('noticeDesc').value;
@@ -1295,17 +1506,14 @@
     notices.push(newNotice);
     localStorage.setItem('notices', JSON.stringify(notices));
     
-    // Clear inputs
     document.getElementById('noticeTitle').value = '';
     document.getElementById('noticeDesc').value = '';
     
-    // Refresh displays
     displayNotices();
     displayAdminNotices();
     showToast('Notice added successfully!', 'success');
   }
   
-  // Delete Notice
   function deleteNotice(id) {
     let notices = JSON.parse(localStorage.getItem('notices')) || [];
     notices = notices.filter(notice => notice.id !== id);
@@ -1316,103 +1524,409 @@
     showToast('Notice deleted successfully!', 'success');
   }
   
-  // Upload Gallery
-  function uploadGallery() {
-    const input = document.getElementById('galleryUpload');
-    if (input.files.length > 0) {
-      showToast('Gallery images uploaded successfully! (Demo)', 'success');
-      // In real app, you would upload to server
+  // Facility Functions
+  function addFacility() {
+    const name = document.getElementById('facilityName').value;
+    const icon = document.getElementById('facilityIcon').value;
+    const desc = document.getElementById('facilityDesc').value;
+    const imageFile = document.getElementById('facilityImage').files[0];
+    
+    if (!name || !icon || !desc) {
+      showToast('Please fill all fields', 'error');
+      return;
+    }
+    
+    if (imageFile) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const facilities = JSON.parse(localStorage.getItem('facilities')) || [];
+        const newFacility = {
+          id: Date.now(),
+          name: name,
+          icon: icon,
+          description: desc,
+          image: e.target.result
+        };
+        
+        facilities.push(newFacility);
+        localStorage.setItem('facilities', JSON.stringify(facilities));
+        
+        document.getElementById('facilityName').value = '';
+        document.getElementById('facilityIcon').value = '';
+        document.getElementById('facilityDesc').value = '';
+        document.getElementById('facilityImage').value = '';
+        
+        displayFacilities();
+        displayAdminFacilities();
+        showToast('Facility added successfully!', 'success');
+      };
+      reader.readAsDataURL(imageFile);
     } else {
-      showToast('Please select files to upload', 'error');
+      const facilities = JSON.parse(localStorage.getItem('facilities')) || [];
+      const newFacility = {
+        id: Date.now(),
+        name: name,
+        icon: icon,
+        description: desc,
+        image: ''
+      };
+      
+      facilities.push(newFacility);
+      localStorage.setItem('facilities', JSON.stringify(facilities));
+      
+      document.getElementById('facilityName').value = '';
+      document.getElementById('facilityIcon').value = '';
+      document.getElementById('facilityDesc').value = '';
+      
+      displayFacilities();
+      displayAdminFacilities();
+      showToast('Facility added successfully!', 'success');
     }
   }
   
-  // Upload PDFs
-  function uploadPDFs() {
-    const admissionForm = document.getElementById('admissionFormUpload');
-    const prospectus = document.getElementById('prospectusUpload');
+  function deleteFacility(id) {
+    let facilities = JSON.parse(localStorage.getItem('facilities')) || [];
+    facilities = facilities.filter(f => f.id !== id);
+    localStorage.setItem('facilities', JSON.stringify(facilities));
     
-    if (admissionForm.files.length > 0 || prospectus.files.length > 0) {
-      showToast('PDFs uploaded successfully! (Demo)', 'success');
+    displayFacilities();
+    displayAdminFacilities();
+    showToast('Facility deleted successfully!', 'success');
+  }
+  
+  // Achievement Functions
+  function addAchievement() {
+    const title = document.getElementById('achievementTitle').value;
+    const student = document.getElementById('achievementStudent').value;
+    const year = document.getElementById('achievementYear').value;
+    const imageFile = document.getElementById('achievementImage').files[0];
+    
+    if (!title || !student || !year) {
+      showToast('Please fill all fields', 'error');
+      return;
+    }
+    
+    if (imageFile) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const achievements = JSON.parse(localStorage.getItem('achievements')) || [];
+        const newAchievement = {
+          id: Date.now(),
+          title: title,
+          student: student,
+          year: year,
+          image: e.target.result
+        };
+        
+        achievements.push(newAchievement);
+        localStorage.setItem('achievements', JSON.stringify(achievements));
+        
+        document.getElementById('achievementTitle').value = '';
+        document.getElementById('achievementStudent').value = '';
+        document.getElementById('achievementYear').value = '';
+        document.getElementById('achievementImage').value = '';
+        
+        displayAchievements();
+        displayAdminAchievements();
+        showToast('Achievement added successfully!', 'success');
+      };
+      reader.readAsDataURL(imageFile);
     } else {
-      showToast('Please select PDF files to upload', 'error');
+      const achievements = JSON.parse(localStorage.getItem('achievements')) || [];
+      const newAchievement = {
+        id: Date.now(),
+        title: title,
+        student: student,
+        year: year,
+        image: 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=600'
+      };
+      
+      achievements.push(newAchievement);
+      localStorage.setItem('achievements', JSON.stringify(achievements));
+      
+      document.getElementById('achievementTitle').value = '';
+      document.getElementById('achievementStudent').value = '';
+      document.getElementById('achievementYear').value = '';
+      
+      displayAchievements();
+      displayAdminAchievements();
+      showToast('Achievement added successfully!', 'success');
     }
   }
   
-  // Save Content
-  function saveContent() {
-    const section = document.getElementById('contentSection').value;
-    const content = document.getElementById('contentText').value;
+  function deleteAchievement(id) {
+    let achievements = JSON.parse(localStorage.getItem('achievements')) || [];
+    achievements = achievements.filter(a => a.id !== id);
+    localStorage.setItem('achievements', JSON.stringify(achievements));
     
-    if (content) {
-      localStorage.setItem(`${section}Content`, content);
-      showToast('Content saved successfully!', 'success');
-    } else {
-      showToast('Please enter content to save', 'error');
+    displayAchievements();
+    displayAdminAchievements();
+    showToast('Achievement deleted successfully!', 'success');
+  }
+  
+  // Image Upload Functions
+  function previewHeroImages(input) {
+    previewImages(input, 'heroPreview');
+  }
+  
+  function previewGalleryImages(input) {
+    previewImages(input, 'galleryPreview');
+  }
+  
+  function previewFacilitiesImages(input) {
+    previewImages(input, 'facilitiesPreview');
+  }
+  
+  function previewAchievementsImages(input) {
+    previewImages(input, 'achievementsPreview');
+  }
+  
+  function previewSchoolImage(input) {
+    previewImages(input, 'schoolImagePreview', true);
+  }
+  
+  function previewPrincipalImage(input) {
+    previewImages(input, 'principalImagePreview', true);
+  }
+  
+  function previewImages(input, previewId, single = false) {
+    const preview = document.getElementById(previewId);
+    preview.innerHTML = '';
+    
+    if (input.files) {
+      if (single) {
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.innerHTML = `
+            <div class="preview-item">
+              <img src="${e.target.result}">
+              <span class="delete-btn" onclick="removePreview(this)">×</span>
+            </div>
+          `;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        Array.from(input.files).forEach(file => {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            preview.innerHTML += `
+              <div class="preview-item">
+                <img src="${e.target.result}">
+                <span class="delete-btn" onclick="removePreview(this)">×</span>
+              </div>
+            `;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
     }
+  }
+  
+  function removePreview(element) {
+    element.parentElement.remove();
+  }
+  
+  function uploadHeroImages() {
+    const preview = document.getElementById('heroPreview');
+    const images = preview.querySelectorAll('img');
+    
+    if (images.length === 0) {
+      showToast('Please select images first', 'error');
+      return;
+    }
+    
+    const hero = [];
+    images.forEach((img, index) => {
+      hero.push({
+        id: Date.now() + index,
+        url: img.src,
+        title: `Hero ${index + 1}`
+      });
+    });
+    
+    localStorage.setItem('hero', JSON.stringify(hero));
+    displayHero();
+    showToast(`${images.length} hero images uploaded!`, 'success');
+    document.getElementById('heroUpload').value = '';
+    preview.innerHTML = '';
+  }
+  
+  function uploadGalleryImages() {
+    const preview = document.getElementById('galleryPreview');
+    const images = preview.querySelectorAll('img');
+    
+    if (images.length === 0) {
+      showToast('Please select images first', 'error');
+      return;
+    }
+    
+    const gallery = JSON.parse(localStorage.getItem('gallery')) || [];
+    
+    images.forEach((img, index) => {
+      gallery.push({
+        id: Date.now() + index,
+        url: img.src,
+        thumb: img.src,
+        title: `Gallery ${gallery.length + 1}`
+      });
+    });
+    
+    localStorage.setItem('gallery', JSON.stringify(gallery));
+    displayGallery();
+    showToast(`${images.length} gallery images uploaded!`, 'success');
+    document.getElementById('galleryUpload').value = '';
+    document.getElementById('galleryPreview').innerHTML = '';
+  }
+  
+  function uploadFacilitiesImages() {
+    const preview = document.getElementById('facilitiesPreview');
+    const images = preview.querySelectorAll('img');
+    
+    if (images.length === 0) {
+      showToast('Please select images first', 'error');
+      return;
+    }
+    
+    showToast(`${images.length} facility images uploaded!`, 'success');
+    document.getElementById('facilitiesUpload').value = '';
+    document.getElementById('facilitiesPreview').innerHTML = '';
+  }
+  
+  function uploadAchievementsImages() {
+    const preview = document.getElementById('achievementsPreview');
+    const images = preview.querySelectorAll('img');
+    
+    if (images.length === 0) {
+      showToast('Please select images first', 'error');
+      return;
+    }
+    
+    showToast(`${images.length} achievement images uploaded!`, 'success');
+    document.getElementById('achievementsUpload').value = '';
+    document.getElementById('achievementsPreview').innerHTML = '';
+  }
+  
+  function uploadSchoolImage() {
+    const preview = document.getElementById('schoolImagePreview');
+    const img = preview.querySelector('img');
+    
+    if (!img) {
+      showToast('Please select an image', 'error');
+      return;
+    }
+    
+    localStorage.setItem('schoolImage', img.src);
+    document.getElementById('school-image').src = img.src;
+    showToast('School image updated!', 'success');
+    document.getElementById('schoolImageUpload').value = '';
+    preview.innerHTML = '';
+  }
+  
+  function uploadPrincipalImage() {
+    const preview = document.getElementById('principalImagePreview');
+    const img = preview.querySelector('img');
+    
+    if (!img) {
+      showToast('Please select an image', 'error');
+      return;
+    }
+    
+    localStorage.setItem('principalImage', img.src);
+    document.getElementById('principal-image').src = img.src;
+    showToast('Principal image updated!', 'success');
+    document.getElementById('principalImageUpload').value = '';
+    preview.innerHTML = '';
+  }
+  
+  // Content Functions
+  function saveAboutContent() {
+    localStorage.setItem('aboutTitle', document.getElementById('aboutTitleInput').value);
+    localStorage.setItem('aboutDesc', document.getElementById('aboutDescInput').value);
+    localStorage.setItem('principalMsg', document.getElementById('principalMsgInput').value);
+    localStorage.setItem('principalName', document.getElementById('principalNameInput').value);
+    localStorage.setItem('mission', document.getElementById('missionInput').value);
+    localStorage.setItem('vision', document.getElementById('visionInput').value);
+    
+    loadAboutContent();
+    showToast('About content saved!', 'success');
+  }
+  
+  function saveContactInfo() {
+    localStorage.setItem('address', document.getElementById('addressInput').value);
+    localStorage.setItem('phone', document.getElementById('phoneInput').value);
+    localStorage.setItem('email', document.getElementById('emailInput').value);
+    
+    loadContactInfo();
+    showToast('Contact info saved!', 'success');
+  }
+  
+  // PDF Functions
+  function uploadAdmissionForm() {
+    const file = document.getElementById('admissionFormUpload').files[0];
+    if (file) {
+      showToast('Admission form uploaded! (Demo)', 'success');
+    } else {
+      showToast('Please select a PDF file', 'error');
+    }
+  }
+  
+  function uploadProspectus() {
+    const file = document.getElementById('prospectusUpload').files[0];
+    if (file) {
+      showToast('Prospectus uploaded! (Demo)', 'success');
+    } else {
+      showToast('Please select a PDF file', 'error');
+    }
+  }
+  
+  // ==================== NAVIGATION ====================
+  
+  function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const offset = 80;
+      const sectionTop = section.offsetTop - offset;
+      window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+    }
+  }
+  
+  function toggleMobileMenu() {
+    document.getElementById('mobileDropdown').classList.toggle('hidden');
   }
   
   // ==================== CONTACT FORM ====================
   
   function handleContactSubmit(event) {
     event.preventDefault();
-    const name = document.getElementById('contactName').value;
-    const email = document.getElementById('contactEmail').value;
-    const message = document.getElementById('contactMessage').value;
-    
-    // Here you would typically send to a server
-    showToast(`Thank you ${name}! Your message has been sent.`, 'success');
-    
-    // Clear form
+    showToast('Thank you! Your message has been sent.', 'success');
     document.getElementById('contactForm').reset();
   }
   
-  // ==================== TOAST NOTIFICATION ====================
+  // ==================== TOAST ====================
   
   function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
     toast.textContent = message;
-    toast.classList.remove('hidden');
-    
-    if (type === 'success') {
-      toast.style.backgroundColor = '#10b981';
-    } else {
-      toast.style.backgroundColor = '#ef4444';
-    }
+    toast.style.backgroundColor = type === 'success' ? '#10b981' : '#ef4444';
+    toast.style.display = 'block';
     
     setTimeout(() => {
-      toast.classList.add('hidden');
+      toast.style.display = 'none';
     }, 3000);
   }
   
   // ==================== INITIAL LOAD ====================
   
-  // Load all data on page load
   window.addEventListener('load', () => {
-    displayNotices();
-    displayGallery();
-    displayAchievements();
-    animateCounters();
+    displayAll();
     
-    // Check URL hash for direct section
+    // Check URL hash
     const hash = window.location.hash.substring(1);
     if (hash) {
-      setTimeout(() => {
-        scrollToSection(hash);
-      }, 500);
+      setTimeout(() => scrollToSection(hash), 500);
     }
   });
-  
-  // Re-animate counters when home section is viewed
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.target.id === 'home') {
-        animateCounters();
-      }
-    });
-  }, { threshold: 0.5 });
-  
-  observer.observe(document.getElementById('home'));
 </script>
 </body>
 </html>
