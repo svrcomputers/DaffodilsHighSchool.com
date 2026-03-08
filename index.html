@@ -33,7 +33,7 @@
       line-height: 1.5; 
       overflow-x: hidden; 
       width: 100%;
-      font-size: 18px; /* Increased base font size */
+      font-size: 18px;
     }
     a { text-decoration: none; color: inherit; }
     .container { 
@@ -44,7 +44,7 @@
     }
     section { padding: 5rem 0; }
     .section-title { 
-      font-size: 3rem; /* Increased from 2.5rem */
+      font-size: 3rem;
       font-weight: 700; 
       color: var(--blue); 
       text-align: center; 
@@ -137,11 +137,11 @@
     /* ===== hero slider ===== */
     .hero {
       position: relative;
-      min-height: 90vh; /* Reduced from 100vh */
+      min-height: 90vh;
       width: 100%;
       display: flex;
-      align-items: flex-start; /* Changed from center to flex-start */
-      padding-top: 8rem; /* Added padding to push content to top */
+      align-items: flex-start;
+      padding-top: 8rem;
       color: var(--white);
       overflow: hidden;
       background: linear-gradient(135deg, rgba(30,58,138,0.92), rgba(30,58,138,0.8));
@@ -167,7 +167,7 @@
     .hero-content {
       max-width: 800px;
       animation: fadeInUp 1s ease;
-      margin-top: 0; /* Removed negative margin */
+      margin-top: 0;
     }
     .hero-content > * {
       animation: fadeInUp 0.8s ease forwards;
@@ -179,23 +179,23 @@
     .hero-content .btn-group { animation-delay: 0.8s; }
     
     .hero h1 { 
-      font-size: 5rem; /* Increased from 4rem */
+      font-size: 5rem;
       font-weight: 700; 
       line-height: 1.2; 
       margin-bottom: 1.5rem; 
     }
     .hero h1 span { color: var(--gold); }
     .hero p { 
-      font-size: 1.5rem; /* Increased from 1.3rem */
+      font-size: 1.5rem;
       margin-bottom: 2.5rem; 
       opacity: 0.95; 
     }
     .btn-group { display: flex; gap: 1.5rem; flex-wrap: wrap; }
     .btn {
-      padding: 1.2rem 3rem; /* Increased padding */
+      padding: 1.2rem 3rem;
       border-radius: 50px; 
       font-weight: 600; 
-      font-size: 1.2rem; /* Added font size */
+      font-size: 1.2rem;
       display: inline-block;
       transition: var(--transition); 
       border: 2px solid transparent; 
@@ -579,10 +579,13 @@
       animation: none;
     }
 
-    /* ===== footer ===== */
+    /* ===== footer - UPDATED WITH REDUCED SPACING ===== */
     footer { 
-      background: var(--blue); color: white; padding: 4rem 0 2rem;
-      position: relative; overflow: hidden;
+      background: var(--blue); 
+      color: white; 
+      padding: 2.5rem 0 1.5rem;
+      position: relative; 
+      overflow: hidden;
     }
     footer::before {
       content: '';
@@ -596,27 +599,27 @@
     }
     .footer-grid { 
       display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-      gap: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+      gap: 1.5rem;
       position: relative; 
       z-index: 2;
     }
     .footer-col { 
       transition: var(--transition); 
-      text-align: left; /* Default left alignment */
+      text-align: left;
     }
-    .footer-col:hover { transform: translateY(-10px); }
+    .footer-col:hover { transform: translateY(-5px); }
     .footer-col h4 { 
       color: var(--gold); 
-      margin-bottom: 1.5rem; 
-      font-size: 1.5rem;
+      margin-bottom: 1rem; 
+      font-size: 1.3rem;
       position: relative; 
       display: inline-block;
     }
     .footer-col h4::after {
       content: '';
       position: absolute;
-      bottom: -5px;
+      bottom: -3px;
       left: 0;
       width: 0;
       height: 2px;
@@ -626,47 +629,48 @@
     .footer-col:hover h4::after { width: 100%; }
     .footer-col ul { list-style: none; }
     .footer-col li { 
-      margin-bottom: 1rem; 
+      margin-bottom: 0.5rem; 
       transition: var(--transition);
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
-    .footer-col li:hover { transform: translateX(10px); }
+    .footer-col li:hover { transform: translateX(5px); }
     .footer-col a:hover { color: var(--gold); }
     .social-icons { 
       display: flex; 
-      gap: 1.5rem; 
-      font-size: 2rem; 
-      margin-top: 1.5rem;
-      justify-content: flex-start; /* Left aligned */
+      gap: 1.2rem; 
+      font-size: 1.6rem; 
+      margin-top: 1rem;
+      justify-content: flex-start;
     }
     .social-icons a { 
       transition: var(--transition);
       display: inline-block;
     }
     .social-icons a:hover { 
-      transform: translateY(-5px) scale(1.2);
+      transform: translateY(-3px) scale(1.1);
       color: var(--gold);
     }
     .copyright { 
       text-align: center; 
-      margin-top: 4rem; 
-      padding-top: 2rem; 
+      margin-top: 2rem; 
+      padding-top: 1rem; 
       border-top: 1px solid rgba(255,255,255,0.2);
       position: relative; 
       z-index: 2;
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
     .copyright span { 
       color: var(--gold); 
       transition: var(--transition); 
       font-weight: 600;
     }
-    .copyright span:hover { color: white; transform: scale(1.1); display: inline-block; }
+    .copyright span:hover { color: white; transform: scale(1.05); display: inline-block; }
     .tagline-full { 
-      font-size: 1.3rem; 
+      font-size: 1.2rem; 
       color: var(--gold); 
-      margin-top: 0.5rem; 
+      margin-top: 0.3rem; 
       font-weight: 500; 
+      margin-bottom: 0.8rem;
     }
 
     /* ===== FIXED MOBILE RESPONSIVENESS ===== */
@@ -756,8 +760,10 @@
       .contact-info { padding: 2rem; }
       .info-item { margin: 1.5rem 0; }
       .map-container { height: 250px; }
-      .footer-grid { gap: 2rem; }
-      .social-icons { justify-content: flex-start; } /* Left aligned even on mobile */
+      .footer-grid { 
+        gap: 1.2rem;
+      }
+      .social-icons { justify-content: flex-start; }
     }
 
     @media (max-width: 600px) {
@@ -795,10 +801,16 @@
       .btn-wa { font-size: 1.3rem; }
       .footer-grid { 
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1rem;
       }
       .footer-col {
-        text-align: left; /* Force left alignment */
+        text-align: left;
+      }
+      .footer-col h4 {
+        margin-bottom: 0.8rem;
+      }
+      .footer-col li {
+        margin-bottom: 0.4rem;
       }
       .footer-col h4::after { 
         left: 0; 
@@ -809,7 +821,9 @@
         text-align: left;
       }
       .social-icons { 
-        justify-content: flex-start; /* Left aligned */
+        justify-content: flex-start;
+        gap: 1rem;
+        font-size: 1.4rem;
       }
       .whatsapp-float, .youtube-float { 
         width: 65px; 
@@ -850,7 +864,7 @@
         gap: 0.8rem;
       }
       .info-item { 
-        flex-direction: row; /* Keep row direction */
+        flex-direction: row;
         text-align: left; 
         gap: 1rem; 
       }
@@ -861,9 +875,19 @@
       }
       .working-hours p { font-size: 1.1rem; }
       .map-container { height: 200px; }
-      .footer-col h4 { font-size: 1.4rem; }
-      .footer-col li { font-size: 1.1rem; }
-      .social-icons { gap: 1.2rem; font-size: 1.8rem; }
+      .footer-col h4 { 
+        font-size: 1.2rem;
+        margin-bottom: 0.7rem;
+      }
+      .footer-col li { 
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+      }
+      .tagline-full {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+      .social-icons { gap: 0.8rem; font-size: 1.3rem; }
     }
 
     @media (max-width: 360px) {
@@ -904,7 +928,6 @@
         width: 45px;
         font-size: 2.5rem;
       }
-      .footer-col ul { text-align: left; }
     }
 
     /* Ensure no horizontal scroll */
@@ -952,7 +975,7 @@
       <p class="tagline-full">Where young minds blossom into global citizens</p>
       <p>Excellence · Innovation · Care since 1995</p>
       <div class="btn-group">
-        <a href="https://wa.me/917396297753?text=Hellow Sir/Madam %2C%20I%20want%20to%20apply%20for%20admission%20at%20Daffodils%20High%20School" target="_blank" class="btn btn-primary">Apply for Admission</a>
+        <a href="https://wa.me/917396297756?text=Hellow Sir/Madam %2C%20I%20want%20to%20apply%20for%20admission%20at%20Daffodils%20High%20School" target="_blank" class="btn btn-primary">Apply for Admission</a>
         <a href="#contact" class="btn btn-outline">Contact Us</a>
       </div>
     </div>
@@ -1073,12 +1096,12 @@
     <div class="contact-grid">
       <div class="contact-info reveal-left">
         <div class="info-item"><i class="fas fa-map-marker-alt"></i> <div>2-6-1055/1, k.L.N, KLN Reddy Colony, Subedari, Hanamkonda, Telangana 506001</div></div>
-        <div class="info-item"><i class="fas fa-phone-alt"></i> <div>+91 9885850508<br> +91 7396297753</div></div>
+        <div class="info-item"><i class="fas fa-phone-alt"></i> <div>+91 9885850508 <br>+91 7396297753</div></div>
         <div class="info-item"><i class="fas fa-envelope"></i> <div>admissions@daffodilshigh.edu</div></div>
         <div class="working-hours">
           <h4><i class="far fa-clock"></i> School Hours</h4>
-          <h3> <p>Monday - Saturday: 8:00 AM – 5:00 PM</p></h3>
-         <h3> <p>Sunday: Closed</p> </h3>h3>
+          <p>Monday - Saturday: 8:00 AM – 5:00 PM</p>
+          <p>Sunday: Closed</p>
         </div>
         <div style="margin-top: 1.5rem; background: rgba(245,180,66,0.1); padding:1rem; border-radius:16px;">
           <p><i class="fab fa-youtube" style="color:#FF0000;"></i> <strong>Watch us:</strong> <a href="https://www.youtube.com/@vcramarao7708" target="_blank" style="color:var(--blue); text-decoration:underline;">Daffodils High YouTube Channel</a></p>
@@ -1092,13 +1115,13 @@
     </div>
   </section>
 
-  <!-- FOOTER - Links now left aligned on mobile -->
+  <!-- FOOTER - Links now left aligned on mobile with reduced spacing -->
   <footer>
     <div class="container footer-grid">
       <div class="footer-col">
         <h4>Daffodils High School</h4>
         <p class="tagline-full">Where young minds blossom into global citizens</p>
-        <ul style="margin-top:1.5rem;">
+        <ul style="margin-top:0.8rem;">
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#why">Why Daffodils</a></li>
@@ -1130,7 +1153,7 @@
       </div>
     </div>
     <div class="copyright container">
-      © 2026 Daffodils High School.<br>
+      © 2026 Daffodils High School. All Rights Reserved.<br>
       Designed & Developed by <span>SVR Computers</span>
     </div>
   </footer>
