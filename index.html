@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Daffodils High School | premium international school</title>
   <meta name="description" content="Daffodils High School offers modern education with smart classrooms, holistic development, and a safe campus. Apply now for admission 2026.">
   <meta name="keywords" content="Daffodils High School, school, admission, education, smart classroom, experienced faculty">
@@ -22,10 +22,26 @@
       --light-bg: #f8fafc; --gray: #334155; --shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
       --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
-    html { scroll-behavior: smooth; }
-    body { background: var(--white); color: var(--gray); line-height: 1.5; overflow-x: hidden; width: 100%; }
+    html { 
+      scroll-behavior: smooth; 
+      -webkit-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+    }
+    body { 
+      background: var(--white); 
+      color: var(--gray); 
+      line-height: 1.5; 
+      overflow-x: hidden; 
+      width: 100%;
+      font-size: 16px;
+    }
     a { text-decoration: none; color: inherit; }
-    .container { width: 90%; max-width: 1280px; margin: 0 auto; }
+    .container { 
+      width: 90%; 
+      max-width: 1280px; 
+      margin: 0 auto; 
+      padding: 0;
+    }
     section { padding: 5rem 0; }
     .section-title { font-size: 2.5rem; font-weight: 700; color: var(--blue); text-align: center; margin-bottom: 1rem; }
     .gold-underline { width: 6rem; height: 4px; background: var(--gold); margin: 0.5rem auto 2rem; border-radius: 4px; }
@@ -243,7 +259,7 @@
       border-bottom-color: var(--gold); 
     }
     .card-img {
-      width: 100%; height: 180px; overflow: hidden; margin-bottom: 1.2rem;
+      width: 100%; height: 200px; overflow: hidden; margin-bottom: 1.2rem;
     }
     .card-img img { 
       width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s;
@@ -253,11 +269,21 @@
     .card:hover h3 { color: var(--gold); }
     .card i { display: none; }
 
-    /* ===== facilities with square images ===== */
-    .facilities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.8rem; }
+    /* ===== facilities with LARGE images ===== */
+    .facilities-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+      gap: 2rem; 
+    }
     .facility-card {
-      background: var(--light-bg); border-radius: 24px; padding: 1.5rem 0.5rem; text-align: center;
-      transition: var(--transition); cursor: pointer; overflow: hidden; position: relative;
+      background: var(--light-bg); 
+      border-radius: 24px; 
+      padding: 2rem 1rem; 
+      text-align: center;
+      transition: var(--transition); 
+      cursor: pointer; 
+      overflow: hidden; 
+      position: relative;
     }
     .facility-card::after {
       content: '';
@@ -274,15 +300,25 @@
       pointer-events: none;
     }
     .facility-card:hover::after {
-      width: 300px;
-      height: 300px;
+      width: 400px;
+      height: 400px;
     }
     .facility-card .facility-img {
-      width: 120px; height: 120px; border-radius: 20px; margin: 0 auto 0.8rem; overflow: hidden;
-      border: 3px solid var(--gold); transition: var(--transition); position: relative; z-index: 2;
+      width: 160px; 
+      height: 160px; 
+      border-radius: 30px; 
+      margin: 0 auto 1.2rem; 
+      overflow: hidden;
+      border: 4px solid var(--gold); 
+      transition: var(--transition); 
+      position: relative; 
+      z-index: 2;
     }
     .facility-img img { 
-      width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s;
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      transition: transform 0.6s;
     }
     .facility-card:hover .facility-img { 
       transform: rotate(5deg) scale(1.1);
@@ -290,8 +326,13 @@
     }
     .facility-card:hover .facility-img img { transform: scale(1.2); }
     .facility-card span { 
-      display: block; font-weight: 600; color: var(--gray); 
-      transition: var(--transition); position: relative; z-index: 2;
+      display: block; 
+      font-weight: 600; 
+      color: var(--gray); 
+      font-size: 1.2rem;
+      transition: var(--transition); 
+      position: relative; 
+      z-index: 2;
     }
     .facility-card:hover { 
       background: var(--blue); 
@@ -556,8 +597,13 @@
     .copyright span:hover { color: white; transform: scale(1.1); display: inline-block; }
     .tagline-full { font-size: 1.1rem; color: var(--gold); margin-top: 0.3rem; font-weight: 500; }
 
-    /* ===== IMPROVED MOBILE RESPONSIVENESS ===== */
-    @media (max-width: 1024px) {
+    /* ===== FIXED MOBILE RESPONSIVENESS - NO ZOOM NEEDED ===== */
+    @media (max-width: 1200px) {
+      html { font-size: 15px; }
+    }
+
+    @media (max-width: 992px) {
+      html { font-size: 14px; }
       .container { width: 92%; }
       .hero h1 { font-size: 3.5rem; }
     }
@@ -578,34 +624,47 @@
       .hamburger { display: block; }
       .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
       .hero h1 { font-size: 3rem; }
-      .facility-card .facility-img { width: 100px; height: 100px; }
       .section-title { font-size: 2.2rem; }
       .cards-grid { gap: 1.5rem; }
-      .facilities-grid { gap: 1.2rem; }
+      .facilities-grid { 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 1.5rem;
+      }
     }
 
     @media (max-width: 768px) {
-      section { padding: 3.5rem 0; }
+      html { font-size: 13px; }
+      section { padding: 3rem 0; }
       .hero { min-height: 90vh; }
       .hero-content { margin-top: 0; }
       .hero-content p { font-size: 1.1rem; }
-      .hero h1 { font-size: 2.5rem; }
+      .hero h1 { font-size: 2.8rem; }
       .btn-group { flex-direction: column; width: 100%; }
       .btn { width: 100%; text-align: center; padding: 0.9rem 1.5rem; }
       .btn-group .btn { width: 100%; }
       .principal-card { padding: 1.5rem; }
       .principal-card img { max-width: 180px; }
       .mission-vision { padding: 1.5rem; }
+      .facilities-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 1.2rem;
+      }
+      .facility-card .facility-img {
+        width: 140px;
+        height: 140px;
+      }
       .gallery-grid { 
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+        grid-template-columns: repeat(2, 1fr); 
         gap: 1rem;
       }
       .gallery-item { height: 200px; }
       .achievement-stats { 
         padding: 2.5rem 1rem; 
         gap: 1.5rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
       }
-      .stat-item { min-width: 120px; }
+      .stat-item { min-width: auto; }
       .stat-item i { font-size: 2.5rem; }
       .stat-number { font-size: 2rem; }
       .admission-cta { padding: 2.5rem 1rem; }
@@ -624,11 +683,11 @@
     }
 
     @media (max-width: 600px) {
+      html { font-size: 12px; }
       .container { width: 94%; }
-      .logo { font-size: 1.5rem; }
+      .logo { font-size: 1.8rem; }
       .section-title { font-size: 2rem; }
-      .gold-underline { margin: 0.3rem auto 1.5rem; }
-      .hero h1 { font-size: 2.2rem; }
+      .hero h1 { font-size: 2.5rem; }
       .hero p { font-size: 1rem; margin-bottom: 1.5rem; }
       .cards-grid { grid-template-columns: 1fr; }
       .academics-grid { grid-template-columns: 1fr; }
@@ -636,16 +695,17 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
       }
-      .facility-card .facility-img { width: 80px; height: 80px; }
-      .facility-card { padding: 1rem 0.3rem; }
+      .facility-card .facility-img { 
+        width: 120px; 
+        height: 120px; 
+      }
+      .facility-card { padding: 1.5rem 0.5rem; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
       .gallery-item { height: 160px; }
       .achievement-stats { 
         grid-template-columns: repeat(2, 1fr);
-        display: grid;
         padding: 1.8rem 1rem;
       }
-      .stat-item { min-width: auto; }
       .stat-number { font-size: 1.8rem; }
       .footer-grid { 
         grid-template-columns: 1fr;
@@ -662,50 +722,83 @@
         right: 15px;
       }
       .youtube-float { bottom: 90px; }
-      .copyright { font-size: 0.9rem; }
     }
 
     @media (max-width: 480px) {
+      html { font-size: 11px; }
       .hero { min-height: 85vh; }
-      .hero h1 { font-size: 2rem; }
-      .hero p { font-size: 0.95rem; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1rem; }
       .section-title { font-size: 1.8rem; }
-      .facilities-grid { gap: 0.8rem; }
-      .facility-card .facility-img { width: 70px; height: 70px; }
-      .facility-card span { font-size: 0.9rem; }
+      .facilities-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 0.8rem;
+      }
+      .facility-card .facility-img { 
+        width: 100px; 
+        height: 100px; 
+        border-width: 3px;
+      }
+      .facility-card span { font-size: 1rem; }
       .gallery-item { height: 140px; }
       .stat-item i { font-size: 2rem; }
       .stat-number { font-size: 1.5rem; }
-      .stat-item div:last-child { font-size: 0.9rem; }
       .cta-title { font-size: 1.8rem; }
       .btn-wa { font-size: 1.1rem; padding: 0.7rem 1.2rem; }
       .info-item { flex-direction: column; text-align: center; gap: 0.5rem; }
       .info-item i { margin: 0 auto; }
-      .working-hours p { font-size: 0.9rem; }
+      .working-hours p { font-size: 1rem; }
       .map-container { height: 180px; }
     }
 
     @media (max-width: 360px) {
+      html { font-size: 10px; }
       .container { width: 96%; }
-      .hero h1 { font-size: 1.8rem; }
-      .facilities-grid { grid-template-columns: 1fr; }
-      .facility-card { display: flex; align-items: center; text-align: left; gap: 1rem; padding: 1rem; }
-      .facility-card .facility-img { margin: 0; width: 60px; height: 60px; }
-      .facility-card span { flex: 1; }
+      .hero h1 { font-size: 2rem; }
+      .facilities-grid { 
+        grid-template-columns: 1fr; 
+      }
+      .facility-card { 
+        display: flex; 
+        align-items: center; 
+        text-align: left; 
+        gap: 1.5rem; 
+        padding: 1.5rem;
+      }
+      .facility-card .facility-img { 
+        margin: 0; 
+        width: 100px; 
+        height: 100px; 
+      }
+      .facility-card span { 
+        flex: 1; 
+        font-size: 1.2rem;
+      }
       .gallery-grid { grid-template-columns: 1fr; }
       .gallery-item { height: 200px; }
       .achievement-stats { grid-template-columns: 1fr; }
-      .stat-item { display: flex; align-items: center; gap: 1rem; }
-      .stat-item i { margin-bottom: 0; width: 40px; }
+      .stat-item { 
+        display: flex; 
+        align-items: center; 
+        gap: 1.5rem;
+        text-align: left;
+      }
+      .stat-item i { 
+        margin-bottom: 0; 
+        width: 40px;
+        font-size: 2.5rem;
+      }
     }
 
-    /* Fix for very small devices */
-    @media (max-width: 280px) {
-      .hero h1 { font-size: 1.5rem; }
-      .btn { padding: 0.7rem 1rem; font-size: 0.9rem; }
-      .principal-card img { max-width: 140px; }
-      .mission-vision-item { flex-direction: column; text-align: center; }
-      .mission-vision-item i { margin: 0 auto; }
+    /* Ensure no horizontal scroll */
+    body, html {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    img, iframe {
+      max-width: 100%;
+      height: auto;
     }
   </style>
 </head>
@@ -754,7 +847,7 @@
     <div class="gold-underline reveal"></div>
     <div class="about-grid">
       <div class="principal-card reveal-left">
-        <img src=" ?w=400" alt="Principal Mrs. Rama Rao">
+        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=400" alt="Principal Mrs. Rama Rao">
         <h4>Mrs. Rama Rao</h4>
         <p>Principal, Daffodils High School</p>
         <p><i class="fas fa-quote-left" style="color:var(--gold);"></i> Every child is a seed; we provide the sunshine.</p>
@@ -788,7 +881,7 @@
     <div class="gold-underline reveal"></div>
     <div class="academics-grid">
       <div class="academic-card reveal-left">
-        <div class="academic-img"><img src="images/pre.jfif?w=400" alt="Pre-Primary"></div>
+        <div class="academic-img"><img src="images/pre.jfif" alt="Pre-Primary"></div>
         <div class="academic-content"><h3>Pre-Primary</h3><p>Play-based learning, nurturing curiosity, and building social skills in a vibrant environment.</p></div>
       </div>
       <div class="academic-card reveal-scale">
@@ -802,13 +895,13 @@
     </div>
   </section>
 
-  <!-- FACILITIES with square images -->
+  <!-- FACILITIES with LARGE images -->
   <section id="facilities" class="container">
     <h2 class="section-title reveal">Premium Facilities</h2>
     <div class="gold-underline reveal"></div>
     <div class="facilities-grid">
-      <div class="facility-card reveal-scale"><div class="facility-img"><img src="images/schoolbus.jfif?w=400&h=400&fit=crop" alt="Bus"></div><span>Transport</span></div>
-      <div class="facility-card reveal-scale" style="transition-delay:0.05s"><div class="facility-img"><img src="images/hostel.jfif?w=400&h=400&fit=crop" alt="Hostel"></div><span>Hostel</span></div>
+      <div class="facility-card reveal-scale"><div class="facility-img"><img src="images/schoolbus.jfif" alt="Bus"></div><span>Transport</span></div>
+      <div class="facility-card reveal-scale" style="transition-delay:0.05s"><div class="facility-img"><img src="images/hostel.jfif" alt="Hostel"></div><span>Hostel</span></div>
       <div class="facility-card reveal-scale" style="transition-delay:0.1s"><div class="facility-img"><img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400&h=400&fit=crop" alt="Computer Lab"></div><span>Computer Lab</span></div>
       <div class="facility-card reveal-scale" style="transition-delay:0.15s"><div class="facility-img"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=400&fit=crop" alt="Library"></div><span>Library</span></div>
       <div class="facility-card reveal-scale" style="transition-delay:0.2s"><div class="facility-img"><img src="https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?w=400&h=400&fit=crop" alt="Playground"></div><span>Playground</span></div>
@@ -817,7 +910,7 @@
     </div>
   </section>
 
-  <!-- GALLERY - YOUR ORIGINAL IMAGES RESTORED EXACTLY -->
+  <!-- GALLERY - YOUR ORIGINAL IMAGES -->
   <section id="gallery" style="background: var(--light-bg);">
     <div class="container">
       <h2 class="section-title reveal">Life @ Daffodils</h2>
@@ -856,7 +949,7 @@
     </div>
   </section>
 
-  <!-- CONTACT (form removed) -->
+  <!-- CONTACT -->
   <section id="contact" class="container">
     <h2 class="section-title reveal">Get in touch</h2>
     <div class="gold-underline reveal"></div>
@@ -940,7 +1033,7 @@
       hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
       document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => navMenu.classList.remove('active')));
 
-      // Scroll reveal with multiple animation classes
+      // Scroll reveal
       const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
       
       function checkReveal() {
@@ -972,17 +1065,6 @@
       closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
       lightbox.addEventListener('click', (e) => { 
         if (e.target === lightbox) lightbox.classList.remove('active'); 
-      });
-
-      // Add hover animations to facility cards
-      const facilityCards = document.querySelectorAll('.facility-card');
-      facilityCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          card.style.animation = 'pulse 1s ease';
-        });
-        card.addEventListener('mouseleave', () => {
-          card.style.animation = 'none';
-        });
       });
     })();
   </script>
