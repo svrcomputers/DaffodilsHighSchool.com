@@ -114,16 +114,16 @@
     .card p { font-size: 1.1rem; padding: 0 1rem; transition: var(--transition); }
     .card:hover h3 { color: var(--gold); }
 
-    /* Facilities Grid - Fixed for mobile */
+    /* Facilities Grid - BIG IMAGES on all devices */
     .facilities-grid { 
       display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-      gap: 1.5rem; 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: 2rem; 
     }
     .facility-card {
       background: var(--light-bg); 
-      border-radius: 20px; 
-      padding: 1.5rem 1rem; 
+      border-radius: 24px; 
+      padding: 2rem 1.5rem; 
       text-align: center;
       transition: var(--transition); 
       cursor: pointer; 
@@ -149,8 +149,9 @@
       height: 400px;
     }
     .facility-card .facility-img {
-      width: 140px;
-      height: 140px;
+      width: 100%;
+      max-width: 260px;
+      height: 220px;
       border-radius: 20px;
       margin: 0 auto 1rem;
       overflow: hidden;
@@ -167,68 +168,62 @@
       display: block;
     }
     .facility-card:hover .facility-img { 
-      transform: rotate(5deg) scale(1.1);
+      transform: rotate(3deg) scale(1.05);
       border-color: var(--white);
     }
-    .facility-card:hover .facility-img img { transform: scale(1.2); }
+    .facility-card:hover .facility-img img { transform: scale(1.15); }
     .facility-card span { 
       display: block; 
       font-weight: 600; 
       color: var(--gray); 
-      font-size: 1.1rem;
+      font-size: 1.3rem;
+      margin-top: 0.8rem;
       transition: var(--transition); 
       position: relative; 
       z-index: 2;
     }
     .facility-card:hover { 
       background: var(--blue); 
-      transform: translateY(-10px) scale(1.05); 
-      box-shadow: 0 20px 30px rgba(30,58,138,0.3); 
+      transform: translateY(-10px) scale(1.03); 
+      box-shadow: 0 25px 35px rgba(30,58,138,0.3); 
     }
     .facility-card:hover span { color: var(--white); transform: scale(1.05); }
 
-    /* Mobile responsive fix for facilities images */
+    /* Mobile responsive - BIG images on mobile too */
     @media (max-width: 768px) {
       .facilities-grid { 
         grid-template-columns: repeat(2, 1fr); 
-        gap: 1rem;
+        gap: 1.2rem;
       }
       .facility-card .facility-img {
-        width: 110px;
-        height: 110px;
-        margin: 0 auto 0.8rem;
+        height: 180px;
+        max-width: 100%;
       }
       .facility-card span {
-        font-size: 0.95rem;
+        font-size: 1.1rem;
       }
       .facility-card {
-        padding: 1rem 0.5rem;
+        padding: 1.2rem 0.8rem;
       }
     }
     @media (max-width: 550px) {
       .facilities-grid { 
         grid-template-columns: repeat(2, 1fr); 
-        gap: 0.8rem;
+        gap: 1rem;
       }
       .facility-card .facility-img {
-        width: 95px;
-        height: 95px;
-        border-width: 3px;
+        height: 150px;
       }
       .facility-card span {
-        font-size: 0.85rem;
-      }
-      .facility-card {
-        padding: 0.8rem 0.3rem;
+        font-size: 1rem;
       }
     }
     @media (max-width: 400px) {
       .facility-card .facility-img {
-        width: 80px;
-        height: 80px;
+        height: 130px;
       }
       .facility-card span {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
       }
     }
 
@@ -498,7 +493,7 @@
     </div>
   </header>
 
-  <section class="hero" id="home"><div class="hero-slider"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1350" alt="School building"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1350" alt="Classroom"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1350" alt="Students"></div><div class="container hero-content"><h1><span>Daffodils</span> High School</h1><p class="tagline-full">Where young minds blossom into global citizens</p><p>Excellence · Innovation · Care since 1995</p><div class="btn-group"><a href="https://wa.me/917396297753?text=Hello Sir/Madam %2C%20I%20want%20to%20apply%20for%20admission%20at%20Daffodils%20High%20School" target="_blank" class="btn btn-primary">Apply for Admission</a><a href="#contact" class="btn btn-outline">Contact Us</a></div></div></section>
+  <section class="hero" id="home"><div class="hero-slider"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1350" alt="School building"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1350" alt="Classroom"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1350" alt="Students"></div><div class="container hero-content"><h1><span>Daffodils</span> High School</h1><p class="tagline-full">Where young minds blossom into global citizens</p><p>Excellence · Innovation · Care since 1989</p><div class="btn-group"><a href="https://wa.me/917396297753?text=Hello Sir/Madam %2C%20I%20want%20to%20apply%20for%20admission%20at%20Daffodils%20High%20School" target="_blank" class="btn btn-primary">Apply for Admission</a><a href="#contact" class="btn btn-outline">Contact Us</a></div></div></section>
 
   <section id="about" class="container"><h3 class="section-title reveal">About Daffodils High School</h3><div class="gold-underline reveal"></div><div class="about-grid"><div class="principal-card reveal-left"><img src="images/Ram.jpeg?w=400" alt="photo"><h4>Mr. V.C.RAMA RAO</h4><p>Correspondent,<br> Daffodils High School</p><p><i class="fas fa-quote-left" style="color:var(--gold);"></i> Every child is a seed; we provide the sunshine.</p></div><div class="mission-vision reveal-right"><div class="mission-vision-item"><i class="fas fa-bullseye"></i><div><strong>Our Mission</strong><br>To nurture critical thinkers and compassionate leaders through innovative teaching and strong values.</div></div><div class="mission-vision-item"><i class="fas fa-eye"></i><div><strong>Our Vision</strong><br>A world where every Daffodils student excels with integrity and confidence.</div></div><div class="mission-vision-item"><i class="fas fa-gem"></i><div><strong>Core Values</strong><br>Respect, Empathy, Excellence, Collaboration</div></div></div></div></section>
 
@@ -564,9 +559,9 @@
       if(closeBtn) closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
       if(lightbox) lightbox.addEventListener('click', (e) => { if(e.target === lightbox) lightbox.classList.remove('active'); });
       
-      // Chatbot functionality
+      // Chatbot functionality - Welcome message on every refresh
       const schoolData = {
-        correspondent: { keys: ['correspondent', 'principal', 'owner', 'founder', 'head', 'rama rao'], reply: 'Our Honorable Correspondent is C. V. Rama Rao Sir. Under his visionary leadership, Daffodils High School continues to excel in providing quality education.' },
+        correspondent: { keys: ['correspondent', 'principal', 'owner', 'founder', 'head', 'rama rao'], reply: 'Our Honorable Correspondent is  V.C. Rama Rao Sir. Under his visionary leadership, Daffodils High School continues to excel in providing quality education.' },
         greetings: { keys: ['hi', 'hello', 'namaste', 'hey', 'good morning', 'help', 'assistant'], reply: 'Hello! I am the Daffodils Smart AI Assistant. I hope you are doing well 🙂, How can I help you today?' },
         admissions: { keys: ['admission', 'join', 'apply', 'seat', 'open', 'document', 'admissions'], reply: 'Admissions are currently OPEN for LKG to 10th Class! Required documents include: Birth Certificate, Previous Marks Memo, and Aadhar Card. Visit our office between 9 AM and 4 PM to apply.' },
         fees: { keys: ['fee', 'cost', 'money', 'discount', 'pay', 'scholarship', 'fees'], reply: 'Our fee structure differs for each class. For complete details, kindly contact our office at 7396297753 or visit the school.' },
@@ -633,12 +628,10 @@
       }
       
       function initChat() {
-        const history = JSON.parse(localStorage.getItem('daffodilsChat')) || [];
-        if (history.length === 0) {
-          appendMessage('bot', 'Welcome to Daffodils High School! I am your AI assistant. I can help you with admission queries, fee details, school timings, facilities, hostel, teachers, and the latest Results. How can I help you today?', false);
-        } else {
-          history.forEach(msg => appendMessage(msg.sender, msg.text, false));
-        }
+        // Always show welcome message on every refresh (clear previous history)
+        localStorage.removeItem('daffodilsChat');
+        messagesContainer.innerHTML = '';
+        appendMessage('bot', 'Welcome to Daffodils High School! I am your AI assistant. I can help you with admission queries, fee details, school timings, facilities, hostel, teachers, and the latest Results. How can I help you today?', false);
       }
       
       function clearChat() {
@@ -659,8 +652,6 @@
         }
       });
       closeBtnChat.addEventListener('click', () => modal.classList.remove('active'));
-      
-      // Initialize empty, will load when opened
     })();
   </script>
 </body>
