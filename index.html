@@ -114,17 +114,123 @@
     .card p { font-size: 1.1rem; padding: 0 1rem; transition: var(--transition); }
     .card:hover h3 { color: var(--gold); }
 
-    .facilities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
-    .facility-card { background: var(--light-bg); border-radius: 24px; padding: 2.5rem 1rem; text-align: center; transition: var(--transition); cursor: pointer; overflow: hidden; position: relative; }
-    .facility-card::after { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background: rgba(255,255,255,0.3); transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s; z-index: 1; pointer-events: none; }
-    .facility-card:hover::after { width: 400px; height: 400px; }
-    .facility-card .facility-img { width: 180px; height: 180px; border-radius: 30px; margin: 0 auto 1.5rem; overflow: hidden; border: 5px solid var(--gold); transition: var(--transition); position: relative; z-index: 2; }
-    .facility-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
-    .facility-card:hover .facility-img { transform: rotate(5deg) scale(1.1); border-color: var(--white); }
+    /* Facilities Grid - Fixed for mobile */
+    .facilities-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+      gap: 1.5rem; 
+    }
+    .facility-card {
+      background: var(--light-bg); 
+      border-radius: 20px; 
+      padding: 1.5rem 1rem; 
+      text-align: center;
+      transition: var(--transition); 
+      cursor: pointer; 
+      overflow: hidden; 
+      position: relative;
+    }
+    .facility-card::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .facility-card:hover::after {
+      width: 400px;
+      height: 400px;
+    }
+    .facility-card .facility-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 20px;
+      margin: 0 auto 1rem;
+      overflow: hidden;
+      border: 4px solid var(--gold);
+      transition: var(--transition);
+      position: relative;
+      z-index: 2;
+    }
+    .facility-img img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      transition: transform 0.6s;
+      display: block;
+    }
+    .facility-card:hover .facility-img { 
+      transform: rotate(5deg) scale(1.1);
+      border-color: var(--white);
+    }
     .facility-card:hover .facility-img img { transform: scale(1.2); }
-    .facility-card span { display: block; font-weight: 600; color: var(--gray); font-size: 1.3rem; transition: var(--transition); position: relative; z-index: 2; }
-    .facility-card:hover { background: var(--blue); transform: translateY(-10px) scale(1.05); box-shadow: 0 20px 30px rgba(30,58,138,0.3); }
-    .facility-card:hover span { color: var(--white); transform: scale(1.1); }
+    .facility-card span { 
+      display: block; 
+      font-weight: 600; 
+      color: var(--gray); 
+      font-size: 1.1rem;
+      transition: var(--transition); 
+      position: relative; 
+      z-index: 2;
+    }
+    .facility-card:hover { 
+      background: var(--blue); 
+      transform: translateY(-10px) scale(1.05); 
+      box-shadow: 0 20px 30px rgba(30,58,138,0.3); 
+    }
+    .facility-card:hover span { color: var(--white); transform: scale(1.05); }
+
+    /* Mobile responsive fix for facilities images */
+    @media (max-width: 768px) {
+      .facilities-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 1rem;
+      }
+      .facility-card .facility-img {
+        width: 110px;
+        height: 110px;
+        margin: 0 auto 0.8rem;
+      }
+      .facility-card span {
+        font-size: 0.95rem;
+      }
+      .facility-card {
+        padding: 1rem 0.5rem;
+      }
+    }
+    @media (max-width: 550px) {
+      .facilities-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 0.8rem;
+      }
+      .facility-card .facility-img {
+        width: 95px;
+        height: 95px;
+        border-width: 3px;
+      }
+      .facility-card span {
+        font-size: 0.85rem;
+      }
+      .facility-card {
+        padding: 0.8rem 0.3rem;
+      }
+    }
+    @media (max-width: 400px) {
+      .facility-card .facility-img {
+        width: 80px;
+        height: 80px;
+      }
+      .facility-card span {
+        font-size: 0.8rem;
+      }
+    }
 
     .academics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
     .academic-card { background: white; border-radius: 24px; box-shadow: var(--shadow); overflow: hidden; transition: var(--transition); border-bottom: 4px solid transparent; position: relative; }
@@ -199,15 +305,36 @@
     .whatsapp-group-float { position:fixed; bottom:210px; right:30px; background:#075E54; color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2.5rem; box-shadow:0 10px 20px rgba(0,0,0,0.2); z-index:999; transition:0.3s; animation:float 3s infinite ease-in-out; border:2px solid #25D366; }
     .whatsapp-group-float:hover { background:#128C7E; transform:scale(1.2) rotate(10deg); animation: none; }
 
-    /* Chatbot Modal Styles - Integrated from second file */
+    /* Chatbot Styles */
+    .chatbot-toggle-btn {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      background: var(--blue);
+      color: white;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+      z-index: 1001;
+      cursor: pointer;
+      transition: 0.3s;
+      border: 2px solid var(--gold);
+    }
+    .chatbot-toggle-btn:hover { transform: scale(1.1) rotate(10deg); background: var(--gold); color: var(--blue); }
+    
     .chatbot-modal {
       position: fixed;
       bottom: 110px;
       left: 20px;
       width: 380px;
       max-width: calc(100vw - 40px);
-      height: 600px;
-      max-height: 75vh;
+      height: 550px;
+      max-height: 70vh;
       background: #e5ddd5;
       border-radius: 24px;
       box-shadow: 0 20px 35px rgba(0,0,0,0.3);
@@ -239,6 +366,18 @@
       font-size: 1.5rem;
     }
     .chatbot-title { flex: 1; font-weight: 600; }
+    .chatbot-clear {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+    .chatbot-clear:hover { background: rgba(255,255,255,0.4); transform: scale(1.05); }
     .chatbot-close {
       background: transparent;
       border: none;
@@ -256,7 +395,7 @@
       gap: 8px;
       background: #e5ddd5;
     }
-    .chatbot-msg-user {
+    .msg-user {
       align-self: flex-end;
       background: #dcf8c6;
       padding: 8px 14px;
@@ -264,7 +403,7 @@
       max-width: 85%;
       font-size: 14px;
     }
-    .chatbot-msg-bot {
+    .msg-bot {
       align-self: flex-start;
       background: white;
       padding: 8px 14px;
@@ -317,26 +456,6 @@
       height: 40px;
       cursor: pointer;
     }
-    .chatbot-toggle-btn {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      background: var(--blue);
-      color: white;
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
-      z-index: 1001;
-      cursor: pointer;
-      transition: 0.3s;
-      border: 2px solid var(--gold);
-    }
-    .chatbot-toggle-btn:hover { transform: scale(1.1) rotate(10deg); background: var(--gold); color: var(--blue); }
     @media (max-width: 600px) {
       .chatbot-modal { left: 10px; right: 10px; width: auto; bottom: 100px; }
       .chatbot-toggle-btn { left: 15px; width: 55px; height: 55px; font-size: 2rem; }
@@ -362,8 +481,9 @@
     .copyright { text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2); position: relative; z-index: 2; font-size: 1rem; }
     .copyright span { color: var(--gold); transition: var(--transition); font-weight: 600; }
     .tagline-full { font-size: 1.2rem; color: var(--gold); margin-top: 0.3rem; font-weight: 500; margin-bottom: 0.8rem; }
+
     @media (max-width: 900px) { .nav-menu { display: none; width: 100%; flex-direction: column; background: white; padding: 2rem; border-radius: 20px; margin-top: 1rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1); gap: 1.5rem; } .nav-menu.active { display: flex; } .hamburger { display: block; } .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; } .hero h1 { font-size: 4rem; } }
-    @media (max-width: 768px) { .hero h1 { font-size: 3rem; } .section-title { font-size: 2.5rem; } .btn-wa { font-size: 1.5rem; } .facilities-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 768px) { .hero h1 { font-size: 3rem; } .section-title { font-size: 2.5rem; } .btn-wa { font-size: 1.5rem; } }
     body, html { max-width: 100%; overflow-x: hidden; }
     img, iframe { max-width: 100%; height: auto; }
   </style>
@@ -378,15 +498,15 @@
     </div>
   </header>
 
-  <section class="hero" id="home"><div class="hero-slider"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1350" alt="School building"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1350" alt="Classroom"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1350" alt="Students"></div><div class="container hero-content"><h1><span>Daffodils</span> High School</h1><p class="tagline-full">Where young minds blossom into global citizens</p><p>Excellence · Innovation · Care since 1989</p><div class="btn-group"><a href="https://wa.me/917396297753?text=Hello Sir/Madam %2C%20I%20want%20to%20apply%20for%20admission%20at%20Daffodils%20High%20School" target="_blank" class="btn btn-primary">Apply for Admission</a><a href="#contact" class="btn btn-outline">Contact Us</a></div></div></section>
+  <section class="hero" id="home"><div class="hero-slider"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1350" alt="School building"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1350" alt="Classroom"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1350" alt="Students"></div><div class="container hero-content"><h1><span>Daffodils</span> High School</h1><p class="tagline-full">Where young minds blossom into global citizens</p><p>Excellence · Innovation · Care since 1995</p><div class="btn-group"><a href="https://wa.me/917396297753?text=Hello Sir/Madam %2C%20I%20want%20to%20apply%20for%20admission%20at%20Daffodils%20High%20School" target="_blank" class="btn btn-primary">Apply for Admission</a><a href="#contact" class="btn btn-outline">Contact Us</a></div></div></section>
 
-  <section id="about" class="container"><h3 class="section-title reveal">About Daffodils High School</h3><div class="gold-underline reveal"></div><div class="about-grid"><div class="principal-card reveal-left"><img src="images/Ram.jpeg?w=400" alt="photo"><h4>Mr. V.C RAMA RAO</h4><p>Correspondent,<br> Daffodils High School</p><p><i class="fas fa-quote-left" style="color:var(--gold);"></i> Every child is a seed; we provide the sunshine.</p></div><div class="mission-vision reveal-right"><div class="mission-vision-item"><i class="fas fa-bullseye"></i><div><strong>Our Mission</strong><br>To nurture critical thinkers and compassionate leaders through innovative teaching and strong values.</div></div><div class="mission-vision-item"><i class="fas fa-eye"></i><div><strong>Our Vision</strong><br>A world where every Daffodils student excels with integrity and confidence.</div></div><div class="mission-vision-item"><i class="fas fa-gem"></i><div><strong>Core Values</strong><br>Respect, Empathy, Excellence, Collaboration</div></div></div></div></section>
+  <section id="about" class="container"><h3 class="section-title reveal">About Daffodils High School</h3><div class="gold-underline reveal"></div><div class="about-grid"><div class="principal-card reveal-left"><img src="images/Ram.jpeg?w=400" alt="photo"><h4>Mr. V.C.RAMA RAO</h4><p>Correspondent,<br> Daffodils High School</p><p><i class="fas fa-quote-left" style="color:var(--gold);"></i> Every child is a seed; we provide the sunshine.</p></div><div class="mission-vision reveal-right"><div class="mission-vision-item"><i class="fas fa-bullseye"></i><div><strong>Our Mission</strong><br>To nurture critical thinkers and compassionate leaders through innovative teaching and strong values.</div></div><div class="mission-vision-item"><i class="fas fa-eye"></i><div><strong>Our Vision</strong><br>A world where every Daffodils student excels with integrity and confidence.</div></div><div class="mission-vision-item"><i class="fas fa-gem"></i><div><strong>Core Values</strong><br>Respect, Empathy, Excellence, Collaboration</div></div></div></div></section>
 
   <section id="why" style="background: var(--light-bg);"><div class="container"><h2 class="section-title reveal">Why Choose Daffodils High School?</h2><div class="gold-underline reveal"></div><div class="cards-grid"><div class="card reveal-scale"><div class="card-img"><img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400" alt="Teacher"></div><h3>Experienced Faculty</h3><p>Passionate educators with global exposure.</p></div><div class="card reveal-scale"><div class="card-img"><img src="images/smart.jfif?w=400" alt="Smart class"></div><h3>Smart Classrooms</h3><p>Interactive tech-enabled learning.</p></div><div class="card reveal-scale"><div class="card-img"><img src="https://images.unsplash.com/photo-1526976668912-1a811878dd37?w=400" alt="Sports"></div><h3>Holistic Development</h3><p>Sports, arts & life skills.</p></div><div class="card reveal-scale"><div class="card-img"><img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400" alt="Security"></div><h3>Safe Campus</h3><p>24/7 security & CCTV.</p></div><div class="card reveal-scale"><div class="card-img"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400" alt="STEAM"></div><h3>Modern Education</h3><p>STEAM & project-based.</p></div></div></div></section>
 
   <section id="academics" class="container"><h2 class="section-title reveal">Academics</h2><div class="gold-underline reveal"></div><div class="academics-grid"><div class="academic-card reveal-left"><div class="academic-img"><img src="images/pre.jfif" alt="Pre-Primary"></div><div class="academic-content"><h3>Pre-Primary</h3><p>Play-based learning, nurturing curiosity.</p></div></div><div class="academic-card reveal-scale"><div class="academic-img"><img src="images/primary.jfif?w=400" alt="Primary"></div><div class="academic-content"><h3>Primary</h3><p>Strong foundations in literacy and numeracy.</p></div></div><div class="academic-card reveal-right"><div class="academic-img"><img src="images/high school.jfif?w=400" alt="High School"></div><div class="academic-content"><h3>High School</h3><p>Rigorous curriculum, career guidance.</p></div></div></div></section>
 
-  <section id="facilities" class="container"><h2 class="section-title reveal">Premium Facilities</h2><div class="gold-underline reveal"></div><div class="facilities-grid"><div class="facility-card reveal-scale"><div class="facility-img"><img src="images/schoolbus.jfif" alt="Bus"></div><span>Transport</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="images/hostel.jfif" alt="Hostel"></div><span>Hostel</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="images/computer lab.jfif?w=400&h=400&fit=crop" alt="Computer Lab"></div><span>Computer Lab</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=400&fit=crop" alt="Library"></div><span>Library</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="images/play.jfif?w=400&h=400&fit=crop" alt="Playground"></div><span>Playground</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=400&fit=crop" alt="Science Lab"></div><span>Science Lab</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=400&h=400&fit=crop" alt="Digital Classroom"></div><span>Digital Classrooms</span></div></div></section>
+  <section id="facilities" class="container"><h2 class="section-title reveal">Premium Facilities</h2><div class="gold-underline reveal"></div><div class="facilities-grid"><div class="facility-card reveal-scale"><div class="facility-img"><img src="images/schoolbus.jfif" alt="Bus" loading="lazy"></div><span>Transport</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="images/hostel.jfif" alt="Hostel" loading="lazy"></div><span>Hostel</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="images/computer lab.jfif?w=400&h=400&fit=crop" alt="Computer Lab" loading="lazy"></div><span>Computer Lab</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=400&fit=crop" alt="Library" loading="lazy"></div><span>Library</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="images/play.jfif?w=400&h=400&fit=crop" alt="Playground" loading="lazy"></div><span>Playground</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=400&fit=crop" alt="Science Lab" loading="lazy"></div><span>Science Lab</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=400&h=400&fit=crop" alt="Digital Classroom" loading="lazy"></div><span>Digital Classrooms</span></div></div></section>
 
   <section id="gallery" style="background: var(--light-bg);"><div class="container"><h2 class="section-title reveal">Life @ Daffodils</h2><div class="gold-underline reveal"></div><div class="gallery-grid" id="galleryGrid"><div class="gallery-item reveal-scale"><img src="images/gallery1.webp" alt="Classroom"></div><div class="gallery-item reveal-scale"><img src="images/sports.webp" alt="Students"></div><div class="gallery-item reveal-scale"><img src="images/gallery3.webp" alt="Library"></div><div class="gallery-item reveal-scale"><img src="images/1.webp" alt="Sports"></div><div class="gallery-item reveal-scale"><img src="images/9.webp" alt="Lab"></div><div class="gallery-item reveal-scale"><img src="images/6.webp" alt="Lab"></div><div class="gallery-item reveal-scale"><img src="images/8.webp" alt="Lab"></div><div class="gallery-item reveal-scale"><img src="images/10.webp" alt="Lab"></div><div class="gallery-item reveal-scale"><img src="images/11.webp" alt="Lab"></div></div></div></section>
 
@@ -394,7 +514,7 @@
 
   <section class="container"><div class="admission-cta reveal"><h2 class="cta-title">Secure your child's future</h2><a href="https://wa.me/917396297753?text=Hello Sir/Madam %2C%20I%20want%20admission%20for%20my%20child%20at%20Daffodils%20High%20School" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> Book Admission Now</a></div></section>
 
-  <section id="contact" class="container"><h2 class="section-title reveal">Get in touch</h2><div class="gold-underline reveal"></div><div class="contact-grid"><div class="contact-info reveal-left"><div class="info-item"><i class="fas fa-map-marker-alt"></i> <div>2-6-1055,KLN Reddy Colony, Subedari, Hanamkonda, Telangana 506001</div></div><div class="info-item"><i class="fas fa-phone-alt"></i> <div>+91 9885850508 <br>+91 7396297753</div></div><div class="info-item"><i class="fas fa-envelope"></i> <div>vcramarao1@gmail.com</div></div><div class="working-hours"><h4><i class="far fa-clock"></i> School Hours</h4><p>Monday - Saturday: 8:00 AM – 5:00 PM</p><p>Sunday: Closed</p></div><div style="margin-top: 1.5rem; background: rgba(245,180,66,0.1); padding:1rem; border-radius:16px;"><p><i class="fab fa-youtube" style="color:#FF0000;"></i> <strong>Watch us:</strong> <a href="https://www.youtube.com/@vcramarao7708" target="_blank" style="color:var(--blue); text-decoration:underline;">Daffodils High School YouTube Channel</a></p><p><i class="fab fa-whatsapp" style="color:#25D366;"></i> <strong>Join WhatsApp group:</strong> <a href="https://whatsapp.com/channel/0029Vb6ttvgJkK7C4oW59B3a" target="_blank" style="color:var(--blue); text-decoration:underline;">Click here</a></p></div><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.5635744457236!2d79.54435107517912!3d17.99903048299623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a334f9d04c48639%3A0x3eebb77566662675!2sDaffodils%20High%20School!5e0!3m2!1sen!2sin!4v1772964404506!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div></div><div class="reveal-right"></div></div></section>
+  <section id="contact" class="container"><h2 class="section-title reveal">Get in touch</h2><div class="gold-underline reveal"></div><div class="contact-grid"><div class="contact-info reveal-left"><div class="info-item"><i class="fas fa-map-marker-alt"></i> <div>2-6-1055,KLN Reddy Colony, Subedari, Hanamkonda, Telangana 506001</div></div><div class="info-item"><i class="fas fa-phone-alt"></i> <div>+91 9885850508 <br>+91 7396297753</div></div><div class="info-item"><i class="fas fa-envelope"></i> <div>admissions@daffodils.com</div></div><div class="working-hours"><h4><i class="far fa-clock"></i> School Hours</h4><p>Monday - Saturday: 8:00 AM – 5:00 PM</p><p>Sunday: Closed</p></div><div style="margin-top: 1.5rem; background: rgba(245,180,66,0.1); padding:1rem; border-radius:16px;"><p><i class="fab fa-youtube" style="color:#FF0000;"></i> <strong>Watch us:</strong> <a href="https://www.youtube.com/@vcramarao7708" target="_blank" style="color:var(--blue); text-decoration:underline;">Daffodils High School YouTube Channel</a></p><p><i class="fab fa-whatsapp" style="color:#25D366;"></i> <strong>Join WhatsApp group:</strong> <a href="https://whatsapp.com/channel/0029Vb6ttvgJkK7C4oW59B3a" target="_blank" style="color:var(--blue); text-decoration:underline;">Click here</a></p></div><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.5635744457236!2d79.54435107517912!3d17.99903048299623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a334f9d04c48639%3A0x3eebb77566662675!2sDaffodils%20High%20School!5e0!3m2!1sen!2sin!4v1772964404506!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div></div><div class="reveal-right"></div></div></section>
 
   <footer><div class="container footer-grid"><div class="footer-col"><h4>Daffodils High School</h4><p class="tagline-full">Where young minds blossom into global citizens</p><ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#why">Why Daffodils</a></li></ul></div><div class="footer-col"><h4>Explore</h4><ul><li><a href="#academics">Academics</a></li><li><a href="#facilities">Facilities</a></li><li><a href="#gallery">Gallery</a></li></ul></div><div class="footer-col"><h4>More</h4><ul><li><a href="#achievements">Achievements</a></li><li><a href="#contact">Contact</a></li></ul></div><div class="footer-col"><h4>Follow us</h4><div class="social-icons"><a href="#"><i class="fab fa-facebook"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="https://www.youtube.com/@vcramarao7708" target="_blank"><i class="fab fa-youtube"></i></a><a href="https://whatsapp.com/channel/0029Vb6ttvgJkK7C4oW59B3a" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div><div class="copyright container">© 2026 Daffodils High School. All Rights Reserved.<br>Designed & Developed by <span style="color: var(--gold); font-weight: 700;">SVR Computers</span> | <i class="fas fa-phone-alt" style="color: var(--gold);"></i> <a href="tel:+918500172644" style="color: white; text-decoration: none;">+91 8500172644</a> | <i class="fab fa-whatsapp" style="color: #25D366;"></i> <a href="https://wa.me/918500172644?text=Hello Sir/Madam%20SVR%20Computers" target="_blank" style="color: white; text-decoration: none;">WhatsApp</a></div></footer>
 
@@ -402,11 +522,15 @@
   <a href="https://www.youtube.com/@vcramarao7708" class="youtube-float" target="_blank"><i class="fab fa-youtube"></i></a>
   <a href="https://whatsapp.com/channel/0029Vb6ttvgJkK7C4oW59B3a" class="whatsapp-group-float" target="_blank"><i class="fas fa-users"></i></a>
 
+  <!-- Chatbot Toggle Button -->
   <div class="chatbot-toggle-btn" id="chatbotToggle"><i class="fas fa-robot"></i></div>
+  
+  <!-- Chatbot Modal -->
   <div class="chatbot-modal" id="chatbotModal">
     <div class="chatbot-header">
       <div class="chatbot-logo"><i class="fas fa-school"></i></div>
       <div class="chatbot-title">Daffodils AI Assistant</div>
+      <button class="chatbot-clear" id="clearChatBtn"><i class="fas fa-trash-alt"></i></button>
       <button class="chatbot-close" id="closeChatbot"><i class="fas fa-times"></i></button>
     </div>
     <div class="chatbot-messages" id="chatbotMessages"></div>
@@ -440,9 +564,9 @@
       if(closeBtn) closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
       if(lightbox) lightbox.addEventListener('click', (e) => { if(e.target === lightbox) lightbox.classList.remove('active'); });
       
-      // Chatbot functionality - Integrated from second file
+      // Chatbot functionality
       const schoolData = {
-        correspondent: { keys: ['correspondent', 'principal', 'owner', 'founder', 'head', 'rama rao'], reply: 'Our Honorable Correspondent is V.C Rama Rao Sir. Under his visionary leadership, Daffodils High School continues to excel in providing quality education.' },
+        correspondent: { keys: ['correspondent', 'principal', 'owner', 'founder', 'head', 'rama rao'], reply: 'Our Honorable Correspondent is C. V. Rama Rao Sir. Under his visionary leadership, Daffodils High School continues to excel in providing quality education.' },
         greetings: { keys: ['hi', 'hello', 'namaste', 'hey', 'good morning', 'help', 'assistant'], reply: 'Hello! I am the Daffodils Smart AI Assistant. I hope you are doing well 🙂, How can I help you today?' },
         admissions: { keys: ['admission', 'join', 'apply', 'seat', 'open', 'document', 'admissions'], reply: 'Admissions are currently OPEN for LKG to 10th Class! Required documents include: Birth Certificate, Previous Marks Memo, and Aadhar Card. Visit our office between 9 AM and 4 PM to apply.' },
         fees: { keys: ['fee', 'cost', 'money', 'discount', 'pay', 'scholarship', 'fees'], reply: 'Our fee structure differs for each class. For complete details, kindly contact our office at 7396297753 or visit the school.' },
@@ -471,6 +595,7 @@
       const modal = document.getElementById('chatbotModal');
       const toggleBtn = document.getElementById('chatbotToggle');
       const closeBtnChat = document.getElementById('closeChatbot');
+      const clearBtn = document.getElementById('clearChatBtn');
       const messagesContainer = document.getElementById('chatbotMessages');
       const userInput = document.getElementById('chatbotInput');
       const sendBtn = document.getElementById('chatbotSend');
@@ -479,7 +604,7 @@
       
       function appendMessage(sender, text, save = true) {
         const messageDiv = document.createElement('div');
-        messageDiv.className = sender === 'user' ? 'chatbot-msg-user' : 'chatbot-msg-bot';
+        messageDiv.className = sender === 'user' ? 'msg-user' : 'msg-bot';
         messageDiv.textContent = text;
         messagesContainer.appendChild(messageDiv);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -516,20 +641,21 @@
         }
       }
       
-      function clearChatOnOpen() {
-        // Clear previous chat when opening
-        messagesContainer.innerHTML = '';
-        localStorage.removeItem('daffodilsChat');
-        appendMessage('bot', 'Welcome to Daffodils High School! I am your AI assistant. I can help you with admission queries, fee details, school timings, facilities, hostel, teachers, and the latest Results. How can I help you today?', false);
+      function clearChat() {
+        if (confirm('Reset conversation?')) {
+          localStorage.removeItem('daffodilsChat');
+          messagesContainer.innerHTML = '';
+          appendMessage('bot', 'Welcome to Daffodils High School! I am your AI assistant. I can help you with admission queries, fee details, school timings, facilities, hostel, teachers, and the latest Results. How can I help you today?', false);
+        }
       }
       
       sendBtn.addEventListener('click', handleSend);
       userInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); handleSend(); } });
-      
+      clearBtn.addEventListener('click', clearChat);
       toggleBtn.addEventListener('click', () => {
         modal.classList.toggle('active');
-        if (modal.classList.contains('active')) {
-          clearChatOnOpen();
+        if (modal.classList.contains('active') && messagesContainer.children.length === 0) {
+          initChat();
         }
       });
       closeBtnChat.addEventListener('click', () => modal.classList.remove('active'));
