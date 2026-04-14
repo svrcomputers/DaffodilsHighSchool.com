@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Daffodils High School | premium international school</title>
   <meta name="description" content="Daffodils High School offers modern education with smart classrooms, holistic development, and a safe campus. Apply now for admission 2026.">
-  <meta name="keywords" content="Daffodils High School, school, admission, education, smart classroom, experienced faculty">
+  <meta name="keywords" content="Best School, Best School in Hanamkonda, Best School near me, Top School in Hanamkonda,Daffodils High School, school, admission, education, smart classroom, experienced faculty">
   <meta name="author" content="SVR Computers">
   <meta property="og:title" content="Daffodils High School">
   <meta property="og:description" content="Where young minds blossom. Modern facilities, experienced faculty, and global standards.">
@@ -22,302 +22,108 @@
       --light-bg: #f8fafc; --gray: #334155; --shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
       --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
-    html { 
-      scroll-behavior: smooth; 
-      -webkit-text-size-adjust: 100%;
-      -webkit-font-smoothing: antialiased;
-    }
-    body { 
-      background: var(--white); 
-      color: var(--gray); 
-      line-height: 1.5; 
-      overflow-x: hidden; 
-      width: 100%;
-      font-size: 18px;
-    }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; }
+    body { background: var(--white); color: var(--gray); line-height: 1.5; overflow-x: hidden; width: 100%; font-size: 18px; }
     a { text-decoration: none; color: inherit; }
-    .container { 
-      width: 90%; 
-      max-width: 1280px; 
-      margin: 0 auto; 
-      padding: 0;
-    }
+    .container { width: 90%; max-width: 1280px; margin: 0 auto; padding: 0; }
     section { padding: 5rem 0; }
-    .section-title { 
-      font-size: 3rem;
-      font-weight: 700; 
-      color: var(--blue); 
-      text-align: center; 
-      margin-bottom: 1rem; 
-    }
+    .section-title { font-size: 3rem; font-weight: 700; color: var(--blue); text-align: center; margin-bottom: 1rem; }
     .gold-underline { width: 7rem; height: 5px; background: var(--gold); margin: 0.5rem auto 2.5rem; border-radius: 4px; }
 
-    /* ===== enhanced animations ===== */
-    @keyframes fadeInUp { 
-      0% { opacity: 0; transform: translateY(40px); } 
-      100% { opacity: 1; transform: translateY(0); } 
-    }
-    @keyframes fadeInLeft { 
-      0% { opacity: 0; transform: translateX(-40px); } 
-      100% { opacity: 1; transform: translateX(0); } 
-    }
-    @keyframes fadeInRight { 
-      0% { opacity: 0; transform: translateX(40px); } 
-      100% { opacity: 1; transform: translateX(0); } 
-    }
-    @keyframes scaleIn { 
-      0% { opacity: 0; transform: scale(0.9); } 
-      100% { opacity: 1; transform: scale(1); } 
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.6); }
-      70% { box-shadow: 0 0 0 20px rgba(37,211,102,0); }
-      100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
-    }
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
-    }
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    @keyframes shimmer {
-      0% { background-position: -1000px 0; }
-      100% { background-position: 1000px 0; }
-    }
-    @keyframes fadeSlider { 
-      0% { opacity: 0; } 
-      10% { opacity: 1; } 
-      30% { opacity: 1; } 
-      40% { opacity: 0; } 
-      100% { opacity: 0; } 
-    }
+    @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInLeft { 0% { opacity: 0; transform: translateX(-40px); } 100% { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInRight { 0% { opacity: 0; transform: translateX(40px); } 100% { opacity: 1; transform: translateX(0); } }
+    @keyframes scaleIn { 0% { opacity: 0; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.6); } 70% { box-shadow: 0 0 0 20px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+    @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes shimmer { 0% { background-position: -1000px 0; } 100% { background-position: 1000px 0; } }
+    @keyframes fadeSlider { 0% { opacity: 0; } 10% { opacity: 1; } 30% { opacity: 1; } 40% { opacity: 0; } 100% { opacity: 0; } }
 
-    /* reveal animations with delay */
     .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
     .reveal.active { opacity: 1; transform: translateY(0); }
-    
     .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 0.8s ease; }
     .reveal-left.active { opacity: 1; transform: translateX(0); }
-    
     .reveal-right { opacity: 0; transform: translateX(40px); transition: all 0.8s ease; }
     .reveal-right.active { opacity: 1; transform: translateX(0); }
-    
     .reveal-scale { opacity: 0; transform: scale(0.9); transition: all 0.8s ease; }
     .reveal-scale.active { opacity: 1; transform: scale(1); }
 
-    /* ===== sticky nav ===== */
-    .sticky-nav {
-      position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05); z-index: 1000; padding: 1rem 0;
-      animation: fadeInUp 0.8s ease;
-    }
+    .sticky-nav { position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); box-shadow: 0 4px 20px rgba(0,0,0,0.05); z-index: 1000; padding: 1rem 0; animation: fadeInUp 0.8s ease; }
     .nav-container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
     .logo { font-size: 2.2rem; font-weight: 700; color: var(--blue); letter-spacing: -0.5px; transition: var(--transition); }
     .logo:hover { transform: scale(1.05); }
     .logo span { color: var(--gold); }
     .nav-menu { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-menu a { 
-      font-weight: 600; 
-      font-size: 1.1rem;
-      transition: var(--transition); 
-      position: relative; 
-    }
-    .nav-menu a::after {
-      content: ''; position: absolute; bottom: -6px; left: 0; width: 0%; height: 2px;
-      background: var(--gold); transition: 0.3s;
-    }
+    .nav-menu a { font-weight: 600; font-size: 1.1rem; transition: var(--transition); position: relative; }
+    .nav-menu a::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0%; height: 2px; background: var(--gold); transition: 0.3s; }
     .nav-menu a:hover::after { width: 100%; }
     .nav-menu a:hover { color: var(--gold); transform: translateY(-2px); }
     .hamburger { display: none; font-size: 2.2rem; color: var(--blue); cursor: pointer; transition: var(--transition); }
     .hamburger:hover { transform: rotate(90deg); color: var(--gold); }
 
-    /* ===== hero slider ===== */
-    .hero {
-      position: relative;
-      min-height: 90vh;
-      width: 100%;
-      display: flex;
-      align-items: flex-start;
-      padding-top: 8rem;
-      color: var(--white);
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(30,58,138,0.92), rgba(30,58,138,0.8));
-    }
-    .hero-slider {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: -1;
-    }
-    .hero-slider img {
-      position: absolute;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      animation: fadeSlider 18s infinite;
-      transform: scale(1.1);
-      transition: transform 6s ease;
-    }
+    .hero { position: relative; min-height: 90vh; width: 100%; display: flex; align-items: flex-start; padding-top: 8rem; color: var(--white); overflow: hidden; background: linear-gradient(135deg, rgba(30,58,138,0.92), rgba(30,58,138,0.8)); }
+    .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+    .hero-slider img { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: fadeSlider 18s infinite; transform: scale(1.1); transition: transform 6s ease; }
     .hero-slider img:nth-child(1) { animation-delay: 0s; }
     .hero-slider img:nth-child(2) { animation-delay: 6s; }
     .hero-slider img:nth-child(3) { animation-delay: 12s; }
-    
-    .hero-content {
-      max-width: 800px;
-      animation: fadeInUp 1s ease;
-      margin-top: 0;
-    }
-    .hero-content > * {
-      animation: fadeInUp 0.8s ease forwards;
-      opacity: 0;
-    }
+    .hero-content { max-width: 800px; animation: fadeInUp 1s ease; margin-top: 0; }
+    .hero-content > * { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
     .hero-content h1 { animation-delay: 0.2s; }
     .hero-content .tagline-full { animation-delay: 0.4s; }
     .hero-content p { animation-delay: 0.6s; }
     .hero-content .btn-group { animation-delay: 0.8s; }
-    
-    .hero h1 { 
-      font-size: 5rem;
-      font-weight: 700; 
-      line-height: 1.2; 
-      margin-bottom: 1.5rem; 
-    }
+    .hero h1 { font-size: 5rem; font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
     .hero h1 span { color: var(--gold); }
-    .hero p { 
-      font-size: 1.5rem;
-      margin-bottom: 2.5rem; 
-      opacity: 0.95; 
-    }
+    .hero p { font-size: 1.5rem; margin-bottom: 2.5rem; opacity: 0.95; }
     .btn-group { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-    .btn {
-      padding: 1.2rem 3rem;
-      border-radius: 50px; 
-      font-weight: 600; 
-      font-size: 1.2rem;
-      display: inline-block;
-      transition: var(--transition); 
-      border: 2px solid transparent; 
-      position: relative;
-      overflow: hidden;
-    }
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.3);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-    .btn:hover::before {
-      width: 300px;
-      height: 300px;
-    }
+    .btn { padding: 1.2rem 3rem; border-radius: 50px; font-weight: 600; font-size: 1.2rem; display: inline-block; transition: var(--transition); border: 2px solid transparent; position: relative; overflow: hidden; }
+    .btn::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background: rgba(255,255,255,0.3); transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s; }
+    .btn:hover::before { width: 300px; height: 300px; }
     .btn-primary { background: var(--gold); color: var(--blue); box-shadow: 0 8px 20px rgba(245,180,66,0.3); }
     .btn-primary:hover { background: transparent; border-color: var(--gold); color: var(--gold); transform: translateY(-5px); }
     .btn-outline { border: 2px solid var(--white); color: var(--white); }
     .btn-outline:hover { background: var(--white); color: var(--blue); transform: translateY(-5px); }
 
-    /* ===== about ===== */
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-    .principal-card {
-      background: var(--light-bg); border-radius: 24px; padding: 2.5rem; text-align: center;
-      box-shadow: var(--shadow); transition: var(--transition); animation: float 4s infinite ease-in-out;
-    }
-    .principal-card:hover { 
-      transform: scale(1.05) translateY(-10px); 
-      box-shadow: 0 30px 40px -10px rgba(30,58,138,0.3);
-    }
-    .principal-card img {
-      width: 100%; max-width: 250px; border-radius: 50%;  aspect-ratio: 1/1; border: 6px solid var(--blue);
-      margin-bottom: 1.5rem; object-fit: cover; transition: var(--transition);
-    }
-    .principal-card:hover img { 
-      transform: rotate(5deg) scale(1.05);
-      border-color: var(--blue);
-    }
+    .principal-card { background: var(--light-bg); border-radius: 24px; padding: 2.5rem; text-align: center; box-shadow: var(--shadow); transition: var(--transition); animation: float 4s infinite ease-in-out; }
+    .principal-card:hover { transform: scale(1.05) translateY(-10px); box-shadow: 0 30px 40px -10px rgba(30,58,138,0.3); }
+    .principal-card img { width: 100%; max-width: 250px; border-radius: 50%; aspect-ratio: 1/1; border: 6px solid var(--blue); margin-bottom: 1.5rem; object-fit: cover; transition: var(--transition); }
+    .principal-card:hover img { transform: rotate(5deg) scale(1.05); border-color: var(--blue); }
     .principal-card h4 { color: var(--blue); font-size: 2rem; margin-bottom: 0.5rem; }
     .principal-card p { color: var(--gray); font-style: italic; margin-bottom: 1.5rem; font-size: 1.1rem; }
-    .mission-vision {
-      display: flex; flex-direction: column; gap: 2rem; background: white; padding: 2.5rem;
-      border-radius: 24px; box-shadow: var(--shadow); transition: var(--transition);
-    }
+    .mission-vision { display: flex; flex-direction: column; gap: 2rem; background: white; padding: 2.5rem; border-radius: 24px; box-shadow: var(--shadow); transition: var(--transition); }
     .mission-vision:hover { transform: translateY(-10px); box-shadow: 0 30px 40px -10px rgba(30,58,138,0.2); }
-    .mission-vision-item { 
-      display: flex; gap: 1.5rem; align-items: flex-start; 
-      transition: var(--transition);
-    }
+    .mission-vision-item { display: flex; gap: 1.5rem; align-items: flex-start; transition: var(--transition); }
     .mission-vision-item:hover { transform: translateX(10px); }
-    .mission-vision-item i { 
-      font-size: 2.5rem; color: var(--gold); min-width: 60px;
-      transition: var(--transition);
-    }
-    .mission-vision-item:hover i { 
-      transform: rotate(360deg);
-      color: var(--blue);
-    }
+    .mission-vision-item i { font-size: 2.5rem; color: var(--gold); min-width: 60px; transition: var(--transition); }
+    .mission-vision-item:hover i { transform: rotate(360deg); color: var(--blue); }
     .mission-vision-item div { font-size: 1.1rem; }
     .mission-vision-item strong { font-size: 1.3rem; }
 
-    /* ===== why us cards with images ===== */
     .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
-    .card {
-      background: var(--white); padding: 0 0 2rem 0; border-radius: 20px; text-align: center;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.03); transition: var(--transition); border-bottom: 4px solid transparent;
-      overflow: hidden; position: relative;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.6s;
-    }
+    .card { background: var(--white); padding: 0 0 2rem 0; border-radius: 20px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.03); transition: var(--transition); border-bottom: 4px solid transparent; overflow: hidden; position: relative; }
+    .card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.6s; }
     .card:hover::before { left: 100%; }
-    .card:hover { 
-      transform: translateY(-20px) scale(1.02); 
-      box-shadow: 0 30px 40px rgba(30,58,138,0.15); 
-      border-bottom-color: var(--gold); 
-    }
-    .card-img {
-      width: 100%; height: 220px; overflow: hidden; margin-bottom: 1.5rem;
-    }
-    .card-img img { 
-      width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s;
-    }
+    .card:hover { transform: translateY(-20px) scale(1.02); box-shadow: 0 30px 40px rgba(30,58,138,0.15); border-bottom-color: var(--gold); }
+    .card-img { width: 100%; height: 220px; overflow: hidden; margin-bottom: 1.5rem; }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s; }
     .card:hover .card-img img { transform: scale(1.15) rotate(2deg); }
-    .card h3 { 
-      font-size: 1.5rem; 
-      padding: 0 1rem; 
-      transition: var(--transition); 
-      margin-bottom: 0.8rem;
-    }
-    .card p { 
-      font-size: 1.1rem; 
-      padding: 0 1rem; 
-      transition: var(--transition); 
-    }
+    .card h3 { font-size: 1.5rem; padding: 0 1rem; transition: var(--transition); margin-bottom: 0.8rem; }
+    .card p { font-size: 1.1rem; padding: 0 1rem; transition: var(--transition); }
     .card:hover h3 { color: var(--gold); }
-    .card i { display: none; }
 
-    /* ===== facilities with LARGE images ===== */
+    /* Facilities Grid - BIG IMAGES on all devices */
     .facilities-grid { 
       display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
       gap: 2rem; 
     }
     .facility-card {
       background: var(--light-bg); 
       border-radius: 24px; 
-      padding: 2.5rem 1rem; 
+      padding: 2rem 1.5rem; 
       text-align: center;
       transition: var(--transition); 
       cursor: pointer; 
@@ -343,14 +149,15 @@
       height: 400px;
     }
     .facility-card .facility-img {
-      width: 180px; 
-      height: 180px; 
-      border-radius: 30px; 
-      margin: 0 auto 1.5rem; 
+      width: 100%;
+      max-width: 260px;
+      height: 220px;
+      border-radius: 20px;
+      margin: 0 auto 1rem;
       overflow: hidden;
-      border: 5px solid var(--gold); 
-      transition: var(--transition); 
-      position: relative; 
+      border: 4px solid var(--gold);
+      transition: var(--transition);
+      position: relative;
       z-index: 2;
     }
     .facility-img img { 
@@ -358,859 +165,493 @@
       height: 100%; 
       object-fit: cover; 
       transition: transform 0.6s;
+      display: block;
     }
     .facility-card:hover .facility-img { 
-      transform: rotate(5deg) scale(1.1);
+      transform: rotate(3deg) scale(1.05);
       border-color: var(--white);
     }
-    .facility-card:hover .facility-img img { transform: scale(1.2); }
+    .facility-card:hover .facility-img img { transform: scale(1.15); }
     .facility-card span { 
       display: block; 
       font-weight: 600; 
       color: var(--gray); 
       font-size: 1.3rem;
+      margin-top: 0.8rem;
       transition: var(--transition); 
       position: relative; 
       z-index: 2;
     }
     .facility-card:hover { 
       background: var(--blue); 
-      transform: translateY(-10px) scale(1.05); 
-      box-shadow: 0 20px 30px rgba(30,58,138,0.3); 
+      transform: translateY(-10px) scale(1.03); 
+      box-shadow: 0 25px 35px rgba(30,58,138,0.3); 
     }
-    .facility-card:hover span { color: var(--white); transform: scale(1.1); }
-    .facility-card i { display: none; }
+    .facility-card:hover span { color: var(--white); transform: scale(1.05); }
 
-    /* ===== academics section ===== */
+    /* Mobile responsive - BIG images on mobile too */
+    @media (max-width: 768px) {
+      .facilities-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 1.2rem;
+      }
+      .facility-card .facility-img {
+        height: 180px;
+        max-width: 100%;
+      }
+      .facility-card span {
+        font-size: 1.1rem;
+      }
+      .facility-card {
+        padding: 1.2rem 0.8rem;
+      }
+    }
+    @media (max-width: 550px) {
+      .facilities-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 1rem;
+      }
+      .facility-card .facility-img {
+        height: 150px;
+      }
+      .facility-card span {
+        font-size: 1rem;
+      }
+    }
+    @media (max-width: 400px) {
+      .facility-card .facility-img {
+        height: 130px;
+      }
+      .facility-card span {
+        font-size: 0.9rem;
+      }
+    }
+
     .academics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
-    .academic-card {
-      background: white; border-radius: 24px; box-shadow: var(--shadow); overflow: hidden;
-      transition: var(--transition); border-bottom: 4px solid transparent; position: relative;
-    }
-    .academic-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      transition: left 0.8s;
-      z-index: 1;
-    }
+    .academic-card { background: white; border-radius: 24px; box-shadow: var(--shadow); overflow: hidden; transition: var(--transition); border-bottom: 4px solid transparent; position: relative; }
+    .academic-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.8s; z-index: 1; }
     .academic-card:hover::before { left: 100%; }
-    .academic-card:hover { 
-      transform: translateY(-15px) scale(1.02); 
-      border-bottom-color: var(--gold);
-      box-shadow: 0 30px 40px rgba(30,58,138,0.2);
-    }
+    .academic-card:hover { transform: translateY(-15px) scale(1.02); border-bottom-color: var(--gold); box-shadow: 0 30px 40px rgba(30,58,138,0.2); }
     .academic-img { height: 240px; overflow: hidden; }
-    .academic-img img { 
-      width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s;
-    }
+    .academic-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s; }
     .academic-card:hover .academic-img img { transform: scale(1.15); }
     .academic-content { padding: 2rem; position: relative; z-index: 2; background: white; }
-    .academic-content h3 { 
-      color: var(--blue); margin-bottom: 0.8rem; font-size: 1.6rem;
-      transition: var(--transition);
-    }
+    .academic-content h3 { color: var(--blue); margin-bottom: 0.8rem; font-size: 1.6rem; transition: var(--transition); }
     .academic-card:hover .academic-content h3 { color: var(--gold); }
     .academic-content p { color: var(--gray); font-size: 1.1rem; transition: var(--transition); }
 
-    /* ===== gallery (YOUR ORIGINAL IMAGES) ===== */
     .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-    .gallery-item { 
-      border-radius: 16px; overflow: hidden; height: 280px; width: 100%; 
-      cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transition: var(--transition); position: relative;
-    }
-    .gallery-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(30,58,138,0.3);
-      opacity: 0;
-      transition: var(--transition);
-      z-index: 1;
-    }
+    .gallery-item { border-radius: 16px; overflow: hidden; height: 280px; width: 100%; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: var(--transition); position: relative; }
+    .gallery-item::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30,58,138,0.3); opacity: 0; transition: var(--transition); z-index: 1; }
     .gallery-item:hover::before { opacity: 1; }
-    .gallery-item::after {
-      content: '\f00e';
-      font-family: 'Font Awesome 6 Free';
-      font-weight: 900;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      color: white;
-      font-size: 2.5rem;
-      z-index: 2;
-      transition: transform 0.4s;
-    }
+    .gallery-item::after { content: '\f00e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); color: white; font-size: 2.5rem; z-index: 2; transition: transform 0.4s; }
     .gallery-item:hover::after { transform: translate(-50%, -50%) scale(1); }
-    .gallery-item img { 
-      width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s;
-    }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s; }
     .gallery-item:hover img { transform: scale(1.15); }
 
-    /* ===== lightbox ===== */
-    .lightbox {
-      position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95);
-      display:flex; align-items:center; justify-content:center; z-index:2000;
-      visibility:hidden; opacity:0; transition:0.4s;
-    }
+    .lightbox { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); display:flex; align-items:center; justify-content:center; z-index:2000; visibility:hidden; opacity:0; transition:0.4s; }
     .lightbox.active { visibility:visible; opacity:1; }
-    .lightbox img { 
-      max-width:90%; max-height:80%; border-radius:10px; 
-      transform: scale(0.9); transition: transform 0.4s;
-    }
+    .lightbox img { max-width:90%; max-height:80%; border-radius:10px; transform: scale(0.9); transition: transform 0.4s; }
     .lightbox.active img { transform: scale(1); }
-    .lightbox-close { 
-      position:absolute; top:20px; right:30px; color:white; font-size:4rem; 
-      cursor:pointer; transition: var(--transition);
-    }
+    .lightbox-close { position:absolute; top:20px; right:30px; color:white; font-size:4rem; cursor:pointer; transition: var(--transition); }
     .lightbox-close:hover { transform: rotate(90deg) scale(1.2); color: var(--gold); }
 
-    /* ===== achievements ===== */
-    .achievement-stats {
-      display: flex; flex-wrap: wrap; justify-content: space-around; gap:2rem;
-      background: linear-gradient(145deg, var(--blue), #112b5e); padding:4rem 2rem; border-radius:40px; color:white;
-      transition: var(--transition);
-    }
+    .achievement-stats { display: flex; flex-wrap: wrap; justify-content: space-around; gap:2rem; background: linear-gradient(145deg, var(--blue), #112b5e); padding:4rem 2rem; border-radius:40px; color:white; transition: var(--transition); }
     .achievement-stats:hover { transform: scale(1.02); box-shadow: 0 30px 40px rgba(30,58,138,0.3); }
-    .stat-item { 
-      text-align:center; min-width:180px; 
-      transition: var(--transition); animation: float 4s infinite ease-in-out;
-    }
+    .stat-item { text-align:center; min-width:180px; transition: var(--transition); animation: float 4s infinite ease-in-out; }
     .stat-item:nth-child(2) { animation-delay: 0.5s; }
     .stat-item:nth-child(3) { animation-delay: 1s; }
     .stat-item:nth-child(4) { animation-delay: 1.5s; }
     .stat-item:hover { transform: translateY(-10px) scale(1.1); }
-    .stat-item i { 
-      font-size: 3.5rem; color:var(--gold); margin-bottom:1rem;
-      transition: var(--transition);
-    }
+    .stat-item i { font-size: 3.5rem; color:var(--gold); margin-bottom:1rem; transition: var(--transition); }
     .stat-item:hover i { transform: rotate(360deg); }
     .stat-number { font-size: 3rem; font-weight:700; }
     .stat-item div:last-child { font-size: 1.3rem; }
 
-    /* ===== admission CTA ===== */
-    .admission-cta {
-      background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1350') center/cover fixed;
-      border-radius:30px; padding:5rem 2rem; text-align:center; color:white; position:relative; isolation:isolate;
-      transition: var(--transition);
-    }
+    .admission-cta { background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1350') center/cover fixed; border-radius:30px; padding:5rem 2rem; text-align:center; color:white; position:relative; isolation:isolate; transition: var(--transition); }
     .admission-cta:hover { transform: translateY(-10px); box-shadow: 0 30px 40px rgba(0,0,0,0.2); }
-    .admission-cta::before { 
-      content:''; position:absolute; inset:0; background:rgba(30,58,138,0.85); 
-      border-radius:30px; z-index:-1; transition: var(--transition);
-    }
+    .admission-cta::before { content:''; position:absolute; inset:0; background:rgba(30,58,138,0.85); border-radius:30px; z-index:-1; transition: var(--transition); }
     .admission-cta:hover::before { background: rgba(30,58,138,0.9); }
-    .cta-title { 
-      font-size: 3.5rem; font-weight:700; margin-bottom:2rem;
-      animation: float 4s infinite ease-in-out;
-    }
-    .btn-wa {
-      background:#25D366; color:white; font-size: 1.8rem; padding:1.2rem 3.5rem; border-radius:60px;
-      border:none; display:inline-flex; align-items:center; gap:1rem; transition:0.3s;
-      animation: pulse 2s infinite; position: relative; overflow: hidden;
-    }
-    .btn-wa:hover { 
-      background:#128C7E; transform:scale(1.1) rotate(2deg); 
-      animation: none;
-    }
+    .cta-title { font-size: 3.5rem; font-weight:700; margin-bottom:2rem; animation: float 4s infinite ease-in-out; }
+    .btn-wa { background:#25D366; color:white; font-size: 1.8rem; padding:1.2rem 3.5rem; border-radius:60px; border:none; display:inline-flex; align-items:center; gap:1rem; transition:0.3s; animation: pulse 2s infinite; position: relative; overflow: hidden; }
+    .btn-wa:hover { background:#128C7E; transform:scale(1.1) rotate(2deg); animation: none; }
 
-    /* ===== contact ===== */
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-    .contact-info { 
-      background: var(--light-bg); padding: 2.5rem; border-radius: 24px;
-      transition: var(--transition);
-    }
+    .contact-info { background: var(--light-bg); padding: 2.5rem; border-radius: 24px; transition: var(--transition); }
     .contact-info:hover { transform: translateY(-10px); box-shadow: 0 30px 40px rgba(30,58,138,0.15); }
-    .info-item { 
-      display: flex; gap: 1.5rem; margin: 2rem 0; align-items: center;
-      transition: var(--transition);
-    }
+    .info-item { display: flex; gap: 1.5rem; margin: 2rem 0; align-items: center; transition: var(--transition); }
     .info-item:hover { transform: translateX(10px); }
-    .info-item i { 
-      font-size: 2.5rem; color: var(--gold); width: 50px;
-      transition: var(--transition);
-    }
+    .info-item i { font-size: 2.5rem; color: var(--gold); width: 50px; transition: var(--transition); }
     .info-item:hover i { transform: rotate(360deg) scale(1.2); }
     .info-item div { font-size: 1.2rem; }
-    .working-hours { 
-      background: var(--blue); color: white; padding: 1.5rem; border-radius: 16px; margin-top: 2rem;
-      transition: var(--transition);
-    }
+    .working-hours { background: var(--blue); color: white; padding: 1.5rem; border-radius: 16px; margin-top: 2rem; transition: var(--transition); }
     .working-hours:hover { transform: scale(1.02); background: #112b5e; }
-    .working-hours h4 { 
-      color: var(--gold); margin-bottom: 1rem; 
-      font-size: 1.4rem; display: flex; align-items: center; gap: 0.8rem;
-    }
+    .working-hours h4 { color: var(--gold); margin-bottom: 1rem; font-size: 1.4rem; display: flex; align-items: center; gap: 0.8rem; }
     .working-hours p { font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .map-container { 
-      margin-top:2rem; border-radius:24px; overflow:hidden; height:300px;
-      transition: var(--transition);
-    }
+    .map-container { margin-top:2rem; border-radius:24px; overflow:hidden; height:300px; transition: var(--transition); }
     .map-container:hover { transform: translateY(-5px); box-shadow: 0 20px 30px rgba(30,58,138,0.2); }
     .map-container iframe { transition: var(--transition); width: 100%; height: 100%; }
     .map-container:hover iframe { filter: brightness(1.1); }
 
-    /* ===== floating social ===== */
-    .whatsapp-float {
-      position:fixed; bottom:30px; right:30px; background:#25D366; color:white; width:75px; height:75px;
-      border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:3rem;
-      box-shadow:0 10px 20px rgba(0,0,0,0.2); z-index:999; transition:0.3s; animation:pulse 2s infinite;
+    .whatsapp-float { position:fixed; bottom:30px; right:30px; background:#25D366; color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2.8rem; box-shadow:0 10px 20px rgba(0,0,0,0.2); z-index:999; transition:0.3s; animation:pulse 2s infinite; }
+    .whatsapp-float:hover { background:#128C7E; transform:scale(1.2) rotate(360deg); animation: none; }
+    .youtube-float { position:fixed; bottom:120px; right:30px; background:#FF0000; color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2.8rem; box-shadow:0 10px 20px rgba(0,0,0,0.2); z-index:999; transition:0.3s; animation:pulse 2s infinite 0.5s; }
+    .youtube-float:hover { background:#cc0000; transform:scale(1.2) rotate(-360deg); animation: none; }
+    .whatsapp-group-float { position:fixed; bottom:210px; right:30px; background:#075E54; color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2.5rem; box-shadow:0 10px 20px rgba(0,0,0,0.2); z-index:999; transition:0.3s; animation:float 3s infinite ease-in-out; border:2px solid #25D366; }
+    .whatsapp-group-float:hover { background:#128C7E; transform:scale(1.2) rotate(10deg); animation: none; }
+
+    /* Chatbot Styles */
+    .chatbot-toggle-btn {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      background: var(--blue);
+      color: white;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+      z-index: 1001;
+      cursor: pointer;
+      transition: 0.3s;
+      border: 2px solid var(--gold);
     }
-    .whatsapp-float:hover { 
-      background:#128C7E; transform:scale(1.2) rotate(360deg); 
-      animation: none;
+    .chatbot-toggle-btn:hover { transform: scale(1.1) rotate(10deg); background: var(--gold); color: var(--blue); }
+    
+    .chatbot-modal {
+      position: fixed;
+      bottom: 110px;
+      left: 20px;
+      width: 380px;
+      max-width: calc(100vw - 40px);
+      height: 550px;
+      max-height: 70vh;
+      background: #e5ddd5;
+      border-radius: 24px;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+      z-index: 1002;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.1);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
-    .youtube-float {
-      position:fixed; bottom:120px; right:30px; background:#FF0000; color:white; width:75px; height:75px;
-      border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:3rem;
-      box-shadow:0 10px 20px rgba(0,0,0,0.2); z-index:999; transition:0.3s; animation:pulse 2s infinite 0.5s;
+    .chatbot-modal.active { display: flex; }
+    .chatbot-header {
+      background: #075E54;
+      color: white;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
-    .youtube-float:hover { 
-      background:#cc0000; transform:scale(1.2) rotate(-360deg); 
-      animation: none;
+    .chatbot-logo {
+      background: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #075E54;
+      font-size: 1.5rem;
+    }
+    .chatbot-title { flex: 1; font-weight: 600; }
+    .chatbot-clear {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+    .chatbot-clear:hover { background: rgba(255,255,255,0.4); transform: scale(1.05); }
+    .chatbot-close {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 36px;
+    }
+    .chatbot-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: #e5ddd5;
+    }
+    .msg-user {
+      align-self: flex-end;
+      background: #dcf8c6;
+      padding: 8px 14px;
+      border-radius: 18px;
+      max-width: 85%;
+      font-size: 14px;
+    }
+    .msg-bot {
+      align-self: flex-start;
+      background: white;
+      padding: 8px 14px;
+      border-radius: 18px;
+      max-width: 85%;
+      font-size: 14px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .chatbot-typing {
+      display: none;
+      align-self: flex-start;
+      background: white;
+      padding: 8px 14px;
+      border-radius: 18px;
+      gap: 4px;
+    }
+    .chatbot-typing span {
+      width: 6px;
+      height: 6px;
+      background: #888;
+      border-radius: 50%;
+      display: inline-block;
+      animation: typingBounce 1.4s infinite;
+    }
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-8px); }
+    }
+    .chatbot-input-area {
+      display: flex;
+      padding: 10px;
+      background: #f0f2f5;
+      gap: 8px;
+      border-top: 1px solid #ddd;
+    }
+    .chatbot-input {
+      flex: 1;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 16px;
+      font-size: 14px;
+      outline: none;
+    }
+    .chatbot-send {
+      background: #075E54;
+      border: none;
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
+    @media (max-width: 600px) {
+      .chatbot-modal { left: 10px; right: 10px; width: auto; bottom: 100px; }
+      .chatbot-toggle-btn { left: 15px; width: 55px; height: 55px; font-size: 2rem; }
+      .whatsapp-float, .youtube-float, .whatsapp-group-float { width: 55px; height: 55px; font-size: 2rem; right: 15px; }
+      .youtube-float { bottom: 100px; }
+      .whatsapp-group-float { bottom: 175px; }
     }
 
-    /* ===== footer - UPDATED WITH REDUCED SPACING ===== */
-    footer { 
-      background: var(--blue); 
-      color: white; 
-      padding: 2.5rem 0 1.5rem;
-      position: relative; 
-      overflow: hidden;
-    }
-    footer::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-      animation: shimmer 8s infinite;
-    }
-    .footer-grid { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-      gap: 1.5rem;
-      position: relative; 
-      z-index: 2;
-    }
-    .footer-col { 
-      transition: var(--transition); 
-      text-align: left;
-    }
+    footer { background: var(--blue); color: white; padding: 2.5rem 0 1.5rem; position: relative; overflow: hidden; }
+    footer::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%); animation: shimmer 8s infinite; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; position: relative; z-index: 2; }
+    .footer-col { transition: var(--transition); text-align: left; }
     .footer-col:hover { transform: translateY(-5px); }
-    .footer-col h4 { 
-      color: var(--gold); 
-      margin-bottom: 1rem; 
-      font-size: 1.3rem;
-      position: relative; 
-      display: inline-block;
-    }
-    .footer-col h4::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: white;
-      transition: width 0.3s;
-    }
+    .footer-col h4 { color: var(--gold); margin-bottom: 1rem; font-size: 1.3rem; position: relative; display: inline-block; }
+    .footer-col h4::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: white; transition: width 0.3s; }
     .footer-col:hover h4::after { width: 100%; }
     .footer-col ul { list-style: none; }
-    .footer-col li { 
-      margin-bottom: 0.5rem; 
-      transition: var(--transition);
-      font-size: 1.1rem;
-    }
+    .footer-col li { margin-bottom: 0.5rem; transition: var(--transition); font-size: 1.1rem; }
     .footer-col li:hover { transform: translateX(5px); }
     .footer-col a:hover { color: var(--gold); }
-    .social-icons { 
-      display: flex; 
-      gap: 1.2rem; 
-      font-size: 1.6rem; 
-      margin-top: 1rem;
-      justify-content: flex-start;
-    }
-    .social-icons a { 
-      transition: var(--transition);
-      display: inline-block;
-    }
-    .social-icons a:hover { 
-      transform: translateY(-3px) scale(1.1);
-      color: var(--gold);
-    }
-    .copyright { 
-      text-align: center; 
-      margin-top: 2rem; 
-      padding-top: 1rem; 
-      border-top: 1px solid rgba(255,255,255,0.2);
-      position: relative; 
-      z-index: 2;
-      font-size: 1rem;
-    }
-    .copyright span { 
-      color: var(--gold); 
-      transition: var(--transition); 
-      font-weight: 600;
-    }
-    .copyright span:hover { color: white; transform: scale(1.05); display: inline-block; }
-    .tagline-full { 
-      font-size: 1.2rem; 
-      color: var(--gold); 
-      margin-top: 0.3rem; 
-      font-weight: 500; 
-      margin-bottom: 0.8rem;
-    }
+    .social-icons { display: flex; gap: 1.2rem; font-size: 1.6rem; margin-top: 1rem; justify-content: flex-start; }
+    .social-icons a:hover { transform: translateY(-3px) scale(1.1); color: var(--gold); }
+    .copyright { text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2); position: relative; z-index: 2; font-size: 1rem; }
+    .copyright span { color: var(--gold); transition: var(--transition); font-weight: 600; }
+    .tagline-full { font-size: 1.2rem; color: var(--gold); margin-top: 0.3rem; font-weight: 500; margin-bottom: 0.8rem; }
 
-    /* ===== FIXED MOBILE RESPONSIVENESS ===== */
-    @media (max-width: 1200px) {
-      body { font-size: 17px; }
-    }
-
-    @media (max-width: 992px) {
-      body { font-size: 16px; }
-      .container { width: 92%; }
-      .hero h1 { font-size: 4.5rem; }
-    }
-
-    @media (max-width: 900px) {
-      .nav-menu { 
-        display: none; 
-        width: 100%; 
-        flex-direction: column; 
-        background: white; 
-        padding: 2rem; 
-        border-radius: 20px; 
-        margin-top: 1rem; 
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        gap: 1.5rem;
-      }
-      .nav-menu.active { display: flex; }
-      .hamburger { display: block; }
-      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .hero h1 { font-size: 4rem; }
-      .hero { padding-top: 6rem; }
-      .section-title { font-size: 2.8rem; }
-      .cards-grid { gap: 1.5rem; }
-      .facilities-grid { 
-        grid-template-columns: repeat(3, 1fr); 
-        gap: 1.5rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      body { font-size: 15px; }
-      section { padding: 3.5rem 0; }
-      .hero { 
-        min-height: 85vh; 
-        padding-top: 5rem;
-      }
-      .hero h1 { font-size: 3.5rem; }
-      .hero p { font-size: 1.4rem; }
-      .btn { padding: 1rem 2.5rem; font-size: 1.1rem; }
-      .btn-group { flex-direction: column; width: 100%; }
-      .btn { width: 100%; text-align: center; }
-      .btn-group .btn { width: 100%; }
-      .principal-card { padding: 2rem; }
-      .principal-card img { max-width: 220px; }
-      .principal-card h4 { font-size: 1.8rem; }
-      .mission-vision { padding: 2rem; }
-      .facilities-grid { 
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 1.5rem;
-      }
-      .facility-card .facility-img {
-        width: 160px;
-        height: 160px;
-      }
-      .gallery-grid { 
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 1rem;
-      }
-      .gallery-item { height: 220px; }
-      .achievement-stats { 
-        padding: 3rem 1.5rem; 
-        gap: 2rem;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .stat-item { min-width: auto; }
-      .stat-item i { font-size: 3rem; }
-      .stat-number { font-size: 2.5rem; }
-      .admission-cta { padding: 3rem 1.5rem; }
-      .cta-title { font-size: 2.8rem; }
-      .btn-wa { 
-        font-size: 1.5rem; 
-        padding: 1rem 2.5rem;
-        width: 100%;
-        justify-content: center;
-      }
-      .contact-grid { gap: 2rem; }
-      .contact-info { padding: 2rem; }
-      .info-item { margin: 1.5rem 0; }
-      .map-container { height: 250px; }
-      .footer-grid { 
-        gap: 1.2rem;
-      }
-      .social-icons { justify-content: flex-start; }
-    }
-
-    @media (max-width: 600px) {
-      body { font-size: 14px; }
-      .container { width: 94%; }
-      .logo { font-size: 2rem; }
-      .hero h1 { font-size: 3rem; }
-      .hero p { font-size: 1.3rem; margin-bottom: 2rem; }
-      .hero { padding-top: 4rem; }
-      .section-title { font-size: 2.5rem; }
-      .cards-grid { grid-template-columns: 1fr; }
-      .card-img { height: 200px; }
-      .academics-grid { grid-template-columns: 1fr; }
-      .facilities-grid { 
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.2rem;
-      }
-      .facility-card .facility-img { 
-        width: 140px; 
-        height: 140px; 
-      }
-      .facility-card { padding: 1.8rem 0.8rem; }
-      .facility-card span { font-size: 1.2rem; }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      .gallery-item { height: 180px; }
-      .achievement-stats { 
-        grid-template-columns: repeat(2, 1fr);
-        padding: 2rem 1rem;
-        gap: 1.5rem;
-      }
-      .stat-number { font-size: 2.2rem; }
-      .stat-item i { font-size: 2.5rem; }
-      .stat-item div:last-child { font-size: 1.1rem; }
-      .cta-title { font-size: 2.5rem; }
-      .btn-wa { font-size: 1.3rem; }
-      .footer-grid { 
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      .footer-col {
-        text-align: left;
-      }
-      .footer-col h4 {
-        margin-bottom: 0.8rem;
-      }
-      .footer-col li {
-        margin-bottom: 0.4rem;
-      }
-      .footer-col h4::after { 
-        left: 0; 
-        transform: none; 
-      }
-      .footer-col ul { 
-        padding: 0; 
-        text-align: left;
-      }
-      .social-icons { 
-        justify-content: flex-start;
-        gap: 1rem;
-        font-size: 1.4rem;
-      }
-      .whatsapp-float, .youtube-float { 
-        width: 65px; 
-        height: 65px; 
-        font-size: 2.5rem; 
-        right: 15px;
-      }
-      .youtube-float { bottom: 100px; }
-    }
-
-    @media (max-width: 480px) {
-      body { font-size: 13px; }
-      .hero { 
-        min-height: 80vh; 
-        padding-top: 3.5rem;
-      }
-      .hero h1 { font-size: 2.5rem; }
-      .hero p { font-size: 1.2rem; }
-      .btn { padding: 0.9rem 2rem; font-size: 1rem; }
-      .section-title { font-size: 2.2rem; }
-      .facilities-grid { 
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 1rem;
-      }
-      .facility-card .facility-img { 
-        width: 120px; 
-        height: 120px; 
-        border-width: 4px;
-      }
-      .facility-card span { font-size: 1.1rem; }
-      .gallery-item { height: 160px; }
-      .stat-item i { font-size: 2.2rem; }
-      .stat-number { font-size: 2rem; }
-      .cta-title { font-size: 2.2rem; }
-      .btn-wa { 
-        font-size: 1.2rem; 
-        padding: 0.9rem 2rem;
-        gap: 0.8rem;
-      }
-      .info-item { 
-        flex-direction: row;
-        text-align: left; 
-        gap: 1rem; 
-      }
-      .info-item i { 
-        margin: 0; 
-        width: 35px;
-        font-size: 2rem;
-      }
-      .working-hours p { font-size: 1.1rem; }
-      .map-container { height: 200px; }
-      .footer-col h4 { 
-        font-size: 1.2rem;
-        margin-bottom: 0.7rem;
-      }
-      .footer-col li { 
-        font-size: 1rem;
-        margin-bottom: 0.3rem;
-      }
-      .tagline-full {
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-      }
-      .social-icons { gap: 0.8rem; font-size: 1.3rem; }
-    }
-
-    @media (max-width: 360px) {
-      body { font-size: 12px; }
-      .container { width: 96%; }
-      .hero h1 { font-size: 2.2rem; }
-      .hero p { font-size: 1.1rem; }
-      .facilities-grid { 
-        grid-template-columns: 1fr; 
-      }
-      .facility-card { 
-        display: flex; 
-        align-items: center; 
-        text-align: left; 
-        gap: 2rem; 
-        padding: 1.8rem;
-      }
-      .facility-card .facility-img { 
-        margin: 0; 
-        width: 100px; 
-        height: 100px; 
-      }
-      .facility-card span { 
-        flex: 1; 
-        font-size: 1.2rem;
-      }
-      .gallery-grid { grid-template-columns: 1fr; }
-      .gallery-item { height: 200px; }
-      .achievement-stats { grid-template-columns: 1fr; }
-      .stat-item { 
-        display: flex; 
-        align-items: center; 
-        gap: 2rem;
-        text-align: left;
-      }
-      .stat-item i { 
-        margin-bottom: 0; 
-        width: 45px;
-        font-size: 2.5rem;
-      }
-    }
-
-    /* Ensure no horizontal scroll */
-    body, html {
-      max-width: 100%;
-      overflow-x: hidden;
-    }
-
-    img, iframe {
-      max-width: 100%;
-      height: auto;
-    }
+    @media (max-width: 900px) { .nav-menu { display: none; width: 100%; flex-direction: column; background: white; padding: 2rem; border-radius: 20px; margin-top: 1rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1); gap: 1.5rem; } .nav-menu.active { display: flex; } .hamburger { display: block; } .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; } .hero h1 { font-size: 4rem; } }
+    @media (max-width: 768px) { .hero h1 { font-size: 3rem; } .section-title { font-size: 2.5rem; } .btn-wa { font-size: 1.5rem; } }
+    body, html { max-width: 100%; overflow-x: hidden; }
+    img, iframe { max-width: 100%; height: auto; }
   </style>
 </head>
 <body>
-  <!-- STICKY NAV -->
   <header class="sticky-nav">
     <div class="container nav-container">
       <div class="logo">Daffodils <span>High School</span></div>
-      <b> <span class="nav-tagline" style="color: black;">Play School |IIT Foundation | OLYMPIADS</span> </b>
-      <nav>
-        <ul class="nav-menu" id="navMenu">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#why">Why Us</a></li>
-          <li><a href="#academics">Academics</a></li>
-          <li><a href="#facilities">Facilities</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#achievements">Achievements</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+      <b><span class="nav-tagline" style="color: black;">Play School | IIT Foundation | OLYMPIADS</span></b>
+      <nav><ul class="nav-menu" id="navMenu"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#why">Why Us</a></li><li><a href="#academics">Academics</a></li><li><a href="#facilities">Facilities</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#achievements">Achievements</a></li><li><a href="#contact">Contact</a></li></ul></nav>
       <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
     </div>
   </header>
 
-  <!-- HERO SECTION with slider - Content at TOP -->
-  <section class="hero" id="home">
-    <div class="hero-slider">
-      <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1350" alt="School building">
-      <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1350" alt="Classroom">
-      <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1350" alt="Students">
-    </div>
-    <div class="container hero-content">
-      <h1><span>Daffodils</span> High School</h1>
-      <p class="tagline-full">Where young minds blossom into global citizens</p>
-      <p>Excellence · Innovation · Care since 1995</p>
-      <div class="btn-group">
-        <a href="https://wa.me/917396297753?text=Hello Sir/Madam %2C%20I%20want%20to%20apply%20for%20admission%20at%20Daffodils%20High%20School" target="_blank" class="btn btn-primary">Apply for Admission</a>
-        <a href="#contact" class="btn btn-outline">Contact Us</a>
-      </div>
-    </div>
-  </section>
+  <section class="hero" id="home"><div class="hero-slider"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1350" alt="School building"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1350" alt="Classroom"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1350" alt="Students"></div><div class="container hero-content"><h1><span>Daffodils</span> High School</h1><p class="tagline-full">Where young minds blossom into global citizens</p><p>Excellence · Innovation · Care since 1989</p><div class="btn-group"><a href="https://wa.me/917396297753?text=Hello Sir/Madam %2C%20I%20want%20to%20apply%20for%20admission%20at%20Daffodils%20High%20School" target="_blank" class="btn btn-primary">Apply for Admission</a><a href="#contact" class="btn btn-outline">Contact Us</a></div></div></section>
 
-  <!-- ABOUT SCHOOL -->
-  <section id="about" class="container">
-    <h3 class="section-title reveal">About Daffodils High School </h3>
-    <div class="gold-underline reveal"></div>
-    <div class="about-grid">
-      <div class="principal-card reveal-left">
-        <img src="images/Ram.jpeg?w=400" alt="photo">
-        <h4>Mr. V.C.RAMA RAO </h4>
-        <p>Correspondent,<br> Daffodils High School</p>
-        <p><i class="fas fa-quote-left" style="color:var(--gold);"></i> Every child is a seed; we provide the sunshine.</p>
-      </div>
-      <div class="mission-vision reveal-right">
-        <div class="mission-vision-item"><i class="fas fa-bullseye"></i><div><strong>Our Mission</strong><br>To nurture critical thinkers and compassionate leaders through innovative teaching and strong values.</div></div>
-        <div class="mission-vision-item"><i class="fas fa-eye"></i><div><strong>Our Vision</strong><br>A world where every Daffodils student excels with integrity and confidence.</div></div>
-        <div class="mission-vision-item"><i class="fas fa-gem"></i><div><strong>Core Values</strong><br>Respect, Empathy, Excellence, Collaboration</div></div>
-      </div>
-    </div>
-  </section>
+  <section id="about" class="container"><h3 class="section-title reveal">About Daffodils High School</h3><div class="gold-underline reveal"></div><div class="about-grid"><div class="principal-card reveal-left"><img src="images/Ram.jpeg?w=400" alt="photo"><h4>Mr. V.C.RAMA RAO</h4><p>Correspondent,<br> Daffodils High School</p><p><i class="fas fa-quote-left" style="color:var(--gold);"></i> Every child is a seed; we provide the sunshine.</p></div><div class="mission-vision reveal-right"><div class="mission-vision-item"><i class="fas fa-bullseye"></i><div><strong>Our Mission</strong><br>To nurture critical thinkers and compassionate leaders through innovative teaching and strong values.</div></div><div class="mission-vision-item"><i class="fas fa-eye"></i><div><strong>Our Vision</strong><br>A world where every Daffodils student excels with integrity and confidence.</div></div><div class="mission-vision-item"><i class="fas fa-gem"></i><div><strong>Core Values</strong><br>Respect, Empathy, Excellence, Collaboration</div></div></div></div></section>
 
-  <!-- WHY CHOOSE US -->
-  <section id="why" style="background: var(--light-bg);">
-    <div class="container">
-      <h2 class="section-title reveal">Why Choose Daffodils High School?</h2>
-      <div class="gold-underline reveal"></div>
-      <div class="cards-grid">
-        <div class="card reveal-scale"><div class="card-img"><img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400" alt="Teacher"></div><h3>Experienced Faculty</h3><p>Passionate educators with global exposure.</p></div>
-        <div class="card reveal-scale" style="transition-delay:0.1s"><div class="card-img"><img src="images/smart.jfif?w=400" alt="Smart class"></div><h3>Smart Classrooms</h3><p>Interactive tech-enabled learning.</p></div>
-        <div class="card reveal-scale" style="transition-delay:0.2s"><div class="card-img"><img src="https://images.unsplash.com/photo-1526976668912-1a811878dd37?w=400" alt="Sports"></div><h3>Holistic Development</h3><p>Sports, arts & life skills.</p></div>
-        <div class="card reveal-scale" style="transition-delay:0.3s"><div class="card-img"><img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400" alt="Security"></div><h3>Safe Campus</h3><p>24/7 security & CCTV.</p></div>
-        <div class="card reveal-scale" style="transition-delay:0.4s"><div class="card-img"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400" alt="STEAM"></div><h3>Modern Education</h3><p>STEAM & project-based.</p></div>
-      </div>
-    </div>
-  </section>
+  <section id="why" style="background: var(--light-bg);"><div class="container"><h2 class="section-title reveal">Why Choose Daffodils High School?</h2><div class="gold-underline reveal"></div><div class="cards-grid"><div class="card reveal-scale"><div class="card-img"><img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400" alt="Teacher"></div><h3>Experienced Faculty</h3><p>Passionate educators with global exposure.</p></div><div class="card reveal-scale"><div class="card-img"><img src="images/smart.jfif?w=400" alt="Smart class"></div><h3>Smart Classrooms</h3><p>Interactive tech-enabled learning.</p></div><div class="card reveal-scale"><div class="card-img"><img src="https://images.unsplash.com/photo-1526976668912-1a811878dd37?w=400" alt="Sports"></div><h3>Holistic Development</h3><p>Sports, arts & life skills.</p></div><div class="card reveal-scale"><div class="card-img"><img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400" alt="Security"></div><h3>Safe Campus</h3><p>24/7 security & CCTV.</p></div><div class="card reveal-scale"><div class="card-img"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400" alt="STEAM"></div><h3>Modern Education</h3><p>STEAM & project-based.</p></div></div></div></section>
 
-  <!-- ACADEMICS SECTION -->
-  <section id="academics" class="container">
-    <h2 class="section-title reveal">Academics</h2>
-    <div class="gold-underline reveal"></div>
-    <div class="academics-grid">
-      <div class="academic-card reveal-left">
-        <div class="academic-img"><img src="images/pre.jfif" alt="Pre-Primary"></div>
-        <div class="academic-content"><h3>Pre-Primary</h3><p>Play-based learning, nurturing curiosity, and building social skills in a vibrant environment.</p></div>
-      </div>
-      <div class="academic-card reveal-scale">
-        <div class="academic-img"><img src="images/primary.jfif?w=400" alt="Primary"></div>
-        <div class="academic-content"><h3>Primary</h3><p>Strong foundations in literacy, numeracy, and character through interactive methods.</p></div>
-      </div>
-      <div class="academic-card reveal-right">
-        <div class="academic-img"><img src="images/high school.jfif?w=400" alt="High School"></div>
-        <div class="academic-content"><h3>High School</h3><p>Rigorous curriculum, career guidance, and leadership opportunities for future readiness.</p></div>
-      </div>
-    </div>
-  </section>
+  <section id="academics" class="container"><h2 class="section-title reveal">Academics</h2><div class="gold-underline reveal"></div><div class="academics-grid"><div class="academic-card reveal-left"><div class="academic-img"><img src="images/pre.jfif" alt="Pre-Primary"></div><div class="academic-content"><h3>Pre-Primary</h3><p>Play-based learning, nurturing curiosity.</p></div></div><div class="academic-card reveal-scale"><div class="academic-img"><img src="images/primary.jfif?w=400" alt="Primary"></div><div class="academic-content"><h3>Primary</h3><p>Strong foundations in literacy and numeracy.</p></div></div><div class="academic-card reveal-right"><div class="academic-img"><img src="images/high school.jfif?w=400" alt="High School"></div><div class="academic-content"><h3>High School</h3><p>Rigorous curriculum, career guidance.</p></div></div></div></section>
 
-  <!-- FACILITIES with LARGE images -->
-  <section id="facilities" class="container">
-    <h2 class="section-title reveal">Premium Facilities</h2>
-    <div class="gold-underline reveal"></div>
-    <div class="facilities-grid">
-      <div class="facility-card reveal-scale"><div class="facility-img"><img src="images/schoolbus.jfif" alt="Bus"></div><span>Transport</span></div>
-      <div class="facility-card reveal-scale" style="transition-delay:0.05s"><div class="facility-img"><img src="images/hostel.jfif" alt="Hostel"></div><span>Hostel</span></div>
-      <div class="facility-card reveal-scale" style="transition-delay:0.1s"><div class="facility-img"><img src="images/computer lab.jfif?w=400&h=400&fit=crop" alt="Computer Lab"></div><span>Computer Lab</span></div>
-      <div class="facility-card reveal-scale" style="transition-delay:0.15s"><div class="facility-img"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=400&fit=crop" alt="Library"></div><span>Library</span></div>
-      <div class="facility-card reveal-scale" style="transition-delay:0.2s"><div class="facility-img"><img src="images/play.jfif?w=400&h=400&fit=crop" alt="Playground"></div><span>Playground</span></div>
-      <div class="facility-card reveal-scale" style="transition-delay:0.25s"><div class="facility-img"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=400&fit=crop" alt="Science Lab"></div><span>Science Lab</span></div>
-      <div class="facility-card reveal-scale" style="transition-delay:0.3s"><div class="facility-img"><img src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=400&h=400&fit=crop" alt="Digital Classroom"></div><span>Digital Classrooms</span></div>
-    </div>
-  </section>
+  <section id="facilities" class="container"><h2 class="section-title reveal">Premium Facilities</h2><div class="gold-underline reveal"></div><div class="facilities-grid"><div class="facility-card reveal-scale"><div class="facility-img"><img src="images/schoolbus.jfif" alt="Bus" loading="lazy"></div><span>Transport</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="images/hostel.jfif" alt="Hostel" loading="lazy"></div><span>Hostel</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="images/computer lab.jfif?w=400&h=400&fit=crop" alt="Computer Lab" loading="lazy"></div><span>Computer Lab</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=400&fit=crop" alt="Library" loading="lazy"></div><span>Library</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="images/play.jfif?w=400&h=400&fit=crop" alt="Playground" loading="lazy"></div><span>Playground</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=400&fit=crop" alt="Science Lab" loading="lazy"></div><span>Science Lab</span></div><div class="facility-card reveal-scale"><div class="facility-img"><img src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=400&h=400&fit=crop" alt="Digital Classroom" loading="lazy"></div><span>Digital Classrooms</span></div></div></section>
 
-  <!-- GALLERY - YOUR ORIGINAL IMAGES -->
-  <section id="gallery" style="background: var(--light-bg);">
-    <div class="container">
-      <h2 class="section-title reveal">Life @ Daffodils</h2>
-      <div class="gold-underline reveal"></div>
-      <div class="gallery-grid" id="galleryGrid">
-        <div class="gallery-item reveal-scale"><img src="images/gallery1.webp" alt="Classroom"></div>
-        <div class="gallery-item reveal-scale" style="transition-delay:0.1s"><img src="images/sports.webp" alt="Students"></div>
-        <div class="gallery-item reveal-scale" style="transition-delay:0.2s"><img src="images/gallery3.webp" alt="Library"></div>
-        <div class="gallery-item reveal-scale" style="transition-delay:0.3s"><img src="images/1.webp" alt="Sports"></div>
-        <div class="gallery-item reveal-scale" style="transition-delay:0.4s"><img src="images/9.webp" alt="Lab"></div>
-        <div class="gallery-item reveal-scale" style="transition-delay:0.5s"><img src="images/6.webp" alt="Lab"></div>
-        <div class="gallery-item reveal-scale" style="transition-delay:0.6s"><img src="images/8.webp" alt="Lab"></div>
-        <div class="gallery-item reveal-scale" style="transition-delay:0.7s"><img src="images/10.webp" alt="Lab"></div>
-        <div class="gallery-item reveal-scale" style="transition-delay:0.8s"><img src="images/11.webp" alt="Lab"></div>
-      </div>
-    </div>
-  </section>
+  <section id="gallery" style="background: var(--light-bg);"><div class="container"><h2 class="section-title reveal">Life @ Daffodils</h2><div class="gold-underline reveal"></div><div class="gallery-grid" id="galleryGrid"><div class="gallery-item reveal-scale"><img src="images/gallery1.webp" alt="Classroom"></div><div class="gallery-item reveal-scale"><img src="images/sports.webp" alt="Students"></div><div class="gallery-item reveal-scale"><img src="images/gallery3.webp" alt="Library"></div><div class="gallery-item reveal-scale"><img src="images/sahasra.jpeg" alt="Sports"></div><div class="gallery-item reveal-scale"><img src="images/9.webp" alt="Lab"></div><div class="gallery-item reveal-scale"><img src="images/6.webp" alt="Lab"></div><div class="gallery-item reveal-scale"><img src="images/8.webp" alt="Lab"></div><div class="gallery-item reveal-scale"><img src="images/10.webp" alt="Lab"></div><div class="gallery-item reveal-scale"><img src="images/11.webp" alt="Lab"></div></div></div></section>
 
-  <!-- ACHIEVEMENTS -->
-  <section id="achievements" class="container">
-    <h2 class="section-title reveal">Our Achievements</h2>
-    <div class="gold-underline reveal"></div>
-    <div class="achievement-stats reveal-scale">
-      <div class="stat-item"><i class="fas fa-trophy"></i><div class="stat-number">25+</div><div>Awards</div></div>
-      <div class="stat-item"><i class="fas fa-medal"></i><div class="stat-number">150+</div><div>Student laurels</div></div>
-      <div class="stat-item"><i class="fas fa-star"></i><div class="stat-number">100%</div><div>Academic pass</div></div>
-      <div class="stat-item"><i class="fas fa-flag-checkered"></i><div class="stat-number">15</div><div>Sports trophies</div></div>
-    </div>
-  </section>
+  <section id="achievements" class="container"><h2 class="section-title reveal">Our Achievements</h2><div class="gold-underline reveal"></div><div class="achievement-stats reveal-scale"><div class="stat-item"><i class="fas fa-trophy"></i><div class="stat-number">25+</div><div>Awards</div></div><div class="stat-item"><i class="fas fa-medal"></i><div class="stat-number">150+</div><div>Student laurels</div></div><div class="stat-item"><i class="fas fa-star"></i><div class="stat-number">100%</div><div>Academic pass</div></div><div class="stat-item"><i class="fas fa-flag-checkered"></i><div class="stat-number">15</div><div>Sports trophies</div></div></div></section>
 
-  <!-- ADMISSION CTA -->
-  <section class="container">
-    <div class="admission-cta reveal">
-      <h2 class="cta-title">Secure your child's future</h2>
-      <a href="https://wa.me/917396297753?text=Hello Sir/Madam %2C%20I%20want%20admission%20for%20my%20child%20at%20Daffodils%20High%20School" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> Book Admission Now</a>
-    </div>
-  </section>
+  <section class="container"><div class="admission-cta reveal"><h2 class="cta-title">Secure your child's future</h2><a href="https://wa.me/917396297753?text=Hello Sir/Madam %2C%20I%20want%20admission%20for%20my%20child%20at%20Daffodils%20High%20School" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> Book Admission Now</a></div></section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="container">
-    <h2 class="section-title reveal">Get in touch</h2>
-    <div class="gold-underline reveal"></div>
-    <div class="contact-grid">
-      <div class="contact-info reveal-left">
-        <div class="info-item"><i class="fas fa-map-marker-alt"></i> <div>2-6-1055,KLN Reddy Colony, Subedari, Hanamkonda, Telangana 506001</div></div>
-        <div class="info-item"><i class="fas fa-phone-alt"></i> <div>+91 9885850508 <br>+91 7396297753</div></div>
-        <div class="info-item"><i class="fas fa-envelope"></i> <div>admissions@daffodils.com</div></div>
-        <div class="working-hours">
-          <h4><i class="far fa-clock"></i> School Hours</h4>
-          <p>Monday - Saturday: 8:00 AM – 5:00 PM</p>
-          <p>Sunday: Closed</p>
-        </div>
-        <div style="margin-top: 1.5rem; background: rgba(245,180,66,0.1); padding:1rem; border-radius:16px;">
-          <p><i class="fab fa-youtube" style="color:#FF0000;"></i> <strong>Watch us:</strong> <a href="https://www.youtube.com/@vcramarao7708" target="_blank" style="color:var(--blue); text-decoration:underline;">Daffodils High School YouTube Channel</a></p>
-          <p><i class="fab fa-whatsapp" style="color:#25D366;"></i> <strong>Join WhatsApp group:</strong> <a href="https://whatsapp.com/channel/0029Vb6ttvgJkK7C4oW59B3a" target="_blank" style="color:var(--blue); text-decoration:underline;">Click here</a></p>
-        </div>
-        <div class="map-container">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.5635744457236!2d79.54435107517912!3d17.99903048299623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a334f9d04c48639%3A0x3eebb77566662675!2sDaffodils%20High%20School!5e0!3m2!1sen!2sin!4v1772964404506!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-      </div>
-      <div class="reveal-right"></div>
-    </div>
-  </section>
+  <section id="contact" class="container"><h2 class="section-title reveal">Get in touch</h2><div class="gold-underline reveal"></div><div class="contact-grid"><div class="contact-info reveal-left"><div class="info-item"><i class="fas fa-map-marker-alt"></i> <div>2-6-1055,KLN Reddy Colony, Subedari, Hanamkonda, Telangana 506001</div></div><div class="info-item"><i class="fas fa-phone-alt"></i> <div>+91 9885850508 <br>+91 7396297753</div></div><div class="info-item"><i class="fas fa-envelope"></i> <div>vcramarao1@gmail.com</div></div><div class="working-hours"><h4><i class="far fa-clock"></i> School Hours</h4><p>Monday - Saturday: 8:00 AM – 5:00 PM</p><p>Sunday: Closed</p></div><div style="margin-top: 1.5rem; background: rgba(245,180,66,0.1); padding:1rem; border-radius:16px;"><p><i class="fab fa-youtube" style="color:#FF0000;"></i> <strong>Watch us:</strong> <a href="https://www.youtube.com/@vcramarao7708" target="_blank" style="color:var(--blue); text-decoration:underline;">Daffodils High School YouTube Channel</a></p><p><i class="fab fa-whatsapp" style="color:#25D366;"></i> <strong>Join WhatsApp group:</strong> <a href="https://whatsapp.com/channel/0029Vb6ttvgJkK7C4oW59B3a" target="_blank" style="color:var(--blue); text-decoration:underline;">Click here</a></p></div><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.5635744457236!2d79.54435107517912!3d17.99903048299623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a334f9d04c48639%3A0x3eebb77566662675!2sDaffodils%20High%20School!5e0!3m2!1sen!2sin!4v1772964404506!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div></div><div class="reveal-right"></div></div></section>
 
-  <!-- FOOTER - Links now left aligned on mobile with reduced spacing -->
-  <footer>
-    <div class="container footer-grid">
-      <div class="footer-col">
-        <h4>Daffodils High School</h4>
-        <p class="tagline-full">Where young minds blossom into global citizens</p>
-        <ul style="margin-top:0.8rem;">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#why">Why Daffodils</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="#academics">Academics</a></li>
-          <li><a href="#facilities">Facilities</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>More</h4>
-        <ul>
-          <li><a href="#achievements">Achievements</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Follow us</h4>
-        <div class="social-icons">
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.youtube.com/@vcramarao7708" target="_blank"><i class="fab fa-youtube"></i></a>
-          <a href="https://whatsapp.com/channel/0029Vb6ttvgJkK7C4oW59B3a" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
-    </div>
-   <div class="copyright container">
-  © 2026 Daffodils High School. All Rights Reserved.<br>
-  Designed & Developed by <span style="color: var(--gold); font-weight: 700;">SVR Computers</span> | 
-  <i class="fas fa-phone-alt" style="color: var(--gold);"></i> 
-  <a href="tel:+918500172644" style="color: white; text-decoration: none;">+91 8500172644</a> | 
-  <i class="fab fa-whatsapp" style="color: #25D366;"></i> 
-  <a href="https://wa.me/918500172644?text=Hello Sir/Madam%20SVR%20Computers" target="_blank" style="color: white; text-decoration: none;">WhatsApp</a>
-</div>
-  </footer>
+  <footer><div class="container footer-grid"><div class="footer-col"><h4>Daffodils High School</h4><p class="tagline-full">Where young minds blossom into global citizens</p><ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#why">Why Daffodils</a></li></ul></div><div class="footer-col"><h4>Explore</h4><ul><li><a href="#academics">Academics</a></li><li><a href="#facilities">Facilities</a></li><li><a href="#gallery">Gallery</a></li></ul></div><div class="footer-col"><h4>More</h4><ul><li><a href="#achievements">Achievements</a></li><li><a href="#contact">Contact</a></li></ul></div><div class="footer-col"><h4>Follow us</h4><div class="social-icons"><a href="#"><i class="fab fa-facebook"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="https://www.youtube.com/@vcramarao7708" target="_blank"><i class="fab fa-youtube"></i></a><a href="https://whatsapp.com/channel/0029Vb6ttvgJkK7C4oW59B3a" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div><div class="copyright container">© 2026 Daffodils High School. All Rights Reserved.<br>Designed & Developed by <span style="color: var(--gold); font-weight: 700;">SVR Computers</span> | <i class="fas fa-phone-alt" style="color: var(--gold);"></i> <a href="tel:+918500172644" style="color: white; text-decoration: none;">+91 8500172644</a> | <i class="fab fa-whatsapp" style="color: #25D366;"></i> <a href="https://wa.me/918500172644?text=Hello Sir/Madam%20SVR%20Computers" target="_blank" style="color: white; text-decoration: none;">WhatsApp</a></div></footer>
 
-  <!-- FLOATING BUTTONS -->
   <a href="https://wa.me/917396297753?text=Hello Sir/Madam %20I%20am%20interested%20in%20admission" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
   <a href="https://www.youtube.com/@vcramarao7708" class="youtube-float" target="_blank"><i class="fab fa-youtube"></i></a>
+  <a href="https://whatsapp.com/channel/0029Vb6ttvgJkK7C4oW59B3a" class="whatsapp-group-float" target="_blank"><i class="fas fa-users"></i></a>
 
-  <!-- LIGHTBOX -->
+  <!-- Chatbot Toggle Button -->
+  <div class="chatbot-toggle-btn" id="chatbotToggle"><i class="fas fa-robot"></i></div>
+  
+  <!-- Chatbot Modal -->
+  <div class="chatbot-modal" id="chatbotModal">
+    <div class="chatbot-header">
+      <div class="chatbot-logo"><i class="fas fa-school"></i></div>
+      <div class="chatbot-title">Daffodils AI Assistant</div>
+      <button class="chatbot-clear" id="clearChatBtn"><i class="fas fa-trash-alt"></i></button>
+      <button class="chatbot-close" id="closeChatbot"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages"></div>
+    <div class="chatbot-typing" id="chatbotTyping"><span></span><span></span><span></span></div>
+    <div class="chatbot-input-area">
+      <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your question..." enterkeyhint="send">
+      <button class="chatbot-send" id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
   <div class="lightbox" id="lightbox"><span class="lightbox-close">&times;</span><img id="lightbox-img" src=""></div>
 
   <script>
     (function() {
-      // Mobile nav
+      // Original navigation and gallery functionality
       const hamburger = document.getElementById('hamburger');
       const navMenu = document.getElementById('navMenu');
-      hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
+      if(hamburger) hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
       document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => navMenu.classList.remove('active')));
-
-      // Scroll reveal
+      
       const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-      
-      function checkReveal() {
-        const wh = window.innerHeight;
-        reveals.forEach(el => {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < wh - 100 && rect.bottom > 0) {
-            el.classList.add('active');
-          }
-        });
-      }
-      
+      function checkReveal() { const wh = window.innerHeight; reveals.forEach(el => { const rect = el.getBoundingClientRect(); if(rect.top < wh - 100 && rect.bottom > 0) el.classList.add('active'); }); }
       window.addEventListener('scroll', checkReveal);
       window.addEventListener('load', checkReveal);
-
-      // Lightbox
+      
       const galleryItems = document.querySelectorAll('.gallery-item img');
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
       const closeBtn = document.querySelector('.lightbox-close');
+      if(galleryItems.length) galleryItems.forEach(img => { img.addEventListener('click', () => { lightbox.classList.add('active'); lightboxImg.src = img.src; }); });
+      if(closeBtn) closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+      if(lightbox) lightbox.addEventListener('click', (e) => { if(e.target === lightbox) lightbox.classList.remove('active'); });
       
-      galleryItems.forEach(img => {
-        img.addEventListener('click', () => { 
-          lightbox.classList.add('active'); 
-          lightboxImg.src = img.src; 
-        });
-      });
+      // Chatbot functionality - Welcome message on every refresh
+      const schoolData = {
+        correspondent: { keys: ['correspondent', 'principal', 'owner', 'founder', 'head', 'rama rao'], reply: 'Our Honorable Correspondent is  V.C. Rama Rao Sir. Under his visionary leadership, Daffodils High School continues to excel in providing quality education.' },
+        greetings: { keys: ['hi', 'hello', 'namaste', 'hey', 'good morning', 'help', 'assistant'], reply: 'Hello! I am the Daffodils Smart AI Assistant. I hope you are doing well 🙂, How can I help you today?' },
+        admissions: { keys: ['admission', 'join', 'apply', 'seat', 'open', 'document', 'admissions'], reply: 'Admissions are currently OPEN for LKG to 10th Class! Required documents include: Birth Certificate, Previous Marks Memo, and Aadhar Card. Visit our office between 9 AM and 4 PM to apply.' },
+        fees: { keys: ['fee', 'cost', 'money', 'discount', 'pay', 'scholarship', 'fees'], reply: 'Our fee structure differs for each class. For complete details, kindly contact our office at 7396297753 or visit the school.' },
+        facilities: { keys: ['facility', 'facilities', 'computer', 'lab', 'digital', 'playground', 'transport', 'bus'], reply: 'We provide premium facilities including Digital Classrooms, a High-tech Computer Lab, a vast Playground, School Bus transport for all local routes.' },
+        teachers: { keys: ['teacher', 'teachers', 'staff', 'faculty', 'teaching staff', 'experienced teachers', 'qualification', 'trainers', 'educators'], reply: 'Daffodils High School has highly qualified and experienced teachers. Our faculty includes subject matter experts with minimum 5 years of teaching experience. We have dedicated teachers for all subjects including Mathematics, Science, Social, English, Hindi, and Computer Science. Our teachers regularly attend training programs to stay updated with modern teaching methods.' },
+        classes: { keys: ['class', 'standard', 'grade', 'lkg', '10th', 'subject', 'classes'], reply: 'We offer education from LKG up to 10th Class, following a holistic curriculum with a special focus on Computer Education and digital learning.' },
+        timings: { keys: ['time', 'open', 'working', 'saturday', 'timings', 'hours'], reply: 'School timings are 8:00 AM to 5:00 PM (Monday to Saturday).' },
+        location: { keys: ['location', 'address', 'where', 'visit', 'maps', 'located'], reply: 'Daffodils High School is located at KLN Reddy Colony, Hanamkonda. You can find our exact location on Google Maps!' },
+        whyUs: { keys: ['choose', 'best', 'advantage', 'why', 'study', 'academics'], reply: 'Daffodils High School focuses on "Learning by Doing." With 100% result records, experienced faculty, and modern digital infrastructure, we ensure your child\'s bright future.' },
+        exit: { keys: ['bye', 'thank', 'thanks', 'ok', 'okay', 'see you', 'goodbye'], reply: 'You\'re welcome! Thank you for contacting Daffodils High School. Have a wonderful day! Please visit us again if you have more questions.' },
+        hostel: { keys: ['hostel', 'accommodation', 'accomodation', 'boarding', 'lodging', 'hostel facility', 'boys hostel', 'girls hostel', 'stay', 'living', 'home food'], reply: 'We have separate hostels for Boys & Girls with proper facilities and home-like food. For more details about fees and availability, please contact our office directly.' },
+        contact: { keys: ['contact', 'phone', 'mobile', 'call', 'number', 'phone number', 'mobile number', 'contact number', 'telephone', 'reach', 'talk', 'speak', '7396297753'], reply: 'You can reach Daffodils High School at: 📞 7396297753 (Office) / 7396297753 (Admissions). Our office hours are 9:00 AM to 5:00 PM (Monday to Saturday). You can also visit us in person at our Campus / Office KLN Reddy Colony, Hanamkonda.' },
+        results: { keys: ['result', 'results', 'outcome', 'grade', 'marks', 'percentage', '2025', 'ssc'], reply: '🎉 Daffodils High School SSC 2025 results are 100% pass percentage. students got 10/10 GPA. For individual student results, please visit the school website or contact office.' }
+      };
       
-      closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
-      lightbox.addEventListener('click', (e) => { 
-        if (e.target === lightbox) lightbox.classList.remove('active'); 
+      function getBotResponse(text) {
+        const lowerText = text.toLowerCase();
+        for (const category in schoolData) {
+          if (schoolData[category].keys.some(key => lowerText.includes(key))) {
+            return schoolData[category].reply;
+          }
+        }
+        return 'Sorry, I could not understand your question. At Daffodils High School, we focus on quality education and character building. Please ask specifically about admissions, fees, timings, results or facilities!';
+      }
+      
+      const modal = document.getElementById('chatbotModal');
+      const toggleBtn = document.getElementById('chatbotToggle');
+      const closeBtnChat = document.getElementById('closeChatbot');
+      const clearBtn = document.getElementById('clearChatBtn');
+      const messagesContainer = document.getElementById('chatbotMessages');
+      const userInput = document.getElementById('chatbotInput');
+      const sendBtn = document.getElementById('chatbotSend');
+      const typingIndicator = document.getElementById('chatbotTyping');
+      let isProcessing = false;
+      
+      function appendMessage(sender, text, save = true) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = sender === 'user' ? 'msg-user' : 'msg-bot';
+        messageDiv.textContent = text;
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        if (save && sender === 'user') {
+          const history = JSON.parse(localStorage.getItem('daffodilsChat')) || [];
+          history.push({ sender, text });
+          if (history.length > 50) history.shift();
+          localStorage.setItem('daffodilsChat', JSON.stringify(history));
+        }
+      }
+      
+      function handleSend() {
+        const text = userInput.value.trim();
+        if (!text || isProcessing) return;
+        isProcessing = true;
+        appendMessage('user', text);
+        userInput.value = '';
+        typingIndicator.style.display = 'flex';
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        setTimeout(() => {
+          typingIndicator.style.display = 'none';
+          const response = getBotResponse(text);
+          appendMessage('bot', response);
+          isProcessing = false;
+        }, 800);
+      }
+      
+      function initChat() {
+        // Always show welcome message on every refresh (clear previous history)
+        localStorage.removeItem('daffodilsChat');
+        messagesContainer.innerHTML = '';
+        appendMessage('bot', 'Welcome to Daffodils High School! I am your AI assistant. I can help you with admission queries, fee details, school timings, facilities, hostel, teachers, and the latest Results. How can I help you today?', false);
+      }
+      
+      function clearChat() {
+        if (confirm('Reset conversation?')) {
+          localStorage.removeItem('daffodilsChat');
+          messagesContainer.innerHTML = '';
+          appendMessage('bot', 'Welcome to Daffodils High School! I am your AI assistant. I can help you with admission queries, fee details, school timings, facilities, hostel, teachers, and the latest Results. How can I help you today?', false);
+        }
+      }
+      
+      sendBtn.addEventListener('click', handleSend);
+      userInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); handleSend(); } });
+      clearBtn.addEventListener('click', clearChat);
+      toggleBtn.addEventListener('click', () => {
+        modal.classList.toggle('active');
+        if (modal.classList.contains('active') && messagesContainer.children.length === 0) {
+          initChat();
+        }
       });
+      closeBtnChat.addEventListener('click', () => modal.classList.remove('active'));
     })();
   </script>
 </body>
